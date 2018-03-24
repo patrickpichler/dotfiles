@@ -1,0 +1,10 @@
+[submodule ".zgen"]
+	path = .zgen
+	url = https://github.com/tarjoilija/zgen
+[submodule ".config/nvim/pack/minpac/opt/minpac"]
+	path = .config/nvim/pack/minpac/opt/minpac
+	url = https://github.com/k-takata/minpac.git
+[submodule ".asdf"]
+        path = .asdf
+        url = https://github.com/asdf-vm/asdf
+        branch = v0.4.3
