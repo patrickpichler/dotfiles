@@ -10,3 +10,10 @@ rm -r ~/myconf-tmp/
 
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 ```
+
+# Taffybar
+
+To make taffybar work:
+```
+cd ~/.config/taffybar && ln -s ~/.xmonad/taffybar-git taffybar
+```

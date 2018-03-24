@@ -10,6 +10,8 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/sudo
   zgen oh-my-zsh plugins/command-not-found
   zgen oh-my-zsh plugins/asdf
+  zgen oh-my-zsh plugins/scala
+  zten oh-my-zsh plugin/sbt
 
   zgen oh-my-zsh themes/robbyrussell
 

@@ -11,7 +11,7 @@
 [submodule ".xmonad/taffybar-git"]
 	path = .xmonad/taffybar-git
 	url = https://github.com/travitch/taffybar
-        branch = v0.4.6
+        branch = stable-0.5
 [submodule ".xmonad/xmonad-git"]
 	path = .xmonad/xmonad-git
 	url = https://github.com/xmonad/xmonad
