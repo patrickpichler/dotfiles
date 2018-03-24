@@ -8,3 +8,15 @@
         path = .asdf
         url = https://github.com/asdf-vm/asdf
         branch = v0.4.3
+[submodule ".xmonad/taffybar-git"]
+	path = .xmonad/taffybar-git
+	url = https://github.com/travitch/taffybar
+        branch = v0.4.6
+[submodule ".xmonad/xmonad-git"]
+	path = .xmonad/xmonad-git
+	url = https://github.com/xmonad/xmonad
+        branch = v0.13
+[submodule ".xmonad/xmonad-contrib-git"]
+	path = .xmonad/xmonad-contrib-git
+	url = https://github.com/xmonad/xmonad-contrib
+        branch = v0.13
