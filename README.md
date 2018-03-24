@@ -1,6 +1,7 @@
 # Setup
 
-Just execute ```
+Just execute 
+```
 git clone --separate-git-dir=$HOME/.myconf https://github.com/patrickpichler/dotfiles $HOME/myconf-tmp
 
 cp ~/myconf-tmp/.gitmodules ~  # If you use Git submodules
