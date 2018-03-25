@@ -1,14 +1,27 @@
-start-pulseaudio-x11 & 
+if [ -s .Xresources ]; then
+  xrdb -merge .Xresources
+fi
 
-nm-applet --sm-disable &
+if [ -x "$(command -v start-pulseaudio-x11)" ]; then
+  start-pulseaudio-x11 & 
+fi
 
- # Start udiskie to handle media
-udiskie --smart-tray &
+if [ -x "$(command -v nm-applet)" ]; then
+  nm-applet --sm-disable &
+fi
 
-blueberry-tray &
+if [ -x "$(command -v udiskie)" ]; then
+  # Start udiskie to handle media
+  udiskie --smart-tray &
+fi
 
-nitrogen --restore &
+if [ -x "$(command -v blueberry-tray)" ]; then
+  blueberry-tray &
+fi
 
-jetbrains-toolbox --minimize &
+if [ -x "$(command -v nitrogen)" ]; then
+  nitrogen --restore &
+fi
+
 
 exec xmonad

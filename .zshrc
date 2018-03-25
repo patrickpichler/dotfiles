@@ -26,6 +26,10 @@ fi
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
+if [ -s $HOME/development/scripts ]; then
+  PATH=$PATH:~/development/scripts
+fi
+
 export NVIM_CONFIG_DIR="$HOME/.config/nvim"
 
 alias edit_zsh_config="nvim ~/.zshrc"

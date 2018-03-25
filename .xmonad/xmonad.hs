@@ -14,6 +14,7 @@ import XMonad.Hooks.EwmhDesktops        (ewmh)
 import XMonad.Hooks.ManageDocks
 import System.Taffybar.Hooks.PagerHints (pagerHints)
 import XMonad.Actions.WindowBringer
+import XMonad.Layout.SimpleDecoration
 
 main = do
   xmproc <- spawnPipe "/home/patrick/.asdf/shims/my-taffybar"
@@ -25,7 +26,7 @@ main = do
     , focusedBorderColor = "#FFFFFF"
     , normalBorderColor = "#222222"
     , focusFollowsMouse = False
-    , layoutHook = avoidStruts $ layoutHook def
+    , layoutHook = myLayoutHook 
     , handleEventHook    = handleEventHook def <+> docksEventHook
     , manageHook = manageHook def <+> manageDocks <+> myManageHook
     , startupHook = do 
@@ -34,6 +35,8 @@ main = do
     } `additionalKeysP` myKeys
 
 myModMask = mod4Mask -- Use Super instead of Alt
+
+myLayoutHook = avoidStruts $ layoutHook def
 
 myManageHook = composeAll
   [ isDialog     --> doCenterFloat
@@ -53,4 +56,5 @@ myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SIN
 
           , ("M-S-l", spawn "i3lock -c 000000")
           , ("M-s", bringMenu)
+          , ("M-S-s", gotoMenu)
           ]
