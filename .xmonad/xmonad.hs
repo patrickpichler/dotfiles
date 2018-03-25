@@ -15,6 +15,7 @@ import XMonad.Hooks.ManageDocks
 import System.Taffybar.Hooks.PagerHints (pagerHints)
 import XMonad.Actions.WindowBringer
 import XMonad.Layout.SimpleDecoration
+import XMonad.Actions.Navigation2D
 
 main = do
   xmproc <- spawnPipe "/home/patrick/.asdf/shims/my-taffybar"
@@ -57,4 +58,12 @@ myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SIN
           , ("M-S-l", spawn "i3lock -c 000000")
           , ("M-s", bringMenu)
           , ("M-S-s", gotoMenu)
+
+          -- , ("M-<Left>", screenGo L False)
+          -- , ("M-<Right>", screenGo R False)
+          
+          , ("M-<Left>", windowGo L False)
+          , ("M-<Right>", windowGo R False)
+          , ("M-<Up>", windowGo U False)
+          , ("M-<Down>", windowGo D False)
           ]
