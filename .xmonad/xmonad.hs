@@ -16,6 +16,10 @@ import System.Taffybar.Hooks.PagerHints (pagerHints)
 import XMonad.Actions.WindowBringer
 import XMonad.Layout.SimpleDecoration
 import XMonad.Actions.Navigation2D
+import qualified XMonad.StackSet as W
+import XMonad.Hooks.XPropManage
+
+import Data.List
 
 main = do
   xmproc <- spawnPipe "/home/patrick/.asdf/shims/my-taffybar"
@@ -40,9 +44,27 @@ myModMask = mod4Mask -- Use Super instead of Alt
 myLayoutHook = avoidStruts $ layoutHook def
 
 myManageHook = composeAll
-  [ isDialog     --> doCenterFloat
-  , isFullscreen --> doFullFloat
+  [ isFullscreen --> doFullFloat
+  , isDialog     --> doCenterFloat
+  , manageIdeaCompletionWindow
   ]
+
+(~=?) :: Eq a => Query [a] -> [a] -> Query Bool
+q ~=? x = fmap (substring x) q
+
+manageIdeaCompletionWindow = (className ~=? "jetbrains-" <&&> isDialog) --> doIgnore
+
+substring :: Eq a => [a] -> [a] -> Bool
+substring (x:xs) [] = False
+substring xs ys
+    | prefix xs ys = True
+    | substring xs (tail ys) = True
+    | otherwise = False
+
+prefix :: Eq a =>  [a] -> [a] -> Bool
+prefix [] ys = True
+prefix (x:xs) [] = False
+prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
 
 myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +1.5%")
           , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -1.5%")

@@ -11,11 +11,13 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/command-not-found
   zgen oh-my-zsh plugins/asdf
   zgen oh-my-zsh plugins/scala
-  zten oh-my-zsh plugin/sbt
+  zgen oh-my-zsh plugins/sbt
 
   zgen oh-my-zsh themes/robbyrussell
 
   zgen load zsh-users/zsh-syntax-highlighting
+
+  zgen load spwhitt/nix-zsh-completions
   
   # generate the init script from plugins above
   zgen save
@@ -43,3 +45,7 @@ fi
 alias vim=nvim
 
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+
+export EDITOR='/usr/local/bin/nvim'
+
+prompt_nix_shell_setup
