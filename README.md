@@ -9,6 +9,9 @@ cp ~/myconf-tmp/.gitmodules ~  # If you use Git submodules
 rm -r ~/myconf-tmp/
 
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+
+# To hide untracked files
+config config status.showUntrackedFiles no
 ```
 
 # Taffybar
