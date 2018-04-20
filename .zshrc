@@ -48,4 +48,3 @@ alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
 export EDITOR='/usr/local/bin/nvim'
 
-prompt_nix_shell_setup

@@ -134,12 +134,18 @@ if executable('nvr')
 endif
 
 " ===============================================
+" ============ Colorscheme ======================
+" ===============================================
+hi ALEError ctermfg=Red
+
+" ===============================================
 " ================ ALE ==========================
 " ===============================================
 
 let g:ale_linters = {
   \ 'haskell' : ['hlint', 'stack-ghc', 'stack-build'], 
   \ }
+
 
 " ===============================================
 " =============== Plugins =======================
@@ -160,13 +166,17 @@ call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-obsession')
 
+call minpac#add('Shougo/denite.nvim')
+call minpac#add('Shougo/deoplete.nvim', { 'branch': 'next', 'do': {-> system('bash install.sh')}})
+
 call minpac#add('w0rp/ale')
 call minpac#add('mhinz/vim-grepper')
 call minpac#add('junegunn/fzf')
 call minpac#add('janko-m/vim-test')
 call minpac#add('sgur/vim-editorconfig')
 call minpac#add('autozimu/LanguageClient-neovim')
-call minpac#add('Shougo/deoplete.nvim', { 'branch': 'next', 'do': {-> system('bash install.sh')}})
 call minpac#add('neovimhaskell/haskell-vim')
+call minpac#add('pbogut/deoplete-elm')
+call minpac#add('ElmCast/elm-vim')
 
 " ==============================================
