@@ -15,7 +15,6 @@ set number
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
 
-
 syntax on
 syntax enable
 
@@ -117,6 +116,8 @@ inoremap <M-l> <Esc><C-w>l
 nnoremap <C-J> o<Esc>
 nnoremap <C-H> O<Esc>
 
+nnoremap <silent><M-b> :Denite buffer<CR>
+nnoremap <silent><M-f> :Denite file_rec<CR>
 " ===============================================
 
 let g:deoplete#enable_at_startup = 1
@@ -138,14 +139,18 @@ endif
 " ===============================================
 hi ALEError ctermfg=Red
 
-" ===============================================
-" ================ ALE ==========================
-" ===============================================
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
 
 let g:ale_linters = {
   \ 'haskell' : ['hlint', 'stack-ghc', 'stack-build'], 
   \ }
 
+" ===============================================
+" ============= Polyglot ========================
+" ===============================================
+
+let g:polyglot_disabled = ['elm']
 
 " ===============================================
 " =============== Plugins =======================
@@ -169,6 +174,9 @@ call minpac#add('tpope/vim-obsession')
 call minpac#add('Shougo/denite.nvim')
 call minpac#add('Shougo/deoplete.nvim', { 'branch': 'next', 'do': {-> system('bash install.sh')}})
 
+call minpac#add('pbogut/deoplete-elm')
+call minpac#add('ElmCast/elm-vim')
+
 call minpac#add('w0rp/ale')
 call minpac#add('mhinz/vim-grepper')
 call minpac#add('junegunn/fzf')
@@ -176,7 +184,5 @@ call minpac#add('janko-m/vim-test')
 call minpac#add('sgur/vim-editorconfig')
 call minpac#add('autozimu/LanguageClient-neovim')
 call minpac#add('neovimhaskell/haskell-vim')
-call minpac#add('pbogut/deoplete-elm')
-call minpac#add('ElmCast/elm-vim')
 
 " ==============================================
