@@ -1,6 +1,5 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig(additionalKeys, additionalKeysP)
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.SpawnOnce
@@ -25,14 +24,12 @@ import XMonad.Prompt.Ssh
 import Data.List
 
 main = do
-  xmproc <- spawnPipe "/home/patrick/.asdf/shims/my-taffybar"
+  spawn "my-taffybar"
 
   xmonad $ docks $ ewmh $ pagerHints $ desktopConfig
     { modMask = myModMask
-    -- , terminal = "termite"
-    , terminal = "termite --name=terminal"
-    -- , terminal = "urxvt"
-    , borderWidth = 1 
+    , terminal = "termite"
+    , borderWidth = 1
     , focusedBorderColor = "#FFFFFF"
     , normalBorderColor = "#222222"
     , focusFollowsMouse = False
