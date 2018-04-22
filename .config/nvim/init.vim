@@ -39,6 +39,10 @@ set fileencoding=utf-8
 
 set lazyredraw
 
+" Auto open quickfix list on grep
+autocmd QuickFixCmdPost *grep* cwindow
+
+" Netrw config
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 " let g:netrw_browse_split = 4
@@ -65,7 +69,8 @@ endwhile
   set statusline+=%h%m%r%w " status flags
   set statusline+=\[%{strlen(&ft)?&ft:'none'}] "file type
   set statusline+=%= "right align remainder
-  set statusline+=0x%-8B " character value
+  set statusline+=\ %{fugitive#statusline()}
+  set statusline+=\ 0x%-8B " character value
   set statusline+=%-14(%l,%c%V%) " line, character
   set statusline+=%<%P " file position 
 " }
@@ -152,6 +157,7 @@ let g:ale_linters = {
 
 let g:polyglot_disabled = ['elm']
 
+
 " ===============================================
 " =============== Plugins =======================
 " ===============================================
@@ -170,6 +176,7 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-obsession')
+call minpac#add('tpope/vim-fugitive')
 
 call minpac#add('Shougo/denite.nvim')
 call minpac#add('Shougo/deoplete.nvim', { 'branch': 'next', 'do': {-> system('bash install.sh')}})
@@ -184,5 +191,6 @@ call minpac#add('janko-m/vim-test')
 call minpac#add('sgur/vim-editorconfig')
 call minpac#add('autozimu/LanguageClient-neovim')
 call minpac#add('neovimhaskell/haskell-vim')
+call minpac#add('ludovicchabant/vim-gutentags')
 
 " ==============================================
