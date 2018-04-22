@@ -3,7 +3,7 @@ module Main where
 import System.Information.CPU
 import System.Information.Memory
 import System.Information.Battery
-import System.Taffybar
+import System.Taffybar(defaultTaffybar, defaultTaffybarConfig, startWidgets, endWidgets) 
 import System.Taffybar.Pager
 import System.Taffybar.FreedesktopNotifications
 import System.Taffybar.Battery
@@ -14,7 +14,6 @@ import System.Taffybar.TaffyPager
 import System.Taffybar.Widgets.PollingBar
 import System.Taffybar.Widgets.PollingGraph
 import System.Taffybar.WorkspaceHUD
-import System.Taffybar.WorkspaceSwitcher
 import System.Taffybar.WindowSwitcher
 
 import qualified Graphics.UI.Gtk as Gtk
@@ -44,7 +43,7 @@ main = do
                                     , barBorderColor = (1,1,1)
                                     }
   let clock = textClockNew Nothing "<span fgcolor='orange'>%a %b %_d %H:%M</span>" 1
-      wss = wspaceSwitcherNew pager
+      workspaceHud = buildWorkspaceHUD defaultWorkspaceHUDConfig pager
       wnd = windowSwitcherNew pager
       note = notifyAreaNew defaultNotificationConfig
       mpris = mpris2New 
@@ -52,7 +51,7 @@ main = do
       cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
       tray = systrayNew
       bat = batteryBarNew batCfg 5
-  defaultTaffybar defaultTaffybarConfig { startWidgets = [ wss, mpris ]
+  defaultTaffybar defaultTaffybarConfig { startWidgets = [workspaceHud , mpris ]
                                         , endWidgets = [ tray,  clock, mem, cpu, bat, wnd, note ]
                                         }
 
