@@ -11,13 +11,16 @@ import System.IO
 import Graphics.X11.ExtraTypes.XF86
 import Data.Default
 import XMonad.Hooks.EwmhDesktops        (ewmh)
-import XMonad.Hooks.ManageDocks
 import System.Taffybar.Hooks.PagerHints (pagerHints)
 import XMonad.Actions.WindowBringer
 import XMonad.Layout.SimpleDecoration
 import XMonad.Actions.Navigation2D
 import qualified XMonad.StackSet as W
 import XMonad.Hooks.XPropManage
+
+import XMonad.Prompt
+import XMonad.Prompt.Man
+import XMonad.Prompt.Ssh
 
 import Data.List
 
@@ -26,7 +29,9 @@ main = do
 
   xmonad $ docks $ ewmh $ pagerHints $ desktopConfig
     { modMask = myModMask
-    , terminal = "termite"
+    -- , terminal = "termite"
+    , terminal = "termite --name=terminal"
+    -- , terminal = "urxvt"
     , borderWidth = 1 
     , focusedBorderColor = "#FFFFFF"
     , normalBorderColor = "#222222"
@@ -88,4 +93,9 @@ myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SIN
           , ("M-<Right>", windowGo R False)
           , ("M-<Up>", windowGo U False)
           , ("M-<Down>", windowGo D False)
+          
+          , ("C-q", spawn  "~/.resources/scripts/noctrlq.sh")
+
+          , ("M-<F1>", manPrompt def)
+          , ("M-<F2>", sshPrompt def)
           ]
