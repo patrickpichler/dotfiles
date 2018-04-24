@@ -123,6 +123,10 @@ nnoremap <C-H> O<Esc>
 
 nnoremap <silent><M-b> :Denite buffer<CR>
 nnoremap <silent><M-f> :Denite file_rec<CR>
+nnoremap <silent><M-g> :Denite grep<CR>
+
+" this allows to do :w!! for overwriting readonly files 
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " ===============================================
 
 let g:deoplete#enable_at_startup = 1

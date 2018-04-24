@@ -16,6 +16,7 @@ import XMonad.Layout.SimpleDecoration
 import XMonad.Actions.Navigation2D
 import qualified XMonad.StackSet as W
 import XMonad.Hooks.XPropManage
+import XMonad.Hooks.ManageDocks
 
 import XMonad.Prompt
 import XMonad.Prompt.Man

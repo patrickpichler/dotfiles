@@ -3,7 +3,7 @@ module Main where
 import System.Information.CPU
 import System.Information.Memory
 import System.Information.Battery
-import System.Taffybar(defaultTaffybar, defaultTaffybarConfig, startWidgets, endWidgets) 
+import qualified System.Taffybar as T
 import System.Taffybar.Pager
 import System.Taffybar.FreedesktopNotifications
 import System.Taffybar.Battery
@@ -15,8 +15,6 @@ import System.Taffybar.Widgets.PollingBar
 import System.Taffybar.Widgets.PollingGraph
 import System.Taffybar.WorkspaceHUD
 import System.Taffybar.WindowSwitcher
-
-import qualified Graphics.UI.Gtk as Gtk
 
 memCallback = do
   mi <- parseMeminfo
@@ -44,16 +42,19 @@ main = do
                                     }
   let clock = textClockNew Nothing "<span fgcolor='orange'>%a %b %_d %H:%M</span>" 1
       workspaceHud = buildWorkspaceHUD defaultWorkspaceHUDConfig pager
-      wnd = windowSwitcherNew pager
       note = notifyAreaNew defaultNotificationConfig
       mpris = mpris2New 
       mem = pollingGraphNew memCfg 1 memCallback
       cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
       tray = systrayNew
       bat = batteryBarNew batCfg 5
-  defaultTaffybar defaultTaffybarConfig { startWidgets = [workspaceHud , mpris ]
-                                        , endWidgets = [ tray,  clock, mem, cpu, bat, wnd, note ]
+      config = T.defaultTaffybarConfig {  T.barHeight = 33
+                                        , T.barPadding = 0
+                                        , T.startWidgets = [workspaceHud , mpris ]
+                                        , T.endWidgets = [ tray, clock, mem, cpu, bat, note ]
                                         }
+
+  T.defaultTaffybar config
 
 
 batColor :: Double -> (Double, Double, Double)
