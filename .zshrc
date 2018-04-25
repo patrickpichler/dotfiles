@@ -12,6 +12,8 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/asdf
   zgen oh-my-zsh plugins/scala
   zgen oh-my-zsh plugins/sbt
+  zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/docker-compose
 
   zgen oh-my-zsh themes/robbyrussell
 
@@ -47,5 +49,9 @@ alias vim=nvim
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
 export EDITOR='/usr/local/bin/nvim'
+
+if [ ! -f ~/.extensions.zsh ]; then
+  source ~/.extensions.zsh
+fi 
 
 prompt_nix_shell_setup
