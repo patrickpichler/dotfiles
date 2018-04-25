@@ -45,14 +45,14 @@ myLayoutHook = avoidStruts $ layoutHook def
 
 myManageHook = composeAll
   [ isFullscreen --> doFullFloat
-  , isDialog     --> doCenterFloat
+  , isDialog     --> doFloat
   , manageIdeaCompletionWindow
   ]
 
 (~=?) :: Eq a => Query [a] -> [a] -> Query Bool
 q ~=? x = fmap (substring x) q
 
-manageIdeaCompletionWindow = (className ~=? "jetbrains-" <&&> isDialog) --> doIgnore
+manageIdeaCompletionWindow = (className ~=? "jetbrains-" <&&> isDialog) --> doFloat
 
 substring :: Eq a => [a] -> [a] -> Bool
 substring (x:xs) [] = False
