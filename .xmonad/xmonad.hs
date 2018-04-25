@@ -1,6 +1,5 @@
 import XMonad
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.ManageDocks
 import XMonad.Util.EZConfig(additionalKeys, additionalKeysP)
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.SpawnOnce
@@ -11,23 +10,27 @@ import System.IO
 import Graphics.X11.ExtraTypes.XF86
 import Data.Default
 import XMonad.Hooks.EwmhDesktops        (ewmh)
-import XMonad.Hooks.ManageDocks
 import System.Taffybar.Hooks.PagerHints (pagerHints)
 import XMonad.Actions.WindowBringer
 import XMonad.Layout.SimpleDecoration
 import XMonad.Actions.Navigation2D
 import qualified XMonad.StackSet as W
 import XMonad.Hooks.XPropManage
+import XMonad.Hooks.ManageDocks
+
+import XMonad.Prompt
+import XMonad.Prompt.Man
+import XMonad.Prompt.Ssh
 
 import Data.List
 
 main = do
-  xmproc <- spawnPipe "/home/patrick/.asdf/shims/my-taffybar"
+  spawn "my-taffybar"
 
   xmonad $ docks $ ewmh $ pagerHints $ desktopConfig
     { modMask = myModMask
     , terminal = "termite"
-    , borderWidth = 1 
+    , borderWidth = 1
     , focusedBorderColor = "#FFFFFF"
     , normalBorderColor = "#222222"
     , focusFollowsMouse = False
@@ -88,4 +91,9 @@ myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SIN
           , ("M-<Right>", windowGo R False)
           , ("M-<Up>", windowGo U False)
           , ("M-<Down>", windowGo D False)
+          
+          , ("C-q", spawn  "~/.resources/scripts/noctrlq.sh")
+
+          , ("M-<F1>", manPrompt def)
+          , ("M-<F2>", sshPrompt def)
           ]

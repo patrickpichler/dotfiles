@@ -15,7 +15,6 @@ set number
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
 
-
 syntax on
 syntax enable
 
@@ -40,6 +39,10 @@ set fileencoding=utf-8
 
 set lazyredraw
 
+" Auto open quickfix list on grep
+autocmd QuickFixCmdPost *grep* cwindow
+
+" Netrw config
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 " let g:netrw_browse_split = 4
@@ -66,7 +69,8 @@ endwhile
   set statusline+=%h%m%r%w " status flags
   set statusline+=\[%{strlen(&ft)?&ft:'none'}] "file type
   set statusline+=%= "right align remainder
-  set statusline+=0x%-8B " character value
+  set statusline+=\ %{fugitive#statusline()}
+  set statusline+=\ 0x%-8B " character value
   set statusline+=%-14(%l,%c%V%) " line, character
   set statusline+=%<%P " file position 
 " }
@@ -117,6 +121,12 @@ inoremap <M-l> <Esc><C-w>l
 nnoremap <C-J> o<Esc>
 nnoremap <C-H> O<Esc>
 
+nnoremap <silent><M-b> :Denite buffer<CR>
+nnoremap <silent><M-f> :Denite file_rec<CR>
+nnoremap <silent><M-g> :Denite grep<CR>
+
+" this allows to do :w!! for overwriting readonly files 
+cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " ===============================================
 
 let g:deoplete#enable_at_startup = 1
@@ -134,12 +144,23 @@ if executable('nvr')
 endif
 
 " ===============================================
-" ================ ALE ==========================
+" ============ Colorscheme ======================
 " ===============================================
+hi ALEError ctermfg=Red
+
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
 
 let g:ale_linters = {
   \ 'haskell' : ['hlint', 'stack-ghc', 'stack-build'], 
   \ }
+
+" ===============================================
+" ============= Polyglot ========================
+" ===============================================
+
+let g:polyglot_disabled = ['elm']
+
 
 " ===============================================
 " =============== Plugins =======================
@@ -159,14 +180,21 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-obsession')
+call minpac#add('tpope/vim-fugitive')
+
+call minpac#add('Shougo/denite.nvim')
+call minpac#add('Shougo/deoplete.nvim', { 'branch': 'next', 'do': {-> system('bash install.sh')}})
+
+call minpac#add('pbogut/deoplete-elm')
+call minpac#add('ElmCast/elm-vim')
 
 call minpac#add('w0rp/ale')
 call minpac#add('mhinz/vim-grepper')
 call minpac#add('junegunn/fzf')
 call minpac#add('janko-m/vim-test')
 call minpac#add('sgur/vim-editorconfig')
-call minpac#add('autozimu/LanguageClient-neovim')
-call minpac#add('Shougo/deoplete.nvim', { 'branch': 'next', 'do': {-> system('bash install.sh')}})
+call minpac#add('autozimu/LanguageClient-neovim', {'branch' : 'next' , 'do': {-> system('bash install.sh')}})
 call minpac#add('neovimhaskell/haskell-vim')
+call minpac#add('ludovicchabant/vim-gutentags')
 
 " ==============================================
