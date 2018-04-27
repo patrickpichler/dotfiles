@@ -12,7 +12,6 @@ import XMonad.Config.Desktop
 
 import XMonad.Layout.SimpleDecoration
 import XMonad.Layout.Tabbed
-import XMonad.Layout.Circle
 import XMonad.Layout.Grid
 
 import XMonad.Actions.WindowBringer
@@ -59,7 +58,7 @@ main = do
 
 myModMask = mod4Mask -- Use Super instead of Alt
 
-myLayoutHook = avoidStruts $ layoutHook def ||| simpleTabbed ||| GridRatio (4/3) ||| Circle
+myLayoutHook = avoidStruts $ layoutHook def ||| simpleTabbed ||| GridRatio (4/3) 
 
 myManageHook = composeOne
   [ manageIdeaCompletionWindow
