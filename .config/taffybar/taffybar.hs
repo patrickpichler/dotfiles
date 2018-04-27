@@ -25,7 +25,7 @@ cpuCallback = do
   return [totalLoad, systemLoad]
 
 main = do
-  pager <- pagerNew defaultPagerConfig { activeWindow = escape . shorten 20 }
+  pager <- pagerNew defaultPagerConfig 
 
 
   let memCfg = defaultGraphConfig { graphDataColors = [(1, 0, 0, 1)]
@@ -41,7 +41,7 @@ main = do
                                     , barBorderColor = (1,1,1)
                                     }
   let clock = textClockNew Nothing "<span fgcolor='orange'>%a %b %_d %H:%M</span>" 1
-      workspaceHud = buildWorkspaceHUD defaultWorkspaceHUDConfig pager
+      workspaceHud = buildWorkspaceHUD myHUDConfig pager
       note = notifyAreaNew defaultNotificationConfig
       mpris = mpris2New 
       mem = pollingGraphNew memCfg 1 memCallback
@@ -56,6 +56,9 @@ main = do
 
   T.defaultTaffybar config
 
+myHUDConfig :: WorkspaceHUDConfig
+myHUDConfig = defaultWorkspaceHUDConfig { maxIcons  = Just 0 -- remove when windowHUD is workin correctly 
+                                        }
 
 batColor :: Double -> (Double, Double, Double)
 batColor p = if p < 1 then (r, g, 0) else (0.7, 0.7, 0.7)
