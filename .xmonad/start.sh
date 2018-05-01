@@ -1,5 +1,5 @@
-if [ -s .Xresources ]; then
-  xrdb -merge .Xresources
+if [ -s ~/.Xresources ]; then
+  xrdb -merge ~/.Xresources
 fi
 
 if [ -x "$(command -v start-pulseaudio-x11)" ]; then
