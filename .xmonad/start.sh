@@ -24,4 +24,4 @@ if [ -x "$(command -v nitrogen)" ]; then
 fi
 
 
-exec xmonad
+exec ppichler-xmonad
