@@ -20,6 +20,7 @@ if ! zgen saved; then
   zgen load zsh-users/zsh-syntax-highlighting
 
   zgen load spwhitt/nix-zsh-completions
+  zgen load arzzen/calc.plugin.zsh
   
   # generate the init script from plugins above
   zgen save
