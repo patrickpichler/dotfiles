@@ -23,6 +23,6 @@ fi
 # Ubuntu make installation of Ubuntu Make binary symlink
 PATH=/home/patrick/.local/share/umake/bin:$PATH
 
-PATH=/home/patrick/.asdf/shims:$PATH
+PATH=/home/patrick/.asdf/shims:/home/patrick/.local/bin:$PATH
 
 if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

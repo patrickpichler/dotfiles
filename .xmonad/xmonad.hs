@@ -71,12 +71,11 @@ myManageHook = composeOne
 (~=?) :: Eq a => Query [a] -> [a] -> Query Bool
 q ~=? x = fmap (substring x) q
 
-manageIdeaCompletionWindow = (className ~=? "jetbrains-" <&&> isDialog) -?> doIgnore
+manageIdeaCompletionWindow = (className ~=? "jetbrains-" <&&> isDialog) -?> doFloat
 
 
 spotifySelector = className =? "Spotify"
 spotifyCommand = "spotify"
-
 
 substring :: Eq a => [a] -> [a] -> Bool
 substring (x:xs) [] = False

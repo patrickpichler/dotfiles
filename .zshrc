@@ -12,12 +12,15 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/asdf
   zgen oh-my-zsh plugins/scala
   zgen oh-my-zsh plugins/sbt
+  zgen oh-my-zsh plugins/docker
+  zgen oh-my-zsh plugins/docker-compose
 
   zgen oh-my-zsh themes/robbyrussell
 
   zgen load zsh-users/zsh-syntax-highlighting
 
   zgen load spwhitt/nix-zsh-completions
+  zgen load arzzen/calc.plugin.zsh
   
   # generate the init script from plugins above
   zgen save
@@ -48,3 +51,8 @@ alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
 export EDITOR='/usr/local/bin/nvim'
 
+if [ ! -f ~/.extensions.zsh ]; then
+  source ~/.extensions.zsh
+fi 
+
+prompt_nix_shell_setup
