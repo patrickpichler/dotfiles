@@ -1,0 +1,11 @@
+[Unit]
+Description=jetbrains-toolbox
+Wants=taffybar.service
+After=taffybar.service
+
+[Service]
+ExecStart=/usr/bin/jetbrains-toolbox
+Restart=always
+
+[Install]
+WantedBy=wm.target

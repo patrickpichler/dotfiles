@@ -1,0 +1,11 @@
+[Unit]
+Description=udiskie
+Wants=taffybar.service
+After=taffybar.service
+
+[Service]
+ExecStart=/usr/bin/udiskie --tray
+Restart=always
+
+[Install]
+WantedBy=wm.target

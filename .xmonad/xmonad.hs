@@ -35,11 +35,9 @@ import Graphics.X11.ExtraTypes.XF86
 
 import System.IO
 
-import System.Taffybar.Hooks.PagerHints (pagerHints)
+import System.Taffybar.Support.PagerHints (pagerHints)
 
-main = do
-  spawn "my-taffybar"
-
+main =
   xmonad $ docks $ pagerHints $ ewmh $ 
     def 
     { modMask = myModMask
@@ -54,7 +52,10 @@ main = do
     , startupHook = do 
                 setWMName "LG3D"
                 docksStartupHook
+                myStartup
     } `additionalKeysP` myKeys
+
+myStartup = spawn "systemctl --user start wm.target"
 
 myModMask = mod4Mask -- Use Super instead of Alt
 

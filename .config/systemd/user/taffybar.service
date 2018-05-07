@@ -1,0 +1,14 @@
+[Unit]
+Description=taffybar
+Wants=status-notifier-watcher.service
+After=status-notifier-watcher.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/env /home/patrick/.asdf/shims/my-taffybar
+ExecStop=/usr/bin/pkill my-taffybar
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=wm.target

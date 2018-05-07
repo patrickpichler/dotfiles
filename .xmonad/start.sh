@@ -23,5 +23,6 @@ if [ -x "$(command -v nitrogen)" ]; then
   nitrogen --restore &
 fi
 
+status-notifier-watcher &
 
 exec ppichler-xmonad
