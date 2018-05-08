@@ -38,7 +38,7 @@ import System.IO
 import System.Taffybar.Support.PagerHints (pagerHints)
 
 main =
-  xmonad $ docks $ pagerHints $ ewmh $ 
+  xmonad $ docks $ ewmh $ pagerHints $
     def 
     { modMask = myModMask
     , terminal = "~/.resources/scripts/termite-wrapper.sh"

@@ -2,32 +2,41 @@
 @define-color bg-tone #1E1E20;
 @define-color active-window-color #374140;
 @define-color urgent-window-color #D9CB9E;
-@define-color font-color #D9CB9E;
+@define-color font-color #FFFFFF;
 
 .Contents {
+	padding: 3px;
+	transition: border-color .5s;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: rgba(1.0, 1.0, 1.0, 0.0);
 }
 
 .Active .Contents, .Visible .Contents {
-	background-color: @bg-tone;
+	border-color: #FFFFFF;
 }
 
 .InnerPad {
+	padding: 4px;
 }
 
 .WorkspaceLabel {
-	padding-right: 1px;
-	padding-left: 1px;
+	padding-right: 3px;
+	padding-left: 2px;
 	font-size: 12pt;
 }
 
 .IconContainer {
-	transition: background-color .5s;
+	transition: border-color .5s;
 	border-radius: 0px;
+	border-bottom: solid;
+	border-width: 1px;
+	border-color: rgba(1.0, 1.0, 1.0, 0.0);
 }
 
 .IconContainer.Active {
-	transition: background-color .5s;
-	background-color: @active-window-color;
+	border-color: #FFFFFF;
 }
 
 .IconContainer.Urgent {
@@ -42,31 +51,57 @@
 
 .IconImage {
 	transition: opacity .5s;
+	padding: 0px;
 	opacity: 1;
 }
 
-#GtkStatusIcon {
-        opacity: 0;
-        background-color: green;
+.Windows * {
+	color: @bg-color;
+	border-color: @bg-color;
 }
 
-hansi{
-  opacity: 0;
-  background-color: green ;
+.TrayContainer {
+	background-color: @urgent-window-color;
+	padding: 20px;
 }
 
-#WindowSwitcher {
-	background-color: @bg-color;
+.TrayWidget {
+	background-color: @urgent-window-color;
+	padding: 20px;
 }
 
-.Taffybar {
-	background-color: @bg-color;
+.TrayWidgetContainer {
+	background-color: @urgent-window-color;
+	padding: 20px;
+}
+
+.TaffyBox {
+	border-bottom: solid;
+	border-width: 1px;
+	border-color: #FFFFFF;
+	background-color: rgba(0.0, 0.0, 0.0, 0.3);
 }
 
 .Taffybar * {
 	font-family: "Fira Sans", sans-serif;
-	font-size: 10pt;
+	font-size: 12pt;
 	color: @font-color;
-        padding: 0;
 }
 
+.Menu * {
+	color: #FFFFFF;
+	background-color: rgba(1.0, 1.0, 1.0, 1.0);
+}
+
+.OuterPad * {
+	background-color: rgba(1.0, 0.0, 0.0, 0.0);
+}
+
+.OuterPad:focus {
+	background-color: rgba(0.0, 0.0, 0.0, 0.3);
+	box-shadow: inset 0 -3px #0c7cd5;
+}
+
+.OuterPad *:hover {
+	box-shadow: inset 0 -3px #0c7cd5;
+}
