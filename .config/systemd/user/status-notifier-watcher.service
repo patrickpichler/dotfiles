@@ -3,7 +3,7 @@ Description=status-notifier-watcher
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/env /home/patrick/.asdf/shims/status-notifier-watcher
+ExecStart=/usr/bin/env /home/patrick/.local/bin/status-notifier-watcher
 ExecStop=/usr/bin/pkill status-notifier-watcher
 
 [Install]

@@ -25,7 +25,7 @@ executable ppichler-xmonad
                     , multimap>=1.2.1
                     , process>=1.4.3.0
                     , split
-                    , taffybar>=1.0.2
+                    , taffybar>=2.0
                     , transformers>=0.5.2.0
                     , utf8-string
                     , data-default
