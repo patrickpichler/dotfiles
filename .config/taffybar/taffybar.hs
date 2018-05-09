@@ -31,20 +31,24 @@ import                  System.Log.Handler.Simple
 import                  System.Log.Logger
 import                  System.Process
 import                  System.Taffybar
+import                  System.Taffybar.Context(TaffyIO)
 import                  System.Taffybar.Auth
 import                  System.Taffybar.Compat.GtkLibs
 import                  System.Taffybar.DBus
 import                  System.Taffybar.DBus.Toggle
 import                  System.Taffybar.Hooks
 import                  System.Taffybar.IconImages
+import                  System.Taffybar.Information.Battery(batteryContextsNew)
 import                  System.Taffybar.Information.CPU
 import                  System.Taffybar.Information.EWMHDesktopInfo
 import                  System.Taffybar.Information.Memory
 import                  System.Taffybar.Information.X11DesktopInfo
 import                  System.Taffybar.SimpleConfig
 import                  System.Taffybar.Widget
+import                  System.Taffybar.Widget.Battery
 import                  System.Taffybar.Widget.Generic.PollingGraph
 import                  System.Taffybar.Widget.Workspaces
+import                  System.Taffybar.Widget.Volume
 import                  Text.Printf
 import                  Unsafe.Coerce
 
@@ -111,7 +115,20 @@ logDebug = do
   infoLogger <- getLogger "System.Information"
   saveGlobalLogger $ setLevel DEBUG infoLogger
 
+-- This function checks if there are any batteries installed. if yes, it will return a battery widget.
+getBatteryWidget :: IO (Maybe (TaffyIO Widget))
+getBatteryWidget = do  
+  batteries <- batteryContextsNew
+  
+  let result = case batteries of []  -> Nothing
+                                 [x] -> do 
+                                      let battery = batteryBarNew defaultBatteryConfig 1.0
+                                      Just battery
+  return result
+
 main = do
+  battery <- getBatteryWidget
+
   let cpuCfg =
         myGraphConfig
         { graphDataColors = [(0, 1, 0, 1), (1, 0, 1, 0.5)]
@@ -122,7 +139,6 @@ main = do
       mpris = mpris2New
       cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
       mem = pollingGraphNew memCfg 1 memCallback
-      battery = batteryBarNew defaultBatteryConfig 1.0
       myWorkspacesConfig =
         defaultWorkspacesConfig
         { underlineHeight = 3
@@ -136,14 +152,14 @@ main = do
             [ workspaces
             , mpris >>= buildPadBox
             ]
-        , endWidgets = map (>>= buildPadBoxNoShrink)
-          [ clock >>= setMinWidth 200
-          , sniTrayNew
+        , endWidgets = (map (>>= buildPadBoxNoShrink) . concat . map maybeToList)
+          [ Just (clock >>= setMinWidth 200)
+          , Just sniTrayNew
           , battery
-          , cpu
-          , mem
-          , networkMonitorNew defaultNetFormat Nothing >>= setMinWidth 180
-          , wnd
+          , Just cpu
+          , Just mem
+          , Just (networkMonitorNew defaultNetFormat Nothing >>= setMinWidth 180)
+          , Just wnd
           ]
         , barPosition = Top
         , barPadding = 0
