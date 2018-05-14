@@ -7,6 +7,7 @@
 * libdbusmenu-gtk3 (pacman -S libdbusmenu-gtk3)
 * xdotool 
 * xvkbd
+* dunst (pacman -S dunst)
 
 # Setup
 * set script/noctrlq.sh to executable

@@ -1,0 +1,10 @@
+[Unit]
+Description=dunst
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/env dunst 
+ExecStop=/usr/bin/pkill dunst
+
+[Install]
+WantedBy=wm.target

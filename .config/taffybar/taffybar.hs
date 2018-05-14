@@ -48,7 +48,6 @@ import                  System.Taffybar.Widget
 import                  System.Taffybar.Widget.Battery
 import                  System.Taffybar.Widget.Generic.PollingGraph
 import                  System.Taffybar.Widget.Workspaces
-import                  System.Taffybar.Widget.Volume
 import                  Text.Printf
 import                  Unsafe.Coerce
 
@@ -116,7 +115,7 @@ logDebug = do
   saveGlobalLogger $ setLevel DEBUG infoLogger
 
 -- This function checks if there are any batteries installed. if yes, it will return a battery widget.
-getBatteryWidget :: IO (Maybe (TaffyIO Widget))
+getBatteryWidget :: MonadIO m => IO (Maybe (m Widget))
 getBatteryWidget = do  
   batteries <- batteryContextsNew
   
@@ -128,7 +127,7 @@ getBatteryWidget = do
 
 main = do
   battery <- getBatteryWidget
-
+  
   let cpuCfg =
         myGraphConfig
         { graphDataColors = [(0, 1, 0, 1), (1, 0, 1, 0.5)]
