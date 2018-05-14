@@ -1,12 +1,10 @@
 [Unit]
 Description=taffybar
-Wants=status-notifier-watcher.service
-After=status-notifier-watcher.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/env /home/patrick/.local/bin/my-taffybar
-ExecStop=/usr/bin/pkill my-taffybar
+ExecStart=/usr/bin/env taffybar
+ExecStop=/usr/bin/pkill taffybar
 Restart=always
 RestartSec=3
 
