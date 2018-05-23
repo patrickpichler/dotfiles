@@ -26,8 +26,6 @@ if ! zgen saved; then
   zgen save
 fi
 
-. $HOME/.nix-profile/etc/profile.d/nix.sh
-
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
@@ -43,6 +41,11 @@ alias edit_nvim_config="nvim $NVIM_CONFIG_DIR"
 
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   alias nvim='echo "No nesting!"'
+fi
+
+if [[ $TERM == xterm-termite ]]; then
+  . /etc/profile.d/vte.sh
+  __vte_osc7
 fi
 
 alias vim=nvim

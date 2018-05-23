@@ -8,6 +8,7 @@
 * xdotool 
 * xvkbd
 * dunst (pacman -S dunst)
+* libsound2-dev
 
 # Setup
 * set script/noctrlq.sh to executable

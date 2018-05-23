@@ -183,7 +183,7 @@ call minpac#add('tpope/vim-obsession')
 call minpac#add('tpope/vim-fugitive')
 
 call minpac#add('Shougo/denite.nvim')
-call minpac#add('Shougo/deoplete.nvim', { 'branch': 'next', 'do': {-> system('bash install.sh')}})
+call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
 
 call minpac#add('pbogut/deoplete-elm')
 call minpac#add('ElmCast/elm-vim')
