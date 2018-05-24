@@ -1,0 +1,10 @@
+[Unit]
+Description=nm-applet
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/env nm-applet --appindicator 
+ExecStop=/usr/bin/pkill nm-applet --appindicato
+
+[Install]
+WantedBy=wm.target
