@@ -31,31 +31,26 @@ import                  System.Log.Handler.Simple
 import                  System.Log.Logger
 import                  System.Process
 import                  System.Taffybar
+import                  System.Taffybar.Util
 import                  System.Taffybar.Context(TaffyIO)
 import                  System.Taffybar.Auth
 import                  System.Taffybar.Compat.GtkLibs
 import                  System.Taffybar.DBus
 import                  System.Taffybar.DBus.Toggle
 import                  System.Taffybar.Hooks
-import                  System.Taffybar.IconImages
-import                  System.Taffybar.Information.Battery(batteryContextsNew)
 import                  System.Taffybar.Information.CPU
 import                  System.Taffybar.Information.EWMHDesktopInfo
 import                  System.Taffybar.Information.Memory
 import                  System.Taffybar.Information.X11DesktopInfo
 import                  System.Taffybar.SimpleConfig
 import                  System.Taffybar.Widget
-import                  System.Taffybar.Widget.Battery
+import                  System.Taffybar.Widget.Util
 import                  System.Taffybar.Widget.Generic.PollingGraph
 import                  System.Taffybar.Widget.Workspaces
 import                  Text.Printf
 import                  Unsafe.Coerce
 
 buildPadBoxNoShrink orig  = liftIO $  buildPadBox orig
-
-setMinWidth width widget = liftIO $ do
-  Gtk.widgetSetSizeRequest widget width (-1)
-  return widget
 
 mkRGBA (r, g, b, a) = (r/256, g/256, b/256, a/256)
 blue = mkRGBA (42, 99, 140, 256)
@@ -115,54 +110,52 @@ logDebug = do
   saveGlobalLogger $ setLevel DEBUG infoLogger
 
 -- This function checks if there are any batteries installed. if yes, it will return a battery widget.
-getBatteryWidget :: MonadIO m => IO (Maybe (m Widget))
-getBatteryWidget = do  
-  batteries <- batteryContextsNew
+-- getBatteryWidget :: MonadIO m => IO (Maybe (m Widget))
+-- getBatteryWidget = do  
+--   batteries <- batteryContextsNew
   
-  let result = case batteries of []  -> Nothing
-                                 [x] -> do 
-                                      let battery = batteryBarNew defaultBatteryConfig 1.0
-                                      Just battery
-  return result
+--   let result = case batteries of []  -> Nothing
+--                                  [x] -> do 
+--                                       let battery = batteryBarNew defaultBatteryConfig 1.0
+--                                       Just battery
+--   return result
 
 main = do
-  battery <- getBatteryWidget
-  
   let cpuCfg =
         myGraphConfig
-        { graphDataColors = [(0, 1, 0, 1), (1, 0, 1, 0.5)]
-        , graphBackgroundColor = (1.0, 1.0, 1.0, 0.0)
-        , graphLabel = Just "cpu"
-        }
-      clock = textClockNew Nothing "%a %b %_d %r" 1
+          { graphDataColors = [(0, 1, 0, 1), (1, 0, 1, 0.5)]
+          , graphBackgroundColor = (1.0, 1.0, 1.0, 0.0)
+          , graphLabel = Just "cpu"
+          }
       mpris = mpris2New
       cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
       mem = pollingGraphNew memCfg 1 memCallback
       myWorkspacesConfig =
         defaultWorkspacesConfig
-        { underlineHeight = 3
-        , underlinePadding = 2
-        , maxIcons = Just 0
-        }
+          { underlineHeight = 3
+          , underlinePadding = 2
+          , maxIcons = Just 0
+          }
       workspaces = workspacesNew myWorkspacesConfig
       wnd = windowsNew defaultWindowsConfig
       baseConfig = defaultSimpleTaffyConfig
         { startWidgets =
-            [ workspaces
-            , mpris >>= buildPadBox
-            ]
-        , endWidgets = (map (>>= buildPadBoxNoShrink) . concat . map maybeToList)
-          [ Just (clock >>= setMinWidth 200)
-          , Just sniTrayNew
-          , battery
-          , Just cpu
-          , Just mem
-          , Just (networkMonitorNew defaultNetFormat Nothing >>= setMinWidth 180)
-          , Just wnd
+          [ workspaces
+          , mpris2New 
+          ]
+        , endWidgets = map (>>= buildContentsBox)
+          [ textClockNew Nothing "%a %b %_d %r" 1
+          , sniTrayNew 
+          , textBatteryNew "$percentage$%"
+          , batteryIconNew
+          , cpu
+          , mem
+          , networkMonitorNew defaultNetFormat Nothing >>= setMinWidth 180
+          , wnd
           ]
         , barPosition = Top
         , barPadding = 0
-        , barHeight = underlineHeight myWorkspacesConfig + windowIconSize myWorkspacesConfig + 15
+        , barHeight = 40
         , widgetSpacing = 0
         }
-  dyreTaffybar $ withLogServer $ withToggleServer $ toTaffyConfig baseConfig
+  dyreTaffybar $ withBatteryRefresh $ withLogServer $ withToggleServer $ toTaffyConfig baseConfig
