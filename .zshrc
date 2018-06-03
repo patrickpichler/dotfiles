@@ -54,7 +54,7 @@ alias config='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
 export EDITOR='nvim'
 
-if [ ! -f ~/.extensions.zsh ]; then
+if [ -f ~/.extensions.zsh ]; then
   source ~/.extensions.zsh
 fi 
 
