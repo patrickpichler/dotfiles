@@ -159,7 +159,7 @@ let g:ale_linters = {
 " ============= Polyglot ========================
 " ===============================================
 
-let g:polyglot_disabled = ['elm']
+" let g:polyglot_disabled = ['elm']
 
 
 " ===============================================
@@ -196,5 +196,5 @@ call minpac#add('sgur/vim-editorconfig')
 call minpac#add('autozimu/LanguageClient-neovim', {'branch' : 'next' , 'do': {-> system('bash install.sh')}})
 call minpac#add('neovimhaskell/haskell-vim')
 call minpac#add('ludovicchabant/vim-gutentags')
-call minpac#add('sheerun/vim-polyglot')
+call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
 " ==============================================
