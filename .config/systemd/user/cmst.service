@@ -1,0 +1,10 @@
+[Unit]
+Description=cmst
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/env cmst --minimized
+ExecStop=/usr/bin/pkill cmst
+
+[Install]
+WantedBy=wm.target
