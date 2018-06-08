@@ -8,3 +8,4 @@ ExecStop=/usr/bin/pkill cmst
 
 [Install]
 WantedBy=wm.target
+After=taffybar.service,status-notifier-watcher.service
