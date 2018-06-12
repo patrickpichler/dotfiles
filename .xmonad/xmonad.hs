@@ -126,4 +126,5 @@ myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SIN
 
           , ("M-<F1>", manPrompt def)
           , ("M-<F2>", sshPrompt def)
+          , ("M-<F3>", spawn "connman_dmenu")
           ]

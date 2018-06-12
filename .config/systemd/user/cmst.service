@@ -1,5 +1,6 @@
 [Unit]
 Description=cmst
+After=taffybar.service,status-notifier-watcher.service
 
 [Service]
 Type=simple
@@ -8,4 +9,3 @@ ExecStop=/usr/bin/pkill cmst
 
 [Install]
 WantedBy=wm.target
-After=taffybar.service,status-notifier-watcher.service
