@@ -58,6 +58,19 @@ while i <= 9
   let i = i + 1
 endwhile 
      
+" autohighlight word under cursor
+
+set updatetime=10
+
+function! HighlightWordUnderCursor()
+    if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]' 
+        exec 'match' 'Search' '/\V\<'.expand('<cword>').'\>/' 
+    else 
+        match none 
+    endif
+endfunction
+
+autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
 
 " Status Line {
   set laststatus=2 " always show statusbar
