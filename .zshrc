@@ -26,6 +26,8 @@ if ! zgen saved; then
   zgen save
 fi
 
+autoload -Uz compinit && compinit -i
+
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 

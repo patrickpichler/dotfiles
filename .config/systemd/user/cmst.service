@@ -1,10 +1,10 @@
 [Unit]
 Description=cmst
-After=taffybar.service,status-notifier-watcher.service
+After=status-notifier-watcher.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/env cmst --minimized
+ExecStart=/usr/bin/env cmst -w 5 --minimized
 ExecStop=/usr/bin/pkill cmst
 
 [Install]

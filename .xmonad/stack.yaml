@@ -16,7 +16,7 @@ packages:
   extra-dep: true
 - location:
     git: https://github.com/taffybar/taffybar
-    commit: 301fb019b4f54da0cca2b77febd877902b5dbfd4 
+    commit: afbe492d857b336d1398d35218a17de8218cf151 
   extra-dep: true
 extra-deps: 
   - X11-xft-0.3.1
