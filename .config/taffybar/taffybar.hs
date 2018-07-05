@@ -4,9 +4,6 @@ module Main where
 import qualified        Control.Concurrent.MVar as MV
 import                  Control.Exception.Base
 import                  Control.Monad
-import                  Control.Monad.Reader
-import                  Control.Monad.Trans
-import qualified        Data.ByteString.Char8 as BS
 import                  Data.GI.Base
 import                  Data.GI.Base.ManagedPtr
 import                  Data.List
@@ -16,16 +13,10 @@ import                  Data.Maybe
 import                  Debug.Trace
 import                  Foreign.ForeignPtr
 import                  Foreign.Ptr
-import qualified        GI.Gtk as GI
-import qualified "gtk3" Graphics.UI.Gtk as Gtk
-import qualified "gtk3" Graphics.UI.Gtk.Abstract.Widget as W
-import qualified "gtk3" Graphics.UI.Gtk.Layout.Table as T
-import                  Graphics.UI.Gtk.Types
 import                  StatusNotifier.Tray
 import                  System.Directory
 import                  System.Environment
 import                  System.FilePath.Posix
-import                  System.Glib.GObject
 import                  System.IO
 import                  System.Log.Handler.Simple
 import                  System.Log.Logger
@@ -49,8 +40,6 @@ import                  System.Taffybar.Widget.Generic.PollingGraph
 import                  System.Taffybar.Widget.Workspaces
 import                  Text.Printf
 import                  Unsafe.Coerce
-
-buildPadBoxNoShrink orig  = liftIO $  buildPadBox orig
 
 mkRGBA (r, g, b, a) = (r/256, g/256, b/256, a/256)
 blue = mkRGBA (42, 99, 140, 256)
@@ -82,44 +71,6 @@ cpuCallback = do
   (_, systemLoad, totalLoad) <- cpuLoad
   return [totalLoad, systemLoad]
 
-containerAddReturn c w =
-  Gtk.containerAdd c w >> Gtk.widgetShowAll c >> return (Gtk.toWidget c)
-
-underlineWidget cfg buildWidget name = do
-  w <- buildWidget
-  t <- T.tableNew 2 1 False
-  u <- Gtk.eventBoxNew
-
-  W.widgetSetSizeRequest u (-1) $ underlineHeight cfg
-
-  T.tableAttach t w 0 1 0 1 [T.Expand] [T.Expand] 0 0
-  T.tableAttach t u 0 1 1 2 [T.Fill] [T.Shrink] 0 0
-
-  Gtk.widgetSetName u (printf "%s-underline" name :: String)
-
-  Gtk.widgetShowAll t
-
-  return $ Gtk.toWidget t
-
-
-logDebug = do
-  handler <- streamHandler stdout DEBUG
-  logger <- getLogger "System.Taffybar"
-  saveGlobalLogger $ setLevel DEBUG logger
-  infoLogger <- getLogger "System.Information"
-  saveGlobalLogger $ setLevel DEBUG infoLogger
-
--- This function checks if there are any batteries installed. if yes, it will return a battery widget.
--- getBatteryWidget :: MonadIO m => IO (Maybe (m Widget))
--- getBatteryWidget = do  
---   batteries <- batteryContextsNew
-  
---   let result = case batteries of []  -> Nothing
---                                  [x] -> do 
---                                       let battery = batteryBarNew defaultBatteryConfig 1.0
---                                       Just battery
---   return result
-
 main = do
   let cpuCfg =
         myGraphConfig
@@ -127,7 +78,6 @@ main = do
           , graphBackgroundColor = (1.0, 1.0, 1.0, 0.0)
           , graphLabel = Just "cpu"
           }
-      mpris = mpris2New
       cpu = pollingGraphNew cpuCfg 0.5 cpuCallback
       mem = pollingGraphNew memCfg 1 memCallback
       myWorkspacesConfig =
@@ -141,7 +91,7 @@ main = do
       baseConfig = defaultSimpleTaffyConfig
         { startWidgets =
           [ workspaces
-          , mpris2New 
+          -- , mpris2New 
           ]
         , endWidgets = map (>>= buildContentsBox)
           [ textClockNew Nothing "%a %b %_d %r" 1
@@ -156,6 +106,8 @@ main = do
         , barPosition = Top
         , barPadding = 0
         , barHeight = 40
+
+
         , widgetSpacing = 0
         }
-  dyreTaffybar $ withBatteryRefresh $ withLogServer $ withToggleServer $ toTaffyConfig baseConfig
+  startTaffybar $ withBatteryRefresh $ withLogServer $ withToggleServer $ toTaffyConfig baseConfig

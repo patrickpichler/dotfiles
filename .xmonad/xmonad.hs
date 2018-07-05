@@ -29,7 +29,6 @@ import XMonad.Prompt.Man
 import XMonad.Prompt.Ssh
 
 import Data.List
-import Data.Default
 
 import Graphics.X11.ExtraTypes.XF86
 
