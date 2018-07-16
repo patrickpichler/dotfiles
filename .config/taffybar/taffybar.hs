@@ -1,45 +1,45 @@
 {-# LANGUAGE PackageImports #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
-import qualified        Control.Concurrent.MVar as MV
-import                  Control.Exception.Base
-import                  Control.Monad
-import                  Data.GI.Base
-import                  Data.GI.Base.ManagedPtr
-import                  Data.List
-import                  Data.List.Split
-import qualified        Data.Map as M
-import                  Data.Maybe
-import                  Debug.Trace
-import                  Foreign.ForeignPtr
-import                  Foreign.Ptr
-import                  StatusNotifier.Tray
-import                  System.Directory
-import                  System.Environment
-import                  System.FilePath.Posix
-import                  System.IO
-import                  System.Log.Handler.Simple
-import                  System.Log.Logger
-import                  System.Process
-import                  System.Taffybar
-import                  System.Taffybar.Util
-import                  System.Taffybar.Context(TaffyIO)
-import                  System.Taffybar.Auth
-import                  System.Taffybar.Compat.GtkLibs
-import                  System.Taffybar.DBus
-import                  System.Taffybar.DBus.Toggle
-import                  System.Taffybar.Hooks
-import                  System.Taffybar.Information.CPU
-import                  System.Taffybar.Information.EWMHDesktopInfo
-import                  System.Taffybar.Information.Memory
-import                  System.Taffybar.Information.X11DesktopInfo
-import                  System.Taffybar.SimpleConfig
-import                  System.Taffybar.Widget
-import                  System.Taffybar.Widget.Util
-import                  System.Taffybar.Widget.Generic.PollingGraph
-import                  System.Taffybar.Widget.Workspaces
-import                  Text.Printf
-import                  Unsafe.Coerce
+import           Control.Exception.Base
+import           Control.Monad
+import           Control.Monad.IO.Class
+import           Control.Monad.Trans.Class
+import           Control.Monad.Trans.Reader
+import qualified Data.ByteString.Char8 as BS
+import           Data.List
+import           Data.List.Split
+import qualified Data.Map as M
+import           Data.Maybe
+import qualified GitHub.Auth as Auth
+import           StatusNotifier.Tray
+import           System.Directory
+import           System.Environment
+import           System.FilePath.Posix
+import           System.IO
+import           System.Log.Handler.Simple
+import           System.Log.Logger
+import           System.Process
+import           System.Taffybar
+import           System.Taffybar.Auth
+import           System.Taffybar.Context (appendHook)
+import           System.Taffybar.DBus
+import           System.Taffybar.DBus.Toggle
+import           System.Taffybar.Hooks
+import           System.Taffybar.Information.CPU
+import           System.Taffybar.Information.EWMHDesktopInfo
+import           System.Taffybar.Information.Memory
+import           System.Taffybar.Information.X11DesktopInfo
+import           System.Taffybar.SimpleConfig
+import           System.Taffybar.Util
+import           System.Taffybar.Widget
+import           System.Taffybar.Widget.Generic.PollingGraph
+import           System.Taffybar.Widget.Generic.PollingLabel
+import           System.Taffybar.Widget.Util
+import           System.Taffybar.Widget.Workspaces
+import           Text.Printf
+import Text.Read hiding (lift)
 
 mkRGBA (r, g, b, a) = (r/256, g/256, b/256, a/256)
 blue = mkRGBA (42, 99, 140, 256)
@@ -70,6 +70,8 @@ memCallback = do
 cpuCallback = do
   (_, systemLoad, totalLoad) <- cpuLoad
   return [totalLoad, systemLoad]
+
+notifySystemD = void $ runCommandFromPath ["systemd-notify", "--ready"]
 
 main = do
   let cpuCfg =
@@ -110,4 +112,11 @@ main = do
 
         , widgetSpacing = 0
         }
-  startTaffybar $ withBatteryRefresh $ withLogServer $ withToggleServer $ toTaffyConfig baseConfig
+
+  startTaffybar $ 
+    appendHook notifySystemD $
+    appendHook (void $ getHost False) $
+    withBatteryRefresh $ 
+    withLogServer $ 
+    withToggleServer $ 
+    toTaffyConfig baseConfig
