@@ -93,7 +93,7 @@ main = do
       baseConfig = defaultSimpleTaffyConfig
         { startWidgets =
           [ workspaces
-          -- , mpris2New 
+          , mpris2New 
           ]
         , endWidgets = map (>>= buildContentsBox)
           [ textClockNew Nothing "%a %b %_d %r" 1
