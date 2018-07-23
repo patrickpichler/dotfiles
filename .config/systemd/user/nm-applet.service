@@ -4,8 +4,8 @@ After=taffybar.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/env nm-applet
-ExecStop=/usr/bin/pkill nm-applet `
+ExecStart=/usr/bin/env nm-applet --indicator
+ExecStop=/usr/bin/pkill nm-applet
 
 [Install]
 WantedBy=wm.target

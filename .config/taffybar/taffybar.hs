@@ -90,6 +90,9 @@ main = do
           }
       workspaces = workspacesNew myWorkspacesConfig
       wnd = windowsNew defaultWindowsConfig
+        { getActiveLabel = truncatedGetActiveLabel 35,
+          getMenuLabel = truncatedGetMenuLabel 35
+        }
       baseConfig = defaultSimpleTaffyConfig
         { startWidgets =
           [ workspaces
