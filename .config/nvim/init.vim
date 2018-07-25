@@ -70,7 +70,7 @@ function! HighlightWordUnderCursor()
     endif
 endfunction
 
-autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
+" autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
 
 " Status Line {
   set laststatus=2 " always show statusbar
@@ -138,15 +138,14 @@ nnoremap <silent><M-b> :Denite buffer<CR>
 nnoremap <silent><M-f> :Denite file_rec<CR>
 nnoremap <silent><M-g> :Denite grep<CR>
 
+nnoremap <silent><Leader>w :call HighlightWordUnderCursor()<CR>
+nnoremap <silent><Leader>cw :match none<CR>
+
 " this allows to do :w!! for overwriting readonly files 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " ===============================================
 
 let g:deoplete#enable_at_startup = 1
-
-let g:LanguageClient_serverCommands = {
-    \ 'haskell': ['hie', '--lsp'],
-    \ }
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
@@ -164,9 +163,6 @@ hi ALEError ctermfg=Red
 let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 
-let g:ale_linters = {
-  \ 'haskell' : ['hlint', 'stack-ghc', 'stack-build'], 
-  \ }
 
 " ===============================================
 " ============= Polyglot ========================
@@ -198,16 +194,17 @@ call minpac#add('tpope/vim-fugitive')
 call minpac#add('Shougo/denite.nvim')
 call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
 
-call minpac#add('pbogut/deoplete-elm')
-call minpac#add('ElmCast/elm-vim')
-
 call minpac#add('w0rp/ale')
 call minpac#add('mhinz/vim-grepper')
 call minpac#add('junegunn/fzf')
 call minpac#add('janko-m/vim-test')
 call minpac#add('sgur/vim-editorconfig')
 call minpac#add('autozimu/LanguageClient-neovim', {'branch' : 'next' , 'do': {-> system('bash install.sh')}})
-call minpac#add('neovimhaskell/haskell-vim')
 call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
 " ==============================================
+
+if exists("$vim_mode")
+  execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/'.$vim_mode.'.vim'
+endif
+

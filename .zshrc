@@ -14,6 +14,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/sbt
   zgen oh-my-zsh plugins/docker
   zgen oh-my-zsh plugins/docker-compose
+  zgen oh-my-zsh plugins/lein
 
   zgen oh-my-zsh themes/robbyrussell
 
@@ -50,9 +51,22 @@ if [[ $TERM == xterm-termite ]]; then
   __vte_osc7
 fi
 
+# =====================
+# ===== ALIAS =========
+# =====================
+
+
+# ==== Vim modes ======
 alias vim=nvim
+alias elmvim='export vim_mode=elm;nvim'
+alias clojurevim='export vim_mode=clojure;nvim'
+alias haskellvim='export vim_mode=haskell;nvim'
+
+# =====================
 
 alias config='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
+
+# =====================
 
 export EDITOR='nvim'
 
