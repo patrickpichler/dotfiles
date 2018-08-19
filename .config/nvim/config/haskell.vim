@@ -12,11 +12,10 @@ let g:ale_linters = {
   \ }
 
 " ================================
-" ===== Additional Plugins =======
+" ==========  Plugins ============
 " ================================
 
-"call minpac#add('ElmCast/elm-vim')
-call minpac#add('neovimhaskell/haskell-vim')
+packadd haskell-vim
 
 " ================================
 

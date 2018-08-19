@@ -202,6 +202,14 @@ call minpac#add('sgur/vim-editorconfig')
 call minpac#add('autozimu/LanguageClient-neovim', {'branch' : 'next' , 'do': {-> system('bash install.sh')}})
 call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
+
+" ============== HASKELL ======================
+call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
+
+" ============== ELM ==========================
+call minpac#add('pbogut/deoplete-elm', {'type': 'opt'})
+call minpac#add('ElmCast/elm-vim', {'type': 'opt'})
+
 " ==============================================
 
 if exists("$vim_mode")

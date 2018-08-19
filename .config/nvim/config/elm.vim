@@ -1,9 +1,8 @@
 " ================================
 " ===== Additional Plugins =======
 " ================================
-
-call minpac#add('pbogut/deoplete-elm')
-call minpac#add('ElmCast/elm-vim')
+packadd deoplete-elm
+packadd elm-vim
 
 " ================================
 
