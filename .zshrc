@@ -15,10 +15,10 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/docker
   zgen oh-my-zsh plugins/docker-compose
   zgen oh-my-zsh plugins/lein
+  zgen oh-my-zsh plugins/mvn
 
   zgen oh-my-zsh themes/robbyrussell
 
-  zgen load andrewferrier/fzf-z
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load hlissner/zsh-autopair
   zgen load gko/ssh-connect
