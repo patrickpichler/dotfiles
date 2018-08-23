@@ -16,8 +16,8 @@ else
     cd $1
   fi
 
-  tmux new-session -d -s 'clojurevim'$PWD 'vim .' #'clojurevim .' 
-  tmux split-window -h
+  tmux new-session -d -s 'clojurevim'$PWD 'vim .'
+  tmux split-window -h 'lein repl'
   tmux split-window -v
   tmux -2 attach-session 
   
