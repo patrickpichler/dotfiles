@@ -203,6 +203,8 @@ call minpac#add('autozimu/LanguageClient-neovim', {'branch' : 'next' , 'do': {->
 call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
 
+call minpac#add('mattn/emmet-vim')
+
 " ============== HASKELL ======================
 call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
 
