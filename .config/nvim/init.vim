@@ -3,6 +3,7 @@
 set nocompatible
 
 " Make backspace behave in a sane manner.
+"
 " Make backspace behave in a sane manner.
 set backspace=indent,eol,start
 
@@ -29,6 +30,8 @@ set softtabstop=2
 set smarttab 
 set autoindent
 set smartindent
+
+set timeoutlen=500
 
 " Detect .md as markdown instead of modula-l2
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -78,6 +81,7 @@ endfunction
   set statusline+=[%{winnr()}]
   set statusline+=\ Buffer:
   set statusline+=\ %-10.1n\ " buffer number
+
   set statusline+=%f\ " filename
   set statusline+=%h%m%r%w " status flags
   set statusline+=\[%{strlen(&ft)?&ft:'none'}] "file type
@@ -98,6 +102,9 @@ let mapleader = ","
 let g:grepper = {}
 let g:grepper.tools = ['grep', 'git', 'rg']
 
+" Define prefix dictionary
+let g:which_key_map =  {}
+
 " ===============================================
 " ===========  Mappings =========================
 " ===============================================
@@ -107,8 +114,8 @@ nmap <C-p> :FZF<CR>
 nnoremap <Leader>* :Grepper -cword -noprompt<CR>
 
 " Search for the current selection
-nmap gs <plug>(GrepperOperator)
-xmap gs <plug>(GrepperOperator)
+nmap gs <Plug>GrepperOperator
+xmap gs <Plug>GrepperOperator
 
 " easier transition from terminal mode to normal mode
 tnoremap <Esc> <C-\><C-n>
@@ -124,6 +131,7 @@ tnoremap <M-l> <C-\><C-n><C-w>l
 
 nnoremap <M-h> <C-w>h
 nnoremap <M-j> <C-w>j
+
 nnoremap <M-k> <C-w>k
 nnoremap <M-l> <C-w>l
 
@@ -135,12 +143,54 @@ inoremap <M-l> <Esc><C-w>l
 nnoremap <C-J> o<Esc>
 nnoremap <C-H> O<Esc>
 
+" ======== Denite ===========================
+let g:which_key_map.d = { 'name' : '+denite' }
+let g:which_key_map.d.b = 'buffers'
+let g:which_key_map.d.f = 'file rec'
+let g:which_key_map.d.g = 'grep'
+
+nnoremap <silent><Leader>db :Denite buffer<CR>
+nnoremap <silent><Leader>df :Denite file_rec<CR>
+nnoremap <silent><Leader>dg :Denite grep<CR>
+
 nnoremap <silent><M-b> :Denite buffer<CR>
 nnoremap <silent><M-f> :Denite file_rec<CR>
 nnoremap <silent><M-g> :Denite grep<CR>
 
-nnoremap <silent><Leader>w :call HighlightWordUnderCursor()<CR>
-nnoremap <silent><Leader>cw :match none<CR>
+" ======== Buffers ==========================
+let g:which_key_map.b = { 'name' : '+buffers' }
+let g:which_key_map.b.d = 'delete'
+let g:which_key_map.b.o = 'only'
+
+nnoremap <silent><Leader>bd :bd<CR>
+nnoremap <silent><Leader>bo :only<CR>
+
+" ======== highlighting  ====================
+let g:which_key_map.h = { 'name' : '+highlight' }
+let g:which_key_map.h.w = 'highlight word'
+let g:which_key_map.h.c = 'clear word highlighting'
+let g:which_key_map.h.n = 'clear word highlighting'
+
+nnoremap <silent><Leader>hw :call HighlightWordUnderCursor()<CR>
+nnoremap <silent><Leader>hc :match none<CR>
+nnoremap <silent><Leader>hn :noh<CR>
+
+" ======== file group ======================
+let g:which_key_map.f = { 'name' : '+file' }
+let g:which_key_map.f.s = 'save-file'
+
+" more convenient save
+nnoremap <silent><Leader>fs :w<CR>
+
+" =========================================
+
+nnoremap <silent> <leader>oq  :copen<CR>
+nnoremap <silent> <leader>ol  :lopen<CR>
+let g:which_key_map.o = {
+      \ 'name' : '+open',
+      \ 'q' : 'open-quickfix'    ,
+      \ 'l' : 'open-locationlist',
+      \ }
 
 " this allows to do :w!! for overwriting readonly files 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
@@ -154,9 +204,18 @@ nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
-if executable('nvr')
-  let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
-endif
+" ============ Vim which key ====================
+nnoremap <silent> <Leader> :<c-u>WhichKey ','<CR>
+
+autocmd! FileType which_key
+autocmd  FileType which_key set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+" ===============================================
+
+" if executable('nvr')
+"   let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
+" endif
 
 " ===============================================
 " ============ Colorscheme ======================
@@ -177,6 +236,7 @@ let g:ale_sign_warning = '.'
 " let g:polyglot_disabled = ['elm']
 
 
+
 " ===============================================
 " =============== Plugins =======================
 " ===============================================
@@ -187,7 +247,6 @@ packadd minpac
 call minpac#init()
 
 call minpac#add('k-takata/minpac', {'type': 'opt'})
-call minpac#add('vim-jp/syntax-vim-ex')
 
 call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-vinegar')
@@ -211,6 +270,7 @@ call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
 
 call minpac#add('mattn/emmet-vim')
 call minpac#add('skywind3000/asyncrun.vim')
+call minpac#add('liuchengxu/vim-which-key')
 
 " ============== HASKELL ======================
 call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
@@ -219,9 +279,14 @@ call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
 call minpac#add('pbogut/deoplete-elm', {'type': 'opt'})
 call minpac#add('ElmCast/elm-vim', {'type': 'opt'})
 
+" ============= JS ============================
+"call minpac#add('mxw/vim-jsx', {'type': 'opt'})
+
 " ==============================================
 
 if exists("$vim_mode")
   execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/'.$vim_mode.'.vim'
 endif
 
+" Is at the end so that specializations can insert things too 
+ autocmd VimEnter * call which_key#register(',', "g:which_key_map")

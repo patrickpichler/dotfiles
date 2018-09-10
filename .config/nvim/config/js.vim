@@ -14,7 +14,7 @@ let g:gutentags_project_root = ['package.json']
 " ===== Additional Plugins =======
 " ================================
 
-"call minpac#add('ElmCast/elm-vim')
+packadd vim-jsx
 
 " ================================
 
