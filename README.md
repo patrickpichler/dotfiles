@@ -20,3 +20,13 @@ To make taffybar work:
 ```
 cd ~/.config/taffybar && ln -s ~/.xmonad/taffybar-git taffybar
 ```
+
+
+# Dependencies
+
+Easiest to install with nix
+
+```
+nix-env -i neovim
+nix-env -i fd
+```
