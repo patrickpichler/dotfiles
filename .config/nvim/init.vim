@@ -280,7 +280,7 @@ call minpac#add('pbogut/deoplete-elm', {'type': 'opt'})
 call minpac#add('ElmCast/elm-vim', {'type': 'opt'})
 
 " ============= JS ============================
-"call minpac#add('mxw/vim-jsx', {'type': 'opt'})
+call minpac#add('mxw/vim-jsx', {'type': 'opt'})
 
 " ==============================================
 
