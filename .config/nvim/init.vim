@@ -60,37 +60,37 @@ while i <= 9
   execute 'nnoremap <silent> <Leader>'.i.' :'.i.'wincmd w<CR>'
   let i = i + 1
 endwhile 
-     
+
 " autohighlight word under cursor
 
 set updatetime=10
 
 function! HighlightWordUnderCursor()
-    if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]' 
-        exec 'match' 'Search' '/\V\<'.expand('<cword>').'\>/' 
-    else 
-        match none 
-    endif
+  if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]' 
+    exec 'match' 'Search' '/\V\<'.expand('<cword>').'\>/' 
+  else 
+    match none 
+  endif
 endfunction
 
 " autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
 
 " Status Line {
-  set laststatus=2 " always show statusbar
-  set statusline=
-  set statusline+=[%{winnr()}]
-  set statusline+=\ Buffer:
-  set statusline+=\ %-10.1n\ " buffer number
+set laststatus=2 " always show statusbar
+set statusline=
+set statusline+=[%{winnr()}]
+set statusline+=\ Buffer:
+set statusline+=\ %-10.1n\ " buffer number
 
-  set statusline+=%f\ " filename
-  set statusline+=%h%m%r%w " status flags
-  set statusline+=\[%{strlen(&ft)?&ft:'none'}] "file type
-  set statusline+=%{gutentags#statusline('[',']')}
-  set statusline+=%= "right align remainder
-  set statusline+=\ %{fugitive#statusline()}
-  set statusline+=\ 0x%-8B " character value
-  set statusline+=%-14(%l,%c%V%) " line, character
-  set statusline+=%<%P " file position 
+set statusline+=%f\ " filename
+set statusline+=%h%m%r%w " status flags
+set statusline+=\[%{strlen(&ft)?&ft:'none'}] "file type
+set statusline+=%{gutentags#statusline('[',']')}
+set statusline+=%= "right align remainder
+set statusline+=\ %{fugitive#statusline()}
+set statusline+=\ 0x%-8B " character value
+set statusline+=%-14(%l,%c%V%) " line, character
+set statusline+=%<%P " file position 
 " }
 
 colorscheme desert
@@ -150,12 +150,13 @@ let g:which_key_map.d.f = 'file rec'
 let g:which_key_map.d.g = 'grep'
 
 nnoremap <silent><Leader>db :Denite buffer<CR>
-nnoremap <silent><Leader>df :Denite file_rec<CR>
+nnoremap <silent><Leader>df :Denite file/rec<CR>
 nnoremap <silent><Leader>dg :Denite grep<CR>
 
 nnoremap <silent><M-b> :Denite buffer<CR>
-nnoremap <silent><M-f> :Denite file_rec<CR>
+nnoremap <silent><M-f> :Denite file/rec<CR>
 nnoremap <silent><M-g> :Denite grep<CR>
+
 
 " ======== Buffers ==========================
 let g:which_key_map.b = { 'name' : '+buffers' }
@@ -209,13 +210,9 @@ nnoremap <silent> <Leader> :<c-u>WhichKey ','<CR>
 
 autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " ===============================================
-
-" if executable('nvr')
-"   let $VISUAL="nvr -cc split --remote-wait +'set bufhidden=wipe'"
-" endif
 
 " ===============================================
 " ============ Colorscheme ======================
@@ -227,14 +224,6 @@ let g:ale_sign_column_always = 1
 
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
-
-
-" ===============================================
-" ============= Polyglot ========================
-" ===============================================
-
-" let g:polyglot_disabled = ['elm']
-
 
 
 " ===============================================
@@ -284,9 +273,27 @@ call minpac#add('mxw/vim-jsx', {'type': 'opt'})
 
 " ==============================================
 
+packloadall
+
+" ====== Denite =============
+
+" Ripgrep command on grep source
+call denite#custom#var('grep', 'command', ['rg'])
+call denite#custom#var('grep', 'default_opts',
+      \ ['--vimgrep', '--no-heading'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+call denite#custom#var('file/rec', 'command',
+      \ ['fd', '--full-path'])
+
+" ==== Load vim config =====
+
 if exists("$vim_mode")
   execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/'.$vim_mode.'.vim'
 endif
 
 " Is at the end so that specializations can insert things too 
- autocmd VimEnter * call which_key#register(',', "g:which_key_map")
+call which_key#register(',', "g:which_key_map")
