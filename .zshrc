@@ -56,18 +56,37 @@ if [[ $TERM == xterm-termite ]]; then
   __vte_osc7
 fi
 
+# ==== Vim modes ======
+
+function _start_vim(){
+  export vim_mode=$1
+
+  shift
+
+  nvim $@
+
+  export vim_mode=
+}
+
+function elmvim(){
+  _start_vim "elm" $@
+}
+function clojurevim(){
+  _start_vim "clojure" $@
+}
+function haskellvim(){
+  _start_vim "haskell" $@
+}
+function jsvim(){
+  _start_vim "js" $@
+}
+
+alias vim=nvim
+
+# =====================
+
 # =====================
 # ===== ALIAS =========
-# =====================
-
-
-# ==== Vim modes ======
-alias vim=nvim
-alias elmvim='export vim_mode=elm;nvim;export vim_mode='
-alias clojurevim='export vim_mode=clojure;nvim;export vim_mode='
-alias haskellvim='export vim_mode=haskell;nvim;export vim_mode='
-alias jsvim='export vim_mode=js;nvim;export vim_mode='
-
 # =====================
 
 alias config='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
