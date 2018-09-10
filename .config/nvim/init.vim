@@ -148,6 +148,8 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 let g:deoplete#enable_at_startup = 1
 
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
@@ -163,6 +165,9 @@ hi ALEError ctermfg=Red
 
 let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
+
+let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_warning = '.'
 
 
 " ===============================================
@@ -205,6 +210,7 @@ call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
 
 call minpac#add('mattn/emmet-vim')
+call minpac#add('skywind3000/asyncrun.vim')
 
 " ============== HASKELL ======================
 call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})

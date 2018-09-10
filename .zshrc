@@ -66,6 +66,7 @@ alias vim=nvim
 alias elmvim='export vim_mode=elm;nvim'
 alias clojurevim='export vim_mode=clojure;nvim'
 alias haskellvim='export vim_mode=haskell;nvim'
+alias jsvim='export vim_mode=js;nvim'
 
 # =====================
 
