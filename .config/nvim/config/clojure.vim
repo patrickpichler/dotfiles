@@ -7,6 +7,8 @@ let g:LanguageClient_serverCommands = {
     \ 'clojure': ['clojure-lspb'],
     \ }
 
+let g:gutentags_project_root = ['project.clj']
+
 " ================================
 " ===== Additional Plugins =======
 " ================================
