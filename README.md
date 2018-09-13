@@ -29,4 +29,5 @@ Easiest to install with nix
 ```
 nix-env -i neovim
 nix-env -i fd
+nix-env -i universal-ctags
 ```
