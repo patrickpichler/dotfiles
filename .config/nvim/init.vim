@@ -260,6 +260,7 @@ call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
 call minpac#add('mattn/emmet-vim')
 call minpac#add('skywind3000/asyncrun.vim')
 call minpac#add('liuchengxu/vim-which-key')
+call minpac#add('jiangmiao/auto-pairs')
 
 " ============== HASKELL ======================
 call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
