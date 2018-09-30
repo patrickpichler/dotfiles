@@ -8,11 +8,11 @@ packages:
 #   extra-dep: true
 - location:
     git: https://github.com/xmonad/xmonad
-    commit: 76f4a162587a8c6b58afe3d76341336cfe3c9aa3
+    commit: 4ccaff8f25a01ab6b279c74b04b8ae509a15d53d
   extra-dep: true
 - location:
     git: https://github.com/xmonad/xmonad-contrib
-    commit: ca9b7d9dfcaf972152731420fe9f1ef01d967f5d
+    commit: 16836b6f914be4d0c00bc2e18fbb3b8d1a739bc7
   extra-dep: true
 - location:
     git: https://github.com/taffybar/taffybar
