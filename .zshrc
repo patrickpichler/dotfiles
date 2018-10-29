@@ -80,7 +80,9 @@ function haskellvim(){
 function jsvim(){
   _start_vim "js" $@
 }
-
+function juliavim(){
+  _start_vim "julia" $@
+}
 alias vim=nvim
 
 # =====================

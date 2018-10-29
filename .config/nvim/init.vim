@@ -272,6 +272,8 @@ call minpac#add('ElmCast/elm-vim', {'type': 'opt'})
 " ============= JS ============================
 call minpac#add('mxw/vim-jsx', {'type': 'opt'})
 
+" ============= Julia ============================
+call minpac#add('JuliaEditorSupport/julia-vim', {'type': 'opt'})
 " ==============================================
 
 packloadall

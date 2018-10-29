@@ -9,6 +9,8 @@
 * xvkbd
 * dunst (pacman -S dunst)
 * libsound2-dev
+* julia (nix-env -i julia)
+  * https://github.com/JuliaEditorSupport/LanguageServer.jl
 
 # Setup
 * set script/noctrlq.sh to executable
