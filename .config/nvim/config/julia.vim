@@ -1,6 +1,8 @@
 
 packadd julia-vim
 
+let g:default_julia_version = '1.0'
+
 " language server
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
