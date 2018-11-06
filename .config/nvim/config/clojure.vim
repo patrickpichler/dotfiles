@@ -40,3 +40,7 @@ nnoremap <silent> <leader>lrml :call LanguageClient#workspace_executeCommand('mo
 nnoremap <silent> <leader>lril :call LanguageClient#workspace_executeCommand('introduce-let', [Expand('%:p'), line('.') - 1, col('.') - 1, input('Binding name: ')])<CR>
 nnoremap <silent> <leader>lrel :call LanguageClient#workspace_executeCommand('expand-let', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
 nnoremap <silent> <leader>lram :call LanguageClient#workspace_executeCommand('create-missing-libspec', [Expand('%:p'), line('.') - 1, col('.') - 1])<CR>
+
+
+nnoremap <F9> :Dispatch lein compile<CR>
+nnoremap <F8> :Dispatch lein test<CR>
