@@ -6,7 +6,7 @@
 * status notifier watcher (https://github.com/IvanMalison/status-notifier-item)
 * libdbusmenu-gtk3 (pacman -S libdbusmenu-gtk3)
 * xdotool 
-* xvkbd
+* xvkbd (nix-env -i xvkbd)
 * dunst (pacman -S dunst)
 * libsound2-dev
 * julia (nix-env -i julia)
