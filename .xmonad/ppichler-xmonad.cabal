@@ -10,7 +10,7 @@ category:            System
 build-type:          Simple
 cabal-version:       >=1.10
 
-executable xmonad
+executable ppichler-xmonad
   main-is:            xmonad.hs
   build-depends:      base
                      , X11>=1.8
