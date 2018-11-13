@@ -116,4 +116,4 @@ source ~/.fzf/key-bindings.zsh
 # ====== Key bindings ======
 # ==========================
 
-bindkey "^[^[" sudo-command-line
+bindkey "^]^]" sudo-command-line
