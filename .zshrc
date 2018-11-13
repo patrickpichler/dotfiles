@@ -17,6 +17,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/lein
   zgen oh-my-zsh plugins/mvn
   zgen oh-my-zsh plugins/z
+  zgen oh-my-zsh plugins/vi-mode
 
   zgen oh-my-zsh themes/robbyrussell
 
@@ -32,6 +33,7 @@ if ! zgen saved; then
   zgen save
 fi
 
+
 autoload -Uz compinit && compinit -i
 
 . $HOME/.asdf/asdf.sh
@@ -40,6 +42,7 @@ autoload -Uz compinit && compinit -i
 if [ -s $HOME/development/scripts ]; then
   PATH=$PATH:~/development/scripts
 fi
+
 
 export NVIM_CONFIG_DIR="$HOME/.config/nvim"
 
@@ -83,6 +86,9 @@ function jsvim(){
 function juliavim(){
   _start_vim "julia" $@
 }
+function rustvim(){
+  _start_vim "rust" $@
+}
 alias vim=nvim
 
 # =====================
@@ -105,3 +111,9 @@ prompt_nix_shell_setup
 
 source ~/.fzf/completion.zsh
 source ~/.fzf/key-bindings.zsh
+
+# ==========================
+# ====== Key bindings ======
+# ==========================
+
+bindkey "^[^[" sudo-command-line
