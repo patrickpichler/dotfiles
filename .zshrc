@@ -112,6 +112,8 @@ prompt_nix_shell_setup
 source ~/.fzf/completion.zsh
 source ~/.fzf/key-bindings.zsh
 
+export KEYTIMEOUT=1
+
 # ==========================
 # ====== Key bindings ======
 # ==========================
@@ -140,6 +142,9 @@ fi
 if [[ "${terminfo[kcud1]}" != "" ]]; then
   bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
+
+bindkey '^[[1;5C' forward-word  # [Ctrl-RightArrow] - move forward one word
+bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
 bindkey -M vicmd 'v' visual-mode
 bindkey -M vicmd '^v' edit-command-line
