@@ -112,7 +112,7 @@ prompt_nix_shell_setup
 source ~/.fzf/completion.zsh
 source ~/.fzf/key-bindings.zsh
 
-export KEYTIMEOUT=1
+export KEYTIMEOUT=20
 
 # ==========================
 # ====== Key bindings ======
@@ -123,8 +123,6 @@ zle -N up-line-or-beginning-search
 
 autoload -U down-line-or-beginning-search
 zle -N down-line-or-beginning-search
-
-bindkey "^]^]" sudo-command-line
 
 # allow ctrl-p, ctrl-n for navigate history (standard behaviour)
 bindkey '^P' up-line-or-beginning-search
@@ -148,3 +146,5 @@ bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
 
 bindkey -M vicmd 'v' visual-mode
 bindkey -M vicmd '^v' edit-command-line
+
+bindkey "^]^]" sudo-command-line
