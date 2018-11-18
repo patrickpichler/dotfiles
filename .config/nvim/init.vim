@@ -33,6 +33,8 @@ set smartindent
 
 set timeoutlen=500
 
+set inccommand=split 
+
 " Detect .md as markdown instead of modula-l2
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
