@@ -33,6 +33,11 @@ if ! zgen saved; then
   zgen save
 fi
 
+export rgDir=`which rg | xargs readlink | xargs dirname | xargs dirname`
+
+if [ -n $rgDir ]; then
+  fpath=("$rgDir/share/zsh/site-functions/" $fpath)
+fi
 
 autoload -Uz compinit && compinit -i
 
