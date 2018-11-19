@@ -199,8 +199,6 @@ let g:which_key_map.o = {
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " ===============================================
 
-let g:deoplete#enable_at_startup = 1
-
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 
 nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
@@ -229,6 +227,37 @@ let g:ale_sign_warning = '.'
 
 
 " ===============================================
+" ============== NCM2 ===========================
+" ===============================================
+
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" IMPORTANTE: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+set shortmess+=c
+
+au TextChangedI * call ncm2#auto_trigger()
+
+inoremap <c-c> <ESC>
+
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" ===============================================
+" ============== Snippets =======================
+" ===============================================
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
+let g:UltiSnipsJumpBackwardTrigger="<c-m>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" ===============================================
 " =============== Plugins =======================
 " ===============================================
 
@@ -239,6 +268,24 @@ call minpac#init()
 
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 
+" ========================== NCM2 ======================
+call minpac#add('ncm2/ncm2')
+call minpac#add('roxma/nvim-yarp')
+call minpac#add('ncm2/ncm2-bufword')
+call minpac#add('ncm2/ncm2-path')
+call minpac#add('ncm2/ncm2-tmux')
+call minpac#add('ncm2/ncm2-tagprefix')
+call minpac#add('ncm2/ncm2-ultisnips')
+call minpac#add('ncm2/ncm2-gtags')
+call minpac#add('wellle/tmux-complete.vim')
+
+
+" ======================== Snippts =====================
+call minpac#add('SirVer/ultisnips')
+call minpac#add('honza/vim-snippets')
+
+" ======================================================
+
 call minpac#add('tpope/vim-dispatch')
 call minpac#add('tpope/vim-vinegar')
 call minpac#add('tpope/vim-unimpaired')
@@ -248,7 +295,6 @@ call minpac#add('tpope/vim-obsession')
 call minpac#add('tpope/vim-fugitive')
 
 call minpac#add('Shougo/denite.nvim')
-call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
 
 call minpac#add('w0rp/ale')
 call minpac#add('mhinz/vim-grepper')
@@ -268,7 +314,6 @@ call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
 
 " ============== ELM ==========================
-call minpac#add('pbogut/deoplete-elm', {'type': 'opt'})
 call minpac#add('ElmCast/elm-vim', {'type': 'opt'})
 
 " ============= JS ============================
