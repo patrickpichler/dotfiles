@@ -142,9 +142,6 @@ inoremap <M-j> <Esc><C-w>j
 inoremap <M-k> <Esc><C-w>k
 inoremap <M-l> <Esc><C-w>l
 
-nnoremap <C-J> o<Esc>
-nnoremap <C-H> O<Esc>
-
 " ======== Denite ===========================
 let g:which_key_map.d = { 'name' : '+denite' }
 let g:which_key_map.d.b = 'buffers'
@@ -251,8 +248,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-m>"
+let g:UltiSnipsJumpForwardTrigger="<c-l>"
+let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -298,7 +295,6 @@ call minpac#add('Shougo/denite.nvim')
 
 call minpac#add('w0rp/ale')
 call minpac#add('mhinz/vim-grepper')
-call minpac#add('junegunn/fzf')
 call minpac#add('janko-m/vim-test')
 call minpac#add('sgur/vim-editorconfig')
 call minpac#add('autozimu/LanguageClient-neovim', {'branch' : 'next' , 'do': {-> system('bash install.sh')}})
