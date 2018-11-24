@@ -40,7 +40,8 @@ main =
   xmonad $ docks $ ewmh $ pagerHints $
     def 
     { modMask = myModMask
-    , terminal = "~/.resources/scripts/termite-wrapper.sh"
+    -- , terminal = "~/.resources/scripts/termite-wrapper.sh"
+    , terminal = "kitty"
     , borderWidth = 1
     , focusedBorderColor = "#FFFFFF"
     , normalBorderColor = "#222222"

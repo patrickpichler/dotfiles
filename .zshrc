@@ -48,6 +48,10 @@ if [ -s $HOME/development/scripts ]; then
   PATH=$PATH:~/development/scripts
 fi
 
+if type kitty > /dev/null ; then
+  kitty + complete setup zsh | source /dev/stdin
+fi
+
 
 export NVIM_CONFIG_DIR="$HOME/.config/nvim"
 
@@ -57,11 +61,6 @@ alias edit_nvim_config="pushd . > /dev/null; cd $NVIM_CONFIG_DIR; nvim $NVIM_CON
 
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   alias nvim='echo "No nesting!"'
-fi
-
-if [[ $TERM == xterm-termite ]]; then
-  . /etc/profile.d/vte.sh
-  __vte_osc7
 fi
 
 # ==== Vim modes ======
@@ -94,6 +93,7 @@ function juliavim(){
 function rustvim(){
   _start_vim "rust" $@
 }
+
 alias vim=nvim
 
 # =====================
@@ -106,7 +106,7 @@ alias config='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
 # =====================
 
-export EDITOR='nvim'
+export EDITOR=nvim
 
 if [ -f ~/.extensions.zsh ]; then
   source ~/.extensions.zsh
