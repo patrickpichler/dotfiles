@@ -11,6 +11,7 @@
 * libsound2-dev
 * julia (nix-env -i julia)
   * https://github.com/JuliaEditorSupport/LanguageServer.jl
+* neovim-remote (nix-env -i python3.6-neovim-remote-2.1.0)
 
 # Setup
 * set script/noctrlq.sh to executable
