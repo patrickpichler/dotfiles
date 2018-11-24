@@ -44,3 +44,5 @@ nnoremap <silent> <leader>lram :call LanguageClient#workspace_executeCommand('cr
 
 nnoremap <F9> :Dispatch lein compile<CR>
 nnoremap <F8> :Dispatch lein test<CR>
+
+autocmd BufNewFile,BufRead *.boot set filetype=clojure

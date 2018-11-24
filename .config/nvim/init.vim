@@ -255,6 +255,16 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 let g:UltiSnipsEditSplit="vertical"
 
 " ===============================================
+" ============ Easy align =======================
+" ===============================================
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" ===============================================
 " =============== Plugins =======================
 " ===============================================
 
@@ -305,6 +315,7 @@ call minpac#add('mattn/emmet-vim')
 call minpac#add('skywind3000/asyncrun.vim')
 call minpac#add('liuchengxu/vim-which-key')
 call minpac#add('jiangmiao/auto-pairs')
+call minpac#add('junegunn/vim-easy-align')
 
 " ============== HASKELL ======================
 call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
