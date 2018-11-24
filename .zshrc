@@ -111,7 +111,12 @@ alias config='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
 # =====================
 
-export EDITOR=nvim
+
+if type nvr > /dev/null ; then
+  export EDITOR='nvr --remote -s'
+else
+  export EDITOR=nvim
+fi
 
 if [ -f ~/.extensions.zsh ]; then
   source ~/.extensions.zsh
