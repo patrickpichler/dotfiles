@@ -52,7 +52,12 @@ if type kitty > /dev/null ; then
   kitty + complete setup zsh | source /dev/stdin
 fi
 
+# Custom style for syntax higlighting
+typeset -A ZSH_HIGHLIGHT_STYLES
 
+ZSH_HIGHLIGHT_STYLES[comment]='fg=cyan'
+
+# ===================================
 export NVIM_CONFIG_DIR="$HOME/.config/nvim"
 
 alias edit_zsh_config="nvim ~/.zshrc"
