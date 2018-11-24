@@ -94,7 +94,12 @@ function rustvim(){
   _start_vim "rust" $@
 }
 
-alias vim=nvim
+
+if type nvr > /dev/null ; then
+  export editor='nvr --remote -s'
+else
+  export editor='nvim'
+fi
 
 # =====================
 
