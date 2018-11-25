@@ -64,6 +64,8 @@ alias edit_zsh_config="nvim ~/.zshrc"
 alias edit_xmonad_config="nvim ~/.xmonad/xmonad.hs"
 alias edit_nvim_config="pushd . > /dev/null; cd $NVIM_CONFIG_DIR; nvim $NVIM_CONFIG_DIR; popd > /dev/null;"
 
+alias vim=nvim # convenient alias
+
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   alias nvim='echo "No nesting!"'
 fi
