@@ -1,4 +1,11 @@
 " ================================
+" ===== Additional Plugins =======
+" ================================
+
+packadd vim-fireplace
+packadd vim-salve
+
+" ================================
 " ========== Config ==============
 " ================================
 
@@ -11,13 +18,7 @@ let g:LanguageClient_rootMarkers = {
     \ 'clojure': ['project.clj', 'build.boot', 'deps.edn']
     \}
 
-let g:gutentags_project_root = ['project.clj']
-
-" ================================
-" ===== Additional Plugins =======
-" ================================
-
-"call minpac#add('ElmCast/elm-vim')
+let g:gutentags_project_root = ['project.clj', 'build.boot']
 
 " ================================
 

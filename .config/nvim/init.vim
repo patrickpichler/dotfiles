@@ -276,11 +276,10 @@ call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " ========================== NCM2 ======================
-call minpac#add('ncm2/ncm2')
 call minpac#add('roxma/nvim-yarp')
+call minpac#add('ncm2/ncm2')
 call minpac#add('ncm2/ncm2-bufword')
 call minpac#add('ncm2/ncm2-path')
-call minpac#add('ncm2/ncm2-tmux')
 call minpac#add('ncm2/ncm2-tagprefix')
 call minpac#add('ncm2/ncm2-ultisnips')
 call minpac#add('ncm2/ncm2-gtags')
@@ -329,6 +328,13 @@ call minpac#add('mxw/vim-jsx', {'type': 'opt'})
 " ============= Julia ============================
 call minpac#add('JuliaEditorSupport/julia-vim', {'type': 'opt'})
 " ==============================================
+
+" ============= Clojure ==========================
+call minpac#add('tpope/vim-salve', { 'type': 'opt' })
+call minpac#add('tpope/vim-fireplace', { 'type': 'opt' })
+
+
+" ===========================================
 
 packloadall
 
