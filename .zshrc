@@ -60,9 +60,6 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=cyan'
 # ===================================
 export NVIM_CONFIG_DIR="$HOME/.config/nvim"
 
-alias edit_zsh_config="nvim ~/.zshrc"
-alias edit_xmonad_config="nvim ~/.xmonad/xmonad.hs"
-alias edit_nvim_config="pushd . > /dev/null; cd $NVIM_CONFIG_DIR; nvim $NVIM_CONFIG_DIR; popd > /dev/null;"
 
 alias vim=nvim # convenient alias
 
@@ -116,6 +113,14 @@ fi
 
 alias config='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
+alias edit_zsh_config="nvim ~/.zshrc"
+alias edit_xmonad_config="nvim ~/.xmonad/xmonad.hs"
+alias edit_nvim_config="pushd . > /dev/null; cd $NVIM_CONFIG_DIR; nvim $NVIM_CONFIG_DIR; popd > /dev/null;"
+
+# kitty specific aliases
+if type kitty > /dev/null ; then
+  alias ssh='kitten +kitten ssh'
+fi
 # =====================
 
 
