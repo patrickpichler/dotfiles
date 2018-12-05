@@ -290,6 +290,8 @@ call minpac#add('liuchengxu/vim-which-key')
 call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('junegunn/vim-easy-align')
 
+call minpac#add('junegunn/fzf')
+
 " ============== HASKELL ======================
 call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
 
