@@ -119,7 +119,7 @@ alias edit_nvim_config="pushd . > /dev/null; cd $NVIM_CONFIG_DIR; nvim $NVIM_CON
 
 # kitty specific aliases
 if type kitty > /dev/null ; then
-  alias ssh='kitten +kitten ssh'
+  alias ssh='kitty +kitten ssh'
 fi
 # =====================
 
