@@ -34,7 +34,8 @@ import Graphics.X11.ExtraTypes.XF86
 
 import System.IO
 
-import System.Taffybar.Support.PagerHints (pagerHints)
+-- import System.Taffybar.Support.PagerHints (pagerHints)
+import PagerHints
 
 main =
   xmonad $ docks $ ewmh $ pagerHints $

@@ -1,17 +1,21 @@
+resolver: lts-12.0
+
 packages:
 - '.'
-# - location: './taffybar'
-#   extra-dep: true
-- location:
-    git: https://github.com/willdonnelly/dyre
-    commit: 11412752b483135e0c151ab90be17b217f837c4b
-  extra-dep: true
-- location:
-    git: https://github.com/taffybar/taffybar
-    commit:  bb275b4fcbd02207b81c2e8265bfe4f5edafc387
-  extra-dep: true
 extra-deps:
+  - git: https://github.com/willdonnelly/dyre
+    commit: 11412752b483135e0c151ab90be17b217f837c4b
+  - git: https://github.com/taffybar/taffybar
+    commit: bb275b4fcbd02207b81c2e8265bfe4f5edafc387
+  - git: https://github.com/xmonad/xmonad
+    commit: bb13853929f8f6fc59b526bcc10631e1bac309ad
+  - git: https://github.com/xmonad/xmonad-contrib
+    commit: dda242a4597c1ed0fa895a10b9296dcc709f4937
+  - ConfigFile-1.1.4
+  - X11-1.8
   - X11-xft-0.3.1
+  - cairo-0.13.5.0
+  - containers-0.5.11.0
   - dbus-1.0.1
   - dbus-hslogger-0.1.0.1
   - gi-dbusmenu-0.4.1
@@ -20,20 +24,24 @@ extra-deps:
   - gi-gdkpixbuf-2.0.16
   - gi-gdkx11-3.0.2
   - gi-gio-2.0.16
-  - gi-gtk-3.0.21
-  - gi-gtk-hs-0.3.6.1
+  - gi-glib-2.0.17
+  - gi-gtk-3.0.26
+  - gi-gtk-hs-0.3.6.3
   - gi-pango-1.0.16
   - gi-xlib-2.0.2
   - gio-0.13.4.1
-  - gtk-sni-tray-0.1.4.0
-  - gtk-strut-0.1.2.1
+  - glib-0.13.6.0
+  - gtk-sni-tray-0.1.5.0
+  - gtk-strut-0.1.3.0
   - haskell-gi-0.21.2
-  - haskell-gi-base-0.21.1
+  - haskell-gi-base-0.21.2
   - libxml-sax-0.7.5
-  - rate-limit-1.1.1
+  - rate-limit-1.4.1
   - spool-0.1
   - status-notifier-item-0.3.0.0
+  - stm-2.4.5.1
   - time-units-1.0.0
   - xml-helpers-1.0.0
-resolver: lts-11.7
+  - haskell-gi-overloading-0.0
+  - transformers-0.5.5.0
 flags:

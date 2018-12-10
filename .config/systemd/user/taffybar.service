@@ -5,8 +5,8 @@ After=status-notifier-watcher.service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/env my-taffybar
-ExecStop=/usr/bin/pkill -f my-taffybar
+ExecStart=/usr/bin/env ppichler-taffybar
+ExecStop=/usr/bin/pkill -f ppichler-taffybar
 Restart=always
 RestartSec=3
 

@@ -12,23 +12,23 @@ cabal-version:       >=1.10
 
 executable ppichler-xmonad
   main-is:            xmonad.hs
-  build-depends:      base
+  build-depends:       aeson>=0.11.2.1
                      , X11>=1.8
-                     , bytestring
-                     , containers
-                     , directory
-                     , filepath
-                     , gi-gtk
-                     , github
-                     , gtk-sni-tray
-                     , gtk-strut
-                     , haskell-gi-base
-                     , hslogger
-                     , process
+                     , base >=4.7
+                     , bytestring>=0.10.8.1
+                     , containers>=0.5.7.1
+                     , directory>=1.2.6.2
+                     , filepath>=1.4.1.0
+                     , hostname>=1.0
+                     , multimap>=1.2.1
+                     , process>=1.4.3.0
                      , split
-                     , taffybar
-                     , transformers
+                     , transformers>=0.5.2.0
+                     , tuple >= 0.3.0.2
+                     , utf8-string
                      , xmonad-contrib>=0.13
                      , xmonad>=0.13
   hs-source-dirs:      .
+                       src
+  other-modules: PagerHints
   default-language:     Haskell2010
