@@ -28,6 +28,7 @@ executable ppichler-xmonad
                      , utf8-string
                      , xmonad-contrib>=0.13
                      , xmonad>=0.13
+                     , dbus >= 1.2.1
   hs-source-dirs:      .
                        src
   other-modules: PagerHints

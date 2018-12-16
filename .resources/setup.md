@@ -12,6 +12,7 @@
 * julia (nix-env -i julia)
   * https://github.com/JuliaEditorSupport/LanguageServer.jl
 * neovim-remote (nix-env -i python3.6-neovim-remote-2.1.0)
+* polybar https://github.com/jaagr/polybar
 
 # Setup
 * set script/noctrlq.sh to executable

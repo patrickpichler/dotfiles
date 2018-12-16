@@ -34,27 +34,40 @@ import Graphics.X11.ExtraTypes.XF86
 
 import System.IO
 
+import qualified DBus as D
+import qualified DBus.Client as D
+import qualified Codec.Binary.UTF8.String as UTF8
+
 -- import System.Taffybar.Support.PagerHints (pagerHints)
 import PagerHints
+import PolybarHints as Polybar
 
 main =
-  xmonad $ docks $ ewmh $ pagerHints $
-    def 
-    { modMask = myModMask
-    -- , terminal = "~/.resources/scripts/termite-wrapper.sh"
-    , terminal = "kitty"
-    , borderWidth = 1
-    , focusedBorderColor = "#FFFFFF"
-    , normalBorderColor = "#222222"
-    , focusFollowsMouse = False
-    , layoutHook = myLayoutHook 
-    , handleEventHook    = handleEventHook def <+> docksEventHook
-    , manageHook = manageHook def <+> manageDocks <+> namedScratchpadManageHook scratchpads <+> myManageHook
-    , startupHook = do 
-                setWMName "LG3D"
-                docksStartupHook
-                myStartup
-    } `additionalKeysP` myKeys
+  do
+    dbus <- D.connectSession
+
+     -- Request access to the DBus name
+    D.requestName dbus (D.busName_ "org.xmonad.Log")
+        [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]
+
+    xmonad $ docks $ ewmh $ pagerHints $
+      def 
+      { modMask = myModMask
+      -- , terminal = "~/.resources/scripts/termite-wrapper.sh"
+      , terminal = "kitty"
+      , borderWidth = 1
+      , focusedBorderColor = "#FFFFFF"
+      , normalBorderColor = "#222222"
+      , focusFollowsMouse = False
+      , layoutHook = myLayoutHook 
+      , logHook = (Polybar.eventLogHook dbus)
+      , handleEventHook    = handleEventHook def <+> docksEventHook
+      , manageHook = manageHook def <+> manageDocks <+> namedScratchpadManageHook scratchpads <+> myManageHook
+      , startupHook = do 
+                  setWMName "LG3D"
+                  docksStartupHook
+                  myStartup
+      } `additionalKeysP` myKeys
 
 myStartup = spawn "systemctl --user start wm.target"
 
