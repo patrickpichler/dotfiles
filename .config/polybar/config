@@ -56,7 +56,7 @@ module-margin-left = 1
 module-margin-right = 2
 
 
-modules-left = xmonad-ws title test
+modules-left = xmonad-ws title
 modules-center = music 
 modules-right = network cpu memory battery date
 
@@ -164,8 +164,6 @@ date-alt =
 time = "%H:%M:%S"
 time-alt = "%H:%M:%S"
 
-format-prefix = ""
-format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.aqua}
 
 label = %date% %time%
@@ -187,19 +185,25 @@ format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-foreground = ${colors.foreground-alt}
 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+
 animation-charging-framerate = 750
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
 
 [module/network]
 type = internal/network
 interface = enp4s0
 
 label-connected = %local_ip% %downspeed: 10%
-
-[module/test]
-type = custom/script
-exec = ~/.config/polybar/test.sh
-tail = true
 
 [module/xmonad-ws]
 type = custom/script
