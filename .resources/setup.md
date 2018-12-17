@@ -14,5 +14,9 @@
 * neovim-remote (nix-env -i python3.6-neovim-remote-2.1.0)
 * polybar https://github.com/jaagr/polybar
 
+# Fonts
+* ttf-material-design-icons-git
+* ttf-font-awesome
+
 # Setup
 * set script/noctrlq.sh to executable
