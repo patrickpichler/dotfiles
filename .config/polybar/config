@@ -207,6 +207,6 @@ label-connected = %local_ip% %downspeed: 10%
 
 [module/xmonad-ws]
 type = custom/script
-exec = ~/.config/polybar/xmonad_dbus.py
+exec = "PYTHONUNBUFFERED='1' ~/.config/polybar/xmonad_dbus.py"
 tail=true
 
