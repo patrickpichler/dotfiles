@@ -13,6 +13,7 @@
   * https://github.com/JuliaEditorSupport/LanguageServer.jl
 * neovim-remote (nix-env -i python3.6-neovim-remote-2.1.0)
 * polybar https://github.com/jaagr/polybar
+* https://github.com/firecat53/networkmanager-dmenu
 
 # Fonts
 * ttf-material-design-icons-git

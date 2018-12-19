@@ -60,7 +60,7 @@ main =
       , normalBorderColor = "#222222"
       , focusFollowsMouse = False
       , layoutHook = myLayoutHook 
-      , logHook = (Polybar.eventLogHook dbus)
+      , logHook = Polybar.eventLogHook dbus
       , handleEventHook    = handleEventHook def <+> docksEventHook
       , manageHook = manageHook def <+> manageDocks <+> namedScratchpadManageHook scratchpads <+> myManageHook
       , startupHook = do 
@@ -140,4 +140,5 @@ myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SIN
 
           , ("M-<F1>", manPrompt def)
           , ("M-<F2>", sshPrompt def)
+          , ("M-<F3>", spawn  "networkmanager_dmenu")
           ]
