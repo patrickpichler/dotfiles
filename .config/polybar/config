@@ -31,6 +31,8 @@ screenchange-reload = true
 
 [bar/bottom]
 ;monitor = ${env:MONITOR}
+monitor = ${xrdb:MONITOR: }
+monitor-fallback =
 width = 100%
 height = 28
 offset-x = 0
@@ -201,7 +203,7 @@ ramp-capacity-4 = 
 
 [module/network]
 type = internal/network
-interface = enp4s0
+interface = ${xrdb:npolybar.interfaces.eth}
 
 label-connected = %local_ip% %downspeed: 10%
 
@@ -212,7 +214,7 @@ tail=true
 
 [module/wifi]
 type = internal/network
-interface = wlp58s0
+interface = ${xrdb:polybar.interfaces.wifi}
 
 label-connected = %essid% %downspeed:9%
 label-connected-foreground = #eefafafa
