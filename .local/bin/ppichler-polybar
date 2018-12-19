@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+MONITOR=xrandr | grep " connected" | cut -d ' ' -f1
+
+if [[ -z '$MONITOR' ]]; then
+  echo 'yaay primary'
+fi
+
+# vi:set ft=bash
