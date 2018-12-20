@@ -131,17 +131,15 @@ tail = true
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = "CPU: "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.red}
-label = %percentage:2%%
+label = "CPU: %percentage:3:3%%"
 
 [module/memory]
 type = internal/memory
 format = <label>
-label = %percentage_used:2%%
+label = "RAM: %percentage_used:3%%"
 format-underline = ${colors.red}
-format-prefix = "RAM:"
 
 [module/title]
 type = internal/xwindow
@@ -200,26 +198,30 @@ ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
 
-[module/network]
-type = internal/network
-interface = ${xrdb:npolybar.interfaces.eth}
-
-label-connected = %local_ip% %downspeed: 10%
-
 [module/xmonad-ws]
 type = custom/script
 exec = ~/.config/polybar/xmonad_dbus.py
 tail=true
 
+[module/network]
+type = internal/network
+interface = ${xrdb:polybar.interfaces.eth}
+
+label-connected = 
+label-disconnected = 
+
+format-underline = ${colors.red}
+
 [module/wifi]
 type = internal/network
 interface = ${xrdb:polybar.interfaces.wifi}
 
-label-connected = %essid% %downspeed:9%
+format-underline = ${colors.red}
+
+label-connected = %essid%
 label-connected-foreground = #eefafafa
 
 format-connected = <ramp-signal> <label-connected>
-
 
 label-disconnected = 來
 label-disconnected-foreground = #66ffffff
@@ -233,11 +235,6 @@ interval = 3.0
 ; NOTE: Experimental (needs more testing)
 ; Default: 0
 ;ping-interval = 3
-
-; @deprecated: Define min width using token specifiers (%downspeed:min% and %upspeed:min%)
-; Minimum output width of upload/download rate
-; Default: 3
-udspeed-minwidth = 5
 
 ; Accumulate values from all interfaces
 ; when querying for up/downspeed rate
