@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-MONITOR=xrandr | grep " connected" | cut -d ' ' -f1
+MONITOR=`xrandr -q | grep "primary" | cut -d ' ' -f1`
 
 if [[ -z '$MONITOR' ]]; then
-  echo 'yaay primary'
+  MONITOR=`xrandr -q | grep " connected" | cut -d ' ' -f1`
 fi
+
+export MONITOR=$MONITOR; polybar bottom --reload
 
 # vi:set ft=bash

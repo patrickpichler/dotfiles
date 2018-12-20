@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 
 import gi
+import sys
 from gi.repository import Playerctl, GLib  # noqa: E402
 
-player = Playerctl.Player()
+print('', flush=True)
 
 
 def on_metadata(player, e):
@@ -18,10 +19,14 @@ def on_metadata(player, e):
         # Print empty line if nothing is playing
         print("", flush=True)
 
+try:
+    player = Playerctl.Player()
 
-player.on('metadata', on_metadata)
+    player.on('metadata', on_metadata)
 
-on_metadata(player, None)
+    on_metadata(player, None)
 
-main = GLib.MainLoop()
-main.run()
+    main = GLib.MainLoop()
+    main.run()
+except:
+    print('', flush=True)

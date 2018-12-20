@@ -3,7 +3,7 @@ Description=polybar
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/env polybar bottom
+ExecStart=/usr/bin/env ppichler-polybar
 ExecStop=/usr/bin/pkill -f polybar
 Restart=always
 RestartSec=3

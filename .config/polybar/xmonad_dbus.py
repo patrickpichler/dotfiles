@@ -11,8 +11,7 @@ import sys
 DBusGMainLoop(set_as_default=True)        
 
 def xmonad_update_handler(string):
-    print(format_ws_string(string))
-    # print(string)
+    print(format_ws_string(string), flush=True)
 
 def format_ws_string(string):
     return replace_active_ws(replace_visible_ws(string)) 
