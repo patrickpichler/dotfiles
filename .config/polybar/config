@@ -125,7 +125,7 @@ format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.yellow}
 
-label = %output:0:90:...%
+label = %output:0:40:...%
 tail = true
 
 [module/cpu]
@@ -151,7 +151,7 @@ format-underline = ${colors.red}
 ;   %title%
 ; Default: %title%
 label = %title%
-label-maxlen = 50
+label-maxlen = 40
 
 [module/date]
 type = internal/date
