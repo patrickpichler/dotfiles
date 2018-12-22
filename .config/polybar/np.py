@@ -2,6 +2,7 @@
 
 import gi
 import sys
+gi.require_version('Playerctl', '2.0')
 from gi.repository import Playerctl, GLib  # noqa: E402
 
 print('', flush=True)
@@ -22,7 +23,7 @@ def on_metadata(player, e):
 try:
     player = Playerctl.Player()
 
-    player.on('metadata', on_metadata)
+    player.connect('metadata', on_metadata)
 
     on_metadata(player, None)
 
