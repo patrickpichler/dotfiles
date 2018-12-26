@@ -1,7 +1,7 @@
 [Unit]
 Description=blueberry-tray
-Wants=taffybar.service
-After=taffybar.service
+Wants=polybar.service
+After=polybar.service
 
 [Service]
 ExecStart=/usr/bin/env blueberry-tray

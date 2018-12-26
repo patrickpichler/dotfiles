@@ -1,6 +1,6 @@
 [Unit]
 Description=nm-applet
-After=taffybar.service
+After=polybar.service
 
 [Service]
 Type=simple
