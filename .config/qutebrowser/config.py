@@ -13,3 +13,6 @@ dracula.draw.blood(c, {
 })
 
 c.editor.command = [ "kitty", "bash", "-c", "eval $EDITOR {file}"]
+
+c.auto_save.session = True
+c.auto_save.interval = 5000
