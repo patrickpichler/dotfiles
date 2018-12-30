@@ -108,6 +108,12 @@ scratchpads = [ NS "htop" "termite -e htop" (title =? "htop") centeredFloat
               ]
 
 centeredFloat = customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)
+
+windowBringerConf :: WindowBringerConfig
+windowBringerConf = def
+              { menuCommand = "rofi"
+              , menuArgs = ["-show", "window", "-sort", "true"]
+              }
               
 myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +1.5%")
           , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@  -1.5%")
@@ -121,8 +127,8 @@ myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SIN
           , ("<XF86MonBrightnessDown>", spawn "lux -s 5%")    
 
           , ("M-S-l", spawn "i3lock -c 000000")
-          , ("M-s", bringMenu)
-          , ("M-S-s", gotoMenu)
+          , ("M-S-s", bringMenuConfig windowBringerConf)
+          , ("M-s", gotoMenuConfig windowBringerConf)
 
     
           , ("M-M1-t", namedScratchpadAction scratchpads "htop")
@@ -137,6 +143,8 @@ myKeys =  [ ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SIN
           , ("M-<Down>", windowGo D False)
           
           , ("C-q", spawn  "~/.resources/scripts/noctrlq.sh")
+
+          , ("M-p", spawn "rofi -show run -sort true")
 
           , ("M-<F1>", manPrompt def)
           , ("M-<F2>", sshPrompt def)
