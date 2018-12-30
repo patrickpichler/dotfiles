@@ -20,3 +20,9 @@
 	path = .xmonad/xmonad-contrib-git
 	url = https://github.com/xmonad/xmonad-contrib
         branch = v0.13
+[submodule ".config/qutebrowser/qutebrowser-dracula-theme"]
+	path = .config/qutebrowser/qutebrowser-dracula-theme
+	url = https://github.com/evannagle/qutebrowser-dracula-theme
+[submodule ".config/qutebrowser/darcula"]
+	path = .config/qutebrowser/dracula
+	url = https://github.com/evannagle/qutebrowser-dracula-theme
