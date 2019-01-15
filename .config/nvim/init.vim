@@ -38,6 +38,8 @@ set inccommand=split
 " Detect .md as markdown instead of modula-l2
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
+au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
+
 " Always use UTF-8
 set termencoding=utf-8
 set fileencoding=utf-8
