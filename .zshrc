@@ -130,6 +130,10 @@ else
   export EDITOR=nvim
 fi
 
+if type maim > /dev/null ; then
+  alias screenshot-selection='maim -s | xclip -selection clipboard -t image/png'
+fi
+
 if [ -f ~/.extensions.zsh ]; then
   source ~/.extensions.zsh
 fi 
@@ -179,3 +183,4 @@ bindkey -M vicmd 'v' visual-mode
 bindkey -M vicmd '^v' edit-command-line
 
 bindkey "^]^]" sudo-command-line
+
