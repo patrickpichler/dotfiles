@@ -25,6 +25,7 @@ PATH=/home/patrick/.local/share/umake/bin:$PATH
 
 PATH=/home/patrick/.asdf/shims:/home/patrick/.local/bin:/home/patrick/.resources/scripts:$PATH
 
-if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
 systemctl --user import-environment PATH HOME
+
+if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/.nix-profile/etc/profile.d/nix.sh;     fi # added by Nix installer
+
