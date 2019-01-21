@@ -27,7 +27,6 @@ if ! zgen saved; then
   zgen load voronkovich/gitignore.plugin.zsh
 
   zgen load spwhitt/nix-zsh-completions
-  zgen load arzzen/calc.plugin.zsh
   
   # generate the init script from plugins above
   zgen save
