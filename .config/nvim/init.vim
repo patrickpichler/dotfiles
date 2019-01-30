@@ -294,6 +294,10 @@ call minpac#add('junegunn/vim-easy-align')
 
 call minpac#add('junegunn/fzf')
 
+" ============= New text objects ==============
+call minpac#add('vim-utils/vim-line')
+call minpac#add('wellle/targets.vim')
+
 " ============== HASKELL ======================
 call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
 
