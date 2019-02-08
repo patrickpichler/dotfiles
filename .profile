@@ -16,16 +16,25 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d $HOME/bin ] ; then
+  PATH=$HOME/bin:$PATH
 fi
-# Ubuntu make installation of Ubuntu Make binary symlink
-PATH=/home/patrick/.local/share/umake/bin:$PATH
 
-PATH=/home/patrick/.asdf/shims:/home/patrick/.local/bin:/home/patrick/.resources/scripts:$PATH
+if [ -d $HOME/.local/bin ] ; then
+  PATH=$HOME/.local/bin:$PATH
+fi
 
-systemctl --user import-environment PATH HOME
+if [ -s $HOME/development/scripts ]; then
+  PATH=$PATH:~/development/scripts
+fi
 
-if [ -e /home/patrick/.nix-profile/etc/profile.d/nix.sh ]; then . /home/patrick/.nix-profile/etc/profile.d/nix.sh;     fi # added by Nix installer
+if [ -e $HOME/.asdf/shims ]; then
+  PATH=$HOME/.asdf/shims:$PATH
+fi
+
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+  . $HOME/.nix-profile/etc/profile.d/nix.sh;
+elif [ -e /etc/profile.d/nix.sh ]; then
+  . /etc/profile.d/nix.sh
+fi 
 
