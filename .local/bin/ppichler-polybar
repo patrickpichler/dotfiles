@@ -2,10 +2,12 @@
 
 MONITOR=`xrandr -q | grep "primary" | cut -d ' ' -f1`
 
-if [[ -z '$MONITOR' ]]; then
+if [[ -z "$MONITOR" ]]; then
   MONITOR=`xrandr -q | grep " connected" | cut -d ' ' -f1`
 fi
 
-export MONITOR=$MONITOR; polybar bottom --reload
+export MONITOR=$MONITOR
 
+exec polybar --reload bottom 
+ 
 # vi:set ft=bash
