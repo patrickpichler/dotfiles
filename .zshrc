@@ -47,6 +47,10 @@ if [ -s $HOME/development/scripts ]; then
   PATH=$PATH:~/development/scripts
 fi
 
+if [ -d $HOME/.local/bin ]; then
+  PATH=$PATH:~/.local/bin
+fi
+
 if type kitty > /dev/null ; then
   kitty + complete setup zsh | source /dev/stdin
 fi
