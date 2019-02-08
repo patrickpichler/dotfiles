@@ -66,10 +66,7 @@ main =
       , startupHook = do 
                   setWMName "LG3D"
                   docksStartupHook
-                  myStartup
       } `additionalKeysP` myKeys
-
-myStartup = spawn "systemctl --user start wm.target"
 
 myModMask = mod4Mask -- Use Super instead of Alt
 
