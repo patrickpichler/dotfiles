@@ -32,23 +32,25 @@ if ! zgen saved; then
   zgen save
 fi
 
-export rgDir=`which rg | xargs readlink | xargs dirname | xargs dirname`
+# ======== Ripgrep autocompletion =========================
+rgDir=`which rg | xargs readlink | xargs dirname | xargs dirname`
 
 if [ -n $rgDir ]; then
   fpath=("$rgDir/share/zsh/site-functions/" $fpath)
 fi
 
-autoload -Uz compinit && compinit -i
+# ==========================================================
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+autoload -Uz compinit && compinit -u
 
-if [ -s $HOME/development/scripts ]; then
-  PATH=$PATH:~/development/scripts
+if [ -e $HOME/.asdf ]; then
+  . $HOME/.asdf/asdf.sh
+  . $HOME/.asdf/completions/asdf.bash
 fi
 
-if [ -d $HOME/.local/bin ]; then
-  PATH=$PATH:~/.local/bin
+if [ -e /usr/share/doc/fzf ]; then
+  . /usr/share/doc/fzf/completion.zsh
+  . /usr/share/doc/fzf/key-bindings.zsh
 fi
 
 if type kitty > /dev/null ; then
@@ -62,13 +64,6 @@ ZSH_HIGHLIGHT_STYLES[comment]='fg=cyan'
 
 # ===================================
 export NVIM_CONFIG_DIR="$HOME/.config/nvim"
-
-
-alias vim=nvim # convenient alias
-
-if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
-  alias nvim='echo "No nesting!"'
-fi
 
 # ==== Vim modes ======
 
@@ -101,18 +96,29 @@ function rustvim(){
   _start_vim "rust" $@
 }
 
+# ===== FZF ===========
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
 
-if type nvr > /dev/null ; then
-  export editor='nvr --remote -s'
-else
-  export editor='nvim'
-fi
-
-# =====================
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
 
 # =====================
 # ===== ALIAS =========
 # =====================
+
+if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
+  alias nvim='echo "No nesting!"'
+fi
+
+alias vim=nvim # convenient alias
 
 alias config='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
@@ -137,14 +143,8 @@ if type maim > /dev/null ; then
   alias screenshot-selection='maim -s | xclip -selection clipboard -t image/png'
 fi
 
-if [ -f ~/.extensions.zsh ]; then
-  source ~/.extensions.zsh
-fi 
 
 prompt_nix_shell_setup
-
-source ~/.fzf/completion.zsh
-source ~/.fzf/key-bindings.zsh
 
 export KEYTIMEOUT=20
 
@@ -186,4 +186,8 @@ bindkey -M vicmd 'v' visual-mode
 bindkey -M vicmd '^v' edit-command-line
 
 bindkey "^]^]" sudo-command-line
+
+if [ -f ~/.extensions.zsh ]; then
+  source ~/.extensions.zsh
+fi 
 
