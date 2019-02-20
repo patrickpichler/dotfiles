@@ -84,10 +84,6 @@ q ~=? x = fmap (substring x) q
 
 manageIdeaCompletionWindow = (className ~=? "jetbrains-" <&&> isDialog) -?> doFloat
 
-
-spotifySelector = className =? "Spotify"
-spotifyCommand = "spotify"
-
 substring :: Eq a => [a] -> [a] -> Bool
 substring (x:xs) [] = False
 substring xs ys
@@ -100,9 +96,12 @@ prefix [] ys = True
 prefix (x:xs) [] = False
 prefix (x:xs) (y:ys) = (x == y) && prefix xs ys
 
-scratchpads = [ NS "htop" "termite -e htop" (title =? "htop") centeredFloat
+scratchpads = [ NS "htop" "kitty --title htop htop" (title =? "htop") centeredFloat
               , NS "spotify" spotifyCommand spotifySelector centeredFloat
               ]
+
+spotifySelector = className =? "Spotify"
+spotifyCommand = "spotify"
 
 centeredFloat = customFloating $ W.RationalRect (1/6) (1/6) (2/3) (2/3)
 
