@@ -294,6 +294,7 @@ call minpac#add('junegunn/vim-easy-align')
 
 call minpac#add('junegunn/fzf')
 
+
 " ============= New text objects ==============
 call minpac#add('vim-utils/vim-line')
 call minpac#add('wellle/targets.vim')
@@ -316,6 +317,10 @@ call minpac#add('JuliaEditorSupport/julia-vim', {'type': 'opt'})
 call minpac#add('tpope/vim-salve', { 'type': 'opt' })
 call minpac#add('tpope/vim-fireplace', { 'type': 'opt' })
 
+" ============ PlantUML ==========================
+call minpac#add('aklt/plantuml-syntax')
+call minpac#add('tyru/open-browser.vim')
+call minpac#add('weirongxu/plantuml-previewer.vim')
 
 " ===========================================
 
