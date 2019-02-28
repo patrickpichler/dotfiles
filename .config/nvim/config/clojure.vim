@@ -9,14 +9,9 @@ packadd vim-salve
 " ========== Config ==============
 " ================================
 
+let g:LanguageClient_serverCommands.clojure = ['bash', '-c', 'clojure-lsp']
 
-let g:LanguageClient_serverCommands = {
-    \ 'clojure': ['bash', '-c', 'clojure-lsp'],
-    \ }
-
-let g:LanguageClient_rootMarkers = {
-    \ 'clojure': ['project.clj', 'build.boot', 'deps.edn']
-    \}
+let g:LanguageClient_rootMarkers.clojure = ['project.clj', 'build.boot', 'deps.edn']
 
 let g:gutentags_project_root = ['project.clj', 'build.boot']
 

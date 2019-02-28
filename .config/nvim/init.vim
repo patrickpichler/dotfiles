@@ -240,6 +240,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 let g:UltiSnipsEditSplit="vertical"
 
 " ===============================================
+" ============ Lang server ======================
+" ===============================================
+
+let g:LanguageClient_serverCommands = {}
+let g:LanguageClient_rootMarkers = {}
+" ===============================================
 " ============ Easy align =======================
 " ===============================================
 
