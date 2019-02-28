@@ -282,6 +282,7 @@ call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-obsession')
 call minpac#add('tpope/vim-fugitive')
+call minpac#add('tpope/vim-repeat')
 
 call minpac#add('Shougo/denite.nvim')
 call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
