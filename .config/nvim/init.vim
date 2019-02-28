@@ -243,7 +243,9 @@ let g:UltiSnipsEditSplit="vertical"
 " ============ Lang server ======================
 " ===============================================
 
-let g:LanguageClient_serverCommands = {}
+let g:LanguageClient_serverCommands = {
+\   "xml": ['bash', '-c', 'lsp4xml']
+\}
 let g:LanguageClient_rootMarkers = {}
 " ===============================================
 " ============ Easy align =======================
