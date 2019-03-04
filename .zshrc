@@ -162,6 +162,8 @@ zle -N down-line-or-beginning-search
 bindkey '^P' up-line-or-beginning-search
 bindkey '^N' down-line-or-beginning-search
 
+bindkey '^X^E' edit-command-line
+
 if [[ "${terminfo[kcbt]}" != "" ]]; then
   bindkey "${terminfo[kcbt]}" reverse-menu-complete   # [Shift-Tab] - move through the completion menu backwards
 fi
