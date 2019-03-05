@@ -48,11 +48,6 @@ if [ -e $HOME/.asdf ]; then
   . $HOME/.asdf/completions/asdf.bash
 fi
 
-if [ -e /usr/share/doc/fzf ]; then
-  . /usr/share/doc/fzf/completion.zsh
-  . /usr/share/doc/fzf/key-bindings.zsh
-fi
-
 if type kitty > /dev/null ; then
   kitty + complete setup zsh | source /dev/stdin
 fi
