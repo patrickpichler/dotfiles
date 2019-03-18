@@ -59,7 +59,7 @@ module-margin-right = 2
 
 modules-left = xmonad-ws title
 modules-center = music 
-modules-right = wifi network cpu memory battery date
+modules-right = keyboard wifi network cpu memory battery date
 
 tray-position = right
 tray-padding = 2
@@ -140,6 +140,14 @@ type = internal/memory
 format = <label>
 label = "RAM: %percentage_used:3%%"
 format-underline = ${colors.red}
+
+[module/keyboard]
+type = internal/xkeyboard
+label-layout = %number% %layout% 
+
+blacklist-0 = num lock
+blacklist-1 = scroll lock 
+blacklist-2 = caps lock
 
 [module/title]
 type = internal/xwindow
