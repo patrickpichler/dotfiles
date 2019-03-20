@@ -26,3 +26,6 @@
 [submodule ".config/qutebrowser/darcula"]
 	path = .config/qutebrowser/dracula
 	url = https://github.com/evannagle/qutebrowser-dracula-theme
+[submodule ".zsh/gradle-completion"]
+	path = .zsh/gradle-completion
+	url = git://github.com/gradle/gradle-completion

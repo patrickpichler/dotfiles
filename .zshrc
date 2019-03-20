@@ -41,6 +41,12 @@ fi
 
 # ==========================================================
 
+# ==== Gradle autocompletion ==============================
+
+fpath=($HOME/.zsh/gradle-completion $fpath)
+
+# =========================================================
+
 autoload -Uz compinit && compinit -u
 
 if [ -e $HOME/.asdf ]; then
