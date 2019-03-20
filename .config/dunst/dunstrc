@@ -100,7 +100,7 @@ monitor = 0
 #
 # If this option is set to mouse or keyboard, the monitor option
 # will be ignored.
-follow = none
+follow = keyboard
 
 # Should a notification popped up from history be sticky or timeout
 # as if it would normally do.
@@ -145,7 +145,7 @@ startup_notification = false
 dmenu = /usr/bin/dmenu -p dunst:
 
 # Browser for opening urls in context menu.
-browser = /usr/bin/firefox -new-tab
+browser = xdg-open
 
 # Align icons left/right/off
 icon_position = off
