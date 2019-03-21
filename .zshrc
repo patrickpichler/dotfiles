@@ -145,11 +145,6 @@ else
   export EDITOR=nvim
 fi
 
-if type maim > /dev/null ; then
-  alias screenshot-selection='maim -s | xclip -selection clipboard -t image/png'
-fi
-
-
 prompt_nix_shell_setup
 
 export KEYTIMEOUT=20
