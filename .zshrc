@@ -32,12 +32,9 @@ if ! zgen saved; then
   zgen save
 fi
 
-# ======== Ripgrep autocompletion =========================
-rgDir=`which rg | xargs readlink | xargs dirname | xargs dirname`
+# ======== Varios autocompletion =========================
 
-if [ -n $rgDir ]; then
-  fpath=("$rgDir/share/zsh/site-functions/" $fpath)
-fi
+fpath=($HOME/.zsh/_completions $fpath)
 
 # ==========================================================
 
