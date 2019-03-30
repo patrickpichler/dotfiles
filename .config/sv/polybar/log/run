@@ -2,6 +2,6 @@
 
 LOGDIR=~/.local/log/polybar
 
-[ ! -f $LOGDIR ] && mkdir $LOGDIR
+[ -f $LOGDIR ] && mkdir $LOGDIR
 
 exec svlogd -tt $LOGDIR
