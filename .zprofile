@@ -20,3 +20,4 @@ elif [ -e /etc/profile.d/nix.sh ]; then
   . /etc/profile.d/nix.sh
 fi 
 
+export SVDIR=~/.local/service
