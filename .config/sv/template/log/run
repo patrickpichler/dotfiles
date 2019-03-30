@@ -1,0 +1,7 @@
+#!/bin/sh
+
+LOGDIR=~/.local/log/TEMPLATE
+
+[ ! -f $LOGDIR ] && mkdir $LOGDIR
+
+exec svlogd -tt $LOGDIR
