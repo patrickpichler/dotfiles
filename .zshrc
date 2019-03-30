@@ -34,7 +34,7 @@ fi
 
 # ======== Varios autocompletion =========================
 
-fpath=($HOME/.zsh/_completions $fpath)
+fpath=($HOME/.zsh/completions $fpath)
 
 # ==========================================================
 
