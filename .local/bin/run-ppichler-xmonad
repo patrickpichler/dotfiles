@@ -1,0 +1,17 @@
+#!/bin/sh
+
+nitrogen --restore &
+
+dbus-launch --exit-with-session \
+  --autolaunch=$(cat /var/lib/dbus/machine-id) \
+  ppichler-xmonad &
+
+XMONAD_PID=$!
+
+runsvdir /home/patrick/.local/service &
+
+RUNSV_PID=$!
+
+wait $XMONAD_PID
+
+kill $RUNSV_PID
