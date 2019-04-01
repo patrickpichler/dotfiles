@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LOGDIR=~/.local/log/TEMPLATE
+LOGDIR=$SV_LOG_DIR/TEMPLATE
 
 [ -f $LOGDIR ] && mkdir $LOGDIR
 

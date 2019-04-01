@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LOGDIR=~/.local/log/polybar
+LOGDIR=$SV_LOG_DIR/polybar
 
 [ -f $LOGDIR ] && mkdir $LOGDIR
 

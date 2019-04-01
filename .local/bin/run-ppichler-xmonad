@@ -1,4 +1,9 @@
-#!/bin/sh
+#!/bin/sh -e
+
+export SV_LOG_DIR=$HOME/.local/logs
+export SVDIR=$HOME/.local/service
+
+autorandr --change --force
 
 nitrogen --restore &
 
