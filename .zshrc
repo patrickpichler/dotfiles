@@ -8,22 +8,19 @@ if ! zgen saved; then
   zgen oh-my-zsh
   zgen oh-my-zsh plugins/git
   zgen oh-my-zsh plugins/sudo
-  zgen oh-my-zsh plugins/command-not-found
   zgen oh-my-zsh plugins/asdf
-  zgen oh-my-zsh plugins/scala
-  zgen oh-my-zsh plugins/sbt
   zgen oh-my-zsh plugins/docker
   zgen oh-my-zsh plugins/docker-compose
   zgen oh-my-zsh plugins/lein
   zgen oh-my-zsh plugins/mvn
   zgen oh-my-zsh plugins/z
   zgen oh-my-zsh plugins/vi-mode
+  zgen oh-my-zsh plugins/fd
 
   zgen oh-my-zsh themes/robbyrussell
 
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load hlissner/zsh-autopair
-  zgen load gko/ssh-connect
   zgen load voronkovich/gitignore.plugin.zsh
 
   zgen load spwhitt/nix-zsh-completions
@@ -141,8 +138,6 @@ if type nvr > /dev/null ; then
 else
   export EDITOR=nvim
 fi
-
-prompt_nix_shell_setup
 
 export KEYTIMEOUT=20
 
