@@ -17,7 +17,7 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/vi-mode
   zgen oh-my-zsh plugins/fd
 
-  zgen oh-my-zsh themes/robbyrussell
+  zgen oh-my-zsh themes/clean
 
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load hlissner/zsh-autopair
