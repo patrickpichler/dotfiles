@@ -257,6 +257,18 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+
+" ===============================================
+" ============ Filetypes  =======================
+" ===============================================
+
+augroup additional_ft
+  au!
+  
+  autocmd BufNewFile,BufRead Jenkinsfile set ft=groovy
+  autocmd BufNewFile,BufRead *.ts set ft=typescript
+augroup END
+
 " ===============================================
 " =============== Plugins =======================
 " ===============================================
