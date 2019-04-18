@@ -1,9 +1,0 @@
-[Unit]
-Description=wallpaper
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/env nitrogen --restore
-
-[Install]
-WantedBy=wm.target
