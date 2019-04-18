@@ -2,6 +2,6 @@
 
 LOGDIR=$SV_LOG_DIR/polybar
 
-[ -f $LOGDIR ] && mkdir $LOGDIR
+[ ! -f $LOGDIR ] && mkdir $LOGDIR
 
 exec svlogd -tt $LOGDIR
