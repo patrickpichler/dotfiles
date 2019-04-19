@@ -315,6 +315,8 @@ call minpac#add('junegunn/vim-easy-align')
 
 call minpac#add('junegunn/fzf')
 
+call minpac#add('airblade/vim-gitgutter')
+
 
 " ============= New text objects ==============
 call minpac#add('vim-utils/vim-line')
