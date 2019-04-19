@@ -1,0 +1,7 @@
+#!/bin/sh
+
+LOGDIR=$SV_LOG_DIR/blueman-applet
+
+[ ! -f $LOGDIR ] && mkdir $LOGDIR
+
+exec svlogd -tt $LOGDIR
