@@ -1,0 +1,45 @@
+#!/usr/bin/env sh
+
+set -e
+
+local_bin_folder="$HOME/.local/bin"
+
+releases_path=https://api.github.com/repos/snoe/clojure-lsp/releases/latest
+curl_cmd="curl -L"
+if [ -n "$GITHUB_API_TOKEN" ]; then
+ curl_cmd="$cmd -H 'Authorization: token $GITHUB_API_TOKEN'"
+fi
+
+cmd="$curl_cmd -s $releases_path"
+
+download_url=$(eval $cmd | grep -oE '"browser_download_url":[ ]?"[^"]*"' | sed -Ern 's/.*browser_download_url":\s?"([^"]*)"/\1/p')
+
+if [ ! $download_url ]; then 
+  echo something went wrong parsing the download_url...
+  exit 1
+fi
+
+echo "Download url: $download_url"
+  
+if [ -f $local_bin_folder/clojure-lsp.bkp ]; then
+  echo "Delete old backup"
+  rm $local_bin_folder/clojure-lsp.bkp
+fi
+
+if [ -f $local_bin_folder/clojure-lsp ]; then
+  echo "Backup previous binary"
+  mv $local_bin_folder/clojure-lsp $local_bin_folder/clojure-lsp.bkp
+fi
+
+download_cmd="$curl_cmd $download_url -o $local_bin_folder/clojure-lsp"
+echo "Download cmd: $download_cmd"
+eval $download_cmd
+
+chmod +x "$local_bin_folder/clojure-lsp"
+
+if [ -f $local_bin_folder/clojure-lsp.bkp ]; then
+  echo "Move backup to /tmp folder"
+  mv $local_bin_folder/clojure-lsp.bkp /tmp
+fi
+
+echo "Done"
