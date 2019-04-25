@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 
+import os
+
+os.environ["PYTHONIOENCODING"] = "utf-8"
+
 import gi
 import sys
 gi.require_version('Playerctl', '2.0')
@@ -9,16 +13,12 @@ print('', flush=True)
 
 
 def on_metadata(player, e):
-    if player.props.status == "Playing":
+    if player.props.status == 'Playing':
         meta = player.props.metadata
-        print(
-            '{artist} - {title}'.format(
-                artist=meta['xesam:artist'][0],
-                title=meta['xesam:title']),
-            flush=True)
+        playing_info = bytes(u'{artist} - {title}'.format( artist=meta['xesam:artist'][0],title=meta['xesam:title']), 'utf-8').decode('ascii', 'ignore')
     else:
         # Print empty line if nothing is playing
-        print("", flush=True)
+        print('', flush=True)
 
 try:
     player = Playerctl.Player()
@@ -29,5 +29,5 @@ try:
 
     main = GLib.MainLoop()
     main.run()
-except:
+except Exception as e:
     print('', flush=True)
