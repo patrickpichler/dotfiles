@@ -144,6 +144,10 @@ inoremap <M-j> <Esc><C-w>j
 inoremap <M-k> <Esc><C-w>k
 inoremap <M-l> <Esc><C-w>l
 
+" Make C-P C-N behave the same as Up Down in command mode
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
 " ======== Denite ===========================
 let g:which_key_map.d = { 'name' : '+denite' }
 let g:which_key_map.d.b = 'buffers'
