@@ -10,10 +10,6 @@ packages:
     git: https://github.com/xmonad/xmonad-contrib
     commit: dda242a4597c1ed0fa895a10b9296dcc709f4937
   extra-dep: true
-- location:
-    git: https://github.com/taffybar/taffybar
-    commit: bb275b4fcbd02207b81c2e8265bfe4f5edafc387 
-  extra-dep: true
 extra-deps: 
   - X11-xft-0.3.1
   - dbus-1.2.1
@@ -42,6 +38,6 @@ extra-deps:
   # - binary-0.9.0.0
   - containers-0.5.11.0
   - template-haskell-2.13.0.0
-  - transformers-0.5.5.0
+  # - transformers-0.5.5.0
 
 flags: 
