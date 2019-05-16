@@ -299,6 +299,8 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-obsession')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-repeat')
+call minpac#add('tpope/vim-dotenv')
+call minpac#add('tpope/vim-dadbod')
 
 call minpac#add('Shougo/denite.nvim')
 call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
@@ -321,7 +323,6 @@ call minpac#add('junegunn/fzf')
 
 call minpac#add('airblade/vim-gitgutter')
 
-
 " ============= New text objects ==============
 call minpac#add('vim-utils/vim-line')
 call minpac#add('wellle/targets.vim')
@@ -335,10 +336,6 @@ call minpac#add('ElmCast/elm-vim', {'type': 'opt'})
 
 " ============= JS ============================
 call minpac#add('mxw/vim-jsx', {'type': 'opt'})
-
-" ============= Julia ============================
-call minpac#add('JuliaEditorSupport/julia-vim', {'type': 'opt'})
-" ==============================================
 
 " ============= Clojure ==========================
 call minpac#add('tpope/vim-salve', { 'type': 'opt' })

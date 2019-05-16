@@ -2,7 +2,7 @@
 " ===== Additional Plugins =======
 " ================================
 
-"call minpac#add('ElmCast/elm-vim')
+packadd vim-polyglot
 
 " ================================
 

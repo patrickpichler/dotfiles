@@ -77,6 +77,10 @@ function _start_vim(){
   export vim_mode=
 }
 
+function vim(){
+  _start_vim "default" $@
+}
+
 function elmvim(){
   _start_vim "elm" $@
 }
@@ -117,8 +121,6 @@ _fzf_compgen_dir() {
 if [ -n "$NVIM_LISTEN_ADDRESS" ]; then
   alias nvim='echo "No nesting!"'
 fi
-
-alias vim=nvim # convenient alias
 
 alias config='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
