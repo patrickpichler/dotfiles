@@ -1,0 +1,3 @@
+#!/bin/sh
+
+PINENTRY_USER_DATA=qt /usr/bin/gopass $@
