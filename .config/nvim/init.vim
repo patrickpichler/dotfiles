@@ -261,6 +261,13 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
+" ===============================================
+" ============ Vim Wiki =========================
+" ===============================================
+
+" Use markdown syntax
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.wikimd'}]
 
 " ===============================================
 " ============ Filetypes  =======================
@@ -322,6 +329,8 @@ call minpac#add('junegunn/vim-easy-align')
 call minpac#add('junegunn/fzf')
 
 call minpac#add('airblade/vim-gitgutter')
+
+call minpac#add('vimwiki/vimwiki')
 
 " ============= New text objects ==============
 call minpac#add('vim-utils/vim-line')
