@@ -5,6 +5,10 @@
 # this *only works* with gpg 2
 # see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=802020
 
+# in order to get this working, this has to be added to 
+# ~/.gnupg/gpg-agent.conf
+# pinentry-program ~/.local/bin/pinentry-env
+
 case $PINENTRY_USER_DATA in
 gtk)
   exec /usr/bin/pinentry-gtk-2 "$@"
