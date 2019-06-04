@@ -143,6 +143,12 @@ fi
 
 export KEYTIMEOUT=20
 
+export MANPATH=~/.local/share/man
+
+# It seems like there is an issue with the default 
+# less setting `-R`
+export LESS=-r
+
 # ==========================
 # ====== Key bindings ======
 # ==========================
