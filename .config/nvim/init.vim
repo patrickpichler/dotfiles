@@ -9,6 +9,7 @@ set backspace=indent,eol,start
 
 " Enable file type detection and do language-dependent indenting.
 filetype plugin indent on
+filetype plugin on
 
 " Show line numbers
 set number
@@ -35,8 +36,8 @@ set timeoutlen=500
 
 set inccommand=split 
 
-" Detect .md as markdown instead of modula-l2
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" " Detect .md as markdown instead of modula-l2
+" autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
 
@@ -279,6 +280,12 @@ augroup additional_ft
   autocmd BufNewFile,BufRead Jenkinsfile set ft=groovy
   autocmd BufNewFile,BufRead *.ts set ft=typescript
 augroup END
+
+" ===============================================
+" ============== Markdown =======================
+" ===============================================
+let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
+                                  \ 'sh', 'kotlin']
 
 " ===============================================
 " =============== Plugins =======================

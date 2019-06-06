@@ -6,6 +6,7 @@ packadd vim-polyglot
 
 " ================================
 
+let g:polyglot_disabled = ['markdown']
 
 " ================================
 " ==== Specialized keymap ========
