@@ -98,7 +98,7 @@ set statusline+=%-14(%l,%c%V%) " line, character
 set statusline+=%<%P " file position 
 " }
 
-colorscheme desert
+colorscheme nachtleben
 
 " remap leader key to something more reachable
 let mapleader = ","
@@ -361,6 +361,10 @@ call minpac#add('tpope/vim-fireplace', { 'type': 'opt' })
 call minpac#add('aklt/plantuml-syntax')
 call minpac#add('tyru/open-browser.vim')
 call minpac#add('weirongxu/plantuml-previewer.vim')
+
+" ===========================================
+
+call minpac#add('schickele/vim-nachtleben')
 
 " ===========================================
 
