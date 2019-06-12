@@ -155,32 +155,6 @@ let g:which_key_map.d.b = 'buffers'
 let g:which_key_map.d.f = 'file rec'
 let g:which_key_map.d.g = 'grep'
 
-nnoremap <silent><Leader>db :Denite buffer<CR>
-nnoremap <silent><Leader>df :Denite file/rec<CR>
-nnoremap <silent><Leader>dg :Denite grep<CR>
-
-nnoremap <silent><M-b> :Denite buffer<CR>
-nnoremap <silent><M-f> :Denite file/rec<CR>
-nnoremap <silent><M-g> :Denite grep<CR>
-
-
-" Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
-endfunction
-
 
 " ======== Buffers ==========================
 let g:which_key_map.b = { 'name' : '+buffers' }
@@ -390,17 +364,60 @@ packloadall
 
 " ====== Denite =============
 
-" Ripgrep command on grep source
-call denite#custom#var('grep', 'command', ['rg'])
-call denite#custom#var('grep', 'default_opts',
-      \ ['--vimgrep', '--no-heading'])
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-call denite#custom#var('grep', 'separator', ['--'])
-call denite#custom#var('grep', 'final_opts', [])
+nnoremap <silent><Leader>db :Denite buffer<CR>
+nnoremap <silent><Leader>df :Denite file/rec<CR>
+nnoremap <silent><Leader>dg :Denite grep<CR>
 
-call denite#custom#var('file/rec', 'command',
-      \ ['fd', '--full-path'])
+nnoremap <silent><M-b> :Denite buffer<CR>
+nnoremap <silent><M-f> :Denite file/rec<CR>
+nnoremap <silent><M-g> :Denite grep<CR>
+
+call denite#custom#option('_', {
+    \ 'cached_filter': v:true,
+    \ 'cursor_shape': v:true,
+    \ 'cursor_wrap': v:true,
+    \ 'highlight_filter_background': 'DeniteFilter',
+    \ 'highlight_matched_char': 'Underlined',
+    \ 'matchers': 'matcher/fruzzy',
+    \ 'statusline': v:false,
+    \ })
+
+autocmd FileType denite call s:denite_settings()
+function! s:denite_settings() abort
+    highlight! link CursorLine Visual
+    nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> i    denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> d    denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p    denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> st   denite#do_map('do_action', 'tabopen')
+    nnoremap <silent><buffer><expr> sg   denite#do_map('do_action', 'vsplit')
+    nnoremap <silent><buffer><expr> sv   denite#do_map('do_action', 'split')
+    nnoremap <silent><buffer><expr> '    denite#do_map('quick_move')
+    nnoremap <silent><buffer><expr> q    denite#do_map('quit')
+    nnoremap <silent><buffer><expr> r    denite#do_map('redraw')
+    nnoremap <silent><buffer><expr> yy   denite#do_map('do_action', 'yank')
+    nnoremap <silent><buffer><expr> <Esc>   denite#do_map('quit')
+    nnoremap <silent><buffer><expr> <C-u>   denite#do_map('restore_sources')
+    nnoremap <silent><buffer><expr> <C-f>   denite#do_map('do_action', 'defx')
+    nnoremap <silent><buffer><expr> <C-x>   denite#do_map('choose_action')
+    nnoremap <silent><buffer><expr><nowait> <Space> denite#do_map('toggle_select').'j'
+endfunction
+
+if executable('rg')
+	" Ripgrep
+  call denite#custom#var('file/rec', 'command',
+        \ ['rg', '--files', '--glob', '!.git'])
+  call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'final_opts', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'default_opts',
+        \ ['-i', '--vimgrep', '--no-heading'])
+endif
+
+let s:menus = {}
+
+call denite#custom#var('menu', 'menus', s:menus)
 
 " ==== Load vim config =====
 
