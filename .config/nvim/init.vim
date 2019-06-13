@@ -399,6 +399,14 @@ augroup additional_ft
 augroup END
 
 " ===============================================
+" ============= GutenTags =======================
+" ===============================================
+
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+
+" ===============================================
 " ============== Markdown =======================
 " ===============================================
 let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
