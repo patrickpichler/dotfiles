@@ -1,0 +1,53 @@
+{
+  "languageserver": {
+    "clojure-lsp": {
+      "command": "bash",
+      "args": ["-c", "clojure-lsp"],
+      "filetypes": ["clojure"],
+      "rootPatterns": ["project.clj", "build.boot", "deps.edn"],
+      "additionalSchemes": ["jar", "zipfile"],
+      "initializationOptions": {
+      }
+    },
+    "xml-lsp": {
+      "command": "bash",
+      "args": ["-c", "lsp4xml"],
+      "filetypes": ["xml"],
+      "rootPatterns": [],
+      "additionalSchemes": [],
+      "initializationOptions": {
+      }
+    },
+    "haskell": {
+      "command": "hie-wrapper",
+      "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
+      "filetypes": ["hs", "lhs", "haskell"],
+      "initializationOptions": {},
+      "settings": {
+        "languageServerHaskell": {
+          "hlintOn": false,
+          "maxNumberOfProblems": 10,
+          "completionSnippetsOn": true
+        }
+      }
+    },
+    "julia": {
+      "command": "/usr/bin/julia",
+      "args" : ["--startup-file=no", "--history-file=no", "-e", 
+        "using LanguageServer; using Pkg; import StaticLint; import SymbolServer; env_path = dirname(Pkg.Types.Context().env.project_file); debug = false; server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, \"\", Dict()); server.runlinter = true; run(server);"
+       ],
+      "filetypes": ["julia"]
+     },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    }
+  }
+}

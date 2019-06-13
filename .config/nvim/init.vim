@@ -1,3 +1,82 @@
+" ===============================================
+" =============== Plugins =======================
+" ===============================================
+
+call plug#begin('~/.local/share/nvim/plugged')
+
+" ======================== Snippts =====================
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" ======================================================
+
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dotenv'
+Plug 'tpope/vim-dadbod'
+
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
+
+Plug 'w0rp/ale'
+Plug 'mhinz/vim-grepper'
+Plug 'janko-m/vim-test'
+Plug 'sgur/vim-editorconfig'
+
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'sheerun/vim-polyglot'
+
+Plug 'mattn/emmet-vim'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
+
+Plug 'junegunn/fzf'
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'vimwiki/vimwiki'
+
+" ============= LSP ===========================
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+" ============= New text objects ==============
+Plug 'vim-utils/vim-line'
+Plug 'wellle/targets.vim'
+
+" ============== HASKELL ======================
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
+
+" ============== ELM ==========================
+Plug 'pbogut/deoplete-elm', {'for': 'elm'}
+Plug 'ElmCast/elm-vim', {'for': 'elm'}
+
+" ============= JS ============================
+Plug 'mxw/vim-jsx', {'for': 'js'}
+
+" ============= Clojure ==========================
+Plug 'tpope/vim-salve', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" ============ PlantUML ==========================
+Plug 'aklt/plantuml-syntax'
+Plug 'tyru/open-browser.vim'
+Plug 'weirongxu/plantuml-previewer.vim'
+
+" ===========================================
+
+Plug 'schickele/vim-nachtleben'
+
+" ===========================================
+call plug#end()
+
 " Used Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -111,6 +190,31 @@ let g:grepper.tools = ['grep', 'git', 'rg']
 let g:which_key_map =  {}
 
 " ===============================================
+" ================  LSP =========================
+" ===============================================
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> [l <Plug>(coc-diagnostic-prev)
+nmap <silent> ]l <Plug>(coc-diagnostic-next)
+nmap <silent> [k :CocPrev<cr>
+nmap <silent> ]k :CocNext<cr>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <leader>u <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+command! -nargs=0 Format :call CocAction('format')
+
+" ===============================================
 " ===========  Mappings =========================
 " ===============================================
 nmap <C-p> :FZF<CR>
@@ -197,12 +301,6 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
 let g:deoplete#enable_at_startup = 1
 
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
 " ============ Vim which key ====================
 nnoremap <silent> <Leader> :<c-u>WhichKey ','<CR>
 
@@ -236,14 +334,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" ===============================================
-" ============ Lang server ======================
-" ===============================================
-
-let g:LanguageClient_serverCommands = {
-\   "xml": ['bash', '-c', 'lsp4xml']
-\}
-let g:LanguageClient_rootMarkers = {}
 " ===============================================
 " ============ Easy align =======================
 " ===============================================
@@ -284,81 +374,6 @@ let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
 " ===============================================
 let g:polyglot_disabled = ['markdown', 'clojure']
 
-" ===============================================
-" =============== Plugins =======================
-" ===============================================
-
-call plug#begin('~/.local/share/nvim/plugged')
-
-" ======================== Snippts =====================
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-" ======================================================
-
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-vinegar'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-dotenv'
-Plug 'tpope/vim-dadbod'
-
-Plug 'Shougo/denite.nvim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
-
-Plug 'w0rp/ale'
-Plug 'mhinz/vim-grepper'
-Plug 'janko-m/vim-test'
-Plug 'sgur/vim-editorconfig'
-Plug 'autozimu/LanguageClient-neovim', {'branch' : 'next' , 'do': {-> system('bash install.sh')}}
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'sheerun/vim-polyglot'
-
-Plug 'mattn/emmet-vim'
-Plug 'skywind3000/asyncrun.vim'
-Plug 'liuchengxu/vim-which-key'
-Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/vim-easy-align'
-
-Plug 'junegunn/fzf'
-
-Plug 'airblade/vim-gitgutter'
-
-Plug 'vimwiki/vimwiki'
-
-" ============= New text objects ==============
-Plug 'vim-utils/vim-line'
-Plug 'wellle/targets.vim'
-
-" ============== HASKELL ======================
-Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
-
-" ============== ELM ==========================
-Plug 'pbogut/deoplete-elm', {'for': 'elm'}
-Plug 'ElmCast/elm-vim', {'for': 'elm'}
-
-" ============= JS ============================
-Plug 'mxw/vim-jsx', {'for': 'js'}
-
-" ============= Clojure ==========================
-Plug 'tpope/vim-salve', { 'for': 'clojure' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" ============ PlantUML ==========================
-Plug 'aklt/plantuml-syntax'
-Plug 'tyru/open-browser.vim'
-Plug 'weirongxu/plantuml-previewer.vim'
-
-" ===========================================
-
-Plug 'schickele/vim-nachtleben'
-
-" ===========================================
-call plug#end()
 
 " ====== Denite =============
 
