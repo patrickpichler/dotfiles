@@ -46,6 +46,7 @@ Plug 'vimwiki/vimwiki'
 
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+Plug 'neoclide/coc-denite'
 
 " ============= Coc extensions ===============
 Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
