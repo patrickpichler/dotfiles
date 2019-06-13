@@ -77,6 +77,8 @@ Plug 'schickele/vim-nachtleben'
 " ===========================================
 call plug#end()
 
+colorscheme nachtleben
+
 " Used Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -318,9 +320,12 @@ hi ALEError ctermfg=Red
 let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 
-let g:ale_sign_error = '●' " Less aggressive than the default '>>'
+let g:ale_sign_error = '>' 
 let g:ale_sign_warning = '.'
 
+highlight GitGutterAdd    ctermfg=green guifg=green
+highlight GitGutterChange ctermfg=yellow guifg=yellow
+highlight GitGutterDelete ctermfg=red guifg=red
 
 " ===============================================
 " ============== Snippets =======================
@@ -440,5 +445,3 @@ endif
 
 " Is at the end so that specializations can insert things too 
 call which_key#register(',', "g:which_key_map")
-
-colorscheme nachtleben
