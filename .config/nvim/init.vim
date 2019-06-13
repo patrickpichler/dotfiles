@@ -47,6 +47,10 @@ Plug 'vimwiki/vimwiki'
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
+" ============= Coc extensions ===============
+Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
+
 " ============= New text objects ==============
 Plug 'vim-utils/vim-line'
 Plug 'wellle/targets.vim'
