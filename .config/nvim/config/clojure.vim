@@ -1,11 +1,4 @@
 " ================================
-" ===== Additional Plugins =======
-" ================================
-
-packadd vim-fireplace
-packadd vim-salve
-
-" ================================
 " ========== Config ==============
 " ================================
 
@@ -14,8 +7,6 @@ let g:LanguageClient_serverCommands.clojure = ['bash', '-c', 'clojure-lsp']
 let g:LanguageClient_rootMarkers.clojure = ['project.clj', 'build.boot', 'deps.edn']
 
 let g:gutentags_project_root = ['project.clj', 'build.boot']
-
-" ================================
 
 
 " ================================
@@ -62,3 +53,4 @@ let g:which_key_map.l.r.a = { 'name': '+add' }
 let g:which_key_map.l.r.a.m = 'add-missing-libspec'
 
 autocmd BufNewFile,BufRead *.boot set filetype=clojure
+

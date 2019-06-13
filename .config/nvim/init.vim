@@ -46,6 +46,7 @@ set termencoding=utf-8
 set fileencoding=utf-8
 
 set lazyredraw
+set termguicolors
 
 " Auto open quickfix list on grep
 autocmd QuickFixCmdPost *grep* cwindow
@@ -98,7 +99,6 @@ set statusline+=%-14(%l,%c%V%) " line, character
 set statusline+=%<%P " file position 
 " }
 
-colorscheme nachtleben
 
 " remap leader key to something more reachable
 let mapleader = ","
@@ -280,87 +280,85 @@ let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
                                   \ 'sh', 'kotlin']
 
 " ===============================================
+" ============== Polyglot =======================
+" ===============================================
+let g:polyglot_disabled = ['markdown', 'clojure']
+
+" ===============================================
 " =============== Plugins =======================
 " ===============================================
 
-" minpac package manager 
-packadd minpac
-
-call minpac#init()
-
-call minpac#add('k-takata/minpac', {'type': 'opt'})
-
+call plug#begin('~/.local/share/nvim/plugged')
 
 " ======================== Snippts =====================
-call minpac#add('SirVer/ultisnips')
-call minpac#add('honza/vim-snippets')
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " ======================================================
 
-call minpac#add('tpope/vim-dispatch')
-call minpac#add('tpope/vim-vinegar')
-call minpac#add('tpope/vim-unimpaired')
-call minpac#add('tpope/vim-commentary')
-call minpac#add('tpope/vim-surround')
-call minpac#add('tpope/vim-obsession')
-call minpac#add('tpope/vim-fugitive')
-call minpac#add('tpope/vim-repeat')
-call minpac#add('tpope/vim-dotenv')
-call minpac#add('tpope/vim-dadbod')
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dotenv'
+Plug 'tpope/vim-dadbod'
 
-call minpac#add('Shougo/denite.nvim')
-call minpac#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'})
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 
-call minpac#add('w0rp/ale')
-call minpac#add('mhinz/vim-grepper')
-call minpac#add('janko-m/vim-test')
-call minpac#add('sgur/vim-editorconfig')
-call minpac#add('autozimu/LanguageClient-neovim', {'branch' : 'next' , 'do': {-> system('bash install.sh')}})
-call minpac#add('ludovicchabant/vim-gutentags')
-call minpac#add('sheerun/vim-polyglot', {'type': 'opt'})
+Plug 'w0rp/ale'
+Plug 'mhinz/vim-grepper'
+Plug 'janko-m/vim-test'
+Plug 'sgur/vim-editorconfig'
+Plug 'autozimu/LanguageClient-neovim', {'branch' : 'next' , 'do': {-> system('bash install.sh')}}
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'sheerun/vim-polyglot'
 
-call minpac#add('mattn/emmet-vim')
-call minpac#add('skywind3000/asyncrun.vim')
-call minpac#add('liuchengxu/vim-which-key')
-call minpac#add('jiangmiao/auto-pairs')
-call minpac#add('junegunn/vim-easy-align')
+Plug 'mattn/emmet-vim'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
 
-call minpac#add('junegunn/fzf')
+Plug 'junegunn/fzf'
 
-call minpac#add('airblade/vim-gitgutter')
+Plug 'airblade/vim-gitgutter'
 
-call minpac#add('vimwiki/vimwiki')
+Plug 'vimwiki/vimwiki'
 
 " ============= New text objects ==============
-call minpac#add('vim-utils/vim-line')
-call minpac#add('wellle/targets.vim')
+Plug 'vim-utils/vim-line'
+Plug 'wellle/targets.vim'
 
 " ============== HASKELL ======================
-call minpac#add('neovimhaskell/haskell-vim', {'type': 'opt'})
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 
 " ============== ELM ==========================
-call minpac#add('pbogut/deoplete-elm', {'type': 'opt'})
-call minpac#add('ElmCast/elm-vim', {'type': 'opt'})
+Plug 'pbogut/deoplete-elm', {'for': 'elm'}
+Plug 'ElmCast/elm-vim', {'for': 'elm'}
 
 " ============= JS ============================
-call minpac#add('mxw/vim-jsx', {'type': 'opt'})
+Plug 'mxw/vim-jsx', {'for': 'js'}
 
 " ============= Clojure ==========================
-call minpac#add('tpope/vim-salve', { 'type': 'opt' })
-call minpac#add('tpope/vim-fireplace', { 'type': 'opt' })
+Plug 'tpope/vim-salve', { 'for': 'clojure' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " ============ PlantUML ==========================
-call minpac#add('aklt/plantuml-syntax')
-call minpac#add('tyru/open-browser.vim')
-call minpac#add('weirongxu/plantuml-previewer.vim')
+Plug 'aklt/plantuml-syntax'
+Plug 'tyru/open-browser.vim'
+Plug 'weirongxu/plantuml-previewer.vim'
 
 " ===========================================
 
-call minpac#add('schickele/vim-nachtleben')
+Plug 'schickele/vim-nachtleben'
 
 " ===========================================
-
-packloadall
+call plug#end()
 
 " ====== Denite =============
 
@@ -427,3 +425,5 @@ endif
 
 " Is at the end so that specializations can insert things too 
 call which_key#register(',', "g:which_key_map")
+
+colorscheme nachtleben

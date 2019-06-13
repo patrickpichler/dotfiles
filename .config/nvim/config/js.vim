@@ -7,15 +7,6 @@ autocmd BufWritePost *.js AsyncRun -post=checktime ./node_modules/.bin/eslint --
 let g:gutentags_project_root = ['package.json']
 
 " ================================
-" ===== Additional Plugins =======
-" ================================
-
-packadd vim-jsx
-
-" ================================
-
-
-" ================================
 " ==== Specialized keymap ========
 " ================================
 

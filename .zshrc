@@ -77,10 +77,6 @@ function _start_vim(){
   export vim_mode=
 }
 
-function vim(){
-  _start_vim "default" $@
-}
-
 function elmvim(){
   _start_vim "elm" $@
 }
@@ -99,6 +95,8 @@ function juliavim(){
 function rustvim(){
   _start_vim "rust" $@
 }
+
+alias vim=nvim
 
 # ===== FZF ===========
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
