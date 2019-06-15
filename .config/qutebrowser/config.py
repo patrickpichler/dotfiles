@@ -26,6 +26,8 @@ c.aliases = {
         "readability": "spawn --userscript readability"
         }
 
+c.content.autoplay = False
+
 for i in range(1, 50):
     c.aliases[f"b{i}"] = f"buffer {i}"
 
