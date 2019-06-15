@@ -18,10 +18,12 @@ c.auto_save.session = True
 c.auto_save.interval = 5000
 
 c.aliases = {
-        "w": "session-save", 
-        "q": "quit", 
+        "w": "session-save",
+        "q": "quit",
         "wq": "quit --save",
-        "b": "buffer"
+        "b": "buffer",
+        "view-in-mpv": "spawn --userscript view_in_mpv",
+        "readability": "spawn --userscript readability"
         }
 
 for i in range(1, 50):
