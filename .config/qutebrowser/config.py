@@ -22,7 +22,7 @@ c.aliases = {
         "q": "quit",
         "wq": "quit --save",
         "b": "buffer",
-        "view-in-mpv": "spawn --userscript view_in_mpv",
+        "view-in-mpv": "spawn --userscript view-in-mpv",
         "readability": "spawn --userscript readability"
         }
 
