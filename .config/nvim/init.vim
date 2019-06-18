@@ -387,6 +387,16 @@ nmap ga <Plug>(EasyAlign)
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.wikimd'}]
 
+" Auto-commit
+
+if executable("git") && isdirectory($HOME . "/vimwiki/.git")
+
+  augroup wiki
+    au! BufWritePost ~/vimwiki/* !git add "%";git commit -m "Auto commit of %:t." "%"
+  augroup END
+
+endif
+
 " ===============================================
 " ============ Filetypes  =======================
 " ===============================================
@@ -395,7 +405,7 @@ augroup additional_ft
   au!
   
   autocmd BufNewFile,BufRead Jenkinsfile set ft=groovy
-  autocmd BufNewFile,BufRead *.ts set ft=typescript
+  autocmd BufNewFile,BufRead *.ts set ft=typescripkk
 augroup END
 
 " ===============================================
