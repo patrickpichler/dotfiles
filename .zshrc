@@ -141,7 +141,7 @@ fi
 
 export KEYTIMEOUT=20
 
-export MANPATH=~/.local/share/man
+export MANPATH=:~/.local/share/man
 
 # It seems like there is an issue with the default 
 # less setting `-R`
