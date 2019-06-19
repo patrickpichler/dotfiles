@@ -392,7 +392,7 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 if executable("git") && isdirectory($HOME . "/vimwiki/.git")
 
   augroup wiki
-    au! BufWritePost ~/vimwiki/* !git add "%";git commit -m "Auto commit of %:t." "%"
+    au! BufWritePost ~/vimwiki/* !cd ~/vimwiki/;git add "%";git commit -m "Auto commit of %:t." "%"
   augroup END
 
 endif
