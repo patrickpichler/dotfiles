@@ -28,6 +28,9 @@ c.aliases = {
 
 c.content.autoplay = False
 
+config.bind('<Ctrl-r>', 'open-editor')
+config.bind('<Ctrl-r>', 'open-editor', mode='insert')
+
 for i in range(1, 50):
     c.aliases[f"b{i}"] = f"buffer {i}"
 
