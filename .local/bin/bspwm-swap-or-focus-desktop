@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh
 
 [ "$#" -eq 1 ] ||{ echo 'One argument expected!'; exit 1; }
 
@@ -21,14 +21,15 @@ _focus_desktop() {
   bspc desktop -f $1
 }
 
-_query_desktops_on_monitor | grep $1 -q
+_query_desktops_on_monitor | grep -w "$1"
 
 case "$?" in
   0)
     _focus_desktop $1
     ;;
 
-  1)
+  *)
     _swap_current_desktop_with $1
     ;;
 esac
+
