@@ -33,11 +33,11 @@ last_monitor=$(bspc query -M | tail -1)
 
 bspc monitor $last_monitor -d $(seq $i 10)
 
-bspc config border_width         1
-bspc config window_gap           5 
+bspc config border_width         3
+bspc config window_gap           2 
 
-bspc config split_ratio          0.52
-bspc config borderless_monocle   true
+bspc config split_ratio          0.50
+bspc config borderless_monocle   false
 bspc config gapless_monocle      true
 
 wmname LG3D
