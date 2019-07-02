@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+export SV_LOG_DIR=$HOME/.local/logs
+export SVDIR=$HOME/.local/service
+
+autorandr --change --force
+
+nitrogen --restore &
+
+dbus-launch --exit-with-session \
+  --autolaunch=$(cat /var/lib/dbus/machine-id) \
+  bspwm &
+
+WM_PID=$!
+
+runsvdir /home/patrick/.local/service &
+
+RUNSV_PID=$!
+
+wait $WM_PID
+
+kill $RUNSV_PID
