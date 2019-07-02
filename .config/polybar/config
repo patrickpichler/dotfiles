@@ -23,7 +23,7 @@ orange = #fe8019
 
 [global/wm]
 margin-top = 0
-margin-bottom = 0
+argin-bottom = 0
 
 [settings]
 ; Reload when screen configuration changes
@@ -57,7 +57,7 @@ module-margin-left = 1
 module-margin-right = 2
 
 
-modules-left = xmonad-ws title
+modules-left = bspwm-ws xmonad-ws title
 modules-center = music 
 modules-right = keyboard wifi network cpu memory battery date
 
@@ -259,3 +259,13 @@ ramp-signal-1 =  爛
 ramp-signal-2 =  嵐
 ramp-signal-3 =  襤
 ramp-signal-4 =  蠟
+
+[module/bspwm-ws]
+type = internal/bspwm
+
+pin-workspaces = false
+
+label-focused = " %name% "
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+label-focused-underline = #fba922
