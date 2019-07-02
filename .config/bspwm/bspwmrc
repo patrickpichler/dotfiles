@@ -30,9 +30,8 @@ for m in $(bspc query -M | head -n -1); do
 done
 
 last_monitor=$(bspc query -M | tail -1)
-missing_desktops=$(seq $i 9 | paste -sd ' ' -)
 
-bspc monitor $last_monitor -d $(seq $i 9)
+bspc monitor $last_monitor -d $(seq $i 10)
 
 bspc config border_width         1
 bspc config window_gap           5 
