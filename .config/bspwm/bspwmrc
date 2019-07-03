@@ -19,6 +19,11 @@ _inc()
 
 sxhkd &
 
+# Test if numlockx is installed
+if type numlockx > /dev/null; then
+  numlockx on
+fi
+
 # bspc monitor -d I II III IV V VI VII VIII IX X
 
 i=1
