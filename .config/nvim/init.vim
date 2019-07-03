@@ -20,6 +20,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-dadbod'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-abolish'
 
 Plug 'Shougo/denite.nvim', { 'tag': '*' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
