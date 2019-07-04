@@ -480,6 +480,12 @@ if executable('rg')
         \ ['-i', '--vimgrep', '--no-heading'])
 endif
 
+if executable('par')
+  set formatprg=par\ -re
+
+  autocmd FileType mail set formatprg=par\ -rjeq
+endif
+
 let s:menus = {}
 
 call denite#custom#var('menu', 'menus', s:menus)
