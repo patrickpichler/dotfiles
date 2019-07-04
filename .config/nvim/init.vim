@@ -45,6 +45,7 @@ Plug 'junegunn/fzf'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'vimwiki/vimwiki'
+Plug 'itchyny/lightline.vim'
 
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
@@ -171,20 +172,37 @@ endfunction
 
 " Status Line {
 set laststatus=2 " always show statusbar
-set statusline=
-set statusline+=[%{winnr()}]
-set statusline+=\ Buffer:
-set statusline+=\ %-10.1n\ " buffer number
+set noshowmode
 
-set statusline+=%f\ " filename
-set statusline+=%h%m%r%w " status flags
-set statusline+=\[%{strlen(&ft)?&ft:'none'}] "file type
-set statusline+=%{gutentags#statusline('[',']')}
-set statusline+=%= "right align remainder
-set statusline+=\ %{fugitive#statusline()}
-set statusline+=\ 0x%-8B " character value
-set statusline+=%-14(%l,%c%V%) " line, character
-set statusline+=%<%P " file position 
+let g:lightline = {
+      \ 'colorscheme': 'jellybeans',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head',
+      \   'readonly': 'LightlineReadonly'
+      \ },
+      \ }
+
+function! LightlineReadonly()
+  return &readonly && &filetype !=# 'help' ? 'RO' : ''
+endfunction
+" set statusline=
+" set statusline+=[%{winnr()}]
+" set statusline+=\ Buffer:
+" set statusline+=\ %-10.1n\ " buffer number
+
+" set statusline+=%f\ " filename
+" set statusline+=%h%m%r%w " status flags
+" set statusline+=\[%{strlen(&ft)?&ft:'none'}] "file type
+" set statusline+=%{gutentags#statusline('[',']')}
+" set statusline+=%= "right align remainder
+" set statusline+=\ %{fugitive#statusline()}
+" set statusline+=\ 0x%-8B " character value
+" set statusline+=%-14(%l,%c%V%) " line, character
+" set statusline+=%<%P " file position 
 " }
 
 
