@@ -14,20 +14,4 @@ alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 config config status.showUntrackedFiles no
 ```
 
-# Taffybar
-
-To make taffybar work:
-```
-cd ~/.config/taffybar && ln -s ~/.xmonad/taffybar-git taffybar
-```
-
-
-# Dependencies
-
-Easiest to install with nix
-
-```
-nix-env -i neovim
-nix-env -i fd
-nix-env -i universal-ctags
-```
+For further information, checkout the ` ~/.resources/setup.md` file.

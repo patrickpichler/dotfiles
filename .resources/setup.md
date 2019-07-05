@@ -1,24 +1,35 @@
 # Dependencies:
 * lux (https://github.com/Ventto/lux)
-* nitrogen (pacman -S nitrogen)
-* kitty (pacman -S kitty https://github.com/kovidgoyal/kitty) 
+* nitrogen 
+* kitty (https://github.com/kovidgoyal/kitty) 
 * playerctl (https://github.com/acrisci/playerctl)
-* status notifier watcher (https://github.com/IvanMalison/status-notifier-item)
-* libdbusmenu-gtk3 (pacman -S libdbusmenu-gtk3)
 * xdotool 
-* xvkbd (nix-env -i xvkbd)
-* dunst (pacman -S dunst)
+* xvkbd 
+* dunst
 * libsound2-dev
 * julia (nix-env -i julia)
   * https://github.com/JuliaEditorSupport/LanguageServer.jl
-* neovim-remote (nix-env -i python3.6-neovim-remote-2.1.0)
-* polybar https://github.com/jaagr/polybar
-* https://github.com/firecat53/networkmanager-dmenu
-* https://github.com/DaveDavenport/rofi
+* neovim-remote 
+* polybar (https://github.com/jaagr/polybar)
+* rofi (https://github.com/DaveDavenport/rofi)
+* pamixer
+* numlockx
 
 # Fonts
 * ttf-material-design-icons-git
 * ttf-font-awesome
 
-# Setup
-* set script/noctrlq.sh to executable
+
+# Notes
+
+## IntelliJ
+
+### Focus issues
+
+In order to make IntelliJ behave nicely with focus, we need to set
+the `suppress.focus.stealing` flag, in the `idea.properties` file to
+false. The easiest way to achieve this, is to open IntelliJ, press
+`CTRL-A`, type `edit custom properties` and hit enter. This will open
+the `idea.properties` file we need to edit. Now put there a new line
+with `suppress.focus.stealing=false`. Now restart IntelliJ and you are
+good to go.
