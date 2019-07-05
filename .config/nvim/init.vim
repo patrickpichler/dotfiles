@@ -46,6 +46,7 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'vimwiki/vimwiki'
 Plug 'itchyny/lightline.vim'
+Plug 'easymotion/vim-easymotion'
 
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
