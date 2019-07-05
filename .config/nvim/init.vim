@@ -177,18 +177,70 @@ set noshowmode
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \   'left': [ [ 'mode', 'paste', ],
+      \             [ 'cocerror', 'cocwarn'  ] ,
+      \             [ 'gitgutter', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'fugitive#head',
-      \   'readonly': 'LightlineReadonly'
+      \   'readonly': 'LightlineReadonly',
+      \   'gitgutter': 'LightLineGitGutter',
       \ },
+      \ 'component_expand': {
+      \   'cocerror': 'LightLineCocError',
+      \   'cocwarn' : 'LightLineCocWarn',   
       \ }
+    \ }
 
 function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
 endfunction
+
+function! LightLineCocError()
+  let error_sign = get(g:, 'coc_status_error_sign', has('mac') ? '❌ ' : 'E')
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info)
+    return ''
+  endif
+  let errmsgs = []
+  if get(info, 'error', 0)
+    call add(errmsgs, error_sign . info['error'])
+  endif
+  return trim(join(errmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
+endfunction
+
+function! LightLineCocWarn() abort
+  let warning_sign = get(g:, 'coc_status_warning_sign')
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info)
+    return ''
+  endif
+  let warnmsgs = []
+  if get(info, 'warning', 0)
+    call add(warnmsgs, warning_sign . info['warning'])
+  endif
+  return trim(join(warnmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
+endfunction
+
+autocmd User CocDiagnosticChange call lightline#update()
+
+function! LightLineGitGutter()
+  if ! exists('*GitGutterGetHunkSummary')
+        \ || ! get(g:, 'gitgutter_enabled', 0)
+        \ || winwidth('.') <= 90
+    return ''
+  endif
+  let symbols = ['+','~','-']
+  let hunks = GitGutterGetHunkSummary()
+  let ret = []
+  for i in [0, 1, 2]
+    if hunks[i] > 0
+      call add(ret, symbols[i] . hunks[i])
+    endif
+  endfor
+  return join(ret, ' ')
+endfunction
+
 " set statusline=
 " set statusline+=[%{winnr()}]
 " set statusline+=\ Buffer:
