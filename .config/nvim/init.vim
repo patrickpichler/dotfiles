@@ -367,7 +367,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 " ===============================================
 hi ALEError ctermfg=Red
 
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 let g:ale_sign_column_always = 1
 
 let g:ale_sign_error = '>' 
