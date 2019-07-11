@@ -98,6 +98,7 @@ set nocompatible
 set backspace=indent,eol,start
 
 " Enable file type detection and do language-dependent indenting.
+filetype on
 filetype plugin indent on
 filetype plugin on
 
@@ -110,7 +111,7 @@ set hidden
 syntax on
 syntax enable
 
-" Enables search highlichting
+" Enables search highlighting
 set hlsearch
 
 " Set indent to use spaces instead of tabs
@@ -241,22 +242,6 @@ function! LightLineGitGutter()
   endfor
   return join(ret, ' ')
 endfunction
-
-" set statusline=
-" set statusline+=[%{winnr()}]
-" set statusline+=\ Buffer:
-" set statusline+=\ %-10.1n\ " buffer number
-
-" set statusline+=%f\ " filename
-" set statusline+=%h%m%r%w " status flags
-" set statusline+=\[%{strlen(&ft)?&ft:'none'}] "file type
-" set statusline+=%{gutentags#statusline('[',']')}
-" set statusline+=%= "right align remainder
-" set statusline+=\ %{fugitive#statusline()}
-" set statusline+=\ 0x%-8B " character value
-" set statusline+=%-14(%l,%c%V%) " line, character
-" set statusline+=%<%P " file position 
-" }
 
 
 " remap leader key to something more reachable
@@ -478,7 +463,7 @@ augroup additional_ft
   au!
   
   autocmd BufNewFile,BufRead Jenkinsfile set ft=groovy
-  autocmd BufNewFile,BufRead *.ts set ft=typescripkk
+  autocmd BufNewFile,BufRead *.ts set ft=typescript
 augroup END
 
 " ===============================================
