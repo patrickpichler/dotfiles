@@ -29,7 +29,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'w0rp/ale'
 Plug 'mhinz/vim-grepper'
 Plug 'janko-m/vim-test'
-Plug 'sgur/vim-editorconfig'
+Plug 'editorconfig/editorconfig-vim'
 
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'sheerun/vim-polyglot'
