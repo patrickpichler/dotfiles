@@ -55,6 +55,7 @@ Plug 'neoclide/coc-denite'
 " ============= Coc extensions ===============
 Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
 
 " ============= New text objects ==============
 Plug 'vim-utils/vim-line'
