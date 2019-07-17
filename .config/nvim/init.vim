@@ -191,12 +191,19 @@ let g:lightline = {
       \   'gitbranch': 'fugitive#head',
       \   'readonly': 'LightlineReadonly',
       \   'gitgutter': 'LightLineGitGutter',
+      \   'filename': 'LightlineFileName',
       \ },
       \ 'component_expand': {
       \   'cocerror': 'LightLineCocError',
       \   'cocwarn' : 'LightLineCocWarn',   
       \ }
     \ }
+
+function! LightlineFileName() abort
+    let filename = winwidth(0) > 70 ? expand('%') : expand('%:t')
+    let modified = &modified ? ' +' : ''
+    return fnamemodify(filename, ":~:.") . modified
+endfunction
 
 function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
