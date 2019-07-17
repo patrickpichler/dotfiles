@@ -56,6 +56,8 @@ Plug 'neoclide/coc-denite'
 Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'iamcco/coc-angular', {'do': 'yarn install --frozen-lockfile'}
 
 " ============= New text objects ==============
 Plug 'vim-utils/vim-line'
@@ -271,7 +273,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gd <Plug>(coc-definition)
 nmap <leader>u <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
 
