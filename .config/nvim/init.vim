@@ -53,11 +53,12 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'neoclide/coc-denite'
 
 " ============= Coc extensions ===============
-Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
 Plug 'iamcco/coc-angular', {'do': 'yarn install --frozen-lockfile'}
+Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
 
 " ============= New text objects ==============
 Plug 'vim-utils/vim-line'
@@ -487,6 +488,25 @@ let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
 " ===============================================
 let g:polyglot_disabled = ['markdown', 'clojure']
 
+
+" ===============================================
+" ============== Java ===========================
+" ===============================================
+
+let java_highlight_functions = 1
+let java_highlight_all = 1
+
+augroup java_stuff
+  au!
+  
+  autocmd Filetype java call SetJavaOptions()
+  function SetJavaOptions()
+    highlight link javaScopeDecl Statement
+    highlight link javaType Type 
+    highlight link javaDocTags PreProc
+  endfunction
+
+augroup END
 
 " ====== Denite =============
 
