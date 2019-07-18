@@ -1,4 +1,4 @@
-" vim:set foldmethod=marker 
+" vim:set foldmethod=marker  foldlevel=0
 
 " Plugins {{{
 
@@ -48,7 +48,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
 
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'mbbill/undotree'
@@ -644,7 +643,10 @@ endif
       nmap <silent> <leader>y :NERDTreeFind<cr>
 
       let NERDTreeShowHidden=1
-  " }}}
+      let g:NERDTreeFileExtensionHighlightFullName = 1
+      let g:NERDTreeExactMatchHighlightFullName = 1
+      let g:NERDTreePatternMatchHighlightFullName = 1
+" }}}
 
 " Vim config {{{
 
