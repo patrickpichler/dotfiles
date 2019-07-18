@@ -1,6 +1,6 @@
-" ===============================================
-" =============== Plugins =======================
-" ===============================================
+" vim:set foldmethod=marker 
+
+" Plugins {{{
 
 call plug#begin('~/.local/share/nvim/plugged')
 
@@ -95,6 +95,9 @@ Plug 'schickele/vim-nachtleben'
 " ===========================================
 call plug#end()
 
+" }}}
+
+" General configuration {{{
 colorscheme nachtleben
 
 " Used Vim settings, rather than Vi settings (much better!).
@@ -203,20 +206,14 @@ endwhile
 
 set updatetime=10
 
-function! HighlightWordUnderCursor()
-  if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]' 
-    exec 'match' 'Search' '/\V\<'.expand('<cword>').'\>/' 
-  else 
-    match none 
-  endif
-endfunction
-
-" autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
 
 " Status Line {
 set laststatus=2 " always show statusbar
 set noshowmode
 
+" }}}
+
+" Lightline {{{
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
@@ -291,6 +288,8 @@ function! LightLineGitGutter()
   return join(ret, ' ')
 endfunction
 
+" }}}
+
 
 " remap leader key to something more reachable
 let mapleader = ","
@@ -302,9 +301,7 @@ let g:grepper.tools = ['grep', 'git', 'rg']
 " Define prefix dictionary
 let g:which_key_map =  {}
 
-" ===============================================
-" ================  LSP =========================
-" ===============================================
+" coc.nvim {{{
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -369,9 +366,9 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-" ===============================================
-" ===========  Mappings =========================
-" ===============================================
+" }}}
+
+" Mappings {{{
 nmap <C-p> :FZF<CR>
 
 " Search for the current word
@@ -463,11 +460,9 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-" ===============================================
+" }}}
 
-" ===============================================
-" ============ Colorscheme ======================
-" ===============================================
+" Colorscheme {{{
 hi ALEError ctermfg=Red
 
 let g:ale_completion_enabled = 0
@@ -480,9 +475,9 @@ highlight GitGutterAdd    ctermfg=green guifg=green
 highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
 
-" ===============================================
-" ============== Snippets =======================
-" ===============================================
+" }}}
+
+" Snippets {{{
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -492,9 +487,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-h>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" ===============================================
-" ============ Easy align =======================
-" ===============================================
+ " }}}
+
+" Easy align {{{
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -502,9 +497,9 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" ===============================================
-" ============ Vim Wiki =========================
-" ===============================================
+" }}}
+
+" Vim Wiki {{{
 
 " Use markdown syntax
 let g:vimwiki_list = [{'path': '~/vimwiki/',
@@ -520,9 +515,9 @@ if executable("git") && isdirectory($HOME . "/vimwiki/.git")
 
 endif
 
-" ===============================================
-" ============ Filetypes  =======================
-" ===============================================
+" }}}
+
+" Filetypes {{{
 
 augroup additional_ft
   au!
@@ -531,29 +526,27 @@ augroup additional_ft
   autocmd BufNewFile,BufRead *.ts set ft=typescript
 augroup END
 
-" ===============================================
-" ============= GutenTags =======================
-" ===============================================
+" }}}
+
+" GutenTags {{{
 
 " generate datebases in my cache directory, prevent gtags files polluting my project
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 
+" }}}
 
-" ===============================================
-" ============== Markdown =======================
-" ===============================================
-let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
-                                  \ 'sh', 'kotlin']
+" Markdown {{{
+let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh', 
+      \ 'sh', 'kotlin']
+" }}}
 
-" ===============================================
-" ============== Polyglot =======================
-" ===============================================
+" Polyglot {{{
+
 let g:polyglot_disabled = ['markdown', 'clojure']
 
+" }}}
 
-" ===============================================
-" ============== Java ===========================
-" ===============================================
+" Java {{{
 
 let java_highlight_functions = 1
 let java_highlight_all = 1
@@ -570,11 +563,18 @@ augroup java_stuff
 
 augroup END
 
+" }}}
+
 " UndoTree {{{
 nnoremap <silent><Leader>tu :UndotreeToggle
 " }}}
 
-" ====== Denite =============
+
+" Denite {{{
+
+let s:menus = {}
+
+call denite#custom#var('menu', 'menus', s:menus)
 
 nnoremap <silent><Leader>db :Denite buffer<CR>
 nnoremap <silent><Leader>df :Denite file/rec<CR>
@@ -594,6 +594,9 @@ call denite#custom#option('_', {
     \ 'statusline': v:false,
     \ })
 
+" }}}
+
+" Ripgrep {{{
 if executable('rg')
 	" Ripgrep
   call denite#custom#var('file/rec', 'command',
@@ -606,47 +609,51 @@ if executable('rg')
         \ ['-i', '--vimgrep', '--no-heading'])
 endif
 
+" }}}
+
+" Formating {{{
 if executable('par')
   set formatprg=par\ -re
 
   autocmd FileType mail set formatprg=par\ -rjeq
 endif
 
-let s:menus = {}
+" }}}
 
-call denite#custom#var('menu', 'menus', s:menus)
+" NERDTree {{{
+      augroup nerdtree_group
+          autocmd!
+          autocmd FileType nerdtree setlocal nolist " turn off whitespace characters
+          autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
+          autocmd StdinReadPre * let s:std_in=1
+          autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+      augroup END
 
- " NERDTree {{{
-        augroup nerdtree_group
-            autocmd!
-            autocmd FileType nerdtree setlocal nolist " turn off whitespace characters
-            autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
-            autocmd StdinReadPre * let s:std_in=1
-            autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-        augroup END
+      " Toggle NERDTree
+      function! ToggleNerdTree()
+          if @% != "" && @% !~ "Startify" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
+              :NERDTreeFind
+          else
+              :NERDTreeToggle
+          endif
+      endfunction
+      
+      " toggle nerd tree
+      nmap <silent> <leader>k :call ToggleNerdTree()<cr>
+      " find the current file in nerdtree without needing to reload the drawer
+      nmap <silent> <leader>y :NERDTreeFind<cr>
 
-        " Toggle NERDTree
-        function! ToggleNerdTree()
-            if @% != "" && @% !~ "Startify" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
-                :NERDTreeFind
-            else
-                :NERDTreeToggle
-            endif
-        endfunction
-        
-        " toggle nerd tree
-        nmap <silent> <leader>k :call ToggleNerdTree()<cr>
-        " find the current file in nerdtree without needing to reload the drawer
-        nmap <silent> <leader>y :NERDTreeFind<cr>
+      let NERDTreeShowHidden=1
+  " }}}
 
-        let NERDTreeShowHidden=1
-    " }}}
-
-" ==== Load vim config =====
+" Vim config {{{
 
 if exists("$vim_mode")
   execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/'.$vim_mode.'.vim'
 endif
 
+" }}}
+
 " Is at the end so that specializations can insert things too 
 call which_key#register(',', "g:which_key_map")
+
