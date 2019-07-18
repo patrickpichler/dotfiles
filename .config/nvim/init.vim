@@ -146,6 +146,13 @@ set fileencoding=utf-8
 set lazyredraw
 set termguicolors
 
+" code folding settings
+set foldmethod=syntax " fold based on indent
+set foldlevelstart=99
+set foldnestmax=10 " deepest fold is 10 levels
+set nofoldenable " don't fold by default
+set foldlevel=1
+
 " Auto open quickfix list on grep
 autocmd QuickFixCmdPost *grep* cwindow
 
