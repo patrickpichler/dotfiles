@@ -11,7 +11,6 @@ Plug 'honza/vim-snippets'
 " ======================================================
 
 Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -47,6 +46,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
 Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
+
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
@@ -556,6 +559,32 @@ endif
 let s:menus = {}
 
 call denite#custom#var('menu', 'menus', s:menus)
+
+ " NERDTree {{{
+        augroup nerdtree_group
+            autocmd!
+            autocmd FileType nerdtree setlocal nolist " turn off whitespace characters
+            autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
+            autocmd StdinReadPre * let s:std_in=1
+            autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+        augroup END
+
+        " Toggle NERDTree
+        function! ToggleNerdTree()
+            if @% != "" && @% !~ "Startify" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
+                :NERDTreeFind
+            else
+                :NERDTreeToggle
+            endif
+        endfunction
+        
+        " toggle nerd tree
+        nmap <silent> <leader>k :call ToggleNerdTree()<cr>
+        " find the current file in nerdtree without needing to reload the drawer
+        nmap <silent> <leader>y :NERDTreeFind<cr>
+
+        let NERDTreeShowHidden=1
+    " }}}
 
 " ==== Load vim config =====
 
