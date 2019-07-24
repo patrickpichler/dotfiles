@@ -641,6 +641,7 @@ endif
       nmap <silent> <leader>k :call ToggleNerdTree()<cr>
       " find the current file in nerdtree without needing to reload the drawer
       nmap <silent> <leader>y :NERDTreeFind<cr>
+      nmap <silent> - :NERDTreeFind<cr>
 
       let NERDTreeShowHidden=1
       let g:NERDTreeFileExtensionHighlightFullName = 1
