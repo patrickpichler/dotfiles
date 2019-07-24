@@ -51,6 +51,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
+Plug 'mbbill/undotree'
+
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 Plug 'neoclide/coc-denite'
@@ -542,6 +544,10 @@ augroup java_stuff
   endfunction
 
 augroup END
+
+" UndoTree {{{
+nnoremap <silent><Leader>tu :UndotreeToggle
+" }}}
 
 " ====== Denite =============
 
