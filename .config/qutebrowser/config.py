@@ -33,6 +33,9 @@ config.bind('<Ctrl-r>', 'open-editor', mode='insert')
 config.bind('<Ctrl-l>', 'edit-url')
 config.bind(',v', 'edit-url')
 
+config.bind('<Ctrl-n>', 'completion-item-focus --history next', mode='command')
+config.bind('<Ctrl-p>', 'completion-item-focus --history prev', mode='command')
+
 for i in range(1, 50):
     c.aliases[f"b{i}"] = f"buffer {i}"
 
