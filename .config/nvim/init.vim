@@ -565,7 +565,7 @@ augroup END
 " }}}
 
 " UndoTree {{{
-nnoremap <silent><Leader>tu :UndotreeToggle
+nnoremap <silent><Leader>tu :UndotreeToggle<CR>
 " }}}
 
 
