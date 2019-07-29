@@ -20,7 +20,6 @@ if ! zgen saved; then
   zgen oh-my-zsh themes/philips
 
   zgen load zsh-users/zsh-syntax-highlighting
-  zgen load zsh-users/zsh-autosuggestions
   zgen load hlissner/zsh-autopair
   zgen load voronkovich/gitignore.plugin.zsh
 
@@ -188,8 +187,6 @@ bindkey -M vicmd 'v' visual-mode
 bindkey -M vicmd '^v' edit-command-line
 
 bindkey "^]^]" sudo-command-line
-
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 if [ -f ~/.extensions.zsh ]; then
   source ~/.extensions.zsh
