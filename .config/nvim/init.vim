@@ -1,4 +1,3 @@
-" vim:set foldmethod=marker  foldlevel=0
 
 " Plugins {{{
 
@@ -460,6 +459,13 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
       \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
+" Resize window {{{
+noremap <M-Up> :res -2<CR>
+noremap <M-Down> :res +2<CR>
+noremap <M-Left> :vertical res -2<CR>
+noremap <M-Right> :vertical res +2<CR>
+" }}}
+
 " }}}
 
 " Colorscheme {{{
@@ -661,3 +667,4 @@ endif
 " Is at the end so that specializations can insert things too 
 call which_key#register(',', "g:which_key_map")
 
+" vim: foldmethod=marker foldlevel=0 foldenable
