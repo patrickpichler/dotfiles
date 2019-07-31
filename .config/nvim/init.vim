@@ -38,8 +38,6 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 
-Plug 'junegunn/fzf'
-
 Plug 'airblade/vim-gitgutter'
 
 Plug 'vimwiki/vimwiki'
@@ -368,7 +366,6 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " }}}
 
 " Mappings {{{
-nmap <C-p> :FZF<CR>
 
 " Search for the current word
 nnoremap <Leader>* :Grepper -cword -noprompt<CR>
@@ -589,6 +586,8 @@ nnoremap <silent><Leader>dg :Denite grep<CR>
 nnoremap <silent><M-b> :Denite buffer<CR>
 nnoremap <silent><M-f> :Denite file/rec<CR>
 nnoremap <silent><M-g> :Denite grep<CR>
+
+nnoremap <silent><C-p> :Denite file/rec<CR>
 
 call denite#custom#option('_', {
     \ 'cached_filter': v:true,
