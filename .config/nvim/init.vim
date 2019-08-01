@@ -22,11 +22,10 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-abolish'
 
 Plug 'Shougo/denite.nvim', { 'tag': '*' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 
 Plug 'w0rp/ale'
 Plug 'mhinz/vim-grepper'
-Plug 'janko-m/vim-test'
+Plug 'janko/vim-test'
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'ludovicchabant/vim-gutentags'
@@ -50,15 +49,15 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'mbbill/undotree'
 
 " ============= LSP ===========================
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'neoclide/coc-denite'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
 " ============= Coc extensions ===============
-Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-emmet', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-rls', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-java', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tslint-plugin', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'iamcco/coc-angular', {'do': 'yarn install --frozen-lockfile'}
 Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
 
@@ -70,7 +69,6 @@ Plug 'wellle/targets.vim'
 Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 
 " ============== ELM ==========================
-Plug 'pbogut/deoplete-elm', {'for': 'elm'}
 Plug 'ElmCast/elm-vim', {'for': 'elm'}
 
 " ============= JS ============================
@@ -86,6 +84,7 @@ Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
 " ===========================================
+Plug 'HerringtonDarkholme/yats.vim'
 
 Plug 'schickele/vim-nachtleben'
 
@@ -175,6 +174,7 @@ set backupdir^=~/.local/share/nvim/backup//
 
 " persist the undo tree for each file
 set undofile
+
 set undodir^=~/.local/share/nvim/undo//
 
 " }}}
@@ -182,22 +182,6 @@ set undodir^=~/.local/share/nvim/undo//
 
 " Auto open quickfix list on grep
 autocmd QuickFixCmdPost *grep* cwindow
-
-" Netrw config
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-" let g:netrw_browse_split = 4
-let g:netrw_browse_split = 0
-let g:netrw_altv = 1
-let g:netrw_winsize = 25 
-
-" Source: http://stackoverflow.com/a/6404246/151007
-let i = 1
-" If I have more than 9 windows open I have bigger problems ^^
-while i <= 9
-  execute 'nnoremap <silent> <Leader>'.i.' :'.i.'wincmd w<CR>'
-  let i = i + 1
-endwhile 
 
 " autohighlight word under cursor
 
@@ -301,6 +285,17 @@ let g:which_key_map =  {}
 " coc.nvim {{{
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 inoremap <silent><expr> <c-space> coc#refresh()
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
@@ -314,6 +309,8 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>u <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 function! s:show_documentation()
   if &filetype == 'vim'
@@ -447,8 +444,6 @@ let g:which_key_map.o = {
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " ===============================================
 
-let g:deoplete#enable_at_startup = 1
-
 " ============ Vim which key ====================
 nnoremap <silent> <Leader> :<c-u>WhichKey ','<CR>
 
@@ -526,7 +521,6 @@ augroup additional_ft
   au!
   
   autocmd BufNewFile,BufRead Jenkinsfile set ft=groovy
-  autocmd BufNewFile,BufRead *.ts set ft=typescript
 augroup END
 
 " }}}
@@ -572,7 +566,6 @@ augroup END
 nnoremap <silent><Leader>tu :UndotreeToggle<CR>
 " }}}
 
-
 " Denite {{{
 
 let s:menus = {}
@@ -600,6 +593,9 @@ call denite#custom#option('_', {
     \ })
 
 " }}}
+
+set completeopt=noinsert,noselect,menuone 
+set shortmess+=c
 
 " Ripgrep {{{
 if executable('rg')
