@@ -460,14 +460,16 @@ noremap <M-Right> :vertical res +2<CR>
 
 " }}}
 
-" Colorscheme {{{
-hi ALEError ctermfg=Red
-
+" ALE {{{
 let g:ale_completion_enabled = 0
 let g:ale_sign_column_always = 1
 
 let g:ale_sign_error = '>' 
 let g:ale_sign_warning = '.'
+" }}}
+
+" Colorscheme {{{
+hi ALEError ctermfg=Red
 
 highlight GitGutterAdd    ctermfg=green guifg=green
 highlight GitGutterChange ctermfg=yellow guifg=yellow
