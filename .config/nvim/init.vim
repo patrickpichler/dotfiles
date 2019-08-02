@@ -530,6 +530,17 @@ augroup END
 " generate datebases in my cache directory, prevent gtags files polluting my project
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 
+" This can be disabled when issue
+" https://github.com/ludovicchabant/vim-gutentags/issues/178 is fixed {{{
+
+let g:gutentags_enabled = 0
+
+augroup auto_gutentags
+  au FileType python,java,scala,sh,groovy,vim,clojure,typescript let g:gutentags_enabled=1
+augroup end
+
+" }}}
+
 " }}}
 
 " Markdown {{{
