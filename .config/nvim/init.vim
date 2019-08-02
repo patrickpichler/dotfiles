@@ -589,6 +589,7 @@ call denite#custom#option('_', {
     \ 'highlight_filter_background': 'DeniteFilter',
     \ 'highlight_matched_char': 'Underlined',
     \ 'matchers': 'matcher/fruzzy',
+    \ 'sorters': 'sorter/sublime',
     \ 'statusline': v:false,
     \ })
 
