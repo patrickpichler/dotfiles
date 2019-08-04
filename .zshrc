@@ -53,10 +53,6 @@ if [ -e /usr/share/doc/fzf ]; then
   . /usr/share/doc/fzf/key-bindings.zsh
 fi
 
-if type kitty > /dev/null ; then
-  kitty + complete setup zsh | source /dev/stdin
-fi
-
 # Custom style for syntax higlighting
 typeset -A ZSH_HIGHLIGHT_STYLES
 
@@ -126,10 +122,6 @@ alias edit_zsh_config="nvim ~/.zshrc"
 alias edit_xmonad_config="nvim ~/.xmonad/xmonad.hs"
 alias edit_nvim_config="pushd . > /dev/null; cd $NVIM_CONFIG_DIR; nvim $NVIM_CONFIG_DIR; popd > /dev/null;"
 
-# kitty specific aliases
-if type kitty > /dev/null ; then
-  alias ssh='kitty +kitten ssh'
-fi
 # =====================
 
 
