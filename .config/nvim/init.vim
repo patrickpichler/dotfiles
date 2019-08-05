@@ -677,6 +677,10 @@ endif
 
 " }}}
 
+" Colors {{{
+hi! MatchParen cterm=NONE,bold gui=NONE,bold  guibg=#eee8d5 guifg=NONE
+" }}}
+
 " Is at the end so that specializations can insert things too 
 call which_key#register(',', "g:which_key_map")
 
