@@ -19,3 +19,5 @@ if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
 elif [ -e /etc/profile.d/nix.sh ]; then
   . /etc/profile.d/nix.sh
 fi 
+
+export WINIT_HIDPI_FACTOR=1
