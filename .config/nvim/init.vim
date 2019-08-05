@@ -62,8 +62,10 @@ Plug 'iamcco/coc-angular', {'do': 'yarn install --frozen-lockfile'}
 Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
 
 " ============= New text objects ==============
+Plug 'kana/vim-textobj-user'
 Plug 'vim-utils/vim-line'
 Plug 'wellle/targets.vim'
+Plug 'kana/vim-textobj-entire'
 
 " ============== HASKELL ======================
 Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
