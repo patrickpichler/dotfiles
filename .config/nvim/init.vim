@@ -337,6 +337,8 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>p  :call CocActionAsync('showSignatureHelp')<cr>
+inoremap <C-p> <C-o>:call CocActionAsync('showSignatureHelp')<cr>
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -648,6 +650,7 @@ endif
           autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
           autocmd StdinReadPre * let s:std_in=1
           autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+          autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
       augroup END
 
       " Toggle NERDTree
