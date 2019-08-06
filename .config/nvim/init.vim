@@ -35,7 +35,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'liuchengxu/vim-which-key'
-Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
 
 Plug 'airblade/vim-gitgutter'
@@ -601,7 +601,7 @@ nnoremap <silent><Leader>df :Denite file/rec<CR>
 nnoremap <silent><Leader>dg :Denite grep<CR>
 
 nnoremap <silent><M-b> :Denite buffer<CR>
-nnoremap <silent><M-f> :Denite file/rec<CR>
+nnoremap <silent><M-p> :Denite file/rec<CR>
 nnoremap <silent><M-g> :Denite grep<CR>
 
 call denite#custom#option('_', {
