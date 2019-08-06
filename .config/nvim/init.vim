@@ -604,15 +604,13 @@ nnoremap <silent><M-b> :Denite buffer<CR>
 nnoremap <silent><M-f> :Denite file/rec<CR>
 nnoremap <silent><M-g> :Denite grep<CR>
 
-nnoremap <silent><C-p> :Denite file/rec<CR>
-
 call denite#custom#option('_', {
     \ 'cached_filter': v:true,
     \ 'cursor_shape': v:true,
     \ 'cursor_wrap': v:true,
     \ 'highlight_filter_background': 'DeniteFilter',
     \ 'highlight_matched_char': 'Underlined',
-    \ 'matchers': 'matcher/fruzzy',
+    \ 'matchers': 'matcher/fuzzy',
     \ 'sorters': 'sorter/sublime',
     \ 'statusline': v:false,
     \ })
