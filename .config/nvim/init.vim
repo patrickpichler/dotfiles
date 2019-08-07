@@ -47,6 +47,8 @@ Plug 'easymotion/vim-easymotion'
 Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
+Plug 'AndrewRadev/linediff.vim'
+
 Plug 'mbbill/undotree'
 
 " ============= LSP ===========================
