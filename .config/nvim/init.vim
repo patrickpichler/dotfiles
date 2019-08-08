@@ -3,10 +3,6 @@
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-" ======================== Snippts =====================
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
 " ======================================================
 
 Plug 'tpope/vim-dispatch'
@@ -485,18 +481,6 @@ highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
 
 " }}}
-
-" Snippets {{{
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-l>"
-let g:UltiSnipsJumpBackwardTrigger="<c-h>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
- " }}}
 
 " Easy align {{{
 
