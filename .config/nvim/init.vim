@@ -47,6 +47,8 @@ Plug 'AndrewRadev/linediff.vim'
 
 Plug 'mbbill/undotree'
 
+Plug 'honza/vim-snippets'
+
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
@@ -59,6 +61,7 @@ Plug 'neoclide/coc-tsserver', {'tag': '*', 'do': 'yarn install --frozen-lockfile
 Plug 'neoclide/coc-tslint-plugin', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-html', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-css', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-snippets', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'iamcco/coc-angular', {'do': 'yarn install --frozen-lockfile'}
 Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
 
@@ -312,6 +315,24 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <leader>u <Plug>(coc-references)
 nmap <leader>rn <Plug>(coc-rename)
+
+" CocSnippet {{{
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" }}}
 
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
