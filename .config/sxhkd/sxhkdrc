@@ -38,6 +38,10 @@ super + y
 super + g
 	bspc node -s biggest
 
+# swap the current node and last marked
+super + shift + m
+	bspc node -s newest.marked
+
 #
 # state/flags
 #
