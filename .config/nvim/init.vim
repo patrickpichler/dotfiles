@@ -303,8 +303,8 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <c-space> coc#refresh()
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 nmap <silent> [k :CocPrev<cr>
 nmap <silent> ]k :CocNext<cr>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
