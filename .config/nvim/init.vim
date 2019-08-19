@@ -421,6 +421,11 @@ inoremap <M-j> <Esc><C-w>j
 inoremap <M-k> <Esc><C-w>k
 inoremap <M-l> <Esc><C-w>l
 
+nnoremap <C-h> h
+nnoremap <C-j> gj
+nnoremap <C-k> gk
+nnoremap <C-l> l
+
 " Make C-P C-N behave the same as Up Down in command mode
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
