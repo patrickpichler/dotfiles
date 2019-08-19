@@ -10,7 +10,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive', { 'tag': '*' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-dadbod'
