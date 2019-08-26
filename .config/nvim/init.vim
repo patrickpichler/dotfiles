@@ -392,7 +392,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " Mappings {{{
 
 " Search for the current word
-nnoremap <Leader>* :Grepper -cword -noprompt<CR>
+nnoremap <leader>* :Grepper -cword -noprompt<CR>
 
 " Search for the current selection
 nmap gs <Plug>GrepperOperator
@@ -442,8 +442,8 @@ let g:which_key_map.b = { 'name' : '+buffers' }
 let g:which_key_map.b.d = 'delete'
 let g:which_key_map.b.o = 'only'
 
-nnoremap <silent><Leader>bd :bd<CR>
-nnoremap <silent><Leader>bo :only<CR>
+nnoremap <silent><leader>bd :bd<CR>
+nnoremap <silent><leader>bo :only<CR>
 
 " ======== highlighting  ====================
 let g:which_key_map.h = { 'name' : '+highlight' }
@@ -451,16 +451,16 @@ let g:which_key_map.h.w = 'highlight word'
 let g:which_key_map.h.c = 'clear word highlighting'
 let g:which_key_map.h.n = 'clear word highlighting'
 
-nnoremap <silent><Leader>hw :call HighlightWordUnderCursor()<CR>
-nnoremap <silent><Leader>hc :match none<CR>
-nnoremap <silent><Leader>hn :noh<CR>
+nnoremap <silent><leader>hw :call HighlightWordUnderCursor()<CR>
+nnoremap <silent><leader>hc :match none<CR>
+nnoremap <silent><leader>hn :noh<CR>
 
 " ======== file group ======================
 let g:which_key_map.f = { 'name' : '+file' }
 let g:which_key_map.f.s = 'save-file'
 
 " more convenient save
-nnoremap <silent><Leader>fs :w<CR>
+nnoremap <silent><leader>fs :w<CR>
 
 " =========================================
 
@@ -472,8 +472,8 @@ let g:which_key_map.o = {
       \ 'l' : 'open-locationlist',
       \ }
 
-nnoremap <silent><Leader>gb :Gblame<CR>
-nnoremap <silent><Leader>gl :Glog<CR>
+nnoremap <silent><leader>gb :Gblame<CR>
+nnoremap <silent><leader>gl :Glog<CR>
 
 let g:which_key_map.g = {
       \ 'name' : '+git',
@@ -486,7 +486,7 @@ cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " ===============================================
 
 " ============ Vim which key ====================
-nnoremap <silent> <Leader> :<c-u>WhichKey ','<CR>
+nnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
 
 autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
@@ -605,7 +605,7 @@ augroup END
 " }}}
 
 " UndoTree {{{
-nnoremap <silent><Leader>tu :UndotreeToggle<CR>
+nnoremap <silent><leader>tu :UndotreeToggle<CR>
 
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
@@ -618,9 +618,9 @@ let s:menus = {}
 
 call denite#custom#var('menu', 'menus', s:menus)
 
-nnoremap <silent><Leader>db :Denite buffer<CR>
-nnoremap <silent><Leader>df :Denite file/rec<CR>
-nnoremap <silent><Leader>dg :Denite grep<CR>
+nnoremap <silent><leader>db :Denite buffer<CR>
+nnoremap <silent><leader>df :Denite file/rec<CR>
+nnoremap <silent><leader>dg :Denite grep<CR>
 
 nnoremap <silent><M-b> :Denite buffer<CR>
 nnoremap <silent><M-p> :Denite file/rec<CR>
