@@ -472,6 +472,15 @@ let g:which_key_map.o = {
       \ 'l' : 'open-locationlist',
       \ }
 
+nnoremap <silent><Leader>gb :Gblame<CR>
+nnoremap <silent><Leader>gl :Glog<CR>
+
+let g:which_key_map.g = {
+      \ 'name' : '+git',
+      \ 'b' : 'blame'    ,
+      \ 'l' : 'log',
+      \ }
+
 " this allows to do :w!! for overwriting readonly files 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 " ===============================================
