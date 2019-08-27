@@ -635,6 +635,7 @@ call denite#custom#option('_', {
     \ 'matchers': 'matcher/fuzzy',
     \ 'sorters': 'sorter/sublime',
     \ 'statusline': v:false,
+    \ 'start_filter': v:true,
     \ })
 
 " Define mappings
