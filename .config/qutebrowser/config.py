@@ -36,6 +36,21 @@ config.bind(',v', 'edit-url')
 config.bind('<Ctrl-n>', 'completion-item-focus --history next', mode='command')
 config.bind('<Ctrl-p>', 'completion-item-focus --history prev', mode='command')
 
+c.url.searchengines = {
+    'DEFAULT': 'https://eu.startpage.com/do/search?q={}',
+    'ddg': 'https://duckduckgo.com/?q={}',
+    'gh': 'https://github.com/search?q={}',
+    'osm': 'https://www.openstreetmap.org/search?query={}',
+    'reddit': 'https://www.reddit.com/search/?q={}',
+    'clojure': 'https://clojuredocs.org/search?q={}',
+    'dictcc': 'https://www.dict.cc/?s={}',
+    'steam': 'https://store.steampowered.com/search/?term={}',
+    'so': 'https://stackoverflow.com/search?q={}',
+    'amazon': 'https://www.amazon.de/s?k={}',
+    'yt': 'https://www.youtube.com/results?search_query={}',
+    'devdocs': 'https://devdocs.io#q={}'
+}
+
 for i in range(1, 50):
     c.aliases[f"b{i}"] = f"buffer {i}"
 
