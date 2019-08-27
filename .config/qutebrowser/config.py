@@ -48,7 +48,8 @@ c.url.searchengines = {
     'so': 'https://stackoverflow.com/search?q={}',
     'amazon': 'https://www.amazon.de/s?k={}',
     'yt': 'https://www.youtube.com/results?search_query={}',
-    'devdocs': 'https://devdocs.io#q={}'
+    'devdocs': 'https://devdocs.io#q={}',
+    'git': 'https://git-scm.com/search/results?search={}',
 }
 
 for i in range(1, 50):
