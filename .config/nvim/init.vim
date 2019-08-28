@@ -643,6 +643,8 @@ autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <CR>
   \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> v
+  \ denite#do_map('do_action', 'vsplit')
   nnoremap <silent><buffer><expr> d
   \ denite#do_map('do_action', 'delete')
   nnoremap <silent><buffer><expr> p
