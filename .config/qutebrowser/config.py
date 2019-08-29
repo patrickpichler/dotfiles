@@ -50,6 +50,7 @@ c.url.searchengines = {
     'yt': 'https://www.youtube.com/results?search_query={}',
     'devdocs': 'https://devdocs.io#q={}',
     'git': 'https://git-scm.com/search/results?search={}',
+    'geizhals': 'https://geizhals.at/?fs={}',
 }
 
 for i in range(1, 50):
