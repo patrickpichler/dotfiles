@@ -57,5 +57,8 @@
   },
   "java.errors.incompleteClasspath.severity": "ignore",
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-  "tsserver.enable": true
+  "tsserver.enable": true,
+  "html.format.wrapAttributes": "auto",
+  "html.format.indentInnerHtml": true,
+  "html.format.preserveNewLines": true
 }
