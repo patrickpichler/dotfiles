@@ -38,6 +38,7 @@ config.bind('<Ctrl-p>', 'completion-item-focus --history prev', mode='command')
 
 c.url.searchengines = {
     'DEFAULT': 'https://eu.startpage.com/do/search?q={}',
+    'sp': 'https://startpage.com/do/search?q={}',
     'ddg': 'https://duckduckgo.com/?q={}',
     'gh': 'https://github.com/search?q={}',
     'osm': 'https://www.openstreetmap.org/search?query={}',
