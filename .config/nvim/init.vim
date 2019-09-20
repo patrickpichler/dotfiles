@@ -44,6 +44,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 Plug 'AndrewRadev/linediff.vim'
+Plug 'AndrewRadev/inline_edit.vim'
 
 Plug 'mbbill/undotree'
 
