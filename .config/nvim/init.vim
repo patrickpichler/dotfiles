@@ -739,7 +739,7 @@ endif
 " }}}
 
 " Colors {{{
-hi! MatchParen cterm=NONE,bold gui=NONE,bold  guibg=#eee8d5 guifg=NONE
+hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=green guifg=yellow
 " }}}
 
 " Is at the end so that specializations can insert things too 
