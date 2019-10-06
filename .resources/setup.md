@@ -1,7 +1,7 @@
 # Dependencies:
 * lux (https://github.com/Ventto/lux)
 * nitrogen 
-* kitty (https://github.com/kovidgoyal/kitty) 
+* alacritty (https://github.com/jwilm/alacritty)
 * playerctl (https://github.com/acrisci/playerctl)
 * xdotool 
 * xvkbd 
