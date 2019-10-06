@@ -1,8 +1,9 @@
 # Setup
 
 Just execute 
+
 ```
-git clone --separate-git-dir=$HOME/.myconf https://github.com/patrickpichler/dotfiles $HOME/myconf-tmp
+git clone --separate-git-dir=$HOME/.myconf https://git.sr.ht/~patrickpichler/dotfiles $HOME/myconf-tmp
 
 cp ~/myconf-tmp/.gitmodules ~  # If you use Git submodules
 
