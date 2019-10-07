@@ -70,7 +70,7 @@ function _start_vim(){
 
   nvim $@
 
-  export vim_mode=
+  unset vim_mode
 }
 
 function elmvim(){
