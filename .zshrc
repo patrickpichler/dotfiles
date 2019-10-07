@@ -118,9 +118,8 @@ fi
 
 alias config='git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
-alias edit_zsh_config="nvim ~/.zshrc"
-alias edit_xmonad_config="nvim ~/.xmonad/xmonad.hs"
-alias edit_nvim_config="pushd . > /dev/null; cd $NVIM_CONFIG_DIR; nvim $NVIM_CONFIG_DIR; popd > /dev/null;"
+alias edit-zsh-config="nvim ~/.zshrc"
+alias edit-nvim-config="pushd . > /dev/null; cd $NVIM_CONFIG_DIR; nvim $NVIM_CONFIG_DIR; popd > /dev/null;"
 
 # =====================
 
