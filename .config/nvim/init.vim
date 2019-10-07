@@ -363,8 +363,8 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
-nmap <leader>p  :call CocActionAsync('showSignatureHelp')<cr>
-inoremap <C-p> <C-o>:call CocActionAsync('showSignatureHelp')<cr>
+nmap <silent><leader>p  :call CocActionAsync('showSignatureHelp')<cr>
+inoremap <silent><C-p> <C-o>:call CocActionAsync('showSignatureHelp')<cr>
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
