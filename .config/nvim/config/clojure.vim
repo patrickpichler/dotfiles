@@ -2,7 +2,7 @@
 " ========== Config ==============
 " ================================
 
-let g:gutentags_project_root = ['project.clj', 'build.boot']
+let g:gutentags_project_root = ['project.clj', 'build.boot', 'deps.edn']
 
 
 " ================================
