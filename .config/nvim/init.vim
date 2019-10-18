@@ -443,6 +443,10 @@ nnoremap <C-l> l
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
 
+" merge tool bindings
+nnoremap <silent> [g :diffget //2<CR>
+nnoremap <silent> ]g :diffget //3<CR>
+
 " ======== Denite ===========================
 let g:which_key_map.d = { 'name' : '+denite' }
 let g:which_key_map.d.b = 'buffers'
