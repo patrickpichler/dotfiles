@@ -49,4 +49,4 @@ bspc config gapless_monocle      true
 wmname LG3D
 
 # Rules
-bspc rule -a '*:zathura' state=tiled
+bspc rule -a 'Zathura:*' state=tiled
