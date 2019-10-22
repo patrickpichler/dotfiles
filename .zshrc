@@ -13,7 +13,6 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/docker-compose
   zgen oh-my-zsh plugins/lein
   zgen oh-my-zsh plugins/mvn
-  zgen oh-my-zsh plugins/z
   zgen oh-my-zsh plugins/vi-mode
   zgen oh-my-zsh plugins/fd
 
