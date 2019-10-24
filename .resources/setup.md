@@ -21,6 +21,11 @@
 
 
 # Notes
+## GPG
+* Setup different pinentry variants
+  * add `pinentry-program [home-path]/.local/bin/pinentry-env` to `~/.gnugpg/gpg-agent.conf`
+* Increase password cache time
+  * add `default-cache-ttl` and `max-cache-ttl` entries to ~/.gnugpg/gpg-agent.conf
 
 ## IntelliJ
 
