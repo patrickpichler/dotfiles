@@ -15,6 +15,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-projectionist'
 
 Plug 'arthurxavierx/vim-caser'
 
@@ -724,6 +725,11 @@ endif
 
 " Colors {{{
 hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=green guifg=yellow
+" }}}
+
+" Projectionist {{{
+let g:projectionist_heuristics = {
+      \}
 " }}}
 
 " Is at the end so that specializations can insert things too 
