@@ -60,5 +60,7 @@
   "tsserver.enable": true,
   "html.format.wrapAttributes": "auto",
   "html.format.indentInnerHtml": true,
-  "html.format.preserveNewLines": true
+  "html.format.preserveNewLines": true,
+  "java.format.settings.url": "https://git.sr.ht/~patrickpichler/java-formatter-settings/blob/master/eclipse-formatter.xml",
+  "java.format.settings.profile": "GoogleStyle"
 }
