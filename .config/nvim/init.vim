@@ -21,7 +21,6 @@ Plug 'arthurxavierx/vim-caser'
 
 Plug 'Shougo/denite.nvim', { 'tag': '*' }
 
-Plug 'w0rp/ale'
 Plug 'mhinz/vim-grepper'
 Plug 'janko/vim-test'
 Plug 'editorconfig/editorconfig-vim'
@@ -519,14 +518,6 @@ noremap <M-Left> :vertical res -2<CR>
 noremap <M-Right> :vertical res +2<CR>
 " }}}
 
-" }}}
-
-" ALE {{{
-let g:ale_completion_enabled = 0
-let g:ale_sign_column_always = 1
-
-let g:ale_sign_error = '>' 
-let g:ale_sign_warning = '.'
 " }}}
 
 " Colorscheme {{{
