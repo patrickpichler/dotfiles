@@ -731,6 +731,12 @@ let g:projectionist_heuristics = {
       \}
 " }}}
 
+" vim.test {{{
+
+let test#strategy = 'dispatch_background'
+
+" }}}
+
 " Is at the end so that specializations can insert things too 
 call which_key#register(',', "g:which_key_map")
 
