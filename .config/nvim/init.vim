@@ -486,18 +486,36 @@ let g:which_key_map.f.s = 'save-file'
 " more convenient save
 nnoremap <silent><leader>fs :w<CR>
 
-" =========================================
+" ========= vim-test =======================
 
-nnoremap <silent> <leader>oq  :copen<CR>
-nnoremap <silent> <leader>ol  :lopen<CR>
-let g:which_key_map.o = {
-      \ 'name' : '+open',
-      \ 'q' : 'open-quickfix'    ,
-      \ 'l' : 'open-locationlist',
+let g:which_key_map.t = {
+      \ 'name': '+test',
+      \ 'f': 'file',
+      \ 'l': 'last',
+      \ 'n': 'nearest',
+      \ 's': 'suite',
+      \ 'v': 'visit',
       \ }
 
-nnoremap <silent><leader>gb :Gblame<CR>
-nnoremap <silent><leader>gl :Glog<CR>
+nnoremap <silent> <leader>tf  :TestFile<CR>
+nnoremap <silent> <leader>tl  :TestLast<CR>
+nnoremap <silent> <leader>tn  :TestNearest<CR>
+nnoremap <silent> <leader>ts  :TestSuite<CR>
+nnoremap <silent> <leader>tv  :TestVisit<CR>
+
+" =========================================
+let g:which_key_map.o = {
+      \ 'name' : '+open',
+      \ 'q' : 'quickfix'    ,
+      \ 'l' : 'locationlist',
+      \ 'u' : 'undotree'
+      \ }
+
+nnoremap <silent> <leader>oq  :Copen<CR>
+nnoremap <silent> <leader>ol  :lopen<CR>
+nnoremap <silent><leader>ou :UndotreeToggle<CR>
+
+" ===============================================
 
 let g:which_key_map.g = {
       \ 'name' : '+git',
@@ -505,9 +523,11 @@ let g:which_key_map.g = {
       \ 'l' : 'log',
       \ }
 
+nnoremap <silent><leader>gb :Gblame<CR>
+nnoremap <silent><leader>gl :Glog<CR>
+
 " this allows to do :w!! for overwriting readonly files 
 cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-" ===============================================
 
 " ============ Vim which key ====================
 nnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
@@ -603,7 +623,6 @@ augroup END
 " }}}
 
 " UndoTree {{{
-nnoremap <silent><leader>tu :UndotreeToggle<CR>
 
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
