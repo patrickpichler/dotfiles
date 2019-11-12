@@ -23,7 +23,8 @@ c.aliases = {
         "wq": "quit --save",
         "b": "buffer",
         "view-in-mpv": "spawn --userscript view-in-mpv",
-        "readability": "spawn --userscript readability"
+        "readability": "spawn --userscript readability",
+        "send-to-remarkable": "spawn --userscript send-to-remarkable {url} {title}"
         }
 
 c.content.autoplay = False
