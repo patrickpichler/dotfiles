@@ -54,6 +54,7 @@ c.url.searchengines = {
     '!git': 'https://git-scm.com/search/results?search={}',
     '!geizhals': 'https://geizhals.at/?fs={}',
     '!wiki': 'https://en.wikipedia.org/w/index.php?search={}',
+    '!g': 'https://google.at/search?q={}'
 }
 
 for i in range(1, 50):
