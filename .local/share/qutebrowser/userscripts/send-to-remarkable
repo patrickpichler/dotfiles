@@ -2,12 +2,14 @@
 
 set -e
 
-wkhtmltopdf -n -g -s a5 "$1" "/tmp/$2"
+SANITIZED_NAME=`echo $2 | sed -E 's#/#\\\\#p'`
 
-echo "`date` Start upload of $1 ($2)" >> /tmp/remarkable.log
+wkhtmltopdf -n -g -s a5 "$1" "/tmp/$SANITIZED_NAME"
 
-rmapi put "/tmp/$2"
+echo "`date` Start upload of $1 ($SANITIZED_NAME)" >> /tmp/remarkable.log
 
-echo "`date` Finished upload of $1 ($2)" >> /tmp/remarkable.log
+rmapi put "/tmp/$SANITIZED_NAME"
 
-notify-send "Download Complete" "$2"
+echo "`date` Finished upload of $1 ($SANITIZED_NAME)" >> /tmp/remarkable.log
+
+notify-send "Download Complete" "$SANITIZED_NAME"
