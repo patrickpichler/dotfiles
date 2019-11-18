@@ -39,6 +39,7 @@ config.bind('<Ctrl-p>', 'completion-item-focus --history prev', mode='command')
 
 c.url.searchengines = {
     'DEFAULT': 'https://search.privacytools.io/?language=en-US&q={}',
+    '!searchx': 'https://search.privacytools.io/?language=en-US&q={}',
     '!sp': 'https://startpage.com/do/search?q={}',
     '!ddg': 'https://duckduckgo.com/?q={}',
     '!gh': 'https://github.com/search?q={}',
@@ -54,7 +55,8 @@ c.url.searchengines = {
     '!git': 'https://git-scm.com/search/results?search={}',
     '!geizhals': 'https://geizhals.at/?fs={}',
     '!wiki': 'https://en.wikipedia.org/w/index.php?search={}',
-    '!g': 'https://google.at/search?q={}'
+    '!g': 'https://google.at/search?q={}',
+    '!eco': 'https://www.ecosia.org/search?q={}'
 }
 
 for i in range(1, 50):
