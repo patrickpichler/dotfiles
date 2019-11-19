@@ -18,7 +18,7 @@
 # Fonts
 * ttf-material-design-icons-git
 * ttf-font-awesome
-
+* google-fonts-ttf
 
 # Notes
 ## GPG
