@@ -12,7 +12,7 @@ dracula.draw.blood(c, {
     }
 })
 
-c.editor.command = [ 'kitty', 'nvim', '-f', '{file}', '-c', 'normal {line}G{column0}l']
+c.editor.command = [ 'alacritty', '-e', 'nvim', '-f', '{file}', '-c', 'normal {line}G{column0}l']
 
 c.auto_save.session = True
 c.auto_save.interval = 5000
