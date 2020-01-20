@@ -38,8 +38,8 @@ config.bind('<Ctrl-n>', 'completion-item-focus --history next', mode='command')
 config.bind('<Ctrl-p>', 'completion-item-focus --history prev', mode='command')
 
 c.url.searchengines = {
-    'DEFAULT': 'https://searx.xyz/?language=en-US&q={}',
-    '!searchx': 'https://searx.xyz/?language=en-US&q={}',
+    'DEFAULT': 'https://searx.be/?language=en-US&q={}',
+    '!searchx': 'https://searx.be/?language=en-US&q={}',
     '!sp': 'https://startpage.com/do/search?q={}',
     '!ddg': 'https://duckduckgo.com/?q={}',
     '!gh': 'https://github.com/search?q={}',
