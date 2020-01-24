@@ -38,3 +38,10 @@ false. The easiest way to achieve this, is to open IntelliJ, press
 the `idea.properties` file we need to edit. Now put there a new line
 with `suppress.focus.stealing=false`. Now restart IntelliJ and you are
 good to go.
+
+## /etc/profile doesn't get sourced
+In order to force sddm to sourcep `/etc/profile` when `zsh` is the 
+login shell, the `Xsession` script has to be adapted. Simply put
+`[ -f /etc/profile ] && emulate sh -c 'source /etc/profile'` in the
+`*/zsh)` branch of the case. 
+
