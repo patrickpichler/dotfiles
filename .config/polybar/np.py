@@ -1,16 +1,14 @@
 #!/usr/bin/env python3
 
-import os
-
 import gi
-import sys
+
 gi.require_version('Playerctl', '2.0')
+
 from gi.repository import Playerctl, GLib
 
-print('', flush=True)
+manager = Playerctl.PlayerManager()
 
-
-def on_metadata(player, e):
+def on_metadata(player, e, manager):
     if player.props.status == 'Playing':
         meta = player.props.metadata
         playing_info = u'{artist} - {title}'.format(artist=meta['xesam:artist'][0],title=meta['xesam:title'])
@@ -20,14 +18,19 @@ def on_metadata(player, e):
         # Print empty line if nothing is playing
         print('', flush=True)
 
-try:
-    player = Playerctl.Player()
+def init_player(name):
+    # choose if you want to manage the player based on the name
+    player = Playerctl.Player.new_from_name(name)
+    player.connect('metadata', on_metadata, manager)
+    manager.manage_player(player)
 
-    player.connect('metadata', on_metadata)
+def on_name_appeared(manager, name):
+    init_player(name)
 
-    on_metadata(player, None)
+manager.connect('name-appeared', on_name_appeared)
 
-    main = GLib.MainLoop()
-    main.run()
-except Exception as e:
-    print('', flush=True)
+for name in manager.props.player_names:
+    init_player(name)
+
+main = GLib.MainLoop()
+main.run()
