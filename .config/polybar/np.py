@@ -2,12 +2,10 @@
 
 import os
 
-os.environ["PYTHONIOENCODING"] = "utf-8"
-
 import gi
 import sys
 gi.require_version('Playerctl', '2.0')
-from gi.repository import Playerctl, GLib  # noqa: E402
+from gi.repository import Playerctl, GLib
 
 print('', flush=True)
 
@@ -15,7 +13,8 @@ print('', flush=True)
 def on_metadata(player, e):
     if player.props.status == 'Playing':
         meta = player.props.metadata
-        playing_info = bytes(u'{artist} - {title}'.format( artist=meta['xesam:artist'][0],title=meta['xesam:title']), 'utf-8').decode('ascii', 'ignore')
+        playing_info = u'{artist} - {title}'.format(artist=meta['xesam:artist'][0],title=meta['xesam:title'])
+
         print(playing_info, flush=True)
     else:
         # Print empty line if nothing is playing

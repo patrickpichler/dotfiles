@@ -37,7 +37,7 @@ height = 28
 offset-x = 0
 offset-y = 0
 
-font-0 = xos4 Terminus:size=12;0
+font-0 = hasklig monospace:size=12;0
 font-1 = Font Awesome 5 Free:size=10;0
 font-2 = Material Design Icons:size=10;0
 font-3 = Koruri,Koruri Regular:size=7;0
@@ -57,15 +57,12 @@ module-margin-left = 1
 module-margin-right = 2
 
 
-modules-left = bspwm-ws xmonad-ws title
+modules-left = bspwm-ws title
 modules-center = music 
 modules-right = keyboard wifi network cpu memory battery date
 
 tray-position = right
 tray-padding = 2
-
-[module/ewmh]
-type = internal/xworkspaces
 
 ; Available tags:
 ;   <label-monitor>
@@ -205,11 +202,6 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-
-[module/xmonad-ws]
-type = custom/script
-exec = ~/.config/polybar/xmonad_dbus.py
-tail=true
 
 [module/network]
 type = internal/network
