@@ -1,16 +1,14 @@
-
 import dracula.draw
 
 dracula.draw.blood(c, {
     'spacing': {
         'vertical': 6,
         'horizontal': 8
-    },
-    'font': {
-        'family': 'Menlo, Terminus, Monaco, Monospace',
-        'size': 10
     }
 })
+
+c.fonts.default_family = [ 'Hasklig monospace' ]
+c.fonts.default_size = '10pt'
 
 c.editor.command = [ 'alacritty', '-e', 'nvim', '-f', '{file}', '-c', 'normal {line}G{column0}l']
 
