@@ -4,7 +4,7 @@ set -e
 
 SANITIZED_NAME=`echo $2 | sed -E 's#/#\\\\#p'`
 
-wkhtmltopdf -n -g -s a5 "$1" "/tmp/$SANITIZED_NAME"
+wkhtmltopdf -n --no-background -g -s a5 "$1" "/tmp/$SANITIZED_NAME"
 
 echo "`date` Start upload of $1 ($SANITIZED_NAME)" >> /tmp/remarkable.log
 
