@@ -131,6 +131,14 @@ super + {Left,Down,Up,Right}
 super + ctrl + {Next,Prior}
         bspc node @/ -R {90,-90}
 
+
+#
+# Move mouse to currently focused window
+#
+
+super + ctrl + o
+        xdotool mousemove -w $(xdotool getactivewindow) 10 10
+
 #
 # Media keys
 #
