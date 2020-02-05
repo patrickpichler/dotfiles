@@ -23,6 +23,7 @@ def init_player(name):
     player = Playerctl.Player.new_from_name(name)
     player.connect('metadata', on_metadata, manager)
     manager.manage_player(player)
+    on_metadata(player, None, manager)
 
 def on_name_appeared(manager, name):
     init_player(name)
