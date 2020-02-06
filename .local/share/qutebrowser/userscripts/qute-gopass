@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+SELECTION="$(gopass-qt list -f | rofi -dmenu -matching fuzzy)"
+
+if [ "$SELECTION" != '' ]; then
+  PASS="$(gopass show -o "$SELECTION")"
+  echo "insert-text $PASS" >> "$QUTE_FIFO"
+fi 
