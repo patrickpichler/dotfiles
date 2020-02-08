@@ -31,6 +31,7 @@ config.bind('<Ctrl-r>', 'open-editor')
 config.bind('<Ctrl-r>', 'open-editor', mode='insert')
 config.bind('<Ctrl-l>', 'edit-url')
 config.bind('<Alt-l>', 'spawn --userscript qute-gopass')
+config.bind('<Alt-l>', 'spawn --userscript qute-gopass', mode='insert')
 config.bind(',v', 'edit-url')
 
 config.bind('<Ctrl-n>', 'completion-item-focus --history next', mode='command')
