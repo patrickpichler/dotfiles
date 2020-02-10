@@ -25,8 +25,6 @@ Plug 'mhinz/vim-grepper'
 Plug 'janko/vim-test'
 Plug 'editorconfig/editorconfig-vim'
 
-Plug 'sheerun/vim-polyglot'
-
 Plug 'mattn/emmet-vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'liuchengxu/vim-which-key'
@@ -595,12 +593,6 @@ augroup END
 " Markdown {{{
 let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh', 
       \ 'sh', 'kotlin']
-" }}}
-
-" Polyglot {{{
-
-let g:polyglot_disabled = ['markdown', 'clojure', 'typescript', 'groovy']
-
 " }}}
 
 " Java {{{
