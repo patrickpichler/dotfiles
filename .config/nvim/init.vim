@@ -599,7 +599,7 @@ let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
 
 " Polyglot {{{
 
-let g:polyglot_disabled = ['markdown', 'clojure', 'typescript']
+let g:polyglot_disabled = ['markdown', 'clojure', 'typescript', 'groovy']
 
 " }}}
 
