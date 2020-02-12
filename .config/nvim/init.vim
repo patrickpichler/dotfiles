@@ -49,6 +49,8 @@ Plug 'honza/vim-snippets'
 
 Plug 'cespare/vim-toml'
 
+Plug 'udalov/kotlin-vim'
+
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
