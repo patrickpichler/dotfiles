@@ -47,6 +47,8 @@ Plug 'mbbill/undotree'
 
 Plug 'honza/vim-snippets'
 
+Plug 'cespare/vim-toml'
+
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
