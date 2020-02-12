@@ -53,6 +53,11 @@
       "command": "clangd",
       "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
       "filetypes": ["c", "cpp", "objc", "objcpp"]
+    },
+    "crystal": {
+      "command": "scry",
+      "rootPatterns": [".git/", ".hg/"],
+      "filetypes": ["crystal"]
     }
   },
   "java.errors.incompleteClasspath.severity": "ignore",

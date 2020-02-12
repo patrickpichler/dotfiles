@@ -84,6 +84,9 @@ Plug 'mxw/vim-jsx', {'for': 'js'}
 Plug 'tpope/vim-salve', { 'for': 'clojure' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
+" ============= Crystal ==========================
+Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
+
 " ============ PlantUML ==========================
 Plug 'aklt/plantuml-syntax'
 Plug 'tyru/open-browser.vim'
