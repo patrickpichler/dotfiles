@@ -14,6 +14,10 @@ if [ -e $HOME/.asdf/shims ]; then
   PATH=$HOME/.asdf/shims:$PATH
 fi
 
+if [ -d $HOME/.cargo/bin ]; then
+  PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
   . $HOME/.nix-profile/etc/profile.d/nix.sh;
 elif [ -e /etc/profile.d/nix.sh ]; then
@@ -21,3 +25,5 @@ elif [ -e /etc/profile.d/nix.sh ]; then
 fi 
 
 export WINIT_HIDPI_FACTOR=1
+
+export PATH
