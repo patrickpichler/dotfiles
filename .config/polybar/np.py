@@ -11,7 +11,11 @@ manager = Playerctl.PlayerManager()
 def on_metadata(player, e, manager):
     if player.props.status == 'Playing':
         meta = player.props.metadata
-        playing_info = u'{artist} - {title}'.format(artist=meta['xesam:artist'][0],title=meta['xesam:title'])
+
+        if 'xesam:artist' in meta.keys():
+            playing_info = u'{artist} - {title}'.format(artist=meta['xesam:artist'][0],title=meta['xesam:title'])
+        else:
+            playing_info = u'{title}'.format(title=meta['xesam:title'])
 
         print(playing_info, flush=True)
     else:
