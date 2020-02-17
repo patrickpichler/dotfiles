@@ -131,6 +131,7 @@ set hidden
 
 syntax on
 syntax enable
+syntax sync fromstart
 
 " Enables search highlighting
 set hlsearch
