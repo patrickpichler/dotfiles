@@ -47,9 +47,9 @@ Plug 'mbbill/undotree'
 
 Plug 'honza/vim-snippets'
 
-Plug 'cespare/vim-toml'
-Plug 'udalov/kotlin-vim'
-Plug 'ekalinin/Dockerfile.vim'
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
+Plug 'ekalinin/Dockerfile.vim', { 'for': 'dockerfile' }
 
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
