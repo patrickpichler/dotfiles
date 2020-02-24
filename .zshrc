@@ -13,7 +13,6 @@ if ! zgen saved; then
   zgen oh-my-zsh plugins/docker-compose
   zgen oh-my-zsh plugins/lein
   zgen oh-my-zsh plugins/mvn
-  zgen oh-my-zsh plugins/vi-mode
   zgen oh-my-zsh plugins/fd
 
   zgen oh-my-zsh themes/philips
@@ -168,9 +167,6 @@ fi
 
 bindkey '^[[1;5C' forward-word  # [Ctrl-RightArrow] - move forward one word
 bindkey '^[[1;5D' backward-word # [Ctrl-LeftArrow] - move backward one word
-
-bindkey -M vicmd 'v' visual-mode
-bindkey -M vicmd '^v' edit-command-line
 
 bindkey "^]^]" sudo-command-line
 
