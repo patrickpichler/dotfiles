@@ -47,6 +47,8 @@ Plug 'mbbill/undotree'
 
 Plug 'honza/vim-snippets'
 
+Plug 'AndrewRadev/bufferize.vim'
+
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'dockerfile' }
