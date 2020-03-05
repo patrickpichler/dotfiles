@@ -49,6 +49,7 @@ Plug 'honza/vim-snippets'
 
 Plug 'AndrewRadev/bufferize.vim'
 Plug 'tommcdo/vim-exchange'
+Plug 'junegunn/vim-peekaboo'
 
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
