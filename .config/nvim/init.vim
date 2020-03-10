@@ -70,8 +70,6 @@ Plug 'neoclide/coc-css', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-snippets', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-python', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-lists', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'iamcco/coc-angular', {'do': 'yarn install --frozen-lockfile'}
-Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
 
 " ============= New text objects ==============
 Plug 'kana/vim-textobj-user'
