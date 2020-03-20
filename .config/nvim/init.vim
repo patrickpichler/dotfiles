@@ -151,6 +151,8 @@ set timeoutlen=500
 
 set inccommand=split 
 
+set textwidth=80
+
 " " Detect .md as markdown instead of modula-l2
 " autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
