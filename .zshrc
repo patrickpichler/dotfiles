@@ -8,7 +8,6 @@ if ! zgen saved; then
   zgen oh-my-zsh
   zgen oh-my-zsh plugins/git
   zgen oh-my-zsh plugins/sudo
-  zgen oh-my-zsh plugins/asdf
   zgen oh-my-zsh plugins/docker
   zgen oh-my-zsh plugins/docker-compose
   zgen oh-my-zsh plugins/lein
@@ -21,8 +20,6 @@ if ! zgen saved; then
   zgen load hlissner/zsh-autopair
   zgen load voronkovich/gitignore.plugin.zsh
 
-  zgen load spwhitt/nix-zsh-completions
-  
   # generate the init script from plugins above
   zgen save
 fi
@@ -31,19 +28,18 @@ fi
 
 fpath=($HOME/.zsh/completions $fpath)
 
-# ==========================================================
-
 # ==== Gradle autocompletion ==============================
 
 fpath=($HOME/.zsh/gradle-completion $fpath)
 
-# =========================================================
+# ==========================================================
 
 autoload -Uz compinit && compinit -u
 
 if [ -e $HOME/.asdf ]; then
   . $HOME/.asdf/asdf.sh
-  . $HOME/.asdf/completions/asdf.bash
+
+  fpath=($HOME/.asdf/completions/ $fpath)
 fi
 
 if [ -e /usr/share/doc/fzf ]; then
