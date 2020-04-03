@@ -151,11 +151,6 @@ set timeoutlen=500
 
 set inccommand=split 
 
-autocmd BufNewFile,BufRead *.txt set textwidth=80
-
-" " Detect .md as markdown instead of modula-l2
-" autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
 au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
 
 " Always use UTF-8
