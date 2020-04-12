@@ -101,7 +101,7 @@ Plug 'weirongxu/plantuml-previewer.vim'
 " ===========================================
 Plug 'leafgarland/typescript-vim'
 
-Plug 'schickele/vim-nachtleben'
+Plug 'https://git.sr.ht/~patrickpichler/vim-nachtleben-pitch-black'
 
 " ===========================================
 call plug#end()
@@ -109,7 +109,7 @@ call plug#end()
 " }}}
 
 " General configuration {{{
-colorscheme nachtleben
+colorscheme nachtleben-pitch-black
 
 " Used Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
