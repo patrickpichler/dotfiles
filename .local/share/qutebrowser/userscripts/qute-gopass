@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-SELECTION="$(gopass-qt list -f | rofi -dmenu -matching fuzzy)"
+SELECTION="$(gopass-qt list -f | rofi -i -dmenu -matching fuzzy)"
 
 if [ "$SELECTION" != '' ]; then
   PASS="$(gopass show -o "$SELECTION")"
