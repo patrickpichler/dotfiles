@@ -50,3 +50,4 @@ wmname LG3D
 
 # Rules
 bspc rule -a 'Zathura:*' state=tiled
+bspc rule -a 'Next:*' state=tiled
