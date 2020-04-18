@@ -194,3 +194,7 @@ label, legend, fieldset {
     margin-bottom: .5rem;
     font-weight: 600;
 }
+
+.highlight > * > p {
+  display: inline;
+}

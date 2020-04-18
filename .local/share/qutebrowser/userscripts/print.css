@@ -414,3 +414,7 @@ abbr[title].no-reformat: after,acronym[title].no-reformat: after {
 .no-reformat abbr: after,.no-reformat acronym: after,.no-reformat a: after {
     content: '';
 }
+
+.highlight > * > p {
+  display: inline;
+}
