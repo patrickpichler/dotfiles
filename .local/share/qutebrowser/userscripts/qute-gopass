@@ -3,6 +3,6 @@
 SELECTION="$(gopass-qt list -f | rofi -i -dmenu -matching fuzzy)"
 
 if [ "$SELECTION" != '' ]; then
-  PASS="$(gopass show -o "$SELECTION")"
+  PASS="$(gopass-qt show -o "$SELECTION")"
   echo "insert-text $PASS" >> "$QUTE_FIFO"
 fi 
