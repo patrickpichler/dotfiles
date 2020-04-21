@@ -28,7 +28,7 @@ with codecs.open(os.environ['QUTE_HTML'], 'r', 'utf-8') as source:
     data = source.read()
 
     article = Article(os.environ['QUTE_URL'], keep_article_html=True) 
-    article.download(input_html = data)
+    article.download(input_html=data, recursion_counter=1)
     article.parse()
 
     title = article.title
@@ -39,16 +39,16 @@ with codecs.open(os.environ['QUTE_HTML'], 'r', 'utf-8') as source:
         target.write('<html>')
         target.write('<head>')
         target.write('<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />')
-        target.write('<title> %s </title>' % title)
-        target.write('<link rel="stylesheet" type="text/css" href="file://%s/custom.css" media="screen">' % path)
-        target.write('<link rel="stylesheet" type="text/css" href="file://%s/print.css" media="print">' % path)
+        target.write(f'<title>{title}</title>')
+        target.write(f'<link rel="stylesheet" type="text/css" href="file://{path}/custom.css" media="screen">')
+        target.write(f'<link rel="stylesheet" type="text/css" href="file://{path}/print.css" media="print">')
         target.write('</head>')
         target.write('<body>')
 
         if article.has_top_image():
-            target.write('<img src=\'%s\'>' % article.top_image)
+            target.write(f'<img src=\'{article.top_image}\' style="width: 100%">')
 
-        target.write('<h1>%s</h1>' % title)
+        target.write(f'<h1>{title}</h1>')
         target.write(content)
         target.write('</body>')
         target.write('</html>')
