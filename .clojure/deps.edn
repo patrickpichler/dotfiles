@@ -33,7 +33,7 @@
            :test {:extra-paths ["test"]}
            :uberjar {:extra-deps {uberdeps {:mvn/version "0.1.4"}}
                      :main-opts ["-m" "uberdeps.uberjar"]}
-           :nREPL {:extra-deps {nrepl/nrepl {:mvn/version "0.6.0"}}}
+           :nREPL {:extra-deps {nrepl/nrepl {:mvn/version "0.7.0"}}}
            :rebel {:extra-deps {com.bhauman/rebel-readline {:mvn/version "0.1.4"}}
                    :main-opts  ["-m" "rebel-readline.main"]}
            :cider-clj {:extra-deps {org.clojure/clojure {:mvn/version "1.10.1"}
