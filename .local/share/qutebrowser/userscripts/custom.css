@@ -198,3 +198,11 @@ label, legend, fieldset {
 .highlight > * > p {
   display: inline;
 }
+
+code > p {
+  display: inline;
+}
+
+code > p {
+  display: inline;
+}
