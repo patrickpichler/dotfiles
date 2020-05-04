@@ -3,12 +3,13 @@
 set -e
 
 SANITIZED_NAME=`echo $2 | sed -E 's#/#\\\\#p'`
+OUTPUT_FILE="/tmp/${SANITIZED_NAME}.pdf"
 
-wkhtmltopdf -n --no-background -g -s a5 "$1" "/tmp/$SANITIZED_NAME"
+wkhtmltopdf -n --no-background -g -s a5 "$1" "$OUTPUT_FILE"
 
 echo "`date` Start upload of $1 ($SANITIZED_NAME)" >> /tmp/remarkable.log
 
-rmapi put "/tmp/$SANITIZED_NAME"
+rmapi put "$OUTPUT_FILE"
 
 echo "`date` Finished upload of $1 ($SANITIZED_NAME)" >> /tmp/remarkable.log
 
