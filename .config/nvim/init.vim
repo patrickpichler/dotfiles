@@ -29,7 +29,9 @@ Plug 'mattn/emmet-vim'
 Plug 'skywind3000/asyncrun.vim'
 Plug 'liuchengxu/vim-which-key'
 Plug 'cohama/lexima.vim'
+
 Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/rainbow_parentheses.vim'
 
 Plug 'airblade/vim-gitgutter'
 
@@ -753,6 +755,17 @@ let g:projectionist_heuristics = {
 " vim.test {{{
 
 let test#strategy = 'dispatch_background'
+
+" }}}
+
+" rainbow_parentheses {{{
+
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
+augroup rainbow
+  autocmd!
+  autocmd FileType * RainbowParentheses
+augroup END
 
 " }}}
 
