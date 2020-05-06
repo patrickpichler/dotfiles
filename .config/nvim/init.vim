@@ -57,6 +57,8 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'dockerfile' }
 
+Plug 'blankname/vim-fish', { 'for': 'fish' }
+
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
