@@ -3,6 +3,8 @@
 export SV_LOG_DIR=$HOME/.local/logs
 export SVDIR=$HOME/.local/service
 
+export SXHKD_SHELL='/usr/bin/sh'
+
 autorandr --change --force
 
 nitrogen --restore &
