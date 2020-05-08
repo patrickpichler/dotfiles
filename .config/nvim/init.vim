@@ -19,7 +19,7 @@ Plug 'tpope/vim-projectionist'
 
 Plug 'arthurxavierx/vim-caser'
 
-Plug 'Shougo/denite.nvim', { 'commit': 'b6e2c7df9402f293bad1dc45f5d41b3dc5d8a9b1' }
+Plug 'Shougo/denite.nvim', { 'tag': '*' }
 
 Plug 'mhinz/vim-grepper'
 Plug 'janko/vim-test'
