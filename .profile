@@ -16,11 +16,11 @@ if [ -d $HOME/.local/bin ] ; then
   PATH=$HOME/.local/bin:$PATH
 fi
 
-if [ -s $HOME/development/scripts ]; then
+if [ -d $HOME/development/scripts ]; then
   PATH=$PATH:~/development/scripts
 fi
 
-if [ -e $HOME/.asdf/shims ]; then
+if [ -d $HOME/.asdf/shims ]; then
   PATH=$HOME/.asdf/shims:$PATH
 fi
 
