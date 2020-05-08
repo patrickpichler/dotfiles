@@ -399,8 +399,6 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-" Grep
-nnoremap <silent> <space>g  :<C-u>CocList -I grep<CR>
 
 " Create mappings for function text object, requires document symbols feature of languageserver.
 xmap if <Plug>(coc-funcobj-i)
@@ -641,11 +639,13 @@ call denite#custom#var('menu', 'menus', s:menus)
 
 nnoremap <silent><leader>db :Denite buffer<CR>
 nnoremap <silent><leader>df :Denite file/rec<CR>
-nnoremap <silent><leader>dg :Denite grep<CR>
+nnoremap <silent><leader>dg :Denite grep:::!<CR>
+nnoremap <silent><leader>dq :Denite -buffer-name=grep -default-action=quickfix grep:::!<CR>
 
 nnoremap <silent><M-b> :Denite buffer<CR>
 nnoremap <silent><M-p> :Denite file/rec<CR>
-nnoremap <silent><M-g> :Denite grep<CR>
+nnoremap <silent><space>g :Denite grep:::!<CR>
+nnoremap <silent><M-g> :Denite -buffer-name=grep -default-action=quickfix grep:::!<CR>
 
 call denite#custom#option('_', {
     \ 'cached_filter': v:true,
@@ -674,8 +674,10 @@ function! s:denite_my_settings() abort
   \ denite#do_map('quit')
   nnoremap <silent><buffer><expr> i
   \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
+  nnoremap <silent><buffer><expr> s
+  \ denite#do_map('toggle_select')
+  nnoremap <silent><buffer><expr> a
+  \ denite#do_map('toggle_select_all')
 endfunction<Paste>
 
 " }}}
