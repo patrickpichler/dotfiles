@@ -58,12 +58,3 @@ c.url.searchengines = {
     '.g': 'https://google.at/search?q={}',
     '.eco': 'https://www.ecosia.org/search?q={}'
 }
-
-for i in range(1, 50):
-    c.aliases[f"b{i}"] = f"buffer {i}"
-
-with config.pattern('*://web.whatsapp.com/') as p:
-    p.content.headers.user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
-
-with config.pattern('https://meet.jit.si/') as p:
-    p.content.media_capture = True
