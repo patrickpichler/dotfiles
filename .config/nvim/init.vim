@@ -633,6 +633,20 @@ let g:undotree_WindowLayout = 2
 
 " Denite {{{
 
+" Ripgrep {{{
+if executable('rg')
+  echom 'ripgrep'
+  call denite#custom#var('grep', {
+    \ 'command': ['rg'],
+    \ 'default_opts': ['-i', '--vimgrep', '--no-heading', '-F'],
+    \ 'recursive_opts': [],
+    \ 'pattern_opt': [],
+    \ 'separator': ['--'],
+    \ 'final_opts': [],
+    \ })
+endif
+" }}}
+
 let s:menus = {}
 
 call denite#custom#var('menu', 'menus', s:menus)
@@ -680,25 +694,12 @@ function! s:denite_my_settings() abort
   \ denite#do_map('toggle_select_all')
 endfunction<Paste>
 
+
 " }}}
 
 set completeopt=noinsert,noselect,menuone 
 set shortmess+=c
 
-" Ripgrep {{{
-if executable('rg')
-	" Ripgrep
-  call denite#custom#var('file/rec', 'command',
-        \ ['rg', '--files', '--glob', '!.git'])
-  call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'final_opts', [])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'default_opts',
-        \ ['-i', '--vimgrep', '--no-heading'])
-endif
-
-" }}}
 
 " Formating {{{
 if executable('par')
