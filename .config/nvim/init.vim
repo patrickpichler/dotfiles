@@ -635,7 +635,6 @@ let g:undotree_WindowLayout = 2
 
 " Ripgrep {{{
 if executable('rg')
-  echom 'ripgrep'
   call denite#custom#var('grep', {
     \ 'command': ['rg'],
     \ 'default_opts': ['-i', '--vimgrep', '--no-heading', '-F'],
