@@ -17,6 +17,8 @@ Plug 'tpope/vim-dadbod'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-projectionist'
 
+Plug 'ziglang/zig.vim'
+
 Plug 'arthurxavierx/vim-caser'
 
 Plug 'Shougo/denite.nvim', { 'tag': '*' }
