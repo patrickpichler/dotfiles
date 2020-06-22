@@ -21,8 +21,6 @@ Plug 'ziglang/zig.vim'
 
 Plug 'arthurxavierx/vim-caser'
 
-Plug 'Shougo/denite.nvim', { 'tag': '*' }
-
 Plug 'mhinz/vim-grepper'
 Plug 'janko/vim-test'
 Plug 'editorconfig/editorconfig-vim'
@@ -53,6 +51,8 @@ Plug 'honza/vim-snippets'
 Plug 'AndrewRadev/bufferize.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
+
+Plug 'liuchengxu/vim-clap', { 'tag': '*', 'do': ':Clap install-binary!' }
 
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
@@ -290,7 +290,6 @@ endfunction
 
 " }}}
 
-
 " remap leader key to something more reachable
 let mapleader = ","
 
@@ -300,6 +299,28 @@ let g:grepper.tools = ['grep', 'git', 'rg']
 
 " Define prefix dictionary
 let g:which_key_map =  {}
+
+" Clap {{{
+
+let g:clap_theme = 'material_design_dark'
+
+let g:clap_provider_grep_delay = 50
+let g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case --hidden -g "!.git/"'
+
+nnoremap <leader>* :Clap grep ++query=<cword><cr>
+nnoremap <silent><space>g :Clap grep<cr>
+nnoremap <silent><M-f> :Clap files --hidden<cr>
+nnoremap <silent><M-b> :Clap buffers<cr>
+nnoremap <silent><M-w> :Clap windows<cr>
+nnoremap <leader>cr :Clap history<cr>
+nnoremap <leader>ch :Clap command_history<cr>
+nnoremap <leader>cj :Clap jumps<cr>
+nnoremap <leader>fl :Clap blines<cr>
+nnoremap <leader>cL :Clap lines<cr>
+nnoremap <leader>ct :Clap filetypes<cr>
+nnoremap <leader>cm :Clap marks<cr>
+
+" }}}
 
 " coc.nvim {{{
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -420,9 +441,6 @@ hi CocHintFloat ctermbg=12 ctermfg=black guifg=#15aabf guifg=black
 
 " Mappings {{{
 
-" Search for the current word
-nnoremap <leader>* :Grepper -cword -noprompt<CR>
-
 " Search for the current selection
 nmap gs <Plug>GrepperOperator
 xmap gs <Plug>GrepperOperator
@@ -462,13 +480,6 @@ cnoremap <C-N> <Down>
 " merge tool bindings
 nnoremap <silent> [g :diffget //2<CR>
 nnoremap <silent> ]g :diffget //3<CR>
-
-" ======== Denite ===========================
-let g:which_key_map.d = { 'name' : '+denite' }
-let g:which_key_map.d.b = 'buffers'
-let g:which_key_map.d.f = 'file rec'
-let g:which_key_map.d.g = 'grep'
-
 
 " ======== Buffers ==========================
 let g:which_key_map.b = { 'name' : '+buffers' }
@@ -630,71 +641,6 @@ augroup END
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
 let g:undotree_WindowLayout = 2
-" }}}
-
-" Denite {{{
-
-" Ripgrep {{{
-if executable('rg')
-  call denite#custom#var('grep', {
-    \ 'command': ['rg'],
-    \ 'default_opts': ['-i', '--vimgrep', '--no-heading', '-F'],
-    \ 'recursive_opts': [],
-    \ 'pattern_opt': [],
-    \ 'separator': ['--'],
-    \ 'final_opts': [],
-    \ })
-endif
-" }}}
-
-let s:menus = {}
-
-call denite#custom#var('menu', 'menus', s:menus)
-
-nnoremap <silent><leader>db :Denite buffer<CR>
-nnoremap <silent><leader>df :Denite file/rec<CR>
-nnoremap <silent><leader>dg :Denite grep:::!<CR>
-nnoremap <silent><leader>dq :Denite -buffer-name=grep -default-action=quickfix grep:::!<CR>
-
-nnoremap <silent><M-b> :Denite buffer<CR>
-nnoremap <silent><M-p> :Denite file/rec<CR>
-nnoremap <silent><space>g :Denite grep:::!<CR>
-nnoremap <silent><M-g> :Denite -buffer-name=grep -default-action=quickfix grep:::!<CR>
-
-call denite#custom#option('_', {
-    \ 'cached_filter': v:true,
-    \ 'cursor_shape': v:true,
-    \ 'cursor_wrap': v:true,
-    \ 'highlight_filter_background': 'DeniteFilter',
-    \ 'highlight_matched_char': 'Underlined',
-    \ 'matchers': 'matcher/fuzzy',
-    \ 'sorters': 'sorter/sublime',
-    \ 'statusline': v:false,
-    \ 'start_filter': v:true,
-    \ })
-
-" Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> v
-  \ denite#do_map('do_action', 'vsplit')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> s
-  \ denite#do_map('toggle_select')
-  nnoremap <silent><buffer><expr> a
-  \ denite#do_map('toggle_select_all')
-endfunction<Paste>
-
-
 " }}}
 
 set completeopt=noinsert,noselect,menuone 
