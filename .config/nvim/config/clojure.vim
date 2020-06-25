@@ -52,6 +52,11 @@ let g:which_key_map.l.r.e.f = 'extract-function'
 let g:which_key_map.l.r.a = { 'name': '+add' }
 let g:which_key_map.l.r.a.m = 'add-missing-libspec'
 
+let g:conjure_config = { 
+      \'mappings.doc-word': '',
+      \'mappings.def-word': ''
+      \}
+
 autocmd BufNewFile,BufRead *.boot set filetype=clojure
 
 autocmd BufReadCmd,FileReadCmd,SourceCmd jar:file://* call s:LoadClojureContent(expand("<amatch>"))

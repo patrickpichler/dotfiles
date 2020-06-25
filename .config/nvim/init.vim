@@ -92,8 +92,9 @@ Plug 'ElmCast/elm-vim', {'for': 'elm'}
 Plug 'mxw/vim-jsx', {'for': 'js'}
 
 " ============= Clojure ==========================
-Plug 'tpope/vim-salve', { 'for': 'clojure' }
-Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'Olical/conjure', { 'for': 'clojure' }
+Plug 'guns/vim-sexp'
+Plug 'tpope/vim-sexp-mappings-for-regular-people'
 
 " ============= Crystal ==========================
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
