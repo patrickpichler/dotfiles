@@ -219,7 +219,6 @@ let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste', ],
-      \             [ 'cocerror', 'cocwarn'  ] ,
       \             [ 'gitgutter', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
@@ -228,10 +227,6 @@ let g:lightline = {
       \   'gitgutter': 'LightLineGitGutter',
       \   'filename': 'LightlineFileName',
       \ },
-      \ 'component_expand': {
-      \   'cocerror': 'LightLineCocError',
-      \   'cocwarn' : 'LightLineCocWarn',   
-      \ }
     \ }
 
 function! LightlineFileName() abort
@@ -242,32 +237,6 @@ endfunction
 
 function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
-endfunction
-
-function! LightLineCocError()
-  let error_sign = get(g:, 'coc_status_error_sign', has('mac') ? '❌ ' : 'E')
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info)
-    return ''
-  endif
-  let errmsgs = []
-  if get(info, 'error', 0)
-    call add(errmsgs, error_sign . info['error'])
-  endif
-  return trim(join(errmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
-endfunction
-
-function! LightLineCocWarn() abort
-  let warning_sign = get(g:, 'coc_status_warning_sign')
-  let info = get(b:, 'coc_diagnostic_info', {})
-  if empty(info)
-    return ''
-  endif
-  let warnmsgs = []
-  if get(info, 'warning', 0)
-    call add(warnmsgs, warning_sign . info['warning'])
-  endif
-  return trim(join(warnmsgs, ' ') . ' ' . get(g:, 'coc_status', ''))
 endfunction
 
 autocmd User CocDiagnosticChange call lightline#update()
