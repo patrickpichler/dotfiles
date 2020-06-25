@@ -9,33 +9,24 @@ Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-fugitive', { 'tag': '*' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dotenv'
-Plug 'tpope/vim-dadbod'
-Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-projectionist'
 
-Plug 'ziglang/zig.vim'
 
 Plug 'arthurxavierx/vim-caser'
 
-Plug 'mhinz/vim-grepper'
-Plug 'janko/vim-test'
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'mattn/emmet-vim'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'liuchengxu/vim-which-key'
 Plug 'cohama/lexima.vim'
 
-Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/rainbow_parentheses.vim'
 
 Plug 'airblade/vim-gitgutter'
 
-Plug 'vimwiki/vimwiki'
 Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
 
@@ -54,11 +45,16 @@ Plug 'junegunn/vim-peekaboo'
 
 Plug 'liuchengxu/vim-clap', { 'tag': '*', 'do': ':Clap install-binary!' }
 
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+Plug 'ziglang/zig.vim', { 'for': 'zig' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
 Plug 'ekalinin/Dockerfile.vim', { 'for': 'dockerfile' }
-
 Plug 'blankname/vim-fish', { 'for': 'fish' }
+Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
+Plug 'ElmCast/elm-vim', {'for': 'elm'}
+Plug 'mxw/vim-jsx', {'for': 'js'}
+Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
@@ -82,22 +78,10 @@ Plug 'vim-utils/vim-line'
 Plug 'wellle/targets.vim'
 Plug 'kana/vim-textobj-entire'
 
-" ============== HASKELL ======================
-Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
-
-" ============== ELM ==========================
-Plug 'ElmCast/elm-vim', {'for': 'elm'}
-
-" ============= JS ============================
-Plug 'mxw/vim-jsx', {'for': 'js'}
-
 " ============= Clojure ==========================
 Plug 'Olical/conjure', { 'for': 'clojure' }
-Plug 'guns/vim-sexp'
-Plug 'tpope/vim-sexp-mappings-for-regular-people'
-
-" ============= Crystal ==========================
-Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
+Plug 'guns/vim-sexp', { 'for': 'clojure' }
+Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 
 " ============ PlantUML ==========================
 Plug 'aklt/plantuml-syntax'
@@ -105,7 +89,6 @@ Plug 'tyru/open-browser.vim'
 Plug 'weirongxu/plantuml-previewer.vim'
 
 " ===========================================
-Plug 'leafgarland/typescript-vim'
 
 Plug 'https://git.sr.ht/~patrickpichler/vim-nachtleben-pitch-black'
 
@@ -154,6 +137,9 @@ set smarttab
 set autoindent
 set smartindent
 
+set splitbelow
+set splitright
+
 set timeoutlen=500
 
 set inccommand=split 
@@ -173,6 +159,9 @@ set foldlevelstart=99
 set foldnestmax=10 " deepest fold is 10 levels
 set nofoldenable " don't fold by default
 set foldlevel=1
+
+set completeopt=noinsert,noselect,menuone 
+set shortmess+=c
 
 " Backup and swap files {{{
 
@@ -198,7 +187,6 @@ set undofile
 set undodir^=~/.local/share/nvim/undo//
 
 " }}}
-
 
 " Auto open quickfix list on grep
 autocmd QuickFixCmdPost *grep* cwindow
@@ -262,13 +250,6 @@ endfunction
 
 " remap leader key to something more reachable
 let mapleader = ","
-
-" grepper settings
-let g:grepper = {}
-let g:grepper.tools = ['grep', 'git', 'rg']
-
-" Define prefix dictionary
-let g:which_key_map =  {}
 
 " Clap {{{
 
@@ -410,38 +391,17 @@ hi CocHintFloat ctermbg=12 ctermfg=black guifg=#15aabf guifg=black
 " }}}
 
 " Mappings {{{
-
-" Search for the current selection
-nmap gs <Plug>GrepperOperator
-xmap gs <Plug>GrepperOperator
-
+"
 " easier transition from terminal mode to normal mode
 tnoremap <Esc> <C-\><C-n>
 
 " send escape even the escape key is remapped
 tnoremap <C-v><Esc> <Esc>
 
-" convenience terminal window movement mappings
-tnoremap <M-h> <C-\><C-n><C-w>h
-tnoremap <M-j> <C-\><C-n><C-w>j
-tnoremap <M-k> <C-\><C-n><C-w>k
-tnoremap <M-l> <C-\><C-n><C-w>l
-
-nnoremap <M-h> <C-w>h
-nnoremap <M-j> <C-w>j
-
-nnoremap <M-k> <C-w>k
-nnoremap <M-l> <C-w>l
-
-inoremap <M-h> <Esc><C-w>h
-inoremap <M-j> <Esc><C-w>j
-inoremap <M-k> <Esc><C-w>k
-inoremap <M-l> <Esc><C-w>l
-
-nnoremap <C-h> h
-nnoremap <C-j> gj
-nnoremap <C-k> gk
-nnoremap <C-l> l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Make C-P C-N behave the same as Up Down in command mode
 cnoremap <C-P> <Up>
@@ -451,125 +411,21 @@ cnoremap <C-N> <Down>
 nnoremap <silent> [g :diffget //2<CR>
 nnoremap <silent> ]g :diffget //3<CR>
 
-" ======== Buffers ==========================
-let g:which_key_map.b = { 'name' : '+buffers' }
-let g:which_key_map.b.d = 'delete'
-let g:which_key_map.b.o = 'only'
-
-nnoremap <silent><leader>bd :bd<CR>
-nnoremap <silent><leader>bo :only<CR>
-
-" ======== highlighting  ====================
-let g:which_key_map.h = { 'name' : '+highlight' }
-let g:which_key_map.h.w = 'highlight word'
-let g:which_key_map.h.c = 'clear word highlighting'
-let g:which_key_map.h.n = 'clear word highlighting'
-
-nnoremap <silent><leader>hw :call HighlightWordUnderCursor()<CR>
-nnoremap <silent><leader>hc :match none<CR>
-nnoremap <silent><leader>hn :noh<CR>
-
-" ======== file group ======================
-let g:which_key_map.f = { 'name' : '+file' }
-let g:which_key_map.f.s = 'save-file'
-
-" more convenient save
-nnoremap <silent><leader>fs :w<CR>
-
-" ========= vim-test =======================
-
-let g:which_key_map.t = {
-      \ 'name': '+test',
-      \ 'f': 'file',
-      \ 'l': 'last',
-      \ 'n': 'nearest',
-      \ 's': 'suite',
-      \ 'v': 'visit',
-      \ }
-
-nnoremap <silent> <leader>tf  :TestFile<CR>
-nnoremap <silent> <leader>tl  :TestLast<CR>
-nnoremap <silent> <leader>tn  :TestNearest<CR>
-nnoremap <silent> <leader>ts  :TestSuite<CR>
-nnoremap <silent> <leader>tv  :TestVisit<CR>
-
 " =========================================
-let g:which_key_map.o = {
-      \ 'name' : '+open',
-      \ 'q' : 'quickfix'    ,
-      \ 'l' : 'locationlist',
-      \ 'u' : 'undotree'
-      \ }
-
-nnoremap <silent> <leader>oq  :Copen<CR>
-nnoremap <silent> <leader>ol  :lopen<CR>
 nnoremap <silent><leader>ou :UndotreeToggle<CR>
 
-" ===============================================
-
-let g:which_key_map.g = {
-      \ 'name' : '+git',
-      \ 'b' : 'blame'    ,
-      \ 'l' : 'log',
-      \ }
-
-nnoremap <silent><leader>gb :Gblame<CR>
-nnoremap <silent><leader>gl :Glog<CR>
-
-" this allows to do :w!! for overwriting readonly files 
-cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-
-" ============ Vim which key ====================
-nnoremap <silent> <leader> :<c-u>WhichKey ','<CR>
-
-autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-      \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-" Resize window {{{
 noremap <M-Up> :res -2<CR>
 noremap <M-Down> :res +2<CR>
 noremap <M-Left> :vertical res -2<CR>
 noremap <M-Right> :vertical res +2<CR>
 " }}}
 
-" }}}
-
 " Colorscheme {{{
-hi ALEError ctermfg=Red
-
 highlight GitGutterAdd    ctermfg=green guifg=green
 highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
 
-" }}}
-
-" Easy align {{{
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" }}}
-
-" Vim Wiki {{{
-
-" Use markdown syntax
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.wikimd'}]
-
-" Auto-commit
-
-if executable("git") && isdirectory($HOME . "/vimwiki/.git")
-
-  augroup wiki
-    au! BufWritePost ~/vimwiki/* !cd ~/vimwiki/;git add "%:p";git commit -m "Auto commit of %:t." "%:p"
-  augroup END
-
-endif
-
+hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=green guifg=yellow
 " }}}
 
 " Filetypes {{{
@@ -587,35 +443,12 @@ let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
       \ 'sh', 'kotlin']
 " }}}
 
-" Java {{{
-
-let java_highlight_functions = 1
-let java_highlight_all = 1
-
-augroup java_stuff
-  au!
-  
-  autocmd Filetype java call SetJavaOptions()
-  function SetJavaOptions()
-    highlight link javaScopeDecl Statement
-    highlight link javaType Type 
-    highlight link javaDocTags PreProc
-  endfunction
-
-augroup END
-
-" }}}
-
 " UndoTree {{{
 
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
 let g:undotree_WindowLayout = 2
 " }}}
-
-set completeopt=noinsert,noselect,menuone 
-set shortmess+=c
-
 
 " Formating {{{
 if executable('par')
@@ -646,37 +479,12 @@ endif
       
       " toggle nerd tree
       nmap <silent> <leader>k :call ToggleNerdTree()<cr>
-      " find the current file in nerdtree without needing to reload the drawer
-      nmap <silent> <leader>y :NERDTreeFind<cr>
       nmap <silent> - :NERDTreeFind<cr>
 
       let NERDTreeShowHidden=1
       let g:NERDTreeFileExtensionHighlightFullName = 1
       let g:NERDTreeExactMatchHighlightFullName = 1
       let g:NERDTreePatternMatchHighlightFullName = 1
-" }}}
-
-" Vim config {{{
-
-if exists("$vim_mode")
-  execute 'source' fnamemodify(expand('<sfile>'), ':h').'/config/'.$vim_mode.'.vim'
-endif
-
-" }}}
-
-" Colors {{{
-hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=green guifg=yellow
-" }}}
-
-" Projectionist {{{
-let g:projectionist_heuristics = {
-      \}
-" }}}
-
-" vim.test {{{
-
-let test#strategy = 'dispatch_background'
-
 " }}}
 
 " rainbow_parentheses {{{
@@ -690,7 +498,13 @@ augroup END
 
 " }}}
 
-" Is at the end so that specializations can insert things too 
-call which_key#register(',', "g:which_key_map")
+" Clojure {{{
+let g:conjure_config = { 
+      \'mappings.doc-word': '',
+      \'mappings.def-word': ''
+      \}
+
+autocmd BufNewFile,BufRead *.boot set filetype=clojure
+" }}}
 
 " vim: foldmethod=marker foldlevel=0 foldenable
