@@ -255,11 +255,8 @@ let mapleader = ","
 
 let g:clap_theme = 'material_design_dark'
 
-let g:clap_provider_grep_delay = 50
-let g:clap_provider_grep_opts = '-H --no-heading --vimgrep --smart-case --hidden -g "!.git/"'
-
-nnoremap <leader>* :Clap grep ++query=<cword><cr>
-nnoremap <silent><space>g :Clap grep<cr>
+nnoremap <leader>* :Clap grep2 ++query=<cword><cr>
+nnoremap <silent><space>g :Clap grep2<cr>
 nnoremap <silent><M-f> :Clap files --hidden<cr>
 nnoremap <silent><M-b> :Clap buffers<cr>
 nnoremap <silent><M-w> :Clap windows<cr>
