@@ -43,7 +43,7 @@ Plug 'AndrewRadev/bufferize.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
 
-Plug 'liuchengxu/vim-clap', { 'tag': '*', 'do': ':Clap install-binary!' }
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ziglang/zig.vim', { 'for': 'zig' }
@@ -251,22 +251,56 @@ endfunction
 " remap leader key to something more reachable
 let mapleader = ","
 
-" Clap {{{
+" Denite {{{
 
-let g:clap_theme = 'material_design_dark'
+if executable('rg')
+  call denite#custom#var('grep', {
+    \ 'command': ['rg'],
+    \ 'default_opts': ['-i', '--vimgrep', '--no-heading', '-F'],
+    \ 'recursive_opts': [],
+    \ 'pattern_opt': [],
+    \ 'separator': ['--'],
+    \ 'final_opts': [],
+    \ })
+endif
 
-nnoremap <leader>* :Clap grep2 ++query=<cword><cr>
-nnoremap <silent><space>g :Clap grep2<cr>
-nnoremap <silent><M-f> :Clap files --hidden<cr>
-nnoremap <silent><M-b> :Clap buffers<cr>
-nnoremap <silent><M-w> :Clap windows<cr>
-nnoremap <leader>cr :Clap history<cr>
-nnoremap <leader>ch :Clap command_history<cr>
-nnoremap <leader>cj :Clap jumps<cr>
-nnoremap <leader>fl :Clap blines<cr>
-nnoremap <leader>cL :Clap lines<cr>
-nnoremap <leader>ct :Clap filetypes<cr>
-nnoremap <leader>cm :Clap marks<cr>
+nnoremap <silent><M-b> :Denite buffer<CR>
+nnoremap <silent><M-p> :Denite file/rec<CR>
+nnoremap <silent><space>g :Denite grep:::!<CR>
+nnoremap <silent><M-g> :Denite -buffer-name=grep -default-action=quickfix grep:::!<CR>
+
+call denite#custom#option('_', {
+    \ 'cached_filter': v:true,
+    \ 'cursor_shape': v:true,
+    \ 'cursor_wrap': v:true,
+    \ 'highlight_filter_background': 'DeniteFilter',
+    \ 'highlight_matched_char': 'Underlined',
+    \ 'matchers': 'matcher/fuzzy',
+    \ 'sorters': 'sorter/sublime',
+    \ 'statusline': v:false,
+    \ 'start_filter': v:true,
+    \ })
+
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> v
+  \ denite#do_map('do_action', 'vsplit')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> s
+  \ denite#do_map('toggle_select')
+  nnoremap <silent><buffer><expr> a
+  \ denite#do_map('toggle_select_all')
+endfunction
 
 " }}}
 
