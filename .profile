@@ -9,23 +9,23 @@
 #umask 022
 
 if [ -d $HOME/bin ] ; then
-  PATH=$HOME/bin:$PATH
+  export PATH=$HOME/bin:$PATH
 fi
 
 if [ -d $HOME/.local/bin ] ; then
-  PATH=$HOME/.local/bin:$PATH
+  export PATH=$HOME/.local/bin:$PATH
 fi
 
 if [ -d $HOME/development/scripts ]; then
-  PATH=$PATH:~/development/scripts
+  export PATH=$PATH:~/development/scripts
 fi
 
 if [ -d $HOME/.asdf/shims ]; then
-  PATH=$HOME/.asdf/shims:$PATH
+  export PATH=$HOME/.asdf/shims:$PATH
 fi
 
 if [ -d $HOME/.cargo/bin ]; then
-  PATH="$HOME/.cargo/bin:$PATH"
+  export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
