@@ -140,8 +140,6 @@ set smartindent
 set splitbelow
 set splitright
 
-set timeoutlen=500
-
 set inccommand=split 
 
 au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
@@ -531,8 +529,8 @@ augroup END
 
 " Clojure {{{
 let g:conjure_config = { 
-      \'mappings.doc-word': '',
-      \'mappings.def-word': ''
+      \'mappings.doc-word': 'nil',
+      \'mappings.def-word': 'nil'
       \}
 
 autocmd BufNewFile,BufRead *.boot set filetype=clojure
