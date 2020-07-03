@@ -266,6 +266,7 @@ nnoremap <silent><M-b> :Denite buffer<CR>
 nnoremap <silent><M-p> :Denite file/rec<CR>
 nnoremap <silent><space>g :Denite grep:::!<CR>
 nnoremap <silent><M-g> :Denite -buffer-name=grep -default-action=quickfix grep:::!<CR>
+nnoremap <silent><leader>* :DeniteCursorWord -buffer-name=grep -default-action=quickfix grep<CR>
 
 call denite#custom#option('_', {
     \ 'cached_filter': v:true,
