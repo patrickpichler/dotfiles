@@ -43,7 +43,7 @@ Plug 'AndrewRadev/bufferize.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
 
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
 
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ziglang/zig.vim', { 'for': 'zig' }
