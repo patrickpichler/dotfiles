@@ -79,7 +79,7 @@ Plug 'wellle/targets.vim'
 Plug 'kana/vim-textobj-entire'
 
 " ============= Clojure ==========================
-Plug 'Olical/conjure', { 'for': 'clojure' }
+Plug 'Olical/conjure', { 'for': 'clojure', 'tag': '*' }
 Plug 'guns/vim-sexp', { 'for': 'clojure' }
 Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
 
