@@ -529,10 +529,8 @@ augroup END
 " }}}
 
 " Clojure {{{
-let g:conjure_config = { 
-      \'mappings.doc-word': 'nil',
-      \'mappings.def-word': 'nil'
-      \}
+let g:conjure#mapping#doc_word = 'nil'
+let g:conjure#mapping#def_word = 'nil'
 
 autocmd BufNewFile,BufRead *.boot set filetype=clojure
 " }}}
