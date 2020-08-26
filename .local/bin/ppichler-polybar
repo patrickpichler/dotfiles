@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+killall -q polybar
+
+while pgrep -u $UID -x polybar > /dev/null; do sleep 1; done
 
 MONITOR=`xrandr -q | grep "primary" | cut -d ' ' -f1`
 
@@ -8,6 +11,6 @@ fi
 
 export MONITOR=$MONITOR
 
-exec polybar --reload bottom 
+exec polybar --reload bottom > "$HOME/.local/logs/polybar.log"
  
 # vi:set ft=bash
