@@ -83,6 +83,11 @@ label-focused-foreground = #ffffff
 label-focused-background = #3f3f3f
 label-focused-underline = #fba922
 
+enable-click = false
+enable-scroll = false
+
+pin-workspaces = false
+
 [module/cpu]
 type = internal/cpu
 interval = 0.5
