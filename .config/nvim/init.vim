@@ -43,6 +43,8 @@ Plug 'AndrewRadev/bufferize.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
 
+Plug 'axelf4/vim-strip-trailing-whitespace'
+
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
 
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
