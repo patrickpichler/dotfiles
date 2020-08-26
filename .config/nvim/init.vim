@@ -61,16 +61,13 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
 " ============= Coc extensions ===============
 Plug 'neoclide/coc-emmet', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-rls', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-java', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tslint-plugin', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-html', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-css', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-snippets', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-python', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-lists', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 
 " ============= New text objects ==============
 Plug 'kana/vim-textobj-user'
