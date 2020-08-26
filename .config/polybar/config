@@ -20,7 +20,7 @@ font-1 = MaterialIcons:size=10;0
 font-2 = Termsynu:size=8:antialias=false;-2
 font-3 = FontAwesome:size=10;0
 
-modules-left = bspwm
+modules-left = bspwm music
 modules-right = volume backlight wireless-network wired-network memory cpu battery date
 
 [module/backlight]
@@ -151,5 +151,13 @@ ramp-volume-3 = 
 type = internal/date
 interval = 2
 date = %%{F#999}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M%%{F-}
+
+[module/music]
+type = custom/script
+interval = 1
+format-prefix = " "
+format = <label>
+exec = ~/.config/polybar/music.sh
+format-underline = #1db954
 
 ; vim:ft=dosini
