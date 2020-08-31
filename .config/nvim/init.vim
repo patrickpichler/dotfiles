@@ -274,6 +274,21 @@ if executable('rg')
     \ })
 endif
 
+if executable('fd')
+   call denite#custom#var('file/rec', 'command',
+        \ ['fd', '--type', 'f', '--follow', '--hidden', '--exclude', '.git',
+        \ ''])
+    call denite#custom#var('directory_rec', 'command',
+        \ ['fd', '--type', 'd', '--follow', '--hidden', '--exclude', '.git',
+        \ ''])
+
+   call denite#custom#alias('source', 'file/rec/noignore', 'file/rec')
+
+   call denite#custom#var('file/rec/noignore', 'command',
+        \ ['fd', '--type', 'f', '--follow', '--hidden', '--exclude', '.git',
+        \ '--no-ignore', ''])
+endif
+
 nnoremap <silent><M-b> :Denite buffer<CR>
 nnoremap <silent><M-p> :Denite file/rec<CR>
 nnoremap <silent><space>g :Denite grep:::!<CR>
