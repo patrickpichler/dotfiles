@@ -59,7 +59,7 @@ Plug 'mxw/vim-jsx', {'for': 'js'}
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 
 " ============= LSP ===========================
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " ============= Coc extensions ===============
 Plug 'neoclide/coc-emmet', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
