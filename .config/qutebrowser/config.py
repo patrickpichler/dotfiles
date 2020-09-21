@@ -27,6 +27,8 @@ c.aliases = {
 
 c.content.autoplay = False
 
+config.source('pyconfig/redirectors.py')
+
 config.bind('<Ctrl-r>', 'open-editor')
 config.bind('<Ctrl-r>', 'open-editor', mode='insert')
 config.bind('<Ctrl-l>', 'edit-url')
