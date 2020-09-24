@@ -3,14 +3,22 @@ killall -q polybar
 
 while pgrep -u $UID -x polybar > /dev/null; do sleep 1; done
 
-MONITOR=`xrandr -q | grep "primary" | cut -d ' ' -f1`
+# Terminate already running bar instances
+pkill -U $(id -u) -x polybar
 
-if [[ -z "$MONITOR" ]]; then
-  MONITOR=`xrandr -q | grep " connected" | cut -d ' ' -f1`
-fi
+# Wait until the processes have been shut down
+while pgrep -u $(id -u) -x polybar >/dev/null; do sleep 1; done
 
-export MONITOR=$MONITOR
+xrandr -q | grep " connected " | while read -r MONITOR state primary rest; do
+  BAR="secondary"
 
-exec polybar --reload bottom > "$HOME/.local/logs/polybar.log"
+  if [ "$primary" = "primary" ]; then
+    BAR="primary"
+  fi
+
+  export MONITOR=$MONITOR
+
+  polybar --reload "$BAR" &
+done
  
 # vi:set ft=bash

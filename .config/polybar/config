@@ -1,14 +1,8 @@
-[bar/bottom]
-monitor = ${env:MONITOR:eDP}
-width = 100%
-height = 30
-
-bottom = true
-
+[bar/base]
 background = #00000000
 foreground = #ccffffff
 
-line-color = ${bar/bottom.background}
+line-color = ${bar/base.background}
 line-size = 2
 
 spacing = 2
@@ -20,11 +14,28 @@ font-1 = MaterialIcons:size=10;0
 font-2 = Termsynu:size=8:antialias=false;-2
 font-3 = FontAwesome:size=10;0
 
-tray-position = right
-tray-padding = 2
+[bar/primary]
+inherit = bar/base
 
-modules-left = bspwm music
+monitor = ${env:MONITOR:eDP}
+width = 100%
+height = 30
+
+bottom = true
+
+modules-left = i3
 modules-right = volume backlight wireless-network wired-network memory cpu battery date
+
+[bar/secondary]
+inherit = bar/base
+
+monitor = ${env:MONITOR:eDP}
+width = 100%
+height = 30
+
+bottom = true
+
+modules-left = i3
 
 [module/backlight]
 type = internal/backlight
@@ -78,6 +89,22 @@ animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-framerate = 750
 
+[module/i3]
+type = internal/i3
+
+label-focused = %index%
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+label-focused-underline = #fba922
+label-focused-padding = 2
+
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+label-visible = %index%
+label-visible-underline = #555555
+label-visible-padding = 2
+
 [module/bspwm]
 type = internal/bspwm
 
@@ -127,7 +154,7 @@ ramp-signal-4 = 
 animation-packetloss-0 = 
 animation-packetloss-0-foreground = #ffa64c
 animation-packetloss-1 = 
-animation-packetloss-1-foreground = ${bar/top.foreground}
+animation-packetloss-1-foreground = ${bar/base.foreground}
 animation-packetloss-framerate = 500
 
 [module/wired-network]

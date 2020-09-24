@@ -36,10 +36,12 @@ xrandr --auto
 
 nitrogen --restore
 
-if [ \( -n "$SCREEN_CONFIG" \) -a \( -x "$HOME/screenlayout/$SCREEN_CONFIG" \) ]; then
+if [  -n "$SCREEN_CONFIG"  ] && [ -x "$HOME/screenlayout/$SCREEN_CONFIG" ]; then
  . "$HOME/screenlayout/$SCREEN_CONFIG" 
 fi
 
 xsettingsd &
 
-exec bspwm
+xset -b
+
+exec i3 -V >> ~/.local/logs/i3log 2>&1
