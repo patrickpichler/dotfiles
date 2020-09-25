@@ -24,6 +24,9 @@ floating_modifier $mod
 
 default_border pixel 3
 
+focus_follows_mouse no
+workspace_auto_back_and_forth yes
+
 # start a terminal
 bindsym $mod+Return exec alacritty
 
@@ -43,11 +46,16 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# change focused output
+bindsym $mod+Control+h focus output left
+bindsym $mod+Control+j focus output down
+bindsym $mod+Control+k focus output up
+bindsym $mod+Control+l focus output right
+
+bindsym $mod+Left focus output left
+bindsym $mod+Down focus output down
+bindsym $mod+Up focus output up
+bindsym $mod+Right focus output right
 
 # move focused window
 bindsym $mod+Shift+h move left
@@ -55,11 +63,16 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move workspace to output left
-bindsym $mod+Shift+Down move workspace to output down
-bindsym $mod+Shift+Up move workspace to output up
-bindsym $mod+Shift+Right move workspace to output right
+bindsym $mod+Control+Shift+h move window to output left
+bindsym $mod+Control+Shift+j move window to output down
+bindsym $mod+Control+Shift+k move window to output up
+bindsym $mod+Control+Shift+l move window to output right
+
+# move focused workspace
+bindsym $mod+Shift+Left move workspace to output left, focus
+bindsym $mod+Shift+Down move workspace to output down, focus
+bindsym $mod+Shift+Up move workspace to output up, focus
+bindsym $mod+Shift+Right move workspace to output right, focus
 
 # split in horizontal orientation
 bindsym $mod+period split h
@@ -160,4 +173,3 @@ exec_always --no-startup-id $HOME/.local/bin/ppichler-polybar
 
 bindsym $mod+r mode "resize"
 
-focus_follows_mouse no
