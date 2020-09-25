@@ -169,8 +169,6 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-exec_always --no-startup-id $HOME/.local/bin/ppichler-polybar
-
 bindsym $mod+r mode "resize"
 
 # Media keys
@@ -185,3 +183,7 @@ bindsym XF86AudioPrev exec playerctl previous
 
 bindsym XF86MonBrightnessUp exec brillo -A 5%
 bindsym XF86MonBrightnessDown exec brillo -U 5%
+
+# Start polybar
+
+exec_always --no-startup-id $HOME/.local/bin/ppichler-polybar
