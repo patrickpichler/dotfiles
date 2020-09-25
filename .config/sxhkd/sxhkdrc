@@ -57,6 +57,10 @@ super + ctrl + {m,x,y,z}
 # focus/swap
 #
 
+# swap the current node and the biggest local window
+super + g
+	bspc node -s biggest.window.local
+
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
