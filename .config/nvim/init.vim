@@ -160,19 +160,6 @@ set foldlevel=1
 set completeopt=noinsert,noselect,menuone 
 set shortmess+=c
 
-let g:clipboard = {
-      \   'name': 'xsel_override',
-      \   'copy': {
-      \      '+': 'xsel --input --clipboard',
-      \      '*': 'xsel --input --primary',
-      \    },
-      \   'paste': {
-      \      '+': 'xsel --output --clipboard',
-      \      '*': 'xsel --output --primary',
-      \   },
-      \   'cache_enabled': 1,
-      \ }
-
 " Backup and swap files {{{
 
 " Protect changes between writes. Default values of
