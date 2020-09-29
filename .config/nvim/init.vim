@@ -89,7 +89,7 @@ Plug 'weirongxu/plantuml-previewer.vim'
 
 " ===========================================
 
-Plug 'https://git.sr.ht/~patrickpichler/vim-nachtleben-pitch-black'
+Plug 'https://git.sr.ht/~patrickpichler/vim-github-colorscheme'
 
 " ===========================================
 call plug#end()
@@ -97,7 +97,7 @@ call plug#end()
 " }}}
 
 " General configuration {{{
-colorscheme nachtleben-pitch-black
+colorscheme github
 
 " Used Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -201,7 +201,7 @@ set noshowmode
 
 " Lightline {{{
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': 'one',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste', ],
       \             [ 'gitgutter', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -534,6 +534,7 @@ endif
 " rainbow_parentheses {{{
 
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:rainbow#blacklist = ['#ffffff']
 
 augroup rainbow
   autocmd!
