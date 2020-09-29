@@ -201,7 +201,7 @@ set noshowmode
 
 " Lightline {{{
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'ayu_light',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste', ],
       \             [ 'gitgutter', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
