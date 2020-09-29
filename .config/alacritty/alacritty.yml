@@ -167,16 +167,16 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0xeeeeee'
+    background: '0xececec'
     foreground: '0x000000'
 
   cursor:
-    text: '0xeeeeee'
+    text: '0xececec'
     cursor: '0x878787'
 
   # Normal colors
   normal:
-    black:   '0xeeeeee'
+    black:   '0xececec'
     red:     '0xaf0000'
     green:   '0x008700'
     yellow:  '0x5f8700'
