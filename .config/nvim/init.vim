@@ -551,6 +551,8 @@ autocmd BufNewFile,BufRead *.boot set filetype=clojure
 " }}}
 
 " GitGutter {{{
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 
 hi SignColumn guibg=#ECECEC
 
