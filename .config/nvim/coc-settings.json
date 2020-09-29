@@ -2,26 +2,49 @@
   "languageserver": {
     "clojure-lsp": {
       "command": "bash",
-      "args": ["-c", "clojure-lsp"],
-      "filetypes": ["clojure"],
-      "rootPatterns": ["project.clj", "build.boot", "deps.edn"],
-      "additionalSchemes": ["jar", "zipfile"],
-      "initializationOptions": {
-      }
+      "args": [
+        "-c",
+        "clojure-lsp"
+      ],
+      "filetypes": [
+        "clojure"
+      ],
+      "rootPatterns": [
+        "project.clj",
+        "build.boot",
+        "deps.edn"
+      ],
+      "additionalSchemes": [
+        "jar",
+        "zipfile"
+      ],
+      "initializationOptions": {}
     },
     "xml-lsp": {
       "command": "bash",
-      "args": ["-c", "lsp4xml"],
-      "filetypes": ["xml"],
+      "args": [
+        "-c",
+        "lsp4xml"
+      ],
+      "filetypes": [
+        "xml"
+      ],
       "rootPatterns": [],
       "additionalSchemes": [],
-      "initializationOptions": {
-      }
+      "initializationOptions": {}
     },
     "haskell": {
       "command": "hie-wrapper",
-      "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
-      "filetypes": ["hs", "lhs", "haskell"],
+      "rootPatterns": [
+        ".stack.yaml",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ],
       "initializationOptions": {},
       "settings": {
         "languageServerHaskell": {
@@ -33,31 +56,62 @@
     },
     "julia": {
       "command": "/usr/bin/julia",
-      "args" : ["--startup-file=no", "--history-file=no", "-e", 
+      "args": [
+        "--startup-file=no",
+        "--history-file=no",
+        "-e",
         "using LanguageServer; using Pkg; import StaticLint; import SymbolServer; env_path = dirname(Pkg.Types.Context().env.project_file); debug = false; server = LanguageServer.LanguageServerInstance(stdin, stdout, debug, env_path, \"\", Dict()); server.runlinter = true; run(server);"
-       ],
-      "filetypes": ["julia"]
-     },
+      ],
+      "filetypes": [
+        "julia"
+      ]
+    },
     "bash": {
       "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
+      "args": [
+        "start"
+      ],
+      "filetypes": [
+        "sh"
+      ],
+      "ignoredRootPaths": [
+        "~"
+      ]
     },
     "dockerfile": {
       "command": "docker-langserver",
-      "filetypes": ["dockerfile"],
-      "args": ["--stdio"]
+      "filetypes": [
+        "dockerfile"
+      ],
+      "args": [
+        "--stdio"
+      ]
     },
     "clangd": {
       "command": "clangd",
-      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["c", "cpp", "objc", "objcpp"]
+      "rootPatterns": [
+        "compile_flags.txt",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ]
     },
     "crystal": {
       "command": "scry",
-      "rootPatterns": [".git/", ".hg/"],
-      "filetypes": ["crystal"]
+      "rootPatterns": [
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "crystal"
+      ]
     }
   },
   "java.errors.incompleteClasspath.severity": "ignore",
