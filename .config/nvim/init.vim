@@ -550,4 +550,10 @@ let g:conjure#mapping#def_word = 'nil'
 autocmd BufNewFile,BufRead *.boot set filetype=clojure
 " }}}
 
+" GitGutter {{{
+
+hi SignColumn guibg=#ECECEC
+
+" }}}
+
 " vim: foldmethod=marker foldlevel=0 foldenable
