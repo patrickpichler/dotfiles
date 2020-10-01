@@ -58,6 +58,8 @@ Plug 'ElmCast/elm-vim', {'for': 'elm'}
 Plug 'mxw/vim-jsx', {'for': 'js'}
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 
+Plug 'liuchengxu/vista.vim'
+
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
