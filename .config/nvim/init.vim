@@ -560,4 +560,9 @@ hi SignColumn guibg=#ECECEC
 
 " }}}
 
+" vim-commentary {{{
+autocmd FileType asm setlocal commentstring=;\ %s
+"}}}
+
+
 " vim: foldmethod=marker foldlevel=0 foldenable
