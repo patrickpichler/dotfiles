@@ -553,10 +553,17 @@ autocmd BufNewFile,BufRead *.boot set filetype=clojure
 " }}}
 
 " GitGutter {{{
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
 
-hi SignColumn guibg=#ECECEC
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap ]h <Plug>(GitGutterNextHunk)
+
+highlight SignColumn guibg=#ECECEC
+highlight GitGutterChange guifg=#FF8000 ctermfg=3
+
+omap ic <Plug>(GitGutterTextObjectInnerPending)
+omap ac <Plug>(GitGutterTextObjectOuterPending)
+xmap ic <Plug>(GitGutterTextObjectInnerVisual)
+xmap ac <Plug>(GitGutterTextObjectOuterVisual)
 
 " }}}
 
