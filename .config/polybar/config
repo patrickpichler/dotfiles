@@ -23,6 +23,9 @@ height = 30
 
 bottom = true
 
+tray-position = right
+tray-padding = 2
+
 modules-left = i3
 modules-right = volume backlight wireless-network wired-network memory cpu battery date
 
