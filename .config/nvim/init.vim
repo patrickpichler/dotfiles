@@ -45,7 +45,8 @@ Plug 'junegunn/vim-peekaboo'
 
 Plug 'axelf4/vim-strip-trailing-whitespace'
 
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
+" Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'commit': '48f485e080c2b6a21a374b5b2000c091d30c5f56' }
 
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ziglang/zig.vim', { 'for': 'zig' }
