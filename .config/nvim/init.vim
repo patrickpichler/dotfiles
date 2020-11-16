@@ -43,6 +43,8 @@ Plug 'AndrewRadev/bufferize.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
 
+Plug 'machakann/vim-highlightedyank'
+
 Plug 'axelf4/vim-strip-trailing-whitespace'
 
 " Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
@@ -473,6 +475,8 @@ noremap <M-Right> :vertical res +2<CR>
 highlight GitGutterAdd    ctermfg=green guifg=green
 highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
+
+highlight HighlightedyankRegion ctermbg=yellow guibg=yellow
 
 hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=green guifg=yellow
 " }}}
