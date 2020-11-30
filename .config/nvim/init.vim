@@ -477,8 +477,6 @@ highlight GitGutterChange ctermfg=yellow guifg=yellow
 highlight GitGutterDelete ctermfg=red guifg=red
 
 highlight HighlightedyankRegion ctermbg=yellow guibg=yellow
-
-hi! MatchParen cterm=NONE,bold gui=NONE,bold guibg=green guifg=yellow
 " }}}
 
 " Filetypes {{{
