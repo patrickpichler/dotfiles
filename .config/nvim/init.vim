@@ -95,6 +95,7 @@ Plug 'weirongxu/plantuml-previewer.vim'
 " ===========================================
 
 Plug 'https://git.sr.ht/~patrickpichler/vim-github-colorscheme'
+Plug 'https://tildegit.org/sloum/gemini-vim-syntax'
 
 " ===========================================
 call plug#end()
