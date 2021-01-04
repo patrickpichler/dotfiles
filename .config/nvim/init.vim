@@ -48,7 +48,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 
 " Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'commit': '48f485e080c2b6a21a374b5b2000c091d30c5f56' }
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'commit': '7990823563392e4031cd474d3e90482329eef877' }
 
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ziglang/zig.vim', { 'for': 'zig' }
@@ -60,8 +60,6 @@ Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 Plug 'ElmCast/elm-vim', {'for': 'elm'}
 Plug 'mxw/vim-jsx', {'for': 'js'}
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
-
-Plug 'liuchengxu/vista.vim'
 
 " ============= LSP ===========================
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -83,14 +81,7 @@ Plug 'wellle/targets.vim'
 Plug 'kana/vim-textobj-entire'
 
 " ============= Clojure ==========================
-Plug 'Olical/conjure', { 'for': 'clojure', 'tag': '*' }
-Plug 'guns/vim-sexp', { 'for': 'clojure' }
-Plug 'tpope/vim-sexp-mappings-for-regular-people', { 'for': 'clojure' }
-
-" ============ PlantUML ==========================
-Plug 'aklt/plantuml-syntax'
-Plug 'tyru/open-browser.vim'
-Plug 'weirongxu/plantuml-previewer.vim'
+Plug 'Olical/conjure', { 'for': ['clojure', 'fennel'], 'tag': '*' }
 
 " ===========================================
 
