@@ -66,6 +66,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " ============= Coc extensions ===============
 Plug 'neoclide/coc-emmet', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-rls', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-java', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
