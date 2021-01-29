@@ -7,6 +7,8 @@ dracula.draw.blood(c, {
     }
 })
 
+config.load_autoconfig()
+
 c.fonts.default_family = [ 'Hasklig monospace' ]
 c.fonts.default_size = '10pt'
 
