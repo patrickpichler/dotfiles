@@ -14,6 +14,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-projectionist'
 
+Plug 'christianrondeau/vim-base64'
 
 Plug 'arthurxavierx/vim-caser'
 
