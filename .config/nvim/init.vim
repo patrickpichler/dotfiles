@@ -49,7 +49,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'axelf4/vim-strip-trailing-whitespace'
 
 " Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'commit': '7990823563392e4031cd474d3e90482329eef877' }
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'commit': 'db2d82cfbd85d8b6caafbd967a27f4d1c6ea5fa6' }
 
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ziglang/zig.vim', { 'for': 'zig' }
