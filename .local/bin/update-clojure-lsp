@@ -5,16 +5,10 @@ set -e
 local_bin_folder="$HOME/.local/bin"
 
 releases_path=https://api.github.com/repos/snoe/clojure-lsp/releases/latest
-curl_cmd="curl -L"
-if [ -n "$GITHUB_API_TOKEN" ]; then
- curl_cmd="$cmd -H 'Authorization: token $GITHUB_API_TOKEN'"
-fi
 
-cmd="$curl_cmd -s $releases_path"
+download_url=$(curl -L -s $releases_path | jq '.assets[] | select(.name | contains("clojure-lsp-native-linux-amd64.zip")) | .browser_download_url')
 
-download_url=$(eval $cmd | grep -oE '"browser_download_url":[ ]?"[^"]*"' | sed -Ern 's/.*browser_download_url":\s?"([^"]*)"/\1/p')
-
-if [ ! $download_url ]; then 
+if [ -z "$download_url" ]; then
   echo something went wrong parsing the download_url...
   exit 1
 fi
@@ -31,9 +25,11 @@ if [ -f $local_bin_folder/clojure-lsp ]; then
   mv $local_bin_folder/clojure-lsp $local_bin_folder/clojure-lsp.bkp
 fi
 
-download_cmd="$curl_cmd $download_url -o $local_bin_folder/clojure-lsp"
+download_cmd="curl \"$download_url\" -o /tmp/clojure-lsp.zip -L"
 echo "Download cmd: $download_cmd"
 eval $download_cmd
+
+unzip -d "$local_bin_folder" /tmp/clojure-lsp.zip
 
 chmod +x "$local_bin_folder/clojure-lsp"
 
