@@ -21,7 +21,7 @@ c.aliases = {
         "w": "session-save",
         "q": "quit",
         "wq": "quit --save",
-        "b": "buffer",
+        "b": "tab-select",
         "view-in-mpv": "spawn --userscript view-in-mpv",
         "readability": "spawn --userscript readability",
         "send-to-remarkable": "spawn --userscript send-to-remarkable {url} {title}"
@@ -31,8 +31,8 @@ c.content.autoplay = False
 
 config.source('pyconfig/redirectors.py')
 
-config.bind('<Ctrl-r>', 'open-editor')
-config.bind('<Ctrl-r>', 'open-editor', mode='insert')
+config.bind('<Ctrl-r>', 'edit-text')
+config.bind('<Ctrl-r>', 'edit-text', mode='insert')
 config.bind('<Ctrl-l>', 'edit-url')
 config.bind('<Alt-l>', 'spawn --userscript qute-gopass')
 config.bind('<Alt-l>', 'spawn --userscript qute-gopass', mode='insert')
