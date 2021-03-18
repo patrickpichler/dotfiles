@@ -438,6 +438,18 @@ if executable('par')
   autocmd FileType mail set formatprg=par\ -rjeq
 endif
 
+
+function! <SID>StripTrailingWhitespaces()
+  if !&binary && &filetype != 'diff'
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+  endif
+endfun
+
+autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
+      \ :call <SID>StripTrailingWhitespaces()
+
 " }}}
 
 " NERDTree {{{
@@ -550,17 +562,6 @@ augroup END
 if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
-
-function! <SID>StripTrailingWhitespaces()
-  if !&binary && &filetype != 'diff'
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-  endif
-endfun
-
-autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
-      \ :call <SID>StripTrailingWhitespaces()
 
 " }}}
 
