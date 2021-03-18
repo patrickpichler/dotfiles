@@ -564,4 +564,30 @@ autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
 
 " }}}
 
+" JSON {{{
+"
+function! <SID>FormatJson()
+  echom "json"
+  let l:save = winsaveview()
+  keeppatterns %!jq
+  echom "fomrat"
+  call winrestview(l:save)
+endfun
+
+function! s:on_json() abort
+  if executable('jq')
+    echom "wat"
+    nmap <buffer><silent> <leader>fa :call <SID>FormatJson()<CR>
+
+  endif
+endfunction
+
+augroup json_setings
+  au!
+
+  autocmd Filetype json :call s:on_json()
+augroup END
+
+"}}}
+
 " vim: foldmethod=marker foldlevel=0 foldenable
