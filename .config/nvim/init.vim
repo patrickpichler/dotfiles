@@ -520,22 +520,24 @@ autocmd FileType asm setlocal commentstring=;\ %s
 
 " vim-lsp {{{
 
+let g:lsp_diagnostics_echo_cursor = 1
+
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
   if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> gs <plug>(lsp-document-symbol-search)
-  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-  nmap <buffer> gr <plug>(lsp-references)
-  nmap <buffer> gi <plug>(lsp-implementation)
-  nmap <buffer> gt <plug>(lsp-type-definition)
-  nmap <buffer> <leader>rn <plug>(lsp-rename)
-  nmap <buffer> [d <plug>(lsp-previous-diagnostic)
-  nmap <buffer> ]d <plug>(lsp-next-diagnostic)
-  nmap <buffer> K <plug>(lsp-hover)
-  inoremap <buffer> <expr><c-f> lsp#scroll(+4)
-  inoremap <buffer> <expr><c-d> lsp#scroll(-4)
+  nmap <buffer><silent> gd <plug>(lsp-definition)
+  nmap <buffer><silent> gs <plug>(lsp-document-symbol-search)
+  nmap <buffer><silent> gS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer><silent> gr <plug>(lsp-references)
+  nmap <buffer><silent> gi <plug>(lsp-implementation)
+  nmap <buffer><silent> gt <plug>(lsp-type-definition)
+  nmap <buffer><silent> <leader>rn <plug>(lsp-rename)
+  nmap <buffer><silent> [d <plug>(lsp-previous-diagnostic)
+  nmap <buffer><silent> ]d <plug>(lsp-next-diagnostic)
+  nmap <buffer><silent> K <plug>(lsp-hover)
+  nnoremap <buffer><silent> <expr><m-f> lsp#scroll(+5)
+  nnoremap <buffer><silent> <expr><m-d> lsp#scroll(-5)
 
   let g:lsp_format_sync_timeout = 1000
   autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
@@ -543,11 +545,6 @@ function! s:on_lsp_buffer_enabled() abort
   set foldmethod=expr
         \ foldexpr=lsp#ui#vim#folding#foldexpr()
         \ foldtext=lsp#ui#vim#folding#foldtext()
-
-  autocmd User lsp_float_opened nnoremap <buffer> <expr><c-f> lsp#scroll(+5)
-  autocmd User lsp_float_opened nnoremap <buffer> <expr><c-d> lsp#scroll(-5)
-  autocmd User lsp_float_closed nunmap <buffer> <c-f>
-  autocmd User lsp_float_closed nunmap <buffer> <c-d>
 
   " refer to doc to add more commands
 endfunction
