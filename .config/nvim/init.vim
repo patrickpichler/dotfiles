@@ -256,12 +256,6 @@ endfunction
 "<S-TAB>: completion back.
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
 
-"<CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return deoplete#cancel_popup() . "\<CR>"
-endfunction
-
 call deoplete#custom#option('camel_case', v:true)
 call deoplete#custom#option('auto_complete_delay', 0)
 call deoplete#custom#option('smart_case', v:true)
