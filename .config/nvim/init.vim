@@ -260,6 +260,7 @@ call deoplete#custom#option('camel_case', v:true)
 call deoplete#custom#option('auto_complete_delay', 0)
 call deoplete#custom#option('smart_case', v:true)
 call deoplete#custom#option('min_pattern_length', 1)
+
 "}}}
 
 " Neosnip {{{
@@ -345,6 +346,12 @@ function! s:denite_my_settings() abort
   \ denite#do_map('toggle_select')
   nnoremap <silent><buffer><expr> a
   \ denite#do_map('toggle_select_all')
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+
+function! s:denite_filter_my_settings() abort
+  call deoplete#custom#buffer_option('auto_complete', v:false)
 endfunction
 
 " }}}
