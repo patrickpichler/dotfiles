@@ -38,14 +38,18 @@ Plug 'AndrewRadev/inline_edit.vim'
 
 Plug 'mbbill/undotree'
 
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
 
 Plug 'AndrewRadev/bufferize.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
 
 Plug 'machakann/vim-highlightedyank'
+
+Plug 'axelf4/vim-strip-trailing-whitespace'
+
+" Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'commit': 'db2d82cfbd85d8b6caafbd967a27f4d1c6ea5fa6' }
 
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ziglang/zig.vim', { 'for': 'zig' }
@@ -58,14 +62,19 @@ Plug 'ElmCast/elm-vim', {'for': 'elm'}
 Plug 'mxw/vim-jsx', {'for': 'js'}
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 
-" Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'commit': 'db2d82cfbd85d8b6caafbd967a27f4d1c6ea5fa6' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'lighttiger2505/deoplete-vim-lsp'
+" ============= LSP ===========================
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" ============= lsp ==============
-Plug 'patrickpichler/vim-lsp'
-Plug 'mattn/vim-lsp-settings'
+" ============= Coc extensions ===============
+Plug 'neoclide/coc-emmet', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-rls', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-java', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tslint-plugin', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-html', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-snippets', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-python', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 
 " ============= New text objects ==============
 Plug 'kana/vim-textobj-user'
@@ -122,14 +131,14 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 
-set smarttab
+set smarttab 
 set autoindent
 set smartindent
 
 set splitbelow
 set splitright
 
-set inccommand=split
+set inccommand=split 
 
 au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
 
@@ -147,7 +156,7 @@ set foldnestmax=10 " deepest fold is 10 levels
 set nofoldenable " don't fold by default
 set foldlevel=1
 
-set completeopt=noinsert,noselect,menuone
+set completeopt=noinsert,noselect,menuone 
 set shortmess+=c
 
 " Backup and swap files {{{
@@ -187,9 +196,6 @@ set updatetime=10
 set laststatus=2 " always show statusbar
 set noshowmode
 
-" remap leader key to something more reachable
-let mapleader = ","
-
 " }}}
 
 " Lightline {{{
@@ -217,6 +223,7 @@ function! LightlineReadonly()
   return &readonly && &filetype !=# 'help' ? 'RO' : ''
 endfunction
 
+autocmd User CocDiagnosticChange call lightline#update()
 
 function! LightLineGitGutter()
   if ! exists('*GitGutterGetHunkSummary')
@@ -237,47 +244,8 @@ endfunction
 
 " }}}
 
-" Deoplete {{{
-let g:deoplete#enable_at_startup = 1
-
-"Autocomplete and cycle from top-to-bottom of suggestions using <Tab>.
-inoremap <expr><TAB> pumvisible() ? "\<c-n>" : "\<TAB>"
-
-"<TAB>: completion.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#manual_complete()
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-"<S-TAB>: completion back.
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
-
-call deoplete#custom#option('camel_case', v:true)
-call deoplete#custom#option('auto_complete_delay', 0)
-call deoplete#custom#option('smart_case', v:true)
-call deoplete#custom#option('min_pattern_length', 1)
-
-"}}}
-
-" Neosnip {{{
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <expr><TAB>
-   \ pumvisible() ? "\<C-n>" :
-   \ neosnippet#expandable_or_jumpable() ?
-   \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-"}}}
+" remap leader key to something more reachable
+let mapleader = ","
 
 " Denite {{{
 
@@ -348,11 +316,133 @@ function! s:denite_my_settings() abort
   \ denite#do_map('toggle_select_all')
 endfunction
 
-autocmd FileType denite-filter call s:denite_filter_my_settings()
+" }}}
 
-function! s:denite_filter_my_settings() abort
-  call deoplete#custom#buffer_option('auto_complete', v:false)
+" coc.nvim {{{
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+inoremap <silent><expr> <c-space> coc#refresh()
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
+nmap <silent> [k :CocPrev<cr>
+nmap <silent> ]k :CocNext<cr>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <leader>u <Plug>(coc-references)
+nmap <leader>rn <Plug>(coc-rename)
+
+nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-d>"
+inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<C-u>"
+vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+
+" CocSnippet {{{
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" }}}
+
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+nmap <leader>fa  :<C-u>call CocAction('format')<cr>
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <silent><leader>p  :call CocActionAsync('showSignatureHelp')<cr>
+inoremap <silent><C-p> <C-o>:call CocActionAsync('showSignatureHelp')<cr>
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+xmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
+hi CocWarningFloat ctermbg=130 ctermfg=black guibg=#ff922b guifg=black
+hi CocErrorFloat ctermbg=9 ctermfg=black guibg=#ff0000 guifg=black
+hi CocInfoFloat ctermbg=11 ctermfg=black guibg=#fab005 guifg=black
+hi CocHintFloat ctermbg=12 ctermfg=black guifg=#15aabf guifg=black
 
 " }}}
 
@@ -398,7 +488,7 @@ highlight HighlightedyankRegion ctermbg=yellow guibg=yellow
 
 augroup additional_ft
   au!
-
+  
   autocmd BufNewFile,BufRead Jenkinsfile set ft=groovy
 augroup END
 
@@ -421,7 +511,7 @@ augroup END
 " }}}
 
 " Markdown {{{
-let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
+let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh', 
       \ 'sh', 'kotlin']
 " }}}
 
@@ -438,18 +528,6 @@ if executable('par')
 
   autocmd FileType mail set formatprg=par\ -rjeq
 endif
-
-
-function! <SID>StripTrailingWhitespaces()
-  if !&binary && &filetype != 'diff'
-    let l:save = winsaveview()
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
-  endif
-endfun
-
-autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
-      \ :call <SID>StripTrailingWhitespaces()
 
 " }}}
 
@@ -470,7 +548,7 @@ autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
               :NERDTreeToggle
           endif
       endfunction
-
+      
       " toggle nerd tree
       nmap <silent> <leader>k :call ToggleNerdTree()<cr>
       nmap <silent> - :NERDTreeFind<cr>
@@ -519,69 +597,5 @@ xmap ac <Plug>(GitGutterTextObjectOuterVisual)
 autocmd FileType asm setlocal commentstring=;\ %s
 "}}}
 
-" vim-lsp {{{
-
-let g:lsp_diagnostics_echo_cursor = 1
-
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-  nmap <buffer><silent> gd <plug>(lsp-definition)
-  nmap <buffer><silent> gs <plug>(lsp-document-symbol-search)
-  nmap <buffer><silent> gS <plug>(lsp-workspace-symbol-search)
-  nmap <buffer><silent> gr <plug>(lsp-references)
-  nmap <buffer><silent> gi <plug>(lsp-implementation)
-  nmap <buffer><silent> gt <plug>(lsp-type-definition)
-  nmap <buffer><silent> <leader>rn <plug>(lsp-rename)
-  nmap <buffer><silent> [d <plug>(lsp-previous-diagnostic)
-  nmap <buffer><silent> ]d <plug>(lsp-next-diagnostic)
-  nmap <buffer><silent> K <plug>(lsp-hover)
-  nnoremap <buffer><silent> <expr><m-f> lsp#scroll(+5)
-  nnoremap <buffer><silent> <expr><m-d> lsp#scroll(-5)
-
-  let g:lsp_format_sync_timeout = 1000
-  autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
-
-  set foldmethod=expr
-        \ foldexpr=lsp#ui#vim#folding#foldexpr()
-        \ foldtext=lsp#ui#vim#folding#foldtext()
-
-  " refer to doc to add more commands
-endfunction
-
-augroup lsp_install
-  au!
-  " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-
-" }}}
-
-" JSON {{{
-"
-function! <SID>FormatJson()
-  echom "json"
-  let l:save = winsaveview()
-  keeppatterns %!jq
-  echom "fomrat"
-  call winrestview(l:save)
-endfun
-
-function! s:on_json() abort
-  if executable('jq')
-    echom "wat"
-    nmap <buffer><silent> <leader>fa :call <SID>FormatJson()<CR>
-
-  endif
-endfunction
-
-augroup json_setings
-  au!
-
-  autocmd Filetype json :call s:on_json()
-augroup END
-
-"}}}
 
 " vim: foldmethod=marker foldlevel=0 foldenable
