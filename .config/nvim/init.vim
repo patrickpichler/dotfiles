@@ -75,6 +75,7 @@ Plug 'neoclide/coc-tslint-plugin', {'tag': '*', 'do': 'yarn install --frozen-loc
 Plug 'neoclide/coc-html', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-snippets', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-python', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
+Plug 'josa42/coc-go', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 
 " ============= New text objects ==============
 Plug 'kana/vim-textobj-user'
