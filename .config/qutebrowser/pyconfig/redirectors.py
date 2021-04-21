@@ -7,10 +7,10 @@ from PyQt5.QtCore import QUrl
 
 # Any return value other than a literal 'False' means we redirected
 REDIRECT_MAP = {
-	"reddit.com": operator.methodcaller('setHost', 'old.reddit.com'),
-	"www.reddit.com": operator.methodcaller('setHost', 'old.reddit.com'),
-	"www.twitter.com": operator.methodcaller('setHost', 'nitter.net'),
-	"twitter.com": operator.methodcaller('setHost', 'nitter.net'),
+	"reddit.com": operator.methodcaller('setHost', 'libredd.it'),
+	"www.reddit.com": operator.methodcaller('setHost', 'libredd.it'),
+	"www.twitter.com": operator.methodcaller('setHost', 'nitter.pussthecat.org'),
+	"twitter.com": operator.methodcaller('setHost', 'nitter.pussthecat.org'),
 } # type: typing.Dict[str, typing.Callable[..., typing.Optional[bool]]]
 
 def int_fn(info: interceptor.Request):
