@@ -46,8 +46,6 @@ Plug 'junegunn/vim-peekaboo'
 
 Plug 'machakann/vim-highlightedyank'
 
-Plug 'axelf4/vim-strip-trailing-whitespace'
-
 " Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'commit': 'db2d82cfbd85d8b6caafbd967a27f4d1c6ea5fa6' }
 
@@ -132,14 +130,14 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 
-set smarttab 
+set smarttab
 set autoindent
 set smartindent
 
 set splitbelow
 set splitright
 
-set inccommand=split 
+set inccommand=split
 
 au BufNewFile,BufRead /dev/shm/gopass.* setlocal noswapfile nobackup noundofile
 
@@ -157,7 +155,7 @@ set foldnestmax=10 " deepest fold is 10 levels
 set nofoldenable " don't fold by default
 set foldlevel=1
 
-set completeopt=noinsert,noselect,menuone 
+set completeopt=noinsert,noselect,menuone
 set shortmess+=c
 
 " Backup and swap files {{{
@@ -489,7 +487,7 @@ highlight HighlightedyankRegion ctermbg=yellow guibg=yellow
 
 augroup additional_ft
   au!
-  
+
   autocmd BufNewFile,BufRead Jenkinsfile set ft=groovy
 augroup END
 
@@ -512,7 +510,7 @@ augroup END
 " }}}
 
 " Markdown {{{
-let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh', 
+let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
       \ 'sh', 'kotlin']
 " }}}
 
@@ -529,6 +527,17 @@ if executable('par')
 
   autocmd FileType mail set formatprg=par\ -rjeq
 endif
+
+function! <SID>StripTrailingWhitespaces()
+  if !&binary && &filetype != 'diff'
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+  endif
+endfun
+
+autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
+      \ :call <SID>StripTrailingWhitespaces()
 
 " }}}
 
@@ -549,7 +558,7 @@ endif
               :NERDTreeToggle
           endif
       endfunction
-      
+
       " toggle nerd tree
       nmap <silent> <leader>k :call ToggleNerdTree()<cr>
       nmap <silent> - :NERDTreeFind<cr>
