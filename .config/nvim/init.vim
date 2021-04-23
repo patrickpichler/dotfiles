@@ -443,6 +443,8 @@ hi CocErrorFloat ctermbg=9 ctermfg=black guibg=#ff0000 guifg=black
 hi CocInfoFloat ctermbg=11 ctermfg=black guibg=#fab005 guifg=black
 hi CocHintFloat ctermbg=12 ctermfg=black guifg=#15aabf guifg=black
 
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
 " }}}
 
 " Mappings {{{
