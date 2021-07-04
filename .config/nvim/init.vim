@@ -15,6 +15,29 @@ Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-projectionist'
 
 Plug 'christianrondeau/vim-base64'
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'ray-x/lsp_signature.nvim'
+
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-lsputils'
+
+Plug 'liuchengxu/vista.vim'
+
+Plug 'folke/trouble.nvim'
+
+Plug 'hrsh7th/nvim-compe', { 'tag': '*' }
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-lua/popup.nvim'
+
+Plug 'nvim-telescope/telescope.nvim'
+
+Plug 'kyazdani42/nvim-tree.lua'
+
+Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'arthurxavierx/vim-caser'
 
@@ -26,18 +49,15 @@ Plug 'cohama/lexima.vim'
 
 Plug 'junegunn/rainbow_parentheses.vim'
 
-Plug 'airblade/vim-gitgutter'
-
 Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
-
-Plug 'scrooloose/nerdtree'
 
 Plug 'AndrewRadev/linediff.vim'
 Plug 'AndrewRadev/inline_edit.vim'
 
 Plug 'mbbill/undotree'
 
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 Plug 'AndrewRadev/bufferize.vim'
@@ -45,9 +65,6 @@ Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
 
 Plug 'machakann/vim-highlightedyank'
-
-" Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '*' }
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins', 'commit': 'db2d82cfbd85d8b6caafbd967a27f4d1c6ea5fa6' }
 
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 Plug 'ziglang/zig.vim', { 'for': 'zig' }
@@ -59,21 +76,6 @@ Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
 Plug 'ElmCast/elm-vim', {'for': 'elm'}
 Plug 'mxw/vim-jsx', {'for': 'js'}
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
-
-" ============= LSP ===========================
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" ============= Coc extensions ===============
-Plug 'neoclide/coc-emmet', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-rls', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-java', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-tsserver', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-tslint-plugin', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-html', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-snippets', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-python', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
-Plug 'josa42/coc-go', {'tag': '*', 'do': 'yarn install --frozen-lockfile'}
 
 " ============= New text objects ==============
 Plug 'kana/vim-textobj-user'
@@ -155,7 +157,7 @@ set foldnestmax=10 " deepest fold is 10 levels
 set nofoldenable " don't fold by default
 set foldlevel=1
 
-set completeopt=noinsert,noselect,menuone
+set completeopt=noselect,menuone
 set shortmess+=c
 
 " Backup and swap files {{{
@@ -178,9 +180,6 @@ set backupdir^=~/.local/share/nvim/backup//
 
 " persist the undo tree for each file
 set undofile
-
-set undodir^=~/.local/share/nvim/undo//
-
 " }}}
 
 " Auto open quickfix list on grep
@@ -246,205 +245,129 @@ endfunction
 " remap leader key to something more reachable
 let mapleader = ","
 
-" Denite {{{
+" LSP {{{
 
-if executable('rg')
-  call denite#custom#var('grep', {
-    \ 'command': ['rg'],
-    \ 'default_opts': ['-i', '--vimgrep', '--no-heading', '-F'],
-    \ 'recursive_opts': [],
-    \ 'pattern_opt': [],
-    \ 'separator': ['--'],
-    \ 'final_opts': [],
-    \ })
-endif
+lua << EOF
+local function has_value (tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
 
-if executable('fd')
-   call denite#custom#var('file/rec', 'command',
-        \ ['fd', '--type', 'f', '--follow', '--hidden', '--exclude', '.git',
-        \ ''])
-    call denite#custom#var('directory_rec', 'command',
-        \ ['fd', '--type', 'd', '--follow', '--hidden', '--exclude', '.git',
-        \ ''])
+    return false
+end
 
-   call denite#custom#alias('source', 'file/rec/noignore', 'file/rec')
 
-   call denite#custom#var('file/rec/noignore', 'command',
-        \ ['fd', '--type', 'f', '--follow', '--hidden', '--exclude', '.git',
-        \ '--no-ignore', ''])
-endif
+vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
+vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 
-nnoremap <silent><M-b> :Denite buffer<CR>
-nnoremap <silent><M-p> :Denite file/rec<CR>
-nnoremap <silent><space>g :Denite grep:::!<CR>
-nnoremap <silent><M-g> :Denite -buffer-name=grep -default-action=quickfix grep:::!<CR>
-nnoremap <silent><leader>* :DeniteCursorWord -buffer-name=grep -default-action=quickfix grep<CR>
+local nvim_lsp = require('lspconfig')
 
-call denite#custom#option('_', {
-    \ 'cached_filter': v:true,
-    \ 'cursor_shape': v:true,
-    \ 'cursor_wrap': v:true,
-    \ 'highlight_filter_background': 'DeniteFilter',
-    \ 'highlight_matched_char': 'Underlined',
-    \ 'matchers': 'matcher/fuzzy',
-    \ 'sorters': 'sorter/sublime',
-    \ 'statusline': v:false,
-    \ 'start_filter': v:true,
-    \ })
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-" Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> v
-  \ denite#do_map('do_action', 'vsplit')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> l
-  \ denite#do_map('do_action', 'quickfix')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> s
-  \ denite#do_map('toggle_select')
-  nnoremap <silent><buffer><expr> a
-  \ denite#do_map('toggle_select_all')
-endfunction
+  --Enable completion triggered by <c-x><c-o>
+  -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-" }}}
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
 
-" coc.nvim {{{
-autocmd FileType json syntax match Comment +\/\/.\+$+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>ws', ':Telescope lsp_dynamic_workspace_symbols<CR>', opts)
+  buf_set_keymap('n', '<space>wd', ':Telescope lsp_workspace_diagnostics<CR>', opts)
+  buf_set_keymap('n', '<space>s', ':Telescope lsp_document_symbols<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>d', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  require'lsp_signature'.on_attach()
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+  local cap = client.resolved_capabilities
 
-inoremap <silent><expr> <c-space> coc#refresh()
-nmap <silent> [d <Plug>(coc-diagnostic-prev)
-nmap <silent> ]d <Plug>(coc-diagnostic-next)
-nmap <silent> [k :CocPrev<cr>
-nmap <silent> ]k :CocNext<cr>
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+  if cap.document_highlight then
+    vim.cmd([[
+      augroup LspHighlight
+        autocmd!
+        autocmd CursorHold   * lua vim.lsp.buf.document_highlight()
+        autocmd CursorHoldI  * lua vim.lsp.buf.document_highlight()
+        autocmd CursorMoved  * lua vim.lsp.buf.clear_references()
+        autocmd CursorMovedI * lua vim.lsp.buf.clear_references()
+      augroup END
+    ]])
+  end
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>u <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
+end
 
-nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
-nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
-inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<C-d>"
-inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<C-u>"
-vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
-vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    update_in_insert = true,
+  }
+)
 
-" CocSnippet {{{
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { "clangd", "rls", "clojure_lsp", "gopls", "zls",   }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
 
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+nvim_lsp["jdtls"].setup {
+  on_attach = on_attach,
+  cmd = { 'jdtls.sh' },
+  flags = {
+    debounce_text_changes = 150,
+  }
+}
 
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
+require'lspconfig'.jsonls.setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    },
+    commands = {
+      Format = {
+        function()
+          print("format")
+          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+      }
+    }
+}
 
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
+EOF
 
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-" }}}
-
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-nmap <leader>fa  :<C-u>call CocAction('format')<cr>
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-nmap <silent><leader>p  :call CocActionAsync('showSignatureHelp')<cr>
-inoremap <silent><C-p> <C-o>:call CocActionAsync('showSignatureHelp')<cr>
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Using CocList
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
-
-" Create mappings for function text object, requires document symbols feature of languageserver.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-xmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
-
-hi CocWarningFloat ctermbg=130 ctermfg=black guibg=#ff922b guifg=black
-hi CocErrorFloat ctermbg=9 ctermfg=black guibg=#ff0000 guifg=black
-hi CocInfoFloat ctermbg=11 ctermfg=black guibg=#fab005 guifg=black
-hi CocHintFloat ctermbg=12 ctermfg=black guifg=#15aabf guifg=black
-
-autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
-
+highlight LspReferenceText cterm=bold gui=bold ctermfg=green guifg=green
+highlight LspReferenceRead cterm=bold gui=bold ctermfg=green guifg=green
+highlight LspReferenceWrite cterm=bold gui=bold ctermfg=green guifg=green
 " }}}
 
 " Mappings {{{
@@ -543,32 +466,20 @@ autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
 
 " }}}
 
-" NERDTree {{{
-      augroup nerdtree_group
-          autocmd!
-          autocmd FileType nerdtree setlocal nolist " turn off whitespace characters
-          autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
-          autocmd StdinReadPre * let s:std_in=1
-          autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-      augroup END
+" nvim-tree {{{
 
-      " Toggle NERDTree
-      function! ToggleNerdTree()
-          if @% != "" && @% !~ "Startify" && (!exists("g:NERDTree") || (g:NERDTree.ExistsForTab() && !g:NERDTree.IsOpen()))
-              :NERDTreeFind
-          else
-              :NERDTreeToggle
-          endif
-      endfunction
+let g:nvim_tree_auto_open = 1
+let g:nvim_tree_show_icons = {
+    \ 'git': 0,
+    \ 'folders': 0,
+    \ 'files': 0,
+    \ 'folder_arrows': 1,
+    \ }
 
-      " toggle nerd tree
-      nmap <silent> <leader>k :call ToggleNerdTree()<cr>
-      nmap <silent> - :NERDTreeFind<cr>
+nnoremap <leader>k :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap - :NvimTreeFindFile<CR>
 
-      let NERDTreeShowHidden=1
-      let g:NERDTreeFileExtensionHighlightFullName = 1
-      let g:NERDTreeExactMatchHighlightFullName = 1
-      let g:NERDTreePatternMatchHighlightFullName = 1
 " }}}
 
 " rainbow_parentheses {{{
@@ -590,24 +501,114 @@ let g:conjure#mapping#def_word = 'nil'
 autocmd BufNewFile,BufRead *.boot set filetype=clojure
 " }}}
 
-" GitGutter {{{
-
-nmap [h <Plug>(GitGutterPrevHunk)
-nmap ]h <Plug>(GitGutterNextHunk)
-
-highlight SignColumn guibg=#ECECEC
-highlight GitGutterChange guifg=#FF8000 ctermfg=3
-
-omap ic <Plug>(GitGutterTextObjectInnerPending)
-omap ac <Plug>(GitGutterTextObjectOuterPending)
-xmap ic <Plug>(GitGutterTextObjectInnerVisual)
-xmap ac <Plug>(GitGutterTextObjectOuterVisual)
-
-" }}}
-
 " vim-commentary {{{
 autocmd FileType asm setlocal commentstring=;\ %s
 "}}}
 
+" Gitsigns {{{
+highlight SignColumn guibg=#ECECEC
+
+lua << EOF
+require('gitsigns').setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    },
+}
+EOF
+" }}}
+
+" vim-compe {{{
+let g:lexima_no_default_rules = v:true
+call lexima#set_default_rules()
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<CR>', 'i'))
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
+let g:compe = {}
+let g:compe.enabled = v:true
+let g:compe.autocomplete = v:true
+let g:compe.min_length = 1
+let g:compe.preselect = 'disable'
+let g:compe.throttle_time = 80
+let g:compe.source_timeout = 200
+let g:compe.resolve_timeout = 800
+let g:compe.incomplete_delay = 400
+let g:compe.max_abbr_width = 100
+let g:compe.max_kind_width = 100
+let g:compe.max_menu_width = 100
+let g:compe.documentation = v:true
+
+let g:compe.source = {}
+let g:compe.source.path = v:true
+let g:compe.source.buffer = v:true
+let g:compe.source.calc = v:true
+let g:compe.source.nvim_lsp = v:true
+let g:compe.source.nvim_lua = v:true
+let g:compe.source.ultisnips = v:true
+let g:compe.source.emoji = v:true
+
+" }}}
+
+" Treesitter {{{
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+  },
+}
+EOF
+
+" }}}
+
+" nvim-telescope {{{
+
+nnoremap <M-p> <cmd>Telescope find_files<cr>
+nnoremap <space>g <cmd>Telescope live_grep<cr>
+
+" }}}
+
+" UltiSnips {{{
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" }}}
+
+" vista {{{
+
+let g:vista#renderer#enable_icon = 0
+
+" }}}
+
+" trouble {{{
+
+lua << EOF
+require("trouble").setup {
+  icons = false,
+  fold_open = "v", -- icon used for open folds
+  fold_closed = ">", -- icon used for closed folds
+  indent_lines = false, -- add an indent guide below the fold icons
+  signs = {
+      -- icons / text used for a diagnostic
+      error = "error",
+      warning = "warn",
+      hint = "hint",
+      information = "info"
+  },
+  use_lsp_diagnostic_signs = false -- enabling this will use the signs defined in your lsp clien
+}
+EOF
+
+" }}}
 
 " vim: foldmethod=marker foldlevel=0 foldenable
