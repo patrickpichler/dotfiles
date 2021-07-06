@@ -469,11 +469,26 @@ autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
 " nvim-tree {{{
 
 let g:nvim_tree_auto_open = 1
+let g:nvim_tree_lsp_diagnostics = 1
+let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_show_icons = {
     \ 'git': 0,
-    \ 'folders': 0,
     \ 'files': 0,
-    \ 'folder_arrows': 1,
+    \ 'folders': 1,
+    \ 'folder_arrows': 0,
+    \ }
+
+let g:nvim_tree_icons = {
+    \ 'folder': {
+    \   'arrow_closed': ">",
+    \   'arrow_open': "v",
+    \   'default': ">",
+    \   'open': "v",
+    \   'empty': "-",
+    \   'empty_open': "-",
+    \   'symlink': "~",
+    \   'symlink_open': "V",
+    \   }
     \ }
 
 nnoremap <leader>k :NvimTreeToggle<CR>
