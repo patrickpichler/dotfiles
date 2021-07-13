@@ -268,8 +268,6 @@ vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.imp
 vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
 vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 
-local nvim_lsp = require('lspconfig')
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -344,34 +342,30 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
+require'lspinstall'.setup()
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { "clangd", "rls", "clojure_lsp", "zls", "gopls"  }
+local servers = require"lspinstall".installed_servers()
+
+for _, s in pairs({ "clangd", "rls", "clojure_lsp", "zls", "gopls" }) do
+  table.insert(servers, s)
+end
+
 for _, lsp in ipairs(servers) do
-  local s = settings[lsp]
-
-  if s == nil then
-    s = {}
-  end
-
-  nvim_lsp[lsp].setup {
+  local config = {
     capabilities = capabilities,
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
     },
-
-    settings = s
   }
+
+  if settings[lsp] ~= nil then
+    config.settings = settings[lsp]
+  end
+
+  require('lspconfig')[lsp].setup(config)
 end
-
-nvim_lsp["jdtls"].setup {
-  on_attach = on_attach,
-  cmd = { 'jdtls.sh' },
-  flags = {
-    debounce_text_changes = 150,
-  }
-}
 
 require'lspconfig'.jsonls.setup {
     on_attach = on_attach,
@@ -381,7 +375,6 @@ require'lspconfig'.jsonls.setup {
     commands = {
       Format = {
         function()
-          print("format")
           vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
         end
       }
