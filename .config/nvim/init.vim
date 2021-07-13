@@ -494,6 +494,7 @@ autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
 " nvim-tree {{{
 
 let g:nvim_tree_auto_open = 1
+let g:nvim_tree_auto_resize = 0
 let g:nvim_tree_lsp_diagnostics = 1
 let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_show_icons = {
