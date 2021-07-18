@@ -189,6 +189,10 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 set updatetime=10
 
+" Map Ctrl+c to Esc, as Ctrl+C does not do some usefull things
+map <C-c> <Esc>
+map! <C-c> <Esc>
+
 
 " Status Line {
 set laststatus=2 " always show statusbar
