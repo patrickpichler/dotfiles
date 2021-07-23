@@ -17,6 +17,7 @@ Plug 'tpope/vim-projectionist'
 Plug 'christianrondeau/vim-base64'
 Plug 'neovim/nvim-lspconfig'
 Plug 'kabouzeid/nvim-lspinstall'
+Plug 'RRethy/vim-illuminate'
 
 Plug 'RishabhRD/popfix'
 Plug 'RishabhRD/nvim-lsputils'
@@ -262,7 +263,6 @@ local function has_value (tab, val)
     return false
 end
 
-
 vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
 vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
 vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
@@ -307,20 +307,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
-  local cap = client.resolved_capabilities
-
-  if cap.document_highlight then
-    vim.cmd([[
-      augroup LspHighlight
-        autocmd!
-        autocmd CursorHold   * lua vim.lsp.buf.document_highlight()
-        autocmd CursorHoldI  * lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved  * lua vim.lsp.buf.clear_references()
-        autocmd CursorMovedI * lua vim.lsp.buf.clear_references()
-      augroup END
-    ]])
-  end
-
+  require 'illuminate'.on_attach(client)
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -656,6 +643,10 @@ require("trouble").setup {
 }
 EOF
 
+" }}}
+
+" vim-illumiinate {{{
+let g:Illuminate_ftblacklist = ['NvimTree']
 " }}}
 
 " vim: foldmethod=marker foldlevel=0 foldenable
