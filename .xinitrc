@@ -37,7 +37,7 @@ xrandr --auto
 nitrogen --restore
 
 if [  -n "$SCREEN_CONFIG"  ] && [ -x "$HOME/screenlayout/$SCREEN_CONFIG" ]; then
- . "$HOME/screenlayout/$SCREEN_CONFIG" 
+ . "$HOME/screenlayout/$SCREEN_CONFIG"
 fi
 
 xsettingsd &
