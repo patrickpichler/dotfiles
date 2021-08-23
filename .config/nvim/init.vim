@@ -561,7 +561,7 @@ lua <<EOF
       buffer = true;
       nvim_lsp = true;
       nvim_lua = true;
-      nvim_vsnip = true;
+      vsnip = true;
       nvim_emoji = true;
       nvim_calc = true;
       treesitter = true;
