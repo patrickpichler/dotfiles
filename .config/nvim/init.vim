@@ -78,6 +78,8 @@ Plug 'ElmCast/elm-vim', {'for': 'elm'}
 Plug 'mxw/vim-jsx', {'for': 'js'}
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 
+Plug 'hashivim/vim-terraform'
+
 " ============= New text objects ==============
 Plug 'kana/vim-textobj-user'
 Plug 'vim-utils/vim-line'
