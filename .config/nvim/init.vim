@@ -589,7 +589,13 @@ EOF
 
 " nvim-telescope {{{
 
-nnoremap <M-p> <cmd>Telescope find_files<cr>
+lua <<EOF
+  require'telescope'.setup {
+    defaults = { vimgrep_arguments = { 'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' } }
+  }
+EOF
+
+nnoremap <M-p> <cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>
 nnoremap <space>g <cmd>Telescope live_grep<cr>
 
 " }}}
