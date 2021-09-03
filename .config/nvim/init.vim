@@ -645,7 +645,7 @@ EOF
 " }}}
 
 " vim-illumiinate {{{
-let g:Illuminate_ftblacklist = ['NvimTree']
+let g:Illuminate_ftblacklist = ['NvimTree', 'fugitiveblame']
 " }}}
 
 " vim: foldmethod=marker foldlevel=0 foldenable
