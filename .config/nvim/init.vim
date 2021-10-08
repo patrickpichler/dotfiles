@@ -35,7 +35,7 @@ Plug 'nvim-lua/popup.nvim'
 
 Plug 'nvim-telescope/telescope.nvim'
 
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-tree.lua', { 'tag': '*' }
 
 Plug 'lewis6991/gitsigns.nvim'
 
@@ -479,11 +479,13 @@ autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
 " }}}
 
 " nvim-tree {{{
+lua <<EOF
+require 'nvim-tree'.setup {
+    lsp_diagnostics = true,
+}
+EOF
 
-let g:nvim_tree_auto_open = 0
 let g:nvim_tree_group_empty = 1
-let g:nvim_tree_auto_resize = 0
-let g:nvim_tree_lsp_diagnostics = 1
 let g:nvim_tree_indent_markers = 1
 let g:nvim_tree_show_icons = {
     \ 'git': 0,
