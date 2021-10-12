@@ -481,8 +481,10 @@ autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
 " nvim-tree {{{
 lua <<EOF
 require 'nvim-tree'.setup {
-    lsp_diagnostics = true,
-    open_on_setup = true,
+  diagnostics = {
+    enabled = true,
+  },
+  open_on_setup = true,
 }
 EOF
 
