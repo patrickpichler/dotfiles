@@ -26,7 +26,17 @@ Plug 'liuchengxu/vista.vim'
 
 Plug 'folke/trouble.nvim'
 
-Plug 'hrsh7th/nvim-compe', { 'tag': '*' }
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/nvim-cmp'
+
+Plug 'ray-x/cmp-treesitter'
+
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
+Plug 'rafamadriz/friendly-snippets'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
@@ -56,10 +66,6 @@ Plug 'AndrewRadev/linediff.vim'
 Plug 'AndrewRadev/inline_edit.vim'
 
 Plug 'mbbill/undotree'
-
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/vim-vsnip-integ'
-Plug 'rafamadriz/friendly-snippets'
 
 Plug 'AndrewRadev/bufferize.vim'
 Plug 'tommcdo/vim-exchange'
@@ -347,7 +353,7 @@ end
 
 for _, lsp in ipairs(servers) do
   local config = {
-    capabilities = capabilities,
+    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
@@ -553,35 +559,37 @@ require('gitsigns').setup {
 EOF
 " }}}
 
-" vim-compe {{{
-let g:lexima_no_default_rules = v:true
-call lexima#set_default_rules()
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm(lexima#expand('<CR>', 'i'))
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
-inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
-
+" nvim-cmp {{{
 lua <<EOF
-  require'compe'.setup {
-    enable = true;
-    autocomplete = true;
-    documentation = true;
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
 
-    source = {
-      path = true;
-      buffer = true;
-      nvim_lsp = true;
-      nvim_lua = true;
-      vsnip = true;
-      nvim_emoji = true;
-      nvim_calc = true;
-      treesitter = true;
-    };
-
-  }
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    mapping = {
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' },
+      { name = 'buffer' },
+      { name = 'path' },
+      { name = 'treesitter' },
+    }
+  })
 EOF
 
+hi CmpItemAbbr ctermfg=White guifg=White
+hi CmpItemKind ctermfg=LightGreen guifg=LightGreen
+hi CmpItemMenu ctermfg=White guifg=White
 " }}}
 
 " Treesitter {{{
