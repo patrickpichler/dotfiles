@@ -490,7 +490,6 @@ require 'nvim-tree'.setup {
   diagnostics = {
     enabled = true,
   },
-  open_on_setup = true,
   view = {
     width = 40,
     auto_resize = true,
