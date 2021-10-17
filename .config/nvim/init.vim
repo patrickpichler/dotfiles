@@ -16,7 +16,7 @@ Plug 'tpope/vim-projectionist'
 
 Plug 'christianrondeau/vim-base64'
 Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
+Plug 'williamboman/nvim-lsp-installer'
 Plug 'RRethy/vim-illuminate'
 
 Plug 'RishabhRD/popfix'
@@ -342,16 +342,26 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
-require'lspinstall'.setup()
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = require"lspinstall".installed_servers()
+local lsp_installer = require("nvim-lsp-installer")
 
-for _, s in pairs({ "clangd", "rls", "clojure_lsp", "zls", "gopls" }) do
-  table.insert(servers, s)
-end
+lsp_installer.on_server_ready(function(server)
+    local opts = {
+      capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
+      on_attach = on_attach,
+      flags = {
+        debounce_text_changes = 150,
+      },
+    }
 
-for _, lsp in ipairs(servers) do
+    if settings[lsp] ~= nil then
+      config.settings = settings[lsp]
+    end
+
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
+
+for _, lsp in ipairs({ "clangd", "rls", "clojure_lsp", "zls", "gopls" }) do
   local config = {
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
     on_attach = on_attach,
