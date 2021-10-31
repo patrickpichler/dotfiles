@@ -184,6 +184,10 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessUp exec brightnessctl s 5%+
 bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
 
+# Dunst keys
+bindsym $mod+grave exec dunstctl close
+bindsym $mod+Shift+grave exec dunstctl history-pop
+
 # Start polybar
 
 exec_always --no-startup-id $HOME/.local/bin/ppichler-polybar
