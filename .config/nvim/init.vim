@@ -351,8 +351,12 @@ lsp_installer.on_server_ready(function(server)
       },
     }
 
-    if settings[lsp] ~= nil then
-      config.settings = settings[lsp]
+    if settings[server.name] ~= nil then
+      opts.settings = settings[lsp]
+    end
+
+    if server.name == 'efm' then
+      opts.filetypes = {'python'}
     end
 
     server:setup(opts)
