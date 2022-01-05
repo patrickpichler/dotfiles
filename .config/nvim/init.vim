@@ -14,13 +14,15 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dotenv'
 Plug 'tpope/vim-projectionist'
 
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-lsputils'
+
 Plug 'christianrondeau/vim-base64'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'RRethy/vim-illuminate'
 
-Plug 'RishabhRD/popfix'
-Plug 'RishabhRD/nvim-lsputils'
+Plug 'folke/lsp-colors.nvim'
 
 Plug 'liuchengxu/vista.vim'
 
@@ -44,6 +46,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/popup.nvim'
 
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 Plug 'kyazdani42/nvim-tree.lua', { 'tag': '*' }
 
@@ -261,6 +264,7 @@ let mapleader = ","
 " LSP {{{
 
 lua << EOF
+
 local function has_value (tab, val)
     for index, value in ipairs(tab) do
         if value == val then
@@ -271,7 +275,6 @@ local function has_value (tab, val)
     return false
 end
 
-vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
 vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
 vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
 vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
@@ -307,11 +310,11 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('v', '<space>a', '<ESC><cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
   require 'illuminate'.on_attach(client)
 end
@@ -619,8 +622,10 @@ EOF
 
 lua <<EOF
   require'telescope'.setup {
-    defaults = { vimgrep_arguments = { 'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' } }
+    defaults = { vimgrep_arguments = { 'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' } },
   }
+
+  require('telescope').load_extension('ui-select')
 EOF
 
 nnoremap <M-p> <cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>
