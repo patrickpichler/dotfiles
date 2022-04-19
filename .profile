@@ -28,11 +28,15 @@ if [ -d $HOME/.cargo/bin ]; then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+if [ -d $HOME/go/bin ]; then
+  export PATH="$HOME/go/bin:$PATH"
+fi
+
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
   . $HOME/.nix-profile/etc/profile.d/nix.sh;
 elif [ -e /etc/profile.d/nix.sh ]; then
   . /etc/profile.d/nix.sh
-fi 
+fi
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
