@@ -169,7 +169,7 @@ set foldnestmax=10 " deepest fold is 10 levels
 set nofoldenable " don't fold by default
 set foldlevel=1
 
-set completeopt=noselect,menuone
+set completeopt=menu,menuone,noselect
 set shortmess+=c
 
 " Backup and swap files {{{
@@ -588,6 +588,8 @@ lua <<EOF
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.close(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<C-p>'] = cmp.mapping.select_prev_item(),
+      ['<C-n>'] = cmp.mapping.select_next_item(),
     },
     sources = {
       { name = 'nvim_lsp' },
