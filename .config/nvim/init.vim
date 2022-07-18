@@ -220,7 +220,7 @@ let g:lightline = {
       \             [ 'gitgutter', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
+      \   'gitbranch': 'FugitiveHead',
       \   'readonly': 'LightlineReadonly',
       \   'gitgutter': 'LightLineGitGutter',
       \   'filename': 'LightlineFileName',
@@ -500,12 +500,9 @@ autocmd BufWritePre,FileWritePre,FileAppendPre,FilterWritePre *
 " nvim-tree {{{
 lua <<EOF
 require 'nvim-tree'.setup {
-  diagnostics = {
-    enabled = true,
-  },
   view = {
     width = 40,
-    auto_resize = true,
+    adaptive_size = true,
   },
 }
 EOF
@@ -623,7 +620,7 @@ EOF
 
 lua <<EOF
   require'telescope'.setup {
-    defaults = { vimgrep_arguments = { 'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' } },
+    defaults = { vimgrep_arguments = { 'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case', '-g', '!.git' } },
   }
 
   require('telescope').load_extension('ui-select')
