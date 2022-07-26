@@ -19,7 +19,9 @@ Plug 'RishabhRD/nvim-lsputils'
 
 Plug 'christianrondeau/vim-base64'
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+
 Plug 'RRethy/vim-illuminate'
 
 Plug 'folke/lsp-colors.nvim'
@@ -331,19 +333,20 @@ local settings = {
   }
 }
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
-  }
-}
+require("mason").setup()
+require("mason-lspconfig").setup()
+require("mason-lspconfig").setup_handlers {
+  function (server_name) -- default handler (optional)
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.completion.completionItem.resolveSupport = {
+      properties = {
+        'documentation',
+        'detail',
+        'additionalTextEdits',
+      }
+    }
 
-local lsp_installer = require("nvim-lsp-installer")
-
-lsp_installer.on_server_ready(function(server)
     local opts = {
       capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
       on_attach = on_attach,
@@ -352,19 +355,41 @@ lsp_installer.on_server_ready(function(server)
       },
     }
 
-    if settings[server.name] ~= nil then
-      opts.settings = settings[lsp]
-    end
-
-    if server.name == 'efm' then
+    if server_name == 'efm' then
       opts.filetypes = {'python'}
     end
 
-    server:setup(opts)
-    vim.cmd [[ do User LspAttachBuffers ]]
-end)
+    require("lspconfig")[server_name].setup(opts)
+  end,
+
+  ["jsonls"] = function()
+    require'lspconfig'.jsonls.setup {
+        on_attach = on_attach,
+        flags = {
+          debounce_text_changes = 150,
+        },
+        commands = {
+          Format = {
+            function()
+              vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+            end
+          }
+        }
+    }
+  end
+}
 
 for _, lsp in ipairs({ "clangd", "rls", "clojure_lsp", "zls", "gopls" }) do
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  capabilities.textDocument.completion.completionItem.resolveSupport = {
+    properties = {
+      'documentation',
+      'detail',
+      'additionalTextEdits',
+    }
+  }
+
   local config = {
     capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
     on_attach = on_attach,
@@ -373,26 +398,8 @@ for _, lsp in ipairs({ "clangd", "rls", "clojure_lsp", "zls", "gopls" }) do
     },
   }
 
-  if settings[lsp] ~= nil then
-    config.settings = settings[lsp]
-  end
-
   require('lspconfig')[lsp].setup(config)
 end
-
-require'lspconfig'.jsonls.setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-    commands = {
-      Format = {
-        function()
-          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
-    }
-}
 
 EOF
 
