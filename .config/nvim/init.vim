@@ -401,6 +401,10 @@ for _, lsp in ipairs({ "clangd", "rls", "clojure_lsp", "zls", "gopls" }) do
     },
   }
 
+  if settings[lsp] ~= nil then
+      config.settings = settings[lsp]
+  end
+
   require('lspconfig')[lsp].setup(config)
 end
 
