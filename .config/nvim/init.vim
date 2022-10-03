@@ -174,6 +174,9 @@ set foldlevel=1
 set completeopt=menu,menuone,noselect
 set shortmess+=c
 
+" disable mouse support
+set mouse=
+
 " Backup and swap files {{{
 
 " Protect changes between writes. Default values of
