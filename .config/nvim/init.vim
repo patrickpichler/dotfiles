@@ -516,7 +516,7 @@ lua <<EOF
 require 'nvim-tree'.setup {
   view = {
     width = 40,
-    adaptive_size = true,
+    adaptive_size = false,
   },
 }
 EOF
