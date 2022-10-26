@@ -60,7 +60,6 @@ Plug 'arthurxavierx/vim-caser'
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'mattn/emmet-vim'
-Plug 'skywind3000/asyncrun.vim'
 Plug 'cohama/lexima.vim'
 
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -103,8 +102,8 @@ Plug 'Olical/conjure', { 'for': ['clojure', 'fennel'], 'tag': '*' }
 
 " ===========================================
 
-Plug 'https://git.sr.ht/~patrickpichler/vim-github-colorscheme'
 Plug 'https://tildegit.org/sloum/gemini-vim-syntax'
+Plug 'NLKNguyen/papercolor-theme'
 
 " ===========================================
 call plug#end()
@@ -112,7 +111,6 @@ call plug#end()
 " }}}
 
 " General configuration {{{
-colorscheme github
 
 " Used Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -163,7 +161,10 @@ set termencoding=utf-8
 set fileencoding=utf-8
 
 set lazyredraw
-set termguicolors
+
+if (has('termguicolors'))
+  set termguicolors
+endif
 
 " code folding settings
 set foldmethod=syntax " fold based on indent
@@ -220,7 +221,7 @@ set noshowmode
 
 " Lightline {{{
 let g:lightline = {
-      \ 'colorscheme': 'ayu_light',
+      \ 'colorscheme': 'PaperColor',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste', ],
       \             [ 'gitgutter', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -410,10 +411,6 @@ for _, lsp in ipairs({ "clangd", "rls", "clojure_lsp", "zls", "gopls" }) do
 end
 
 EOF
-
-highlight LspReferenceText cterm=bold gui=bold ctermfg=green guifg=green
-highlight LspReferenceRead cterm=bold gui=bold ctermfg=green guifg=green
-highlight LspReferenceWrite cterm=bold gui=bold ctermfg=green guifg=green
 " }}}
 
 " Mappings {{{
@@ -447,11 +444,22 @@ noremap <M-Right> :vertical res +2<CR>
 " }}}
 
 " Colorscheme {{{
-highlight GitGutterAdd    ctermfg=green guifg=green
-highlight GitGutterChange ctermfg=yellow guifg=yellow
-highlight GitGutterDelete ctermfg=red guifg=red
+
+let g:PaperColor_Theme_Options = {
+  \   'theme': {
+  \     'default': {
+  \       'transparent_background': 1,
+  \       'allow_bold': 1,
+  \       'allow_italic': 1
+  \     }
+  \   }
+  \ }
 
 highlight HighlightedyankRegion ctermbg=yellow guibg=yellow
+
+set background=light
+colorscheme PaperColor
+
 " }}}
 
 " Filetypes {{{
@@ -640,9 +648,6 @@ lua <<EOF
   })
 EOF
 
-hi CmpItemAbbr ctermfg=White guifg=White
-hi CmpItemKind ctermfg=LightGreen guifg=LightGreen
-hi CmpItemMenu ctermfg=White guifg=White
 " }}}
 
 " Treesitter {{{
