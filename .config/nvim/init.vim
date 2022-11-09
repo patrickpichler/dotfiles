@@ -352,7 +352,7 @@ require("mason-lspconfig").setup_handlers {
     }
 
     local opts = {
-      capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
+      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
       on_attach = on_attach,
       flags = {
         debounce_text_changes = 150,
@@ -395,7 +395,7 @@ for _, lsp in ipairs({ "clangd", "rls", "clojure_lsp", "zls", "gopls" }) do
   }
 
   local config = {
-    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities),
+    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities),
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
