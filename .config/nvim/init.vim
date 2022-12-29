@@ -100,6 +100,8 @@ Plug 'kana/vim-textobj-entire'
 " ============= Clojure ==========================
 Plug 'Olical/conjure', { 'for': ['clojure', 'fennel'], 'tag': '*' }
 
+Plug 'Hoffs/omnisharp-extended-lsp.nvim'
+
 " ===========================================
 
 Plug 'https://tildegit.org/sloum/gemini-vim-syntax'
@@ -362,6 +364,12 @@ require("mason-lspconfig").setup_handlers {
 
     if server_name == 'efm' then
       opts.filetypes = {'python'}
+    end
+
+    if server_name == 'omnisharp' then
+      opts.handlers = {
+        ["textDocument/definition"] = require('omnisharp_extended').handler
+      }
     end
 
     require("lspconfig")[server_name].setup(opts)
