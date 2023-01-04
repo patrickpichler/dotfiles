@@ -187,6 +187,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
 # Dunst keys
 bindsym $mod+grave exec dunstctl close
 bindsym $mod+Shift+grave exec dunstctl history-pop
+bindsym $mod+Shift+s exec flameshot gui
 
 # Start polybar
 
