@@ -77,20 +77,6 @@ Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
 
 Plug 'machakann/vim-highlightedyank'
-
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'ziglang/zig.vim', { 'for': 'zig' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'udalov/kotlin-vim', { 'for': 'kotlin' }
-Plug 'ekalinin/Dockerfile.vim', { 'for': 'dockerfile' }
-Plug 'blankname/vim-fish', { 'for': 'fish' }
-Plug 'neovimhaskell/haskell-vim', {'for': 'haskell'}
-Plug 'ElmCast/elm-vim', {'for': 'elm'}
-Plug 'mxw/vim-jsx', {'for': 'js'}
-Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
-
-Plug 'hashivim/vim-terraform'
-
 " ============= New text objects ==============
 Plug 'kana/vim-textobj-user'
 Plug 'vim-utils/vim-line'
