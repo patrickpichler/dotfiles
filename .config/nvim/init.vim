@@ -462,6 +462,12 @@ augroup additional_ft
   au!
 
   autocmd BufNewFile,BufRead Jenkinsfile set ft=groovy
+
+  " terraform
+  autocmd FileType terraform-vars set ft=terraform
+  autocmd BufNewFile,BufRead *.terraformrc set ft=hcl
+  autocmd BufNewFile,BufRead terraform.rc set ft=hcl
+  autocmd BufNewFile,BufRead *.tfstate set ft=json
 augroup END
 
 " Transparent editing of gpg encrypted files.
