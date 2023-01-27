@@ -527,6 +527,9 @@ require 'nvim-tree'.setup {
     width = 40,
     adaptive_size = false,
   },
+  git = {
+    ignore = false,
+  }
 }
 EOF
 
