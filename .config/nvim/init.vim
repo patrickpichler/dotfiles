@@ -257,17 +257,6 @@ let mapleader = ","
 " LSP {{{
 
 lua << EOF
-
-local function has_value (tab, val)
-    for index, value in ipairs(tab) do
-        if value == val then
-            return true
-        end
-    end
-
-    return false
-end
-
 vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
 vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
 vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
@@ -276,38 +265,45 @@ vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.imp
 vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
 vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
 
+local function get_selected_range(bufnr)
+    local startPos = vim.api.nvim_buf_get_mark(bufnr, '<')
+    local endPos = vim.api.nvim_buf_get_mark(bufnr, '>')
+
+    return { start=startPos, ['end']=endPos }
+end
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
   -- Mappings.
-  local opts = { noremap=true, silent=true }
+  local opts = { noremap=true, silent=true, buffer=bufnr }
+
+  local telescopeBuiltin = require('telescope.builtin')
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>Telescope lsp_definitions<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>Telescope lsp_implementations', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>ws', '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>', opts)
-  buf_set_keymap('n', '<space>wd', '<cmd>Telescope lsp_workspace_diagnostics<CR>', opts)
-  buf_set_keymap('n', '<space>s', '<cmd>Telescope lsp_document_symbols<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>d', '<cmd>Telescope lsp_type_definitions<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('v', '<space>a', '<ESC><cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>Telescope diagnostics<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.format { async = true }<CR>', opts)
+  vim.keymap.set('n', 'gD',  vim.lsp.buf.declaration, opts)
+  vim.keymap.set('n', 'gd', telescopeBuiltin.lsp_definitions, opts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+  vim.keymap.set('n', 'gi', telescopeBuiltin.lsp_implementations, opts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+  vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+  vim.keymap.set('n', '<space>ws', telescopeBuiltin.lsp_dynamic_workspace_symbols, opts)
+  vim.keymap.set('n', '<space>wd', telescopeBuiltin.diagnostics, opts)
+  vim.keymap.set('n', '<space>s', telescopeBuiltin.lsp_document_symbols, opts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+  vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
+  vim.keymap.set('n', '<space>d', telescopeBuiltin.lsp_type_definitions, opts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+  vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, opts)
+  vim.keymap.set('v', '<space>a', function() vim.lsp.buf.code_action {range=get_selected_range(bufnr)} end, opts)
+  vim.keymap.set('n', 'gr', telescopeBuiltin.lsp_references, opts)
+  vim.keymap.set('n', '<space>e', telescopeBuiltin.diagnostics, opts)
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, opts)
+  vim.keymap.set('v', '<space>f', function() vim.lsp.buf.format { async = true, range=get_selected_range(bufnr) } end, opts)
 
   require 'illuminate'.on_attach(client)
 end
