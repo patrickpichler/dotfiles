@@ -485,8 +485,8 @@ augroup END
 " }}}
 
 " Markdown {{{
-let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
-      \ 'sh', 'kotlin']
+" let g:markdown_fenced_languages = ['html', 'java', 'groovy', 'bash=sh',
+"       \ 'sh']
 " }}}
 
 " UndoTree {{{
