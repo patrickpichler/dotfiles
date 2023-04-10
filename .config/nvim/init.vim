@@ -374,7 +374,7 @@ require("mason-lspconfig").setup_handlers {
   end
 }
 
-for _, lsp in ipairs({ "clangd", "rls", "clojure_lsp", "zls", "gopls" }) do
+for _, lsp in ipairs({ "clangd", "clojure_lsp", "zls", "gopls" }) do
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
