@@ -7,7 +7,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive', { 'tag': '*' }
 Plug 'tpope/vim-repeat'
@@ -16,6 +15,7 @@ Plug 'tpope/vim-projectionist'
 
 Plug 'RishabhRD/popfix'
 Plug 'RishabhRD/nvim-lsputils'
+Plug 'numToStr/Comment.nvim'
 
 Plug 'christianrondeau/vim-base64'
 Plug 'neovim/nvim-lspconfig'
@@ -771,5 +771,9 @@ EOF
 " vim-illumiinate {{{
 let g:Illuminate_ftblacklist = ['NvimTree', 'fugitiveblame']
 " }}}
+
+lua << EOF
+require('Comment').setup()
+EOF
 
 " vim: foldmethod=marker foldlevel=0 foldenable
