@@ -65,8 +65,10 @@ Plug 'mattn/emmet-vim'
 Plug 'cohama/lexima.vim'
 
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'nvim-lualine/lualine.nvim'
+" If you want to have icons in your statusline choose one of these
+Plug 'nvim-tree/nvim-web-devicons'
 
-Plug 'itchyny/lightline.vim'
 Plug 'easymotion/vim-easymotion'
 
 Plug 'AndrewRadev/linediff.vim'
@@ -202,55 +204,30 @@ set updatetime=10
 map <C-c> <Esc>
 map! <C-c> <Esc>
 
+" lualine {{{
+lua <<EOF
+local navic = require("nvim-navic")
 
-" Status Line {
-set laststatus=2 " always show statusbar
-set noshowmode
-
-" }}}
-
-" Lightline {{{
-let g:lightline = {
-      \ 'colorscheme': 'PaperColor',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste', ],
-      \             [ 'gitgutter', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead',
-      \   'readonly': 'LightlineReadonly',
-      \   'gitgutter': 'LightLineGitGutter',
-      \   'filename': 'LightlineFileName',
-      \ },
-    \ }
-
-function! LightlineFileName() abort
-    let filename = winwidth(0) > 70 ? expand('%') : expand('%:t')
-    let modified = &modified ? ' +' : ''
-    return fnamemodify(filename, ":~:.") . modified
-endfunction
-
-function! LightlineReadonly()
-  return &readonly && &filetype !=# 'help' ? 'RO' : ''
-endfunction
-
-function! LightLineGitGutter()
-  if ! exists('*GitGutterGetHunkSummary')
-        \ || ! get(g:, 'gitgutter_enabled', 0)
-        \ || winwidth('.') <= 90
-    return ''
-  endif
-  let symbols = ['+','~','-']
-  let hunks = GitGutterGetHunkSummary()
-  let ret = []
-  for i in [0, 1, 2]
-    if hunks[i] > 0
-      call add(ret, symbols[i] . hunks[i])
-    endif
-  endfor
-  return join(ret, ' ')
-endfunction
-
+require("lualine").setup({
+  winbar = {
+    lualine_c = {
+      {
+        function()
+          return navic.get_location()
+        end,
+        cond = function()
+          return navic.is_available()
+        end
+      },
+    }
+  },
+  sections = {
+    lualine_c = {
+      {'filename', file_status = true, path = 1},
+    }
+  },
+})
+EOF
 " }}}
 
 " remap leader key to something more reachable
