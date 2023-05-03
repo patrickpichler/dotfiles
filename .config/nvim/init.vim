@@ -7,7 +7,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive', { 'tag': '*' }
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dotenv'
@@ -23,6 +22,7 @@ Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 
 Plug 'RRethy/vim-illuminate'
+Plug 'machakann/vim-sandwich'
 
 Plug 'folke/lsp-colors.nvim'
 
