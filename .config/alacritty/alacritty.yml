@@ -1,4 +1,6 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
+import:
+  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -163,39 +165,6 @@ font:
 
 # If `true`, bold text is drawn using the bright color variants.
 #draw_bold_text_with_bright_colors: true
-
-# Colors (PaperColor - Light)
-colors:
-  # Default colors
-  primary:
-    background: '0xececec'
-    foreground: '0x000000'
-
-  cursor:
-    text: '0xececec'
-    cursor: '0x878787'
-
-  # Normal colors
-  normal:
-    black:   '0xececec'
-    red:     '0xaf0000'
-    green:   '0x008700'
-    yellow:  '0x5f8700'
-    blue:    '0x0087af'
-    magenta: '0x878787'
-    cyan:    '0x005f87'
-    white:   '0x444444'
-
-  # Bright colors
-  bright:
-    black:   '0xbcbcbc'
-    red:     '0xd70000'
-    green:   '0xd70087'
-    yellow:  '0x8700af'
-    blue:    '0xd75f00'
-    magenta: '0xd75f00'
-    cyan:    '0x005faf'
-    white:   '0x005f87'
 
 # Bell
 #

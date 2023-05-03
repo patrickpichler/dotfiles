@@ -91,7 +91,7 @@ Plug 'Hoffs/omnisharp-extended-lsp.nvim'
 " ===========================================
 
 Plug 'https://tildegit.org/sloum/gemini-vim-syntax'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " ===========================================
 call plug#end()
@@ -435,20 +435,61 @@ noremap <M-Right> :vertical res +2<CR>
 
 " Colorscheme {{{
 
-let g:PaperColor_Theme_Options = {
-  \   'theme': {
-  \     'default': {
-  \       'transparent_background': 1,
-  \       'allow_bold': 1,
-  \       'allow_italic': 1
-  \     }
-  \   }
-  \ }
+lua << EOF
+require("catppuccin").setup({
+    flavour = "latte", -- latte, frappe, macchiato, mocha
+    background = { -- :h background
+        light = "latte",
+        dark = "mocha",
+    },
+    transparent_background = false,
+    show_end_of_buffer = true, -- show the '~' characters after the end of buffers
+    term_colors = false,
+    dim_inactive = {
+        enabled = false,
+        shade = "dark",
+        percentage = 0.15,
+    },
+    no_italic = false, -- Force no italic
+    no_bold = false, -- Force no bold
+    styles = {
+        -- comments = { "italic" },
+        -- conditionals = { "italic" },
+        -- loops = {},
+        -- functions = {},
+        -- keywords = {},
+        -- strings = {},
+        -- variables = {},
+        -- numbers = {},
+        -- booleans = {},
+        -- properties = {},
+        -- types = {},
+        -- operators = {},
+    },
+    color_overrides = {},
+    custom_highlights = {},
+    integrations = {
+        cmp = true,
+        fidget = true,
+        gitsigns = true,
+        illuminate = true,
+        lsp_trouble = true,
+        notify = true,
+        mason = true,
+        markdown = true,
+        nvimtree = true,
+        sandwich = true,
+        telescope = true,
+        indent_blankline = {
+          enabled = true,
+        },
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+    },
+})
 
-highlight HighlightedyankRegion ctermbg=yellow guibg=yellow
-
-set background=light
-colorscheme PaperColor
+-- setup must be called before loading
+vim.cmd.colorscheme "catppuccin"
+EOF
 
 " }}}
 
