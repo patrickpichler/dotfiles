@@ -85,6 +85,8 @@ Plug 'AndrewRadev/bufferize.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
 
+Plug 'rcarriga/nvim-notify'
+
 Plug 'machakann/vim-highlightedyank'
 " ============= New text objects ==============
 Plug 'kana/vim-textobj-user'
@@ -760,6 +762,8 @@ let g:Illuminate_ftblacklist = ['NvimTree', 'fugitiveblame']
 " }}}
 
 lua << EOF
+vim.notify = require("notify")
+
 require"fidget".setup{
     window = {
         blend = 0,
