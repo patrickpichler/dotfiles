@@ -36,6 +36,8 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
+Plug 'HiPhish/nvim-ts-rainbow2'
+
 Plug 'ray-x/cmp-treesitter'
 
 Plug 'SmiteshP/nvim-navic'
@@ -64,7 +66,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mattn/emmet-vim'
 Plug 'cohama/lexima.vim'
 
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'nvim-tree/nvim-web-devicons'
@@ -583,18 +584,6 @@ nnoremap - :NvimTreeFindFile<CR>
 
 " }}}
 
-" rainbow_parentheses {{{
-
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-let g:rainbow#blacklist = ['#ffffff']
-
-augroup rainbow
-  autocmd!
-  autocmd FileType * RainbowParentheses
-augroup END
-
-" }}}
-
 " Clojure {{{
 let g:conjure#mapping#doc_word = 'nil'
 let g:conjure#mapping#def_word = 'nil'
@@ -683,6 +672,15 @@ require'nvim-treesitter.configs'.setup {
   highlight = { enable = true },
   indent = { enable = true },
   autotag = { enable = true },
+  rainbow = {
+    enable = true,
+    -- list of languages you want to disable the plugin for
+    disable = { 'jsx', 'cpp' },
+    -- Which query to use for finding delimiters
+    query = 'rainbow-parens',
+    -- Highlight the entire buffer all at once
+    strategy = require('ts-rainbow').strategy.global,
+  }
 }
 EOF
 
