@@ -57,6 +57,8 @@ Plug 'nvim-telescope/telescope-ui-select.nvim'
 
 Plug 'kyazdani42/nvim-tree.lua', { 'tag': '*' }
 
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'arthurxavierx/vim-caser'
@@ -796,6 +798,10 @@ require('nvim-navic').setup {
   depth_limit_indicator = "..",
   safe_output = true,
   click = false
+}
+
+require("indent_blankline").setup {
+  show_current_context = true,
 }
 
 require('Comment').setup()
