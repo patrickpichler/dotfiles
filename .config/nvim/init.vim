@@ -68,11 +68,12 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mattn/emmet-vim'
 Plug 'windwp/nvim-autopairs'
 
+Plug 'ggandor/lightspeed.nvim'
+
 Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'nvim-tree/nvim-web-devicons'
 
-Plug 'easymotion/vim-easymotion'
 
 Plug 'AndrewRadev/linediff.vim'
 Plug 'AndrewRadev/inline_edit.vim'
