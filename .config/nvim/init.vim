@@ -5,26 +5,19 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " ======================================================
 
-Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-fugitive', { 'tag': '*' }
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-dotenv'
-Plug 'tpope/vim-projectionist'
 
-Plug 'RishabhRD/popfix'
-Plug 'RishabhRD/nvim-lsputils'
 Plug 'numToStr/Comment.nvim'
 
-Plug 'christianrondeau/vim-base64'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 
-Plug 'RRethy/vim-illuminate'
 Plug 'machakann/vim-sandwich'
 
-Plug 'folke/lsp-colors.nvim'
+Plug 'RRethy/vim-illuminate'
 
 Plug 'liuchengxu/vista.vim'
 
@@ -50,7 +43,6 @@ Plug 'rafamadriz/friendly-snippets'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-lua/popup.nvim'
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-ui-select.nvim'
@@ -62,8 +54,6 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'arthurxavierx/vim-caser'
-
-Plug 'editorconfig/editorconfig-vim'
 
 Plug 'mattn/emmet-vim'
 Plug 'windwp/nvim-autopairs'
@@ -77,12 +67,9 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'j-hui/fidget.nvim'
 
 Plug 'AndrewRadev/linediff.vim'
-Plug 'AndrewRadev/inline_edit.vim'
 
 Plug 'mbbill/undotree'
 
-Plug 'AndrewRadev/bufferize.vim'
-Plug 'tommcdo/vim-exchange'
 Plug 'junegunn/vim-peekaboo'
 
 Plug 'rcarriga/nvim-notify'
@@ -90,9 +77,8 @@ Plug 'rcarriga/nvim-notify'
 Plug 'machakann/vim-highlightedyank'
 " ============= New text objects ==============
 Plug 'kana/vim-textobj-user'
-Plug 'vim-utils/vim-line'
-Plug 'wellle/targets.vim'
 Plug 'kana/vim-textobj-entire'
+Plug 'vim-utils/vim-line'
 
 " ============= Clojure ==========================
 Plug 'Olical/conjure', { 'for': ['clojure', 'fennel'], 'tag': '*' }
@@ -203,10 +189,6 @@ set undofile
 " Auto open quickfix list on grep
 autocmd QuickFixCmdPost *grep* cwindow
 
-" autohighlight word under cursor
-
-set updatetime=10
-
 " Map Ctrl+c to Esc, as Ctrl+C does not do some usefull things
 map <C-c> <Esc>
 map! <C-c> <Esc>
@@ -240,17 +222,10 @@ EOF
 " remap leader key to something more reachable
 let mapleader = ","
 
+" }}}
+
 " LSP {{{
-
 lua << EOF
-vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
-vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
-vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
-vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
-vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
-vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
-vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
-
 local function get_selected_range(bufnr)
     local startPos = vim.api.nvim_buf_get_mark(bufnr, '<')
     local endPos = vim.api.nvim_buf_get_mark(bufnr, '>')
