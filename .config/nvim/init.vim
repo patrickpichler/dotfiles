@@ -74,6 +74,7 @@ Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
 Plug 'nvim-tree/nvim-web-devicons'
 
+Plug 'j-hui/fidget.nvim'
 
 Plug 'AndrewRadev/linediff.vim'
 Plug 'AndrewRadev/inline_edit.vim'
@@ -759,6 +760,12 @@ let g:Illuminate_ftblacklist = ['NvimTree', 'fugitiveblame']
 " }}}
 
 lua << EOF
+require"fidget".setup{
+    window = {
+        blend = 0,
+    },
+}
+
 require("nvim-autopairs").setup {}
 
 -- If you want insert `(` after select function or method item
