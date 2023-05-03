@@ -836,6 +836,16 @@ require("indent_blankline").setup {
 }
 
 require('Comment').setup()
+
+require('illuminate').configure({
+    filetypes_denylist = {
+        'NvimTree',
+        'fugitive',
+        'mason',
+        'vista',
+        'Trouble',
+    },
+})
 EOF
 
 " vim: foldmethod=marker foldlevel=0 foldenable
