@@ -38,6 +38,8 @@ Plug 'hrsh7th/nvim-cmp'
 
 Plug 'ray-x/cmp-treesitter'
 
+Plug 'SmiteshP/nvim-navic'
+
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/vim-vsnip-integ'
@@ -272,6 +274,8 @@ local function get_selected_range(bufnr)
     return { start=startPos, ['end']=endPos }
 end
 
+local navic = require("nvim-navic")
+
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -279,6 +283,10 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true, buffer=bufnr }
 
   local telescopeBuiltin = require('telescope.builtin')
+
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set('n', 'gD',  vim.lsp.buf.declaration, opts)
@@ -773,6 +781,48 @@ let g:Illuminate_ftblacklist = ['NvimTree', 'fugitiveblame']
 " }}}
 
 lua << EOF
+
+require('nvim-navic').setup {
+  icons = {
+    File = ' ',
+    Module = ' ',
+    Namespace = ' ',
+    Package = ' ',
+    Class = ' ',
+    Method = ' ',
+    Property = ' ',
+    Field = ' ',
+    Constructor = ' ',
+    Enum = ' ',
+    Interface = ' ',
+    Function = ' ',
+    Variable = ' ',
+    Constant = ' ',
+    String = ' ',
+    Number = ' ',
+    Boolean = ' ',
+    Array = ' ',
+    Object = ' ',
+    Key = ' ',
+    Null = ' ',
+    EnumMember = ' ',
+    Struct = ' ',
+    Event = ' ',
+    Operator = ' ',
+    TypeParameter = ' '
+  },
+  lsp = {
+      auto_attach = false,
+      preference = nil,
+  },
+  highlight = true,
+  separator = " > ",
+  depth_limit = 0,
+  depth_limit_indicator = "..",
+  safe_output = true,
+  click = false
+}
+
 require('Comment').setup()
 EOF
 
