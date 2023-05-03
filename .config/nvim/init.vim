@@ -66,7 +66,7 @@ Plug 'arthurxavierx/vim-caser'
 Plug 'editorconfig/editorconfig-vim'
 
 Plug 'mattn/emmet-vim'
-Plug 'cohama/lexima.vim'
+Plug 'windwp/nvim-autopairs'
 
 Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
@@ -758,6 +758,15 @@ let g:Illuminate_ftblacklist = ['NvimTree', 'fugitiveblame']
 " }}}
 
 lua << EOF
+require("nvim-autopairs").setup {}
+
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp = require('cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 
 require('nvim-navic').setup {
   icons = {
@@ -799,6 +808,16 @@ require('nvim-navic').setup {
   safe_output = true,
   click = false
 }
+
+require("nvim-autopairs").setup {}
+
+-- If you want insert `(` after select function or method item
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local cmp = require('cmp')
+cmp.event:on(
+  'confirm_done',
+  cmp_autopairs.on_confirm_done()
+)
 
 require("indent_blankline").setup {
   show_current_context = true,
