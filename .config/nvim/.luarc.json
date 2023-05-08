@@ -1,0 +1,9 @@
+{
+    "workspace.library": [
+        "/home/patrick/.local/share/nvim/plugged/neodev.nvim/types/stable",
+        "/usr/share/nvim/runtime/lua",
+        "/home/patrick/.config/nvim/lua",
+        "${3rd}/luv/library"
+    ],
+    "workspace.checkThirdParty": false
+}
