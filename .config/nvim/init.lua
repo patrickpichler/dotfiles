@@ -8,5 +8,3 @@ require("config.lazy") {
     path = '~/development/projects'
   }
 }
-
-vim.cmd.colorscheme 'catppuccin'
