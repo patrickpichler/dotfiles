@@ -44,8 +44,6 @@ return {
       -- color_overrides = {},
       custom_highlights = function(C)
         return {
-          -- TODO remove this once the fix is merged upstream
-          NeoTreeNormalNc = { fg = C.text, bg = C.mantle }
         }
       end,
       integrations = {

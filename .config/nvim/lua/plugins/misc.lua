@@ -22,6 +22,5 @@ return {
   {
     'nvim-tree/nvim-web-devicons',
     opts = true,
-    priority = 999,
   },
 }

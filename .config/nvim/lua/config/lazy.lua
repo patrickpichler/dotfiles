@@ -22,8 +22,6 @@ return function(opts)
       },
       rtp = {
         disabled_plugins = {
-          -- "matchit",
-          -- "matchparen",
           "netrwPlugin",
           "rplugin",
           "tohtml",
