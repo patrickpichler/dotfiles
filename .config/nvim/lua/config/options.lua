@@ -18,11 +18,10 @@ vim.opt.smartindent = true
 vim.opt.termencoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 
-vim.opt.foldmethod = 'syntax'
-vim.opt.foldlevelstart = 99
-vim.opt.foldnestmax = 10
-vim.opt.foldenable = false
-vim.opt.foldlevel = 1
+vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 
 vim.opt.splitbelow = true
 vim.opt.splitright = true
