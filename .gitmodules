@@ -1,37 +1,10 @@
-[submodule ".zgen"]
-	path = .zgen
-	url = https://github.com/tarjoilija/zgen
-[submodule ".config/nvim/pack/minpac/opt/minpac"]
-	path = .config/nvim/pack/minpac/opt/minpac
-	url = https://github.com/k-takata/minpac.git
-[submodule ".asdf"]
-        path = .asdf
-        url = https://github.com/asdf-vm/asdf
-        branch = v0.4.3
-[submodule ".xmonad/taffybar-git"]
-	path = .xmonad/taffybar-git
-	url = https://github.com/travitch/taffybar
-        branch = stable-0.5
-[submodule ".xmonad/xmonad-git"]
-	path = .xmonad/xmonad-git
-	url = https://github.com/xmonad/xmonad
-        branch = v0.13
-[submodule ".xmonad/xmonad-contrib-git"]
-	path = .xmonad/xmonad-contrib-git
-	url = https://github.com/xmonad/xmonad-contrib
-        branch = v0.13
-[submodule ".config/qutebrowser/qutebrowser-dracula-theme"]
-	path = .config/qutebrowser/qutebrowser-dracula-theme
-	url = https://github.com/evannagle/qutebrowser-dracula-theme
-[submodule ".config/qutebrowser/darcula"]
-	path = .config/qutebrowser/dracula
-	url = https://github.com/evannagle/qutebrowser-dracula-theme
-[submodule ".zsh/gradle-completion"]
-	path = .zsh/gradle-completion
-	url = git://github.com/gradle/gradle-completion
-[submodule ".tmux/plugins/tpm"]
-	path = .tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
-[submodule ".config/alacritty/catppuccin"]
-	path = .config/alacritty/catppuccin
+[submodule "dot_asdf"]
+	path = dot_asdf
+	url = https://github.com/asdf-vm/asdf
+	branch = v0.4.3
+[submodule "dot_tmux/plugins/tpm"]
+	path = dot_tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git
+[submodule "dot_config/alacritty/catppuccin"]
+	path = dot_config/alacritty/catppuccin
 	url = https://github.com/catppuccin/alacritty
