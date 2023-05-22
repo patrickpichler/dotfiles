@@ -201,7 +201,16 @@ return {
       ---@type NoiceConfigViews
       views = {}, ---@see section on views
       ---@type NoiceRouteConfig[]
-      routes = {}, --- @see section on routes
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            kind = "",
+            find = "written",
+          },
+          opts = { skip = true },
+        },
+      },           --- @see section on routes
       ---@type table<string, NoiceFilter>
       status = {}, --- @see section on statusline components
       ---@type NoiceFormatOptions
