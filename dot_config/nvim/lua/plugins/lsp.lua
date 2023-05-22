@@ -11,7 +11,7 @@ local function get_selected_range(bufnr)
   return { start = startPos, ['end'] = endPos }
 end
 
-local function buf_set_keymaps(_, bufnr)
+local function buf_set_keymaps(bufnr)
   -- Mappings.
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
