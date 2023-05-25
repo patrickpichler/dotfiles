@@ -108,6 +108,10 @@ return {
         }
       )
 
+      require('lspconfig').sourcekit.setup {
+        capabilities = default_capabilities,
+      }
+
       mason_lspconfig.setup_handlers {
         function(server_name)
           require('lspconfig')[server_name].setup {
