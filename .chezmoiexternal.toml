@@ -2,7 +2,7 @@
   type = "git-repo"
   url = "https://github.com/asdf-vm/asdf"
   [".asdf".clone]
-    args = ["--branch", "v0.4.3"]
+    args = ["--branch", "v0.11.3"]
 
 [".tmux/plugins/tpm"]
   type = "git-repo"
