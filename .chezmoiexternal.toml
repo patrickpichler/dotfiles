@@ -1,13 +1,7 @@
-[".asdf"]
-  type = "git-repo"
-  url = "https://github.com/asdf-vm/asdf"
-  [".asdf".clone]
-    args = ["--branch", "v0.11.3"]
-
 [".tmux/plugins/tpm"]
   type = "git-repo"
   url = "https://github.com/tmux-plugins/tpm.git"
 
-[".config/alacritty/catppucci"]
+[".config/alacritty/catppuccin"]
   type = "git-repo"
   url = "https://github.com/catppuccin/alacritty"
