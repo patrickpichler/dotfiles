@@ -38,6 +38,8 @@ return {
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
           ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<C-n>'] = cmp.mapping.select_next_item(),
+          ['<Up>'] = cmp.mapping.select_prev_item(),
+          ['<Down>'] = cmp.mapping.select_next_item(),
           ["<Tab>"] = cmp.mapping(function(fallback)
             -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
             -- they way you will only jump inside the snippet region
@@ -114,43 +116,22 @@ return {
     config = function()
       require('luasnip.loaders.from_vscode').lazy_load()
 
-      local luasnip = require('luasnip')
-
-      vim.keymap.set('i', '<Tab>', function()
-        if not luasnip.expand_or_locally_jumpable() then
-          return '<Tab>'
-        end
-
-        luasnip.jump(1)
-      end, { silent = true, expr = true })
-
-      vim.keymap.set('i', '<S-Tab>', function()
-        if not luasnip.expand_or_locally_jumpable() then
-          return '<S-Tab>'
-        end
-
-        luasnip.jump(-1)
-      end, { silent = true, expr = true })
-
-      vim.keymap.set('n', '<Tab>', function()
-        if not luasnip.expand_or_locally_jumpable() then
-          return '<Tab>'
-        end
-        luasnip.jump(1)
-      end, { silent = true, expr = true })
-
-      vim.keymap.set('n', '<S-Tab>', function()
-        if not luasnip.expand_or_locally_jumpable() then
-          return '<S-Tab>'
-        end
-
-        luasnip.jump(-1)
-      end, { silent = true, expr = true })
-
       vim.cmd [[
         imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
         smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
       ]]
+
+      vim.api.nvim_create_autocmd('ModeChanged', {
+        pattern = '*',
+        callback = function()
+          if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+              and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+              and not require('luasnip').session.jump_active
+          then
+            require('luasnip').unlink_current()
+          end
+        end
+      })
     end,
   }
 }
