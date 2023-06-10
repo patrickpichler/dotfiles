@@ -47,7 +47,7 @@ end)
 GOPASS_CHOOSER:choices(function()
   local output, status = hs.execute("gopass list -f", true)
 
-  if not status then
+  if not status or output == nil then
     return {}
   end
 
@@ -66,6 +66,8 @@ hs.hotkey.bind(SUPER, 'p', function()
   if GOPASS_CHOOSER:isVisible() then
     return
   end
+
+  GOPASS_CHOOSER:refreshChoicesCallback(true)
 
   GOPASS_CHOOSER:show()
 end)
