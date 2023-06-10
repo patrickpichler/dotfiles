@@ -1,7 +1,6 @@
 hs.loadSpoon('SpoonInstall')
 
 spoon.SpoonInstall:andUse('EmmyLua')
-spoon.SpoonInstall:andUse('MouseFollowsFocus')
 
 SUPER = { 'cmd', 'ctrl' }
 
@@ -27,8 +26,6 @@ end)
 hs.hotkey.bind(SUPER, 'j', function()
   hs.window.focusedWindow():focusWindowSouth(nil, true, true)
 end)
-
-spoon.MouseFollowsFocus:start()
 
 GOPASS_CHOOSER = hs.chooser.new(function(result)
   if result == nil then
