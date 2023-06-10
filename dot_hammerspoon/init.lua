@@ -29,3 +29,43 @@ hs.hotkey.bind(SUPER, 'j', function()
 end)
 
 spoon.MouseFollowsFocus:start()
+
+GOPASS_CHOOSER = hs.chooser.new(function(result)
+  if result == nil then
+    return
+  end
+
+  local target = result["text"]
+
+  local _, status = hs.execute("gopass show --clip " .. target, true)
+
+  if not status then
+    hs.alert.show("error while copying password for `" .. target .. "`")
+  end
+end)
+
+GOPASS_CHOOSER:choices(function()
+  local output, status = hs.execute("gopass list -f", true)
+
+  if not status then
+    return {}
+  end
+
+  local result = {}
+
+  for s in output:gmatch("[^\r\n]+") do
+    table.insert(result, {
+      ["text"] = s
+    })
+  end
+
+  return result
+end)
+
+hs.hotkey.bind(SUPER, 'p', function()
+  if GOPASS_CHOOSER:isVisible() then
+    return
+  end
+
+  GOPASS_CHOOSER:show()
+end)
