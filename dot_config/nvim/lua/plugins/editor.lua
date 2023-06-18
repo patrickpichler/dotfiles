@@ -1,7 +1,35 @@
 return {
-  { 'tpope/vim-unimpaired' },
-  { 'tpope/vim-repeat' },
-  { 'cappyzawa/trim.nvim', opts = true },
+  { 'echasnovski/mini.ai',      version = '*', config = true },
+  { 'echasnovski/mini.align',   version = '*', config = true },
+  { 'echasnovski/mini.basics',  version = '*', config = true },
+  { 'echasnovski/mini.comment', version = '*', config = true },
+  { 'echasnovski/mini.pairs',   version = '*', config = true },
+  {
+    'echasnovski/mini.surround',
+    version = '*',
+    opts = {
+      mappings = {
+        add = "gza",
+        delete = "gzd",
+        find = "gzf",
+        find_left = "gzF",
+        highlight = "gzh",
+        replace = "gzr",
+        update_n_lines = "gzn",
+      },
+    },
+  },
+
+  {
+    'echasnovski/mini.bracketed',
+    version = '*',
+    opts = {
+      yank = { suffix = "" },
+      treesitter = { suffix = "n" },
+    }
+  },
+
+  { 'cappyzawa/trim.nvim',     config = true },
   {
     'RRethy/vim-illuminate',
 
@@ -36,10 +64,7 @@ return {
     end,
   },
 
-  { 'machakann/vim-sandwich', },
   { 'mattn/emmet-vim', },
-  { 'arthurxavierx/vim-caser', },
-  { 'ggandor/lightspeed.nvim', },
   { 'vim-utils/vim-line', },
   {
     'kana/vim-textobj-entire',
@@ -48,34 +73,6 @@ return {
     },
   },
 
-  {
-    'numToStr/Comment.nvim',
-
-    event = { 'VeryLazy' },
-
-    opts = true,
-  },
-
-  {
-    'windwp/nvim-autopairs',
-
-    event = { 'VeryLazy' },
-
-    dependencies = {
-      { 'hrsh7th/nvim-cmp' }
-    },
-
-    config = function()
-      require("nvim-autopairs").setup {}
-
-      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-      local cmp = require('cmp')
-      cmp.event:on(
-        'confirm_done',
-        cmp_autopairs.on_confirm_done()
-      )
-    end
-  },
 
   {
     'lukas-reineke/indent-blankline.nvim',
@@ -228,9 +225,100 @@ return {
       },
     },
   },
+
   {
     "smjonas/inc-rename.nvim",
     cmd = "IncRename",
-    opts = true,
-  }
+    config = true,
+  },
+
+  {
+    "Wansmer/treesj",
+    keys = {
+      { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
+    },
+    opts = { use_default_keymaps = false, max_join_length = 150 },
+  },
+
+  {
+    "danymat/neogen",
+    keys = {
+      {
+        "<leader>cc",
+        function()
+          require("neogen").generate({})
+        end,
+        desc = "Neogen Comment",
+      },
+    },
+    opts = { snippet_engine = "luasnip" },
+  },
+
+  {
+    "AckslD/muren.nvim",
+    opts = {
+      patterns_width = 60,
+      patterns_height = 20,
+      options_width = 40,
+      preview_height = 24,
+    },
+    cmd = "MurenToggle",
+  },
+
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    config = function()
+      local actions = require("diffview.actions")
+
+      require('diffview').setup {
+        view = {
+          merge_tool = {
+            layout = "diff3_mixed",
+          }
+        },
+
+        keymaps = {
+          diff3 = {
+            { { "n", "x" }, "[g", actions.diffget("ours") },
+            { { "n", "x" }, "]g", actions.diffget("theirs") },
+          },
+        },
+      }
+    end,
+    keys = { { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffView" } },
+  },
+
+  {
+    "ggandor/flit.nvim",
+    keys = function()
+      ---@type LazyKeys[]
+      local ret = {}
+      for _, key in ipairs({ "f", "F", "t", "T" }) do
+        ret[#ret + 1] = { key, mode = { "n", "x", "o" }, desc = key }
+      end
+      return ret
+    end,
+    opts = { labeled_modes = "nx" },
+  },
+
+  {
+    "ggandor/leap.nvim",
+    keys = {
+      { "s",  mode = { "n", "x", "o" }, desc = "Leap forward to" },
+      { "S",  mode = { "n", "x", "o" }, desc = "Leap backward to" },
+      { "gs", mode = { "n", "x", "o" }, desc = "Leap from windows" },
+    },
+    config = function(_, opts)
+      local leap = require("leap")
+      for k, v in pairs(opts) do
+        leap.opts[k] = v
+      end
+      leap.add_default_mappings(true)
+      vim.keymap.del({ "x", "o" }, "x")
+      vim.keymap.del({ "x", "o" }, "X")
+    end,
+  },
+
+
 }

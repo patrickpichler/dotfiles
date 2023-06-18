@@ -7,7 +7,7 @@ return {
       vim.notify = notify
 
       vim.keymap.set('n', '<leader>nd', function()
-        notify.dismiss()
+        notify.dismiss({ pending = true, silent = true })
       end)
       vim.keymap.set('n', '<leader>no', function()
         vim.cmd(":Telescope notify")
@@ -17,10 +17,10 @@ return {
 
   { 'AndrewRadev/linediff.vim', },
   { 'junegunn/vim-peekaboo', },
-  { 'machakann/vim-highlightedyank', },
 
   {
     'nvim-tree/nvim-web-devicons',
     opts = true,
   },
+
 }

@@ -15,9 +15,6 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { remap = false })
 vim.keymap.set('c', '<C-p>', '<Up>', { remap = false })
 vim.keymap.set('c', '<C-n>', '<Down>', { remap = false })
 
-vim.keymap.set('n', '[g', ':diffget //2<cr>', { remap = false, silent = true })
-vim.keymap.set('n', ']g', ':diffget //3<cr>', { remap = false, silent = true })
-
 vim.keymap.set('n', '<M-Up>', ':res -2<cr>', { remap = false, silent = true })
 vim.keymap.set('n', '<M-Down>', ':res +2<cr>', { remap = false, silent = true })
 vim.keymap.set('n', '<M-Left>', ':vertical res -2<cr>', { remap = false, silent = true })

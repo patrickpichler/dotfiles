@@ -1,6 +1,5 @@
 return {
   { 'rhysd/committia.vim' },
-  { 'tpope/vim-fugitive' },
 
   {
     'ruifm/gitlinker.nvim',

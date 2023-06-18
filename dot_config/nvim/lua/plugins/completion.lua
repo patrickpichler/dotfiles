@@ -9,6 +9,7 @@ return {
       { 'hrsh7th/cmp-cmdline' },
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-emoji' },
       { 'ray-x/cmp-treesitter' },
       { 'saadparwaiz1/cmp_luasnip' },
       { 'L3MON4D3/LuaSnip' },
@@ -30,7 +31,7 @@ return {
             require('luasnip').lsp_expand(args.body)
           end,
         },
-        mapping = {
+        mapping = cmp.mapping.preset.insert {
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
           ['<C-Space>'] = cmp.mapping.complete(),
@@ -40,7 +41,7 @@ return {
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ['<Up>'] = cmp.mapping.select_prev_item(),
           ['<Down>'] = cmp.mapping.select_next_item(),
-          ["<Tab>"] = cmp.mapping(function(fallback)
+          ['<Tab>'] = cmp.mapping(function(fallback)
             -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
             -- they way you will only jump inside the snippet region
             if luasnip.expand_or_locally_jumpable() then
@@ -52,9 +53,9 @@ return {
             else
               fallback()
             end
-          end, { "i", "s" }),
+          end, { 'i', 's' }),
 
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
+          ['<S-Tab>'] = cmp.mapping(function(fallback)
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             elseif cmp.visible() then
@@ -62,43 +63,19 @@ return {
             else
               fallback()
             end
-          end, { "i", "s" }),
+          end, { 'i', 's' }),
         },
-        sources = {
+
+        sources = cmp.config.sources {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'buffer' },
           { name = 'path' },
           { name = 'treesitter' },
+          { name = 'emoji' },
         }
       })
 
-      -- Set configuration for specific filetype.
-      cmp.setup.filetype('gitcommit', {
-        sources = cmp.config.sources({
-          { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-        }, {
-          { name = 'buffer' },
-        })
-      })
-
-      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline({ '/', '?' }, {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = 'buffer' }
-        }
-      })
-
-      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = 'path' }
-        }, {
-          { name = 'cmdline' }
-        })
-      })
     end
   },
 
