@@ -17,7 +17,7 @@ return {
 
     config = function()
       local cmp = require 'cmp'
-      local luasnip = require("luasnip")
+      local luasnip = require('luasnip')
 
       local has_words_before = function()
         unpack = unpack or table.unpack
@@ -26,6 +26,9 @@ return {
       end
 
       cmp.setup({
+        completion = {
+          completeopt = "menu,menuone,noinsert",
+        },
         snippet = {
           expand = function(args)
             require('luasnip').lsp_expand(args.body)

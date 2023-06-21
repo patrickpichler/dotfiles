@@ -29,7 +29,7 @@ return {
     }
   },
 
-  { 'cappyzawa/trim.nvim',     config = true },
+  { 'cappyzawa/trim.nvim', config = true },
   {
     'RRethy/vim-illuminate',
 
@@ -234,10 +234,12 @@ return {
 
   {
     "Wansmer/treesj",
-    keys = {
-      { "J", "<cmd>TSJToggle<cr>", desc = "Join Toggle" },
-    },
-    opts = { use_default_keymaps = false, max_join_length = 150 },
+
+    keys = { '<space>m', '<space>j', '<space>s' },
+
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+
+    config = true,
   },
 
   {
