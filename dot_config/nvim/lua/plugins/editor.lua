@@ -320,5 +320,26 @@ return {
     end,
   },
 
+  {
+    'mhartington/formatter.nvim',
+
+    keys = {
+      { "<space>f", "<cmd>Format<cr>" }
+    },
+
+    opts = {
+      filetype = {
+        yaml = {
+          function()
+            return {
+              exe = vim.fn.stdpath('data') .. '/mason/packages/yamlfmt/yamlfmt',
+              args = { "-in" },
+              stdin = true,
+            }
+          end
+        },
+      },
+    },
+  },
 
 }
