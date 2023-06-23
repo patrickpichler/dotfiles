@@ -21,7 +21,7 @@ return {
           vimgrep_arguments = { 'rg', '--hidden', '--color=never',
             '--no-heading', '--with-filename', '--line-number',
             '--column', '--smart-case', '-g', '!.git', },
-          path_display = {'smart'},
+          path_display = {'truncate'},
         },
         extensions = {
           live_grep_args = {
