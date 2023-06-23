@@ -61,6 +61,7 @@ return {
               end
             end
           end,
+          ["/"] = 'none'
         },
       },
       default_component_configs = {
