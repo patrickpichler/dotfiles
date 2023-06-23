@@ -235,7 +235,38 @@ return {
   {
     "Wansmer/treesj",
 
-    keys = { '<space>m', '<space>j', '<space>s' },
+    use_default_keymaps = false,
+
+    keys = {
+      {
+        '<leader>m',
+        function()
+          require('treesj').toggle()
+        end,
+      },
+      {
+        '<leader>M',
+        function()
+          require('treesj').toggle({
+            split = {
+              recursive = true,
+            },
+          })
+        end,
+      },
+      {
+        '<leader>j',
+        function()
+          require('treesj').join()
+        end
+      },
+      {
+        '<leader>s',
+        function()
+          require('treesj').split()
+        end
+      },
+    },
 
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
 
