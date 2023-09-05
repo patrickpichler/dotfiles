@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-NUMBER_HEADS=$(xrandr | grep ' connected' | wc -l)
-
-for i in $(seq $NUMBER_HEADS); do
-  nitrogen --head=$(($i - 1)) --random --set-scaled ${1:-~/.resources/backgrounds/}
-done
