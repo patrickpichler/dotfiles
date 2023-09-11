@@ -30,6 +30,7 @@ return {
     dependencies = {
       {
         "HiPhish/nvim-ts-rainbow2",
+        "nvim-treesitter/nvim-treesitter-textobjects",
       }
     },
     make = ":TSUpdate",
@@ -48,7 +49,30 @@ return {
           query = 'rainbow-parens',
           -- Highlight the entire buffer all at once
           strategy = require('ts-rainbow').strategy.global,
-        }
+        },
+        textobjects = {
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              ["]m"] = "@function.outer",
+              ["]]"] = { query = "@class.outer", desc = "Next class start" },
+              ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+            },
+            goto_next_end = {
+              ["]M"] = "@function.outer",
+              ["]["] = "@class.outer",
+            },
+            goto_previous_start = {
+              ["[m"] = "@function.outer",
+              ["[["] = "@class.outer",
+            },
+            goto_previous_end = {
+              ["[M"] = "@function.outer",
+              ["[]"] = "@class.outer",
+            },
+          },
+        },
       }
     end,
     config = function(_, opts)
