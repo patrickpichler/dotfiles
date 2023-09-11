@@ -29,7 +29,6 @@ return {
 
     dependencies = {
       {
-        "HiPhish/nvim-ts-rainbow2",
         "nvim-treesitter/nvim-treesitter-textobjects",
       }
     },
@@ -41,15 +40,6 @@ return {
         highlight = { enable = true },
         indent = { enable = true },
         autotag = { enable = true },
-        rainbow = {
-          enable = true,
-          -- list of languages you want to disable the plugin for
-          disable = { 'jsx', 'cpp' },
-          -- Which query to use for finding delimiters
-          query = 'rainbow-parens',
-          -- Highlight the entire buffer all at once
-          strategy = require('ts-rainbow').strategy.global,
-        },
         textobjects = {
           move = {
             enable = true,
