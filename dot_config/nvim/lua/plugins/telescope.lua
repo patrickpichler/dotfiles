@@ -22,6 +22,11 @@ return {
             '--no-heading', '--with-filename', '--line-number',
             '--column', '--smart-case', '-g', '!.git', },
           path_display = {'truncate'},
+          layout_strategy = 'vertical',
+          layout_config = {
+            preview_cutoff = 1,
+            prompt_position = 'top',
+          },
         },
         extensions = {
           live_grep_args = {
@@ -41,6 +46,7 @@ return {
       telescope.load_extension('ui-select')
       telescope.load_extension('undo')
       telescope.load_extension('notify')
+      vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
     end,
 
     keys = {

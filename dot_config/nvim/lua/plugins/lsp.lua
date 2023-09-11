@@ -17,16 +17,28 @@ local function buf_set_keymaps(bufnr)
 
   local telescopeBuiltin = require('telescope.builtin')
 
+  local referencesWrapper = function(f)
+    return function()
+      f({ show_line = false })
+    end
+  end
+
+  local symbolsWrapper = function(f)
+    return function ()
+      f({symbol_width = 60})
+    end
+  end
+
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gd', telescopeBuiltin.lsp_definitions, opts)
+  vim.keymap.set('n', 'gD', referencesWrapper(vim.lsp.buf.declaration), opts)
+  vim.keymap.set('n', 'gd', referencesWrapper(telescopeBuiltin.lsp_definitions), opts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', 'gi', telescopeBuiltin.lsp_implementations, opts)
+  vim.keymap.set('n', 'gi', referencesWrapper(telescopeBuiltin.lsp_implementations), opts)
   vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-  vim.keymap.set('n', '<space>ws', telescopeBuiltin.lsp_dynamic_workspace_symbols, opts)
+  vim.keymap.set('n', '<space>ws', symbolsWrapper(telescopeBuiltin.lsp_dynamic_workspace_symbols), opts)
   vim.keymap.set('n', '<space>wd', telescopeBuiltin.diagnostics, opts)
-  vim.keymap.set('n', '<space>s', telescopeBuiltin.lsp_document_symbols, opts)
+  vim.keymap.set('n', '<space>s', symbolsWrapper(telescopeBuiltin.lsp_document_symbols), opts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
   vim.keymap.set('n', '<space>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
@@ -40,7 +52,7 @@ local function buf_set_keymaps(bufnr)
       vim.lsp.buf.code_action { range = get_selected_range(bufnr) }
     end,
     opts)
-  vim.keymap.set('n', 'gr', telescopeBuiltin.lsp_references, opts)
+  vim.keymap.set('n', 'gr', referencesWrapper(telescopeBuiltin.lsp_references), opts)
   vim.keymap.set('n', '<space>e', telescopeBuiltin.diagnostics, opts)
   vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
   vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
