@@ -36,7 +36,7 @@ return {
               -- extend mappings
               i = {
                 ["<C-k>"] = lga_actions.quote_prompt(),
-                ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+                ["<C-g>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
                 ["<C-f>"] = lga_actions.quote_prompt({ postfix = " --fixed-strings" }),
               },
             },
