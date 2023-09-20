@@ -111,8 +111,9 @@ return {
 
       local kOpts = { noremap = true, silent = true }
 
-      vim.keymap.set('n', '<leader>k', ':Neotree toggle<CR>', kOpts)
-      vim.keymap.set('n', '-', ':Neotree focus reveal<CR>', kOpts)
+      vim.keymap.set('n', '<leader>k', ':Neotree toggle<CR>', vim.tbl_extend("force", kOpts, { desc = "Neotree toggle" }))
+      vim.keymap.set('n', '-', ':Neotree focus reveal<CR>',
+        vim.tbl_extend("force", kOpts, { desc = "Neotree reveal at current file" }))
     end,
   }
 }

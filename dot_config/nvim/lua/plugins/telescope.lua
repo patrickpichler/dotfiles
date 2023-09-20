@@ -56,13 +56,22 @@ return {
           require('telescope.builtin').find_files({
             find_command = { 'rg', '--files', '--hidden', '-g', '!.git' }
           })
-        end
+        end,
+         desc = "Find files"
       },
       {
         '<space>g',
         function()
           require('telescope').extensions.live_grep_args.live_grep_args()
-        end
+        end,
+         desc = "Grep"
+      },
+      {
+        '<space>c',
+        function()
+          require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({quote=false, postfix=""})
+        end,
+         desc = "Grep current words"
       }
     },
 

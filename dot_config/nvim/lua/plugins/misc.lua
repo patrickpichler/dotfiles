@@ -8,10 +8,10 @@ return {
 
       vim.keymap.set('n', '<leader>nd', function()
         notify.dismiss({ pending = true, silent = true })
-      end)
+      end, { desc = "Clear notifications" })
       vim.keymap.set('n', '<leader>no', function()
         vim.cmd(":Telescope notify")
-      end)
+      end, { desc = "Open notifications"})
     end,
   },
 

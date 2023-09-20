@@ -15,6 +15,10 @@ local function buf_set_keymaps(bufnr)
   -- Mappings.
   local opts = { noremap = true, silent = true, buffer = bufnr }
 
+  local provideOpts = function(description)
+    return vim.tbl_deep_extend("force", opts, { desc = description })
+  end
+
   local telescopeBuiltin = require('telescope.builtin')
 
   local referencesWrapper = function(f)
@@ -24,46 +28,46 @@ local function buf_set_keymaps(bufnr)
   end
 
   local symbolsWrapper = function(f)
-    return function ()
-      f({symbol_width = 60})
+    return function()
+      f({ symbol_width = 60 })
     end
   end
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gD', referencesWrapper(vim.lsp.buf.declaration), opts)
-  vim.keymap.set('n', 'gd', referencesWrapper(telescopeBuiltin.lsp_definitions), opts)
+  vim.keymap.set('n', 'gD', referencesWrapper(vim.lsp.buf.declaration), provideOpts("Goto declaration"))
+  vim.keymap.set('n', 'gd', referencesWrapper(telescopeBuiltin.lsp_definitions), provideOpts("Goto definitions"))
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', 'gi', referencesWrapper(telescopeBuiltin.lsp_implementations), opts)
+  vim.keymap.set('n', 'gi', referencesWrapper(telescopeBuiltin.lsp_implementations), provideOpts("Goto implementations"))
   vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-  vim.keymap.set('n', '<space>ws', symbolsWrapper(telescopeBuiltin.lsp_dynamic_workspace_symbols), opts)
-  vim.keymap.set('n', '<space>wd', telescopeBuiltin.diagnostics, opts)
-  vim.keymap.set('n', '<space>s', symbolsWrapper(telescopeBuiltin.lsp_document_symbols), opts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, provideOpts("Add workspace folder"))
+  vim.keymap.set('n', '<space>ws', symbolsWrapper(telescopeBuiltin.lsp_dynamic_workspace_symbols),
+    provideOpts("Search for workspace symbol"))
+  vim.keymap.set('n', '<space>wd', telescopeBuiltin.diagnostics, provideOpts("Show workspace diagnostics"))
+  vim.keymap.set('n', '<space>s', telescopeBuiltin.lsp_document_symbols, provideOpts("Search document symbols"))
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, provideOpts("Remove workspace folder"))
   vim.keymap.set('n', '<space>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, opts)
-  vim.keymap.set('n', '<space>d', telescopeBuiltin.lsp_type_definitions, opts)
+  end, provideOpts("List workspace folders"))
+  vim.keymap.set('n', '<space>d', telescopeBuiltin.lsp_type_definitions, provideOpts("Show type definitions"))
   vim.keymap.set('n', '<space>rn', function()
     return ':IncRename ' .. vim.fn.expand('<cword>')
-  end, { expr = true, buffer = bufnr, silent = true })
-  vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, opts)
+  end, { expr = true, buffer = bufnr, silent = true, desc = "Rename" })
+  vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, provideOpts("Code actions"))
   vim.keymap.set('v', '<space>a', function()
       vim.lsp.buf.code_action { range = get_selected_range(bufnr) }
     end,
-    opts)
-  vim.keymap.set('n', 'gr', referencesWrapper(telescopeBuiltin.lsp_references), opts)
-  vim.keymap.set('n', '<space>e', telescopeBuiltin.diagnostics, opts)
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+    provideOpts("Code actions"))
+  vim.keymap.set('n', 'gr', referencesWrapper(telescopeBuiltin.lsp_references), provideOpts("Goto references"))
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, provideOpts("Goto previos diagnostic"))
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, provideOpts("Goto next diagnostic"))
   vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
   vim.keymap.set('n', '<space>f', function()
     vim.lsp.buf.format { async = true }
-  end, opts)
+  end, provideOpts("Format"))
   vim.keymap.set('v', '<space>f',
     function()
       vim.lsp.buf.format { async = true, range = get_selected_range(bufnr) }
-    end, opts)
+    end, provideOpts("Format"))
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
