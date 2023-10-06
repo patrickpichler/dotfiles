@@ -42,7 +42,6 @@ local function buf_set_keymaps(bufnr)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, provideOpts("Add workspace folder"))
   vim.keymap.set('n', '<space>ws', symbolsWrapper(telescopeBuiltin.lsp_dynamic_workspace_symbols),
     provideOpts("Search for workspace symbol"))
-  vim.keymap.set('n', '<space>wd', telescopeBuiltin.diagnostics, provideOpts("Show workspace diagnostics"))
   vim.keymap.set('n', '<space>s', telescopeBuiltin.lsp_document_symbols, provideOpts("Search document symbols"))
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, provideOpts("Remove workspace folder"))
   vim.keymap.set('n', '<space>wl', function()
@@ -58,9 +57,13 @@ local function buf_set_keymaps(bufnr)
     end,
     provideOpts("Code actions"))
   vim.keymap.set('n', 'gr', referencesWrapper(telescopeBuiltin.lsp_references), provideOpts("Goto references"))
+
+  vim.keymap.set('n', '<leader>sd', telescopeBuiltin.diagnostics, provideOpts("[S]earch [D]iagnostics"))
   vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, provideOpts("Goto previos diagnostic"))
   vim.keymap.set('n', ']d', vim.diagnostic.goto_next, provideOpts("Goto next diagnostic"))
-  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+  vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, provideOpts("Open floating diagnostic message"))
+  vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, provideOpts("Open diagnostics list"))
+
   vim.keymap.set('n', '<space>f', function()
     vim.lsp.buf.format { async = true }
   end, provideOpts("Format"))

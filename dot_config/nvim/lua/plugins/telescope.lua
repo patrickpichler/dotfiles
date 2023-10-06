@@ -21,7 +21,7 @@ return {
           vimgrep_arguments = { 'rg', '--hidden', '--color=never',
             '--no-heading', '--with-filename', '--line-number',
             '--column', '--smart-case', '-g', '!.git', },
-          path_display = {'truncate'},
+          path_display = { 'truncate' },
           layout_strategy = 'vertical',
           layout_config = {
             preview_cutoff = 1,
@@ -51,28 +51,60 @@ return {
 
     keys = {
       {
-        "<M-p>",
+        '<leader>/',
+        function()
+          -- You can pass additional configuration to telescope to change theme, layout, etc.
+          require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+            winblend = 10,
+            previewer = false,
+          })
+        end,
+        desc = "[/] Fuzzily search in current buffer"
+      },
+      {
+        '<leader><space>',
+        function() require('telescope.builtin').buffers() end,
+        desc = "[ ] Find existing buffers",
+      },
+      {
+        '<leader>?',
+        function() require('telescope.builtin').oldfiles() end,
+        desc = "[?] Find recently opened files",
+      },
+      {
+        "<leader>sf",
         function()
           require('telescope.builtin').find_files({
             find_command = { 'rg', '--files', '--hidden', '-g', '!.git' }
           })
         end,
-         desc = "Find files"
+        desc = "[S]earch [F]iles"
       },
       {
-        '<space>g',
-        function()
-          require('telescope').extensions.live_grep_args.live_grep_args()
-        end,
-         desc = "Grep"
+        '<leader>sg',
+        function() require('telescope').extensions.live_grep_args.live_grep_args() end,
+        desc = "[S]earch [G]rep",
       },
       {
-        '<space>c',
-        function()
-          require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({quote=false, postfix=""})
-        end,
-         desc = "Grep current words"
-      }
+        '<leader>sw',
+        function() require('telescope.builtin').grep_string() end,
+        desc = "[S]earch [W]ord",
+      },
+      {
+        '<leader>sh',
+        function() require('telescope.builtin').help_tags() end,
+        desc = "[S]earch [H]elp",
+      },
+      {
+        '<leader>sc',
+        function() require('telescope-live-grep-args.shortcuts').grep_word_under_cursor({ quote = false, postfix = "" }) end,
+        desc = "Grep current words"
+      },
+      {
+        '<leader>sr',
+        function() require('telescope.builtin').resume() end,
+        desc = "[S]earch [R]esume"
+      },
     },
 
     cmd = {
