@@ -73,15 +73,11 @@ return {
     },
   },
 
-
   {
-    'lukas-reineke/indent-blankline.nvim',
-
+    "lukas-reineke/indent-blankline.nvim",
     event = { 'VeryLazy' },
-
-    opts = {
-      show_current_context = true,
-    }
+    main = "ibl",
+    opts = {}
   },
 
   {
