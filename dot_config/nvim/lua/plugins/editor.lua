@@ -421,6 +421,6 @@ return {
         buftypes = {},
         filetypes = { "TelescopePrompt" },
       },
-    }
+    },
   },
 }
