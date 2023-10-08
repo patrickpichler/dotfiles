@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>alignThumbnails</key>
+	<string>0</string>
+	<key>cursorFollowFocusEnabled</key>
+	<string>true</string>
+	<key>fontHeight</key>
+	<string>19</string>
+	<key>hideAppBadges</key>
+	<string>false</string>
+	<key>hideThumbnails</key>
+	<string>true</string>
+	<key>hideWindowlessApps</key>
+	<string>true</string>
+	<key>holdShortcut</key>
+	<string>⌘</string>
+	<key>iconSize</key>
+	<string>70</string>
+	<key>maxHeightOnScreen</key>
+	<string>100</string>
+	<key>maxWidthOnScreen</key>
+	<string>50</string>
+	<key>menubarIcon</key>
+	<string>0</string>
+	<key>preferencesVersion</key>
+	<string>6.61.0</string>
+	<key>previewFocusedWindow</key>
+	<string>true</string>
+	<key>showOnScreen</key>
+	<string>1</string>
+	<key>showTabsAsWindows</key>
+	<string>true</string>
+	<key>startAtLogin</key>
+	<string>true</string>
+	<key>theme</key>
+	<string>0</string>
+	<key>titleTruncation</key>
+	<string>1</string>
+	<key>updatePolicy</key>
+	<string>1</string>
+	<key>windowMaxWidthInRow</key>
+	<string>100</string>
+	<key>windowMinWidthInRow</key>
+	<string>50</string>
+</dict>
+</plist>

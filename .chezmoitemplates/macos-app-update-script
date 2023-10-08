@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# {{ .target }}: {{ include .target | sha256sum }}
+
+defaults import com.lwouis.alt-tab-macos - < {{ joinPath .chezmoi.sourceDir .target | quote }}
