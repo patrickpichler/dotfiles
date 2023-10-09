@@ -1,3 +1,3 @@
-{{$target := "dot_macapps/alt-tab.xml"}}
-{{$targetApp := "com.lwouis.alt-tab-macos"}}
+{{- $target := "dot_macapps/alt-tab.xml" -}}
+{{- $targetApp := "com.lwouis.alt-tab-macos" -}}
 {{- template "macos-app-update-script" dict "chezmoi" .chezmoi "target" $target "targetApp" $targetApp -}}
