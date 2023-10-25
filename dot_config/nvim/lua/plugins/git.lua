@@ -1,3 +1,20 @@
+local function toggleGitBlame()
+  local lastWinNr = vim.fn.winnr("$")
+  local found = false
+  print(lastWinNr)
+
+  for winnr = 0, lastWinNr do
+    if vim.fn.getbufvar(vim.fn.winbufnr(winnr), '&filetype') == 'fugitiveblame' then
+      vim.fn.execute(winnr .. 'close')
+      found = true
+    end
+  end
+
+  if not found then
+    vim.cmd.Git('blame')
+  end
+end
+
 return {
   { 'rhysd/committia.vim' },
 
@@ -52,12 +69,20 @@ return {
         map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = "Toggle blame current line" })
         map('n', '<leader>hd', gs.diffthis, { desc = "Diff this" })
         map('n', '<leader>hD', function() gs.diffthis('~') end, { desc = "Diff this head" })
-        map('n', '<leader>td', gs.toggle_deleted, {desc = "Toggle deleted"})
+        map('n', '<leader>td', gs.toggle_deleted, { desc = "Toggle deleted" })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
       end
     },
+  },
+
+  {
+    'tpope/vim-fugitive',
+    keys = {
+      { '<leader>gb', toggleGitBlame, desc = 'Toggle Git blame' },
+    },
+    cmd = 'Git',
   },
 
 }
