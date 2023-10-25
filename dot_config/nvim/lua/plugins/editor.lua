@@ -172,12 +172,12 @@ return {
     config = true,
     -- stylua: ignore
     keys = {
-      { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
-      { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo (Trouble)" },
-      { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>",                            desc = "[S]earch [t]odo" },
-      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>",    desc = "[S] [T]odo/Fix/Fixme" },
+      { "]t",         function() require("todo-comments").jump_next() end,             desc = "Next todo comment" },
+      { "[t",         function() require("todo-comments").jump_prev() end,             desc = "Previous todo comment" },
+      { "<leader>xt", vim.cmd.TodoTrouble,                                             desc = "Todo (Trouble)" },
+      { "<leader>xT", function() vim.cmd.TodoTrouble("keywords=TODO,FIX,FIXME") end,   desc = "Todo/Fix/Fixme (Trouble)" },
+      { "<leader>st", vim.cmd.TodoTelescope,                                           desc = "[S]earch [t]odo" },
+      { "<leader>sT", function() vim.cmd.TodoTelescope("keywords=TODO,FIX,FIXME") end, desc = "[S] [T]odo/Fix/Fixme" },
     },
   },
 
@@ -318,7 +318,7 @@ return {
         },
       }
     end,
-    keys = { { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffView" } },
+    keys = { { "<leader>gd", vim.cmd.DiffviewOpen, desc = "DiffView" } },
   },
 
   {
@@ -356,7 +356,7 @@ return {
     'mhartington/formatter.nvim',
 
     keys = {
-      { "<space>f", "<cmd>Format<cr>", desc = "Format" }
+      { "<space>f", vim.cmd.Format, desc = "Format" }
     },
 
     opts = {
@@ -427,7 +427,7 @@ return {
   {
     'mbbill/undotree',
     keys = {
-      { "<leader>tu", "<cmd>UndotreeToggle<cr>", desc = "Toggle UndoTree" },
+      { "<leader>tu", vim.cmd.UndotreeToggle, desc = "Toggle UndoTree" },
     },
 
   }
