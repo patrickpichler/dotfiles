@@ -10,6 +10,8 @@
 	<string>19</string>
 	<key>hideAppBadges</key>
 	<string>false</string>
+	<key>hideShowAppShortcut</key>
+	<string></string>
 	<key>hideThumbnails</key>
 	<string>true</string>
 	<key>hideWindowlessApps</key>
@@ -24,10 +26,14 @@
 	<string>50</string>
 	<key>menubarIcon</key>
 	<string>0</string>
+	<key>nextWindowShortcut</key>
+	<string>⇥</string>
 	<key>preferencesVersion</key>
-	<string>6.61.0</string>
+	<string>6.64.0</string>
 	<key>previewFocusedWindow</key>
 	<string>true</string>
+	<key>shortcutStyle</key>
+	<string>0</string>
 	<key>showOnScreen</key>
 	<string>1</string>
 	<key>showTabsAsWindows</key>
@@ -40,6 +46,8 @@
 	<string>1</string>
 	<key>updatePolicy</key>
 	<string>1</string>
+	<key>vimKeysEnabled</key>
+	<string>true</string>
 	<key>windowMaxWidthInRow</key>
 	<string>100</string>
 	<key>windowMinWidthInRow</key>
