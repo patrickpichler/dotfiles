@@ -4,9 +4,6 @@ spoon.SpoonInstall:andUse('EmmyLua')
 
 SUPER = { 'cmd', 'ctrl' }
 
-hs.hotkey.bind('cmd', 'h', function()
-end)
-
 hs.hotkey.bind(SUPER, 't', function()
   os.execute('open -n -b org.alacritty')
 end)
