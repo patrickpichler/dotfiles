@@ -1,5 +1,7 @@
 #!/bin/sh
 
-# {{ .target }}: {{ include .target | sha256sum }}
+# {{ .target }} hash: {{ include .target | sha256sum }}
 
-defaults import com.lwouis.alt-tab-macos - < {{ joinPath .chezmoi.sourceDir .target | quote }}
+defaults import {{ .targetApp }} - < {{ joinPath .chezmoi.sourceDir .target | quote }}
+
+date > /tmp/run
