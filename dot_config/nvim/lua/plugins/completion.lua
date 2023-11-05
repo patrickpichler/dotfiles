@@ -65,7 +65,7 @@ return {
             if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             elseif cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+              cmp.select_next_item()
             elseif has_words_before() then
               cmp.complete()
             else
