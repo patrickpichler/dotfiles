@@ -1,7 +1,7 @@
 require('config.options')
 require('config.keymaps')
 
-vim.opt.background = 'light'
+vim.opt.background = 'dark'
 
 require("config.lazy") {
   dev = {

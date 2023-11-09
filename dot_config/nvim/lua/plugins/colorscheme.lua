@@ -3,6 +3,8 @@ return {
     'catppuccin/nvim',
     name = 'catppucin',
 
+    lazy = false,
+
     priority = 1000,
 
     config = function(_, opts)
@@ -12,7 +14,7 @@ return {
     end,
 
     opts = {
-      flavour = "latte", -- latte, frappe, macchiato, mocha
+      flavour = "mocha", -- latte, frappe, macchiato, mocha
       background = {
         light = "latte",
         dark = "mocha",
@@ -73,5 +75,5 @@ return {
         -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
       },
     }
-  }
+  },
 }
