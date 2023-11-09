@@ -1,0 +1,25 @@
+[credential]
+  helper = !gopass git-credential $@
+[core]
+  pager = delta --dark
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  features = line-numbers decorations
+  whitespace-error-style = 22 reverse
+  syntax-theme = Catppuccin-mocha
+  line-numbers-zero-style = "#FFFFFF"
+[pull]
+  rebase = true
+[merge]
+  tool = nvim
+  conflictstyle = diff3
+[mergetool "nvim"]
+	cmd = nvim -c \"DiffviewOpen\"
+[mergetool]
+	keepBackup = false
+	keepTemporaries = false
+[log]
+	follow = true
+[push]
+	autoSetupRemote = true
