@@ -11,7 +11,7 @@ return {
       end, { desc = "Clear notifications" })
       vim.keymap.set('n', '<leader>no', function()
         vim.cmd(":Telescope notify")
-      end, { desc = "Open notifications"})
+      end, { desc = "Open notifications" })
     end,
   },
 

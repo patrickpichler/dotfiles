@@ -101,6 +101,11 @@ return {
         desc = "Grep current words"
       },
       {
+        '<leader>sb',
+        function() require('telescope.builtin').buffers() end,
+        desc = "[S]earch [B]uffers"
+      },
+      {
         '<leader>sr',
         function() require('telescope.builtin').resume() end,
         desc = "[S]earch [R]esume"
