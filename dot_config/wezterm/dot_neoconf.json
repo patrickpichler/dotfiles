@@ -1,0 +1,12 @@
+{
+  "neoconf": {
+    "import": {
+
+    }
+  },
+  "lspconfig": {
+    "lua_ls": {
+      "Lua.workspace.library": ["~/.config/wezterm/types"]
+    }
+  }
+}
