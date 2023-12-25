@@ -5,7 +5,7 @@ spoon.SpoonInstall:andUse('EmmyLua')
 local SUPER = { 'cmd', 'ctrl' }
 
 hs.hotkey.bind(SUPER, 't', function()
-  os.execute('open -n -b org.alacritty')
+  os.execute('open -n -b com.github.wez.wezterm --args start --always-new-process')
 end)
 
 local function fuzzyQuery(s, m)
