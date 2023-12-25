@@ -208,15 +208,6 @@ return {
   },
 
   {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    event = { 'VeryLazy' },
-    config = function()
-      require("inc_rename").setup()
-    end,
-  },
-
-  {
     "Wansmer/treesj",
 
     use_default_keymaps = false,
