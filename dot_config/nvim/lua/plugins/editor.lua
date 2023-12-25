@@ -64,7 +64,6 @@ return {
     end,
   },
 
-  { 'mattn/emmet-vim', },
   { 'vim-utils/vim-line', },
   {
     'kana/vim-textobj-entire',
