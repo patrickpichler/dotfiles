@@ -2,6 +2,8 @@ hs.loadSpoon('SpoonInstall')
 
 spoon.SpoonInstall:andUse('EmmyLua')
 
+local debouncer = require('debouncer')
+
 local SUPER = { 'cmd', 'ctrl' }
 
 hs.hotkey.bind(SUPER, 't', function()
@@ -37,24 +39,28 @@ local function fuzzyQuery(s, m)
   end
 end
 
+local GOPASS_DEBOUNCER_KEY = 'gopass'
+
 local function _fuzzy_filter(initial_choices, chooser)
   return function(query)
-    if query:len() == 0 then
-      chooser:choices(initial_choices)
-      return
-    end
-    local picked_choices = {}
-    for _, j in pairs(initial_choices) do
-      local fullText = (j["text"] .. (j["subText"] or '')):lower()
-      local score = fuzzyQuery(fullText, query:lower())
-      if score > 0 then
-        j["fzf_score"] = score
-        table.insert(picked_choices, j)
+    debouncer:debounce(GOPASS_DEBOUNCER_KEY, 0.5, function()
+      if query:len() == 0 then
+        chooser:choices(initial_choices)
+        return
       end
-    end
-    local sort_func = function(a, b) return a["fzf_score"] > b["fzf_score"] end
-    table.sort(picked_choices, sort_func)
-    chooser:choices(picked_choices)
+      local picked_choices = {}
+      for _, j in pairs(initial_choices) do
+        local fullText = (j["text"] .. (j["subText"] or '')):lower()
+        local score = fuzzyQuery(fullText, query:lower())
+        if score > 0 then
+          j["fzf_score"] = score
+          table.insert(picked_choices, j)
+        end
+      end
+      local sort_func = function(a, b) return a["fzf_score"] > b["fzf_score"] end
+      table.sort(picked_choices, sort_func)
+      chooser:choices(picked_choices)
+    end)
   end
 end
 
