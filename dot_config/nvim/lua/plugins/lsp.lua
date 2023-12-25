@@ -36,7 +36,6 @@ local function buf_set_keymaps(bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set('n', 'gD', referencesWrapper(vim.lsp.buf.declaration), provideOpts("Goto declaration"))
   vim.keymap.set('n', 'gd', referencesWrapper(telescopeBuiltin.lsp_definitions), provideOpts("Goto definitions"))
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
   vim.keymap.set('n', 'gi', referencesWrapper(telescopeBuiltin.lsp_implementations), provideOpts("Goto implementations"))
   vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, provideOpts("Add workspace folder"))
@@ -77,9 +76,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    if client.server_capabilities.completionProvider then
-      vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
-    end
     if client.server_capabilities.definitionProvider then
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
     end

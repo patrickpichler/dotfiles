@@ -437,6 +437,26 @@ return {
       { '[y', '<Plug>(YankyCycleForward)',      desc = 'Cycle forward through yank history' },
       { ']y', '<Plug>(YankyCycleBackward)',     desc = 'Cycle backward through yank history' },
     },
+  },
 
+  {
+    'patrickpichler/hovercraft.nvim',
+
+    keys = {
+      { 'K', function()
+        local hovercraft = require('hovercraft')
+
+        if hovercraft.is_visible() then
+          hovercraft.enter_popup()
+        else
+          hovercraft.hover()
+        end
+      end },
+      { '<leader>ll', function()
+        local hovercraft = require('hovercraft')
+
+        hovercraft.hover_select()
+      end },
+    },
   }
 }
