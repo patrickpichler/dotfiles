@@ -4,7 +4,6 @@ return {
   { 'echasnovski/mini.basics',  version = '*', config = true },
   { 'echasnovski/mini.comment', version = '*', config = true },
   { 'echasnovski/mini.pairs',   version = '*', config = true },
-  { 'echasnovski/mini.move',    version = '*', config = true },
   {
     'echasnovski/mini.surround',
     version = '*',
