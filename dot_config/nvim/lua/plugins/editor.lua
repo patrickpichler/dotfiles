@@ -419,6 +419,11 @@ return {
   },
 
   {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
+
+  {
     'gbprod/yanky.nvim',
     opts = {
       ring = { history_length = 20 },
