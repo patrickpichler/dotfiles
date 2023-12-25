@@ -345,6 +345,7 @@ return {
         },
 
         search = {
+          enabled = false,
           incremental = true,
         },
       },
