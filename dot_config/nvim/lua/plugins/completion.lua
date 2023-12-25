@@ -26,7 +26,7 @@ return {
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
       end
 
----@diagnostic disable-next-line: missing-fields
+      ---@diagnostic disable-next-line: missing-fields
       cmp.setup({
         experimental = { ghost_text = true },
 
@@ -64,7 +64,7 @@ return {
             if luasnip.locally_jumpable() then
               luasnip.expand_or_jump()
             elseif cmp.visible() then
-              cmp.select_next_item()
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
             elseif has_words_before() then
               cmp.complete()
             else
@@ -92,6 +92,34 @@ return {
           { name = 'treesitter' },
           { name = 'emoji' },
         }
+      })
+
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline({
+          ['<Tab>'] = {
+            c = function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              else
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-z>', true, true, true), 'ni', true)
+              end
+            end
+          }
+        }),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' }
+        })
       })
     end
   },
