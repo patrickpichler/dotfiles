@@ -21,6 +21,8 @@ end
 
 ssh_config.infuse(config)
 
+config.term = 'wezterm'
+
 config.color_scheme = 'tokyonight_night'
 
 config.tab_bar_at_bottom = true
