@@ -21,7 +21,7 @@ end
 
 ssh_config.infuse(config)
 
-config.color_scheme = 'Catppuccin Mocha'
+config.color_scheme = 'tokyonight_night'
 
 config.tab_bar_at_bottom = true
 

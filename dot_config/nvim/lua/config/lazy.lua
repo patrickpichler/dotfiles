@@ -16,6 +16,7 @@ return function(opts)
     spec = {
       { import = "plugins" },
     },
+    install = { colorscheme = {"tokyonight", "habamax"} },
     performance = {
       cache = {
         enabled = true,
