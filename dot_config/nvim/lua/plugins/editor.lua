@@ -46,21 +46,10 @@ return {
         'Outline',
         'TelescopePrompt',
       },
+      under_cursor = false,
     },
     config = function(_, opts)
       require('illuminate').configure(opts)
-
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("LspAttach_illuminate", {}),
-        callback = function(args)
-          if not (args.data and args.data.client_id) then
-            return
-          end
-
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          require('illuminate').on_attach(client)
-        end
-      })
     end,
   },
 
@@ -77,31 +66,6 @@ return {
     event = { 'VeryLazy' },
     main = "ibl",
     opts = {}
-  },
-
-  {
-    'stevearc/aerial.nvim',
-
-    event = { 'VeryLazy' },
-
-    opts = {
-      backends = { 'lsp', 'treesitter', 'markdown' },
-      filter_kind = false,
-      highlight_closest = false,
-    },
-
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
-    },
-
-    config = function(_, opts)
-      require('aerial').setup(opts)
-
-      vim.keymap.set('n', '<leader>at', function()
-        vim.cmd(':AerialToggle!')
-      end, { desc = "Aerial toggle" })
-    end
   },
 
   {
@@ -440,7 +404,43 @@ return {
   },
 
   {
+    'lewis6991/hover.nvim',
+
+    config = function()
+      require("hover").setup {
+        init = function()
+          require("hover.providers.lsp")
+          require('hover.providers.man')
+          require('hover.providers.dictionary')
+        end,
+        preview_opts = {
+          border = 'single',
+          max_width = 100,
+          -- focusable = true,
+          -- focus = true,
+          wrap = true,
+        },
+        -- Whether the contents of a currently open hover window should be moved
+        -- to a :h preview-window when pressing the hover keymap.
+        preview_window = false,
+        title = true,
+      }
+    end,
+
+    keys = {
+      { '<leader>lk', function() require("hover").hover() end, desc = 'Hover' },
+      -- { 'gK', function() require("hover").hover_select() end, desc = 'Hover (select)' },
+    },
+
+  },
+
+  {
     'patrickpichler/hovercraft.nvim',
+
+    dev = true,
+
+    event = 'VeryLazy',
+
 
     keys = {
       { 'K', function()
