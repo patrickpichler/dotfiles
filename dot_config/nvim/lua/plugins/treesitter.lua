@@ -32,7 +32,7 @@ return {
         "nvim-treesitter/nvim-treesitter-textobjects",
       }
     },
-    make = ":TSUpdate",
+    build = ":TSUpdate",
     opts = function()
       return {
         ensure_installed = "all",
