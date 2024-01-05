@@ -441,7 +441,6 @@ return {
 
     event = 'VeryLazy',
 
-
     keys = {
       { 'K', function()
         local hovercraft = require('hovercraft')
@@ -458,5 +457,37 @@ return {
         hovercraft.hover_select()
       end },
     },
+  },
+
+  {
+    'ThePrimeagen/harpoon',
+
+    branch = 'harpoon2',
+
+    dependencies = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-telescope/telescope.nvim' },
+    },
+
+    opts = {},
+
+    init = function()
+      local harpoon = require('harpoon')
+
+      vim.keymap.set('n', '<leader>hw', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+        { desc = 'Open [h]arpoon [w]indow' })
+
+      vim.keymap.set('n', '<leader>ha', function() harpoon:list():append() end,
+        { desc = '[h]arpoon [a]ppend' })
+      vim.keymap.set('n', '<leader>1', function() harpoon:list():select(1) end)
+      vim.keymap.set('n', '<leader>2', function() harpoon:list():select(2) end)
+      vim.keymap.set('n', '<leader>3', function() harpoon:list():select(3) end)
+      vim.keymap.set('n', '<leader>4', function() harpoon:list():select(4) end)
+
+      vim.keymap.set('n', '<leader>hp', function() harpoon:list():prev() end,
+        { desc = '[h]arpoon [p]rev' })
+      vim.keymap.set('n', '<leader>hn', function() harpoon:list():next() end,
+        { desc = '[h]arpoon [n]ext' })
+    end,
   }
 }
