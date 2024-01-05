@@ -4,6 +4,16 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+local function extend_default_filetypes(lsp, ...)
+  local filetypes = {...}
+
+  for _, ft in ipairs(require('lspconfig.server_configurations.' .. lsp).default_config.filetypes) do
+    table.insert(filetypes, ft)
+  end
+
+  return filetypes
+end
+
 local function get_selected_range(bufnr)
   local startPos = vim.api.nvim_buf_get_mark(bufnr, '<')
   local endPos = vim.api.nvim_buf_get_mark(bufnr, '>')
@@ -105,6 +115,7 @@ return {
     },
 
     config = function()
+      local lspconfig = require('lspconfig')
       local mason_lspconfig = require('mason-lspconfig')
 
       mason_lspconfig.setup({})
@@ -123,26 +134,22 @@ return {
         }
       )
 
-      require('lspconfig').sourcekit.setup {
-        capabilities = default_capabilities,
-      }
-
       mason_lspconfig.setup_handlers {
         function(server_name)
-          require('lspconfig')[server_name].setup {
+          lspconfig[server_name].setup {
             capabilities = default_capabilities,
           }
         end,
 
         ['efm'] = function()
-          require('lspconfig').efm.setup {
+          lspconfig.efm.setup {
             capabilities = default_capabilities,
             filetypes = { 'python' },
           }
         end,
 
         ['omnisharp'] = function()
-          require('lspconfig').omnisharp.setup {
+          lspconfig.omnisharp.setup {
             capabilities = default_capabilities,
             handlers = {
               ["textDocument/definition"] = require('omnisharp_extended').handler
@@ -151,7 +158,7 @@ return {
         end,
 
         ['jsonls'] = function()
-          require('lspconfig').jsonls.setup {
+          lspconfig.jsonls.setup {
             capabilities = default_capabilities,
             commands = {
               Format = {
@@ -164,7 +171,7 @@ return {
         end,
 
         ['gopls'] = function()
-          require('lspconfig').gopls.setup {
+          lspconfig.gopls.setup {
             capabilities = default_capabilities,
             init_options = {
               env = { GOFLAGS = '-tags=unit' },
@@ -178,6 +185,43 @@ return {
               },
               usePlaceholders = true,
             }
+          }
+        end,
+
+        ['html'] = function()
+          local filetypes = extend_default_filetypes('html', 'templ')
+
+          lspconfig.html.setup {
+            capabilities = default_capabilities,
+            filetypes = filetypes,
+          }
+        end,
+
+        ['htmx'] = function()
+          local filetypes = extend_default_filetypes('htmx', 'templ')
+
+          lspconfig.htmx.setup {
+            capabilities = default_capabilities,
+            filetypes = filetypes,
+          }
+        end,
+
+        ['tailwindcss'] = function()
+          local filetypes = extend_default_filetypes('tailwindcss', 'templ')
+
+          lspconfig.tailwindcss.setup {
+            capabilities = default_capabilities,
+            filetypes = filetypes,
+            init_options = { userLanguages = { templ = "html" } },
+          }
+        end,
+
+        ['emmet_language_server'] = function()
+          local filetypes = extend_default_filetypes('emmet_language_server', 'templ')
+
+          lspconfig.emmet_language_server.setup {
+            capabilities = default_capabilities,
+            filetypes = filetypes,
           }
         end,
       }
