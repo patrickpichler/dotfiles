@@ -15,7 +15,6 @@ vim.opt.smarttab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 
-vim.opt.termencoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 
 vim.o.foldcolumn = '0' -- '0' is not bad
