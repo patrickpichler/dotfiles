@@ -3,7 +3,8 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = {
       { 'nvim-tree/nvim-web-devicons' },
-      { 'SmiteshP/nvim-navic' }
+      { 'SmiteshP/nvim-navic' },
+      { 'stevearc/overseer.nvim' },
     },
     opts = function()
       local navic = require("nvim-navic")
@@ -49,6 +50,7 @@ return {
         sections = {
           lualine_c = {
             { 'filename', file_status = true, path = 1 },
+            { 'overseer' }
           }
         },
       }
