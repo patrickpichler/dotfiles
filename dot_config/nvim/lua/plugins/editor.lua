@@ -489,5 +489,49 @@ return {
       vim.keymap.set('n', '<leader>hn', function() harpoon:list():next() end,
         { desc = '[h]arpoon [n]ext' })
     end,
+  },
+
+  {
+    'ThePrimeagen/refactoring.nvim',
+
+    dependencies = {
+      { 'nvim-telescope/telescope.nvim' },
+      { 'nvim-lua/plenary.nvim' },
+    },
+
+    opts = {},
+
+    init = function()
+      vim.keymap.set('x', '<leader>re', function() require('refactoring').refactor('Extract Function') end,
+        { desc = '[R]efactoring [e]xtract function' })
+      vim.keymap.set('x', '<leader>rf', function() require('refactoring').refactor('Extract Function To File') end,
+        { desc = '[R]efactoring extract function to [f]ile' })
+      -- Extract function supports only visual mode
+      vim.keymap.set('x', '<leader>rv', function() require('refactoring').refactor('Extract Variable') end,
+        { desc = '[R]efactoring extract [v]ariable' })
+      -- Extract variable supports only visual mode
+      vim.keymap.set('n', '<leader>rI', function() require('refactoring').refactor('Inline Function') end,
+        { desc = '[R]efactoring [I]nline function' })
+      -- Inline func supports only normal
+      vim.keymap.set({ 'n', 'x' }, '<leader>ri', function() require('refactoring').refactor('Inline Variable') end,
+        { desc = '[R]efactoring [i]nline variable' })
+      -- Inline var supports both normal and visual mode
+
+      vim.keymap.set('n', '<leader>rb', function() require('refactoring').refactor('Extract Block') end,
+        { desc = '[R]efactoring extract [b]lock' })
+      vim.keymap.set('n', '<leader>rbf', function() require('refactoring').refactor('Extract Block To File') end,
+        { desc = '[R]efactoring extract [b]lock to [f]ile' })
+
+      -- Extract block supports only normal mode
+      -- load refactoring Telescope extension
+      require('telescope').load_extension('refactoring')
+
+      vim.keymap.set(
+        { 'n', 'x' },
+        '<leader>rr',
+        function() require('telescope').extensions.refactoring.refactors() end,
+        { desc = '[R]efactoring telescope' }
+      )
+    end,
   }
 }
