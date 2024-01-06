@@ -69,68 +69,6 @@ return {
   },
 
   {
-    'SmiteshP/nvim-navic',
-    opts = {
-      icons = {
-        File = ' ',
-        Module = ' ',
-        Namespace = ' ',
-        Package = ' ',
-        Class = ' ',
-        Method = ' ',
-        Property = ' ',
-        Field = ' ',
-        Constructor = ' ',
-        Enum = ' ',
-        Interface = ' ',
-        Function = ' ',
-        Variable = ' ',
-        Constant = ' ',
-        String = ' ',
-        Number = ' ',
-        Boolean = ' ',
-        Array = ' ',
-        Object = ' ',
-        Key = ' ',
-        Null = ' ',
-        EnumMember = ' ',
-        Struct = ' ',
-        Event = ' ',
-        Operator = ' ',
-        TypeParameter = ' '
-      },
-      lsp = {
-        auto_attach = false,
-        preference = nil,
-      },
-      highlight = true,
-      separator = " > ",
-      depth_limit = 0,
-      depth_limit_indicator = "..",
-      safe_output = true,
-      click = false
-    },
-    event = "LspAttach",
-    config = function(_, opts)
-      require('nvim-navic').setup(opts)
-
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("LspAttach_navic", {}),
-        callback = function(args)
-          if not (args.data and args.data.client_id) then
-            return
-          end
-
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          require("nvim-navic").attach(client, args.buf)
-        end
-      })
-    end,
-  },
-
-
-
-  {
     "kevinhwang91/nvim-ufo",
     dependencies = "kevinhwang91/promise-async",
     event = "BufReadPost",
