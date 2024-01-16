@@ -5,7 +5,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 local function extend_default_filetypes(lsp, ...)
-  local filetypes = {...}
+  local filetypes = { ... }
 
   for _, ft in ipairs(require('lspconfig.server_configurations.' .. lsp).default_config.filetypes) do
     table.insert(filetypes, ft)
@@ -58,11 +58,7 @@ local function buf_set_keymaps(bufnr)
   end, provideOpts("List workspace folders"))
   vim.keymap.set('n', '<space>d', telescopeBuiltin.lsp_type_definitions, provideOpts("Show type definitions"))
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, provideOpts('Rename'))
-  vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, provideOpts("Code actions"))
-  vim.keymap.set('v', '<space>a', function()
-      vim.lsp.buf.code_action { range = get_selected_range(bufnr) }
-    end,
-    provideOpts("Code actions"))
+  vim.keymap.set({ 'n', 'v' }, '<space>a', vim.lsp.buf.code_action, provideOpts("Code actions"))
   vim.keymap.set('n', 'gr', referencesWrapper(telescopeBuiltin.lsp_references), provideOpts("Goto references"))
 
   vim.keymap.set('n', '<leader>sd', telescopeBuiltin.diagnostics, provideOpts("[S]earch [D]iagnostics"))
@@ -111,7 +107,7 @@ return {
       { 'hrsh7th/cmp-nvim-lsp' },
       { 'Hoffs/omnisharp-extended-lsp.nvim' },
       { 'neovim/nvim-lspconfig' },
-      -- { 'nvim-telescope/telescope.nvim' },
+      { 'nanotee/sqls.nvim' },
     },
 
     config = function()
@@ -222,6 +218,14 @@ return {
           lspconfig.emmet_language_server.setup {
             capabilities = default_capabilities,
             filetypes = filetypes,
+          }
+        end,
+
+        ['sqls'] = function()
+          lspconfig.sqls.setup {
+            on_attach = function(client, bufnr)
+              require('sqls').on_attach(client, bufnr)
+            end
           }
         end,
       }

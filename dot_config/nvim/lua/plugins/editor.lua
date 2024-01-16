@@ -132,13 +132,13 @@ return {
         end,
       },
       {
-        '<leader>j',
+        '<leader>tj',
         function()
           require('treesj').join()
         end
       },
       {
-        '<leader>s',
+        '<leader>ts',
         function()
           require('treesj').split()
         end

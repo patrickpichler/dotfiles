@@ -28,6 +28,7 @@ return {
 
     init = function()
       vim.g["conjure#mapping#doc_word"] = false
+      vim.g['conjure#client_on_load'] = false
     end,
   },
 
