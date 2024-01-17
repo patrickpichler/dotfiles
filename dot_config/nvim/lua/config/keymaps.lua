@@ -3,7 +3,6 @@ vim.keymap.set('t', '<ESC>', '<C-\\><C-n>', { remap = false })
 
 --" send escape even the escape key is remapped
 vim.keymap.set('t', '<C-v><Esc>', '<Esc>', { remap = false })
-
 vim.keymap.set({'n', 'v', 'x'}, '<C-c>', '<Esc>', { remap = true })
 
 -- Make C-P C-N behave the same as Up Down in command mode
