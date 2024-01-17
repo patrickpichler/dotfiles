@@ -1,5 +1,8 @@
 vim.g.mapleader = ","
 
+-- disable any builtin sql completions (they remap <C-c> which is pretty annoying)
+vim.g.omni_sql_no_default_maps = 1
+
 vim.opt.hidden = true
 vim.opt.backspace = '2'
 vim.opt.compatible = false
