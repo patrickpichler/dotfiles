@@ -85,4 +85,17 @@ return {
     end,
   },
 
+  {
+    "folke/neodev.nvim",
+
+    opts = {
+      library = {
+        plugins = {
+          "neotest"
+        },
+
+        types = true
+      },
+    },
+  },
 }
