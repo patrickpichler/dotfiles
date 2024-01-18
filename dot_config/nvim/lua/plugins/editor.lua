@@ -375,8 +375,6 @@ return {
   {
     'patrickpichler/hovercraft.nvim',
 
-    dev = true,
-
     event = 'VeryLazy',
 
     keys = {
