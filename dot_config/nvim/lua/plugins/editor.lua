@@ -47,7 +47,10 @@ return {
         'TelescopePrompt',
       },
       under_cursor = false,
+
+      large_file_cutoff = 500,
     },
+
     config = function(_, opts)
       require('illuminate').configure(opts)
     end,
