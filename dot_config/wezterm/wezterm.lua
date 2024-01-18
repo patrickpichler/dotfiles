@@ -1,4 +1,4 @@
-local ssh_config = require('ssh')
+local connection_config = require('connection')
 
 -- Pull in the wezterm API
 ---@type wezterm
@@ -19,7 +19,7 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-ssh_config.infuse(config)
+connection_config.infuse(config)
 
 config.term = 'wezterm'
 
