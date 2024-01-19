@@ -9,7 +9,7 @@ return {
     event = "BufReadPre",
     opts = {
       enable = true,            -- Enable this plugin (Can be enabled/disabled later via commands)
-      max_lines = 10,            -- How many lines the window should span. Values <= 0 mean no limit.
+      max_lines = 10,           -- How many lines the window should span. Values <= 0 mean no limit.
       min_window_height = 0,    -- Minimum editor window height to enable context. Values <= 0 mean no limit.
       line_numbers = true,
       multiline_threshold = 20, -- Maximum number of lines to collapse for a single context line
@@ -35,7 +35,12 @@ return {
     build = ":TSUpdate",
     opts = function()
       return {
-        ensure_installed = "all",
+        ensure_installed = {
+          "c", "lua", "vim", "vimdoc", "elixir", "javascript", "html", "zig", "go", "templ", "css", "nix",
+          "xml", "bash", "diff", "http", "java", "make", "rust", "toml", "yaml", "gomod", "json5", "proto", "templ",
+          "kotlin", "python", "svelte", "vimdoc", "comment", "clojure", "markdown", "starlark",
+        },
+        sync_install = true,
         ignore_install = { "phpdoc" },
         highlight = {
           enable = true,
