@@ -1,9 +1,8 @@
 return {
-  { 'echasnovski/mini.ai',      version = '*', config = true },
-  { 'echasnovski/mini.align',   version = '*', config = true },
-  { 'echasnovski/mini.basics',  version = '*', config = true },
-  { 'echasnovski/mini.comment', version = '*', config = true },
-  { 'echasnovski/mini.pairs',   version = '*', config = true },
+  { 'echasnovski/mini.ai',     version = '*', config = true },
+  { 'echasnovski/mini.align',  version = '*', config = true },
+  { 'echasnovski/mini.basics', version = '*', config = true },
+  { 'echasnovski/mini.pairs',  version = '*', config = true },
   {
     'echasnovski/mini.surround',
     version = '*',
@@ -27,6 +26,13 @@ return {
       yank = { suffix = "" },
       treesitter = { suffix = "n" },
     }
+  },
+
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+    },
+    lazy = false,
   },
 
   { 'cappyzawa/trim.nvim', config = true },
@@ -228,7 +234,27 @@ return {
     "folke/todo-comments.nvim",
     cmd = { "TodoTrouble", "TodoTelescope" },
     event = { "BufReadPost", "BufNewFile" },
-    config = true,
+    opts = {
+      highlight = {
+        keyword = "bg",
+        after = "fg",
+        pattern = [[.*<(KEYWORDS)\([^)]*\):]]
+      },
+      search = {
+        command = "rg",
+        args = {
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+        },
+        -- regex that will be used to match keywords.
+        -- don't replace the (KEYWORDS) placeholder
+        pattern = [[\b(KEYWORDS)(\([^)]*\))?:]], -- ripgrep regex
+        -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
+      },
+    },
     -- stylua: ignore
     keys = {
       { "]t",         function() require("todo-comments").jump_next() end,             desc = "Next todo comment" },

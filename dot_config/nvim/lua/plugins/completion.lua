@@ -136,11 +136,21 @@ return {
     },
 
     config = function()
+      local luasnip = require('luasnip')
+
+      luasnip.setup({
+        enable_autosnippets = true
+      })
+
+      require("luasnip.loaders.from_lua").load({ paths = "./snippets" })
+
       require('luasnip.loaders.from_vscode').lazy_load()
 
       vim.cmd [[
         imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
         smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+        imap <silent><expr> <C-S-E> luasnip#choice_active() ? '<Plug>luasnip-prev-choice' : '<C-S-E>'
+        smap <silent><expr> <C-S-E> luasnip#choice_active() ? '<Plug>luasnip-prev-choice' : '<C-S-E>'
       ]]
 
       vim.api.nvim_create_autocmd('ModeChanged', {
