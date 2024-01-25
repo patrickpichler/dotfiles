@@ -8,10 +8,10 @@ return {
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
       {
-        's1n7ax/nvim-window-picker',
-        version = 'v1.*',
+        "s1n7ax/nvim-window-picker",
+        version = "v1.*",
         config = function()
-          require 'window-picker'.setup()
+          require "window-picker".setup()
         end,
 
       },
@@ -45,23 +45,23 @@ return {
         mappings = {
           ["h"] = function(state)
             local node = state.tree:get_node()
-            if node.type == 'directory' and node:is_expanded() then
-              require 'neo-tree.sources.filesystem'.toggle_directory(state, node)
+            if node.type == "directory" and node:is_expanded() then
+              require "neo-tree.sources.filesystem".toggle_directory(state, node)
             else
-              require 'neo-tree.ui.renderer'.focus_node(state, node:get_parent_id())
+              require "neo-tree.ui.renderer".focus_node(state, node:get_parent_id())
             end
           end,
           ["l"] = function(state)
             local node = state.tree:get_node()
-            if node.type == 'directory' then
+            if node.type == "directory" then
               if not node:is_expanded() then
-                require 'neo-tree.sources.filesystem'.toggle_directory(state, node)
+                require "neo-tree.sources.filesystem".toggle_directory(state, node)
               elseif node:has_children() then
-                require 'neo-tree.ui.renderer'.focus_node(state, node:get_child_ids()[1])
+                require "neo-tree.ui.renderer".focus_node(state, node:get_child_ids()[1])
               end
             end
           end,
-          ["/"] = 'none'
+          ["/"] = "none"
         },
       },
       default_component_configs = {
@@ -101,18 +101,18 @@ return {
           Struct = { icon = "󰌗", hl = "Type" },
           Operator = { icon = "󰆕", hl = "Operator" },
           TypeParameter = { icon = "󰊄", hl = "Type" },
-          StaticMethod = { icon = '󰠄 ', hl = 'Function' },
+          StaticMethod = { icon = "󰠄 ", hl = "Function" },
         }
       },
     },
 
     config = function(_, opts)
-      require('neo-tree').setup(opts)
+      require("neo-tree").setup(opts)
 
       local kOpts = { noremap = true, silent = true }
 
-      vim.keymap.set('n', '<leader>k', ':Neotree toggle<CR>', vim.tbl_extend("force", kOpts, { desc = "Neotree toggle" }))
-      vim.keymap.set('n', '-', ':Neotree focus reveal<CR>',
+      vim.keymap.set("n", "<leader>k", ":Neotree toggle<CR>", vim.tbl_extend("force", kOpts, { desc = "Neotree toggle" }))
+      vim.keymap.set("n", "-", ":Neotree focus reveal<CR>",
         vim.tbl_extend("force", kOpts, { desc = "Neotree reveal at current file" }))
     end,
   }

@@ -1,12 +1,12 @@
-require('config.autocmds')
-require('config.commands')
-require('config.keymaps')
-require('config.options')
+require("config.autocmds")
+require("config.commands")
+require("config.keymaps")
+require("config.options")
 
-vim.opt.background = 'dark'
+vim.opt.background = "dark"
 
 require("config.lazy") {
   dev = {
-    path = '~/development/projects'
+    path = "~/development/projects"
   }
 }

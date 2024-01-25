@@ -43,11 +43,11 @@ return {
         }
       end
 
-      vim.keymap.set('n', '<leader>tt', ':Neotest summary toggle<CR>', opts('Neo[t]est summary [t]oggle'))
-      vim.keymap.set('n', '<leader>to', ':Neotest output-panel toggle<CR>', opts('Neo[t]est [t]oggle output-panel'))
-      vim.keymap.set('n', '<leader>trr', ':Neotest run<CR>', opts('neo[t]est [r]un nea[r]est'))
-      vim.keymap.set('n', '<leader>trf', ':Neotest run file<CR>', opts('Neo[t]est [r]un [f]ile'))
-      vim.keymap.set('n', '<leader>trl', ':Neotest run last<CR>', opts('Neo[t]est [r]un [l]ast'))
+      vim.keymap.set("n", "<leader>tt", ":Neotest summary toggle<CR>", opts("Neo[t]est summary [t]oggle"))
+      vim.keymap.set("n", "<leader>to", ":Neotest output-panel toggle<CR>", opts("Neo[t]est [t]oggle output-panel"))
+      vim.keymap.set("n", "<leader>trr", ":Neotest run<CR>", opts("neo[t]est [r]un nea[r]est"))
+      vim.keymap.set("n", "<leader>trf", ":Neotest run file<CR>", opts("Neo[t]est [r]un [f]ile"))
+      vim.keymap.set("n", "<leader>trl", ":Neotest run last<CR>", opts("Neo[t]est [r]un [l]ast"))
     end,
   },
 }

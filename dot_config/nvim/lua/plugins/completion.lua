@@ -1,24 +1,24 @@
 return {
   {
-    'hrsh7th/nvim-cmp',
+    "hrsh7th/nvim-cmp",
 
-    event = { 'VeryLazy' },
+    event = { "VeryLazy" },
 
     dependencies = {
-      { 'hrsh7th/cmp-buffer' },
-      { 'hrsh7th/cmp-cmdline' },
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-      { 'hrsh7th/cmp-path' },
-      { 'hrsh7th/cmp-emoji' },
-      { 'ray-x/cmp-treesitter' },
-      { 'saadparwaiz1/cmp_luasnip' },
-      { 'L3MON4D3/LuaSnip' },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-cmdline" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lsp-signature-help" },
+      { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-emoji" },
+      { "ray-x/cmp-treesitter" },
+      { "saadparwaiz1/cmp_luasnip" },
+      { "L3MON4D3/LuaSnip" },
     },
 
     config = function()
-      local cmp = require 'cmp'
-      local luasnip = require('luasnip')
+      local cmp = require "cmp"
+      local luasnip = require("luasnip")
 
       local has_words_before = function()
         unpack = unpack or table.unpack
@@ -32,7 +32,7 @@ return {
 
         snippet = {
           expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            require("luasnip").lsp_expand(args.body)
           end,
         },
 
@@ -42,8 +42,8 @@ return {
         },
 
         mapping = cmp.mapping.preset.insert {
-          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-d>'] = cmp.mapping.scroll_docs(4),
+          ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-d>"] = cmp.mapping.scroll_docs(4),
           ["<CR>"] = cmp.mapping({
             i = function(fallback)
               if cmp.visible() and cmp.get_selected_entry() then
@@ -54,11 +54,11 @@ return {
             end,
             s = cmp.mapping.confirm({ select = true }),
           }),
-          ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<Up>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<Down>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-          ['<Tab>'] = cmp.mapping(function(fallback)
+          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<Tab>"] = cmp.mapping(function(fallback)
             -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
             -- they way you will only jump inside the snippet region
             if luasnip.locally_jumpable() then
@@ -70,9 +70,9 @@ return {
             else
               fallback()
             end
-          end, { 'i', 's' }),
+          end, { "i", "s" }),
 
-          ['<S-Tab>'] = cmp.mapping(function(fallback)
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             elseif cmp.visible() then
@@ -80,63 +80,63 @@ return {
             else
               fallback()
             end
-          end, { 'i', 's' }),
+          end, { "i", "s" }),
         },
 
         sources = cmp.config.sources {
-          { name = 'nvim_lsp' },
-          { name = 'nvim_lsp_signature_help' },
-          { name = 'luasnip' },
-          { name = 'buffer' },
-          { name = 'path' },
-          { name = 'treesitter' },
-          { name = 'emoji' },
+          { name = "nvim_lsp" },
+          { name = "nvim_lsp_signature_help" },
+          { name = "luasnip" },
+          { name = "buffer" },
+          { name = "path" },
+          { name = "treesitter" },
+          { name = "emoji" },
         }
       })
 
-      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline({ '/', '?' }, {
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won"t work anymore).
+      cmp.setup.cmdline({ "/", "?" }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
-          { name = 'buffer' }
+          { name = "buffer" }
         }
       })
 
-      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-      cmp.setup.cmdline(':', {
+      -- Use cmdline & path source for ":" (if you enabled `native_menu`, this won"t work anymore).
+      cmp.setup.cmdline(":", {
         mapping = cmp.mapping.preset.cmdline({
-          ['<Tab>'] = {
+          ["<Tab>"] = {
             c = function(fallback)
               if cmp.visible() then
                 cmp.select_next_item()
               else
-                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-z>', true, true, true), 'ni', true)
+                vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-z>", true, true, true), "ni", true)
               end
             end
           }
         }),
         sources = cmp.config.sources({
-          { name = 'path' }
+          { name = "path" }
         }, {
-          { name = 'cmdline' }
+          { name = "cmdline" }
         })
       })
     end
   },
 
   {
-    'L3MON4D3/LuaSnip',
+    "L3MON4D3/LuaSnip",
     -- follow latest release.
-    version = '1.*',
+    version = "1.*",
     -- install jsregexp (optional!).
-    build = 'make install_jsregexp',
+    build = "make install_jsregexp",
 
     dependencies = {
-      { 'rafamadriz/friendly-snippets' }
+      { "rafamadriz/friendly-snippets" }
     },
 
     config = function()
-      local luasnip = require('luasnip')
+      local luasnip = require("luasnip")
 
       luasnip.setup({
         enable_autosnippets = true
@@ -144,23 +144,23 @@ return {
 
       require("luasnip.loaders.from_lua").load({ paths = "./snippets" })
 
-      require('luasnip.loaders.from_vscode').lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load()
 
       vim.cmd [[
-        imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
-        smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
-        imap <silent><expr> <C-S-E> luasnip#choice_active() ? '<Plug>luasnip-prev-choice' : '<C-S-E>'
-        smap <silent><expr> <C-S-E> luasnip#choice_active() ? '<Plug>luasnip-prev-choice' : '<C-S-E>'
+        imap <silent><expr> <C-E> luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"
+        smap <silent><expr> <C-E> luasnip#choice_active() ? "<Plug>luasnip-next-choice" : "<C-E>"
+        imap <silent><expr> <C-S-E> luasnip#choice_active() ? "<Plug>luasnip-prev-choice" : "<C-S-E>"
+        smap <silent><expr> <C-S-E> luasnip#choice_active() ? "<Plug>luasnip-prev-choice" : "<C-S-E>"
       ]]
 
-      vim.api.nvim_create_autocmd('ModeChanged', {
-        pattern = '*',
+      vim.api.nvim_create_autocmd("ModeChanged", {
+        pattern = "*",
         callback = function()
-          if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
-              and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
-              and not require('luasnip').session.jump_active
+          if ((vim.v.event.old_mode == "s" and vim.v.event.new_mode == "n") or vim.v.event.old_mode == "i")
+              and require("luasnip").session.current_nodes[vim.api.nvim_get_current_buf()]
+              and not require("luasnip").session.jump_active
           then
-            require('luasnip').unlink_current()
+            require("luasnip").unlink_current()
           end
         end
       })

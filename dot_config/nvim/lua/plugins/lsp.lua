@@ -7,7 +7,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 local function extend_default_filetypes(lsp, ...)
   local filetypes = { ... }
 
-  for _, ft in ipairs(require('lspconfig.server_configurations.' .. lsp).default_config.filetypes) do
+  for _, ft in ipairs(require("lspconfig.server_configurations." .. lsp).default_config.filetypes) do
     table.insert(filetypes, ft)
   end
 
@@ -15,10 +15,10 @@ local function extend_default_filetypes(lsp, ...)
 end
 
 local function get_selected_range(bufnr)
-  local startPos = vim.api.nvim_buf_get_mark(bufnr, '<')
-  local endPos = vim.api.nvim_buf_get_mark(bufnr, '>')
+  local startPos = vim.api.nvim_buf_get_mark(bufnr, "<")
+  local endPos = vim.api.nvim_buf_get_mark(bufnr, ">")
 
-  return { start = startPos, ['end'] = endPos }
+  return { start = startPos, ["end"] = endPos }
 end
 
 local function buf_set_keymaps(bufnr)
@@ -29,7 +29,7 @@ local function buf_set_keymaps(bufnr)
     return vim.tbl_deep_extend("force", opts, { desc = description })
   end
 
-  local telescopeBuiltin = require('telescope.builtin')
+  local telescopeBuiltin = require("telescope.builtin")
 
   local referencesWrapper = function(f)
     return function()
@@ -44,33 +44,33 @@ local function buf_set_keymaps(bufnr)
   end
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set('n', 'gD', referencesWrapper(vim.lsp.buf.declaration), provideOpts("Goto declaration"))
-  vim.keymap.set('n', 'gd', referencesWrapper(telescopeBuiltin.lsp_definitions), provideOpts("Goto definitions"))
-  vim.keymap.set('n', 'gi', referencesWrapper(telescopeBuiltin.lsp_implementations), provideOpts("Goto implementations"))
-  vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, provideOpts("Add workspace folder"))
-  vim.keymap.set('n', '<space>ws', symbolsWrapper(telescopeBuiltin.lsp_dynamic_workspace_symbols),
+  vim.keymap.set("n", "gD", referencesWrapper(vim.lsp.buf.declaration), provideOpts("Goto declaration"))
+  vim.keymap.set("n", "gd", referencesWrapper(telescopeBuiltin.lsp_definitions), provideOpts("Goto definitions"))
+  vim.keymap.set("n", "gi", referencesWrapper(telescopeBuiltin.lsp_implementations), provideOpts("Goto implementations"))
+  vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, provideOpts("Add workspace folder"))
+  vim.keymap.set("n", "<space>ws", symbolsWrapper(telescopeBuiltin.lsp_dynamic_workspace_symbols),
     provideOpts("Search for workspace symbol"))
-  vim.keymap.set('n', '<space>s', telescopeBuiltin.lsp_document_symbols, provideOpts("Search document symbols"))
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, provideOpts("Remove workspace folder"))
-  vim.keymap.set('n', '<space>wl', function()
+  vim.keymap.set("n", "<space>s", telescopeBuiltin.lsp_document_symbols, provideOpts("Search document symbols"))
+  vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, provideOpts("Remove workspace folder"))
+  vim.keymap.set("n", "<space>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, provideOpts("List workspace folders"))
-  vim.keymap.set('n', '<space>d', telescopeBuiltin.lsp_type_definitions, provideOpts("Show type definitions"))
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, provideOpts('Rename'))
-  vim.keymap.set({ 'n', 'v' }, '<space>a', vim.lsp.buf.code_action, provideOpts("Code actions"))
-  vim.keymap.set('n', 'gr', referencesWrapper(telescopeBuiltin.lsp_references), provideOpts("Goto references"))
+  vim.keymap.set("n", "<space>d", telescopeBuiltin.lsp_type_definitions, provideOpts("Show type definitions"))
+  vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, provideOpts("Rename"))
+  vim.keymap.set({ "n", "v" }, "<space>a", vim.lsp.buf.code_action, provideOpts("Code actions"))
+  vim.keymap.set("n", "gr", referencesWrapper(telescopeBuiltin.lsp_references), provideOpts("Goto references"))
 
-  vim.keymap.set('n', '<leader>sd', telescopeBuiltin.diagnostics, provideOpts("[S]earch [D]iagnostics"))
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, provideOpts("Goto previos diagnostic"))
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, provideOpts("Goto next diagnostic"))
-  vim.keymap.set('n', '<leader>do', vim.diagnostic.open_float, provideOpts("Open floating diagnostic message"))
-  vim.keymap.set('n', '<space>dl', vim.diagnostic.setloclist, provideOpts("Open diagnostics list"))
+  vim.keymap.set("n", "<leader>sd", telescopeBuiltin.diagnostics, provideOpts("[S]earch [D]iagnostics"))
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, provideOpts("Goto previos diagnostic"))
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, provideOpts("Goto next diagnostic"))
+  vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float, provideOpts("Open floating diagnostic message"))
+  vim.keymap.set("n", "<space>dl", vim.diagnostic.setloclist, provideOpts("Open diagnostics list"))
 
-  vim.keymap.set('n', '<space>f', function()
+  vim.keymap.set("n", "<space>f", function()
     vim.lsp.buf.format { async = true }
   end, provideOpts("Format"))
-  vim.keymap.set('v', '<space>f',
+  vim.keymap.set("v", "<space>f",
     function()
       vim.lsp.buf.format { async = true, range = get_selected_range(bufnr) }
     end, provideOpts("Format"))
@@ -92,34 +92,34 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 return {
   {
-    'williamboman/mason.nvim',
-    version = 'v1.*',
+    "williamboman/mason.nvim",
+    version = "v1.*",
     build = ":MasonUpdate",
     opts = true
   },
 
   {
-    'williamboman/mason-lspconfig.nvim',
+    "williamboman/mason-lspconfig.nvim",
 
-    version = 'v1.*',
+    version = "v1.*",
 
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp' },
-      { 'Hoffs/omnisharp-extended-lsp.nvim' },
-      { 'neovim/nvim-lspconfig' },
-      { 'nanotee/sqls.nvim' },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "Hoffs/omnisharp-extended-lsp.nvim" },
+      { "neovim/nvim-lspconfig" },
+      { "nanotee/sqls.nvim" },
     },
 
     config = function()
-      local lspconfig = require('lspconfig')
-      local mason_lspconfig = require('mason-lspconfig')
+      local lspconfig = require("lspconfig")
+      local mason_lspconfig = require("mason-lspconfig")
 
       mason_lspconfig.setup({})
 
       local default_capabilities = vim.tbl_deep_extend(
-        'force',
+        "force",
         vim.lsp.protocol.make_client_capabilities(),
-        require('cmp_nvim_lsp').default_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities(),
         {
           textDocument = {
             foldingRange = {
@@ -137,23 +137,23 @@ return {
           }
         end,
 
-        ['efm'] = function()
+        ["efm"] = function()
           lspconfig.efm.setup {
             capabilities = default_capabilities,
-            filetypes = { 'python' },
+            filetypes = { "python" },
           }
         end,
 
-        ['omnisharp'] = function()
+        ["omnisharp"] = function()
           lspconfig.omnisharp.setup {
             capabilities = default_capabilities,
             handlers = {
-              ["textDocument/definition"] = require('omnisharp_extended').handler
+              ["textDocument/definition"] = require("omnisharp_extended").handler
             },
           }
         end,
 
-        ['jsonls'] = function()
+        ["jsonls"] = function()
           lspconfig.jsonls.setup {
             capabilities = default_capabilities,
             commands = {
@@ -166,11 +166,11 @@ return {
           }
         end,
 
-        ['gopls'] = function()
+        ["gopls"] = function()
           lspconfig.gopls.setup {
             capabilities = default_capabilities,
             init_options = {
-              env = { GOFLAGS = '-tags=unit' },
+              env = { GOFLAGS = "-tags=unit" },
               hints = {
                 assignVariableTypes = true,
                 compositeLiteralFields = true,
@@ -184,8 +184,8 @@ return {
           }
         end,
 
-        ['html'] = function()
-          local filetypes = extend_default_filetypes('html', 'templ')
+        ["html"] = function()
+          local filetypes = extend_default_filetypes("html", "templ")
 
           lspconfig.html.setup {
             capabilities = default_capabilities,
@@ -193,8 +193,8 @@ return {
           }
         end,
 
-        ['htmx'] = function()
-          local filetypes = extend_default_filetypes('htmx', 'templ')
+        ["htmx"] = function()
+          local filetypes = extend_default_filetypes("htmx", "templ")
 
           lspconfig.htmx.setup {
             capabilities = default_capabilities,
@@ -202,8 +202,8 @@ return {
           }
         end,
 
-        ['tailwindcss'] = function()
-          local filetypes = extend_default_filetypes('tailwindcss', 'templ')
+        ["tailwindcss"] = function()
+          local filetypes = extend_default_filetypes("tailwindcss", "templ")
 
           lspconfig.tailwindcss.setup {
             capabilities = default_capabilities,
@@ -212,8 +212,8 @@ return {
           }
         end,
 
-        ['emmet_language_server'] = function()
-          local filetypes = extend_default_filetypes('emmet_language_server', 'templ')
+        ["emmet_language_server"] = function()
+          local filetypes = extend_default_filetypes("emmet_language_server", "templ")
 
           lspconfig.emmet_language_server.setup {
             capabilities = default_capabilities,
@@ -221,19 +221,19 @@ return {
           }
         end,
 
-        ['sqls'] = function()
+        ["sqls"] = function()
           lspconfig.sqls.setup {
             on_attach = function(client, bufnr)
-              require('sqls').on_attach(client, bufnr)
+              require("sqls").on_attach(client, bufnr)
 
-              vim.keymap.set({ 'n', 'v' }, '<C-CR>', ':SqlsExecuteQuery<CR>',
+              vim.keymap.set({ "n", "v" }, "<C-CR>", ":SqlsExecuteQuery<CR>",
                 { silent = true, desc = "Execute query", buffer = bufnr })
 
-              vim.keymap.set('n', '<leader>qc', ':SqlsSwitchConnection<CR>',
-                { silent = true, desc = 'S[Q]L switch [C]onnection', buffer = bufnr })
+              vim.keymap.set("n", "<leader>qc", ":SqlsSwitchConnection<CR>",
+                { silent = true, desc = "S[Q]L switch [C]onnection", buffer = bufnr })
 
-              vim.keymap.set({ 'n' }, '<leader>qd', ':SqlsSwitchDatabase<CR>',
-                { silent = true, desc = 'S[Q]L switch [D]atabase', buffer = bufnr })
+              vim.keymap.set({ "n" }, "<leader>qd", ":SqlsSwitchDatabase<CR>",
+                { silent = true, desc = "S[Q]L switch [D]atabase", buffer = bufnr })
             end
           }
         end,
@@ -242,18 +242,18 @@ return {
   },
 
   {
-    'neovim/nvim-lspconfig',
+    "neovim/nvim-lspconfig",
 
     dependencies = {
       { "folke/neodev.nvim" },
-      { 'folke/neoconf.nvim', opts = true, },
+      { "folke/neoconf.nvim", opts = true, },
     },
   },
 
   {
-    'j-hui/fidget.nvim',
+    "j-hui/fidget.nvim",
 
-    tag = 'legacy',
+    tag = "legacy",
 
     event = "LspAttach",
 
@@ -265,13 +265,13 @@ return {
   },
 
   {
-    'lvimuser/lsp-inlayhints.nvim',
+    "lvimuser/lsp-inlayhints.nvim",
 
     config = function(_, opts)
-      require('lsp-inlayhints').setup(opts)
+      require("lsp-inlayhints").setup(opts)
 
-      vim.api.nvim_create_autocmd('LspAttach', {
-        group = vim.api.nvim_create_augroup('LspAttach_inlayhints', {}),
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = vim.api.nvim_create_augroup("LspAttach_inlayhints", {}),
         callback = function(args)
           if not (args.data and args.data.client_id) then
             return
@@ -279,7 +279,7 @@ return {
 
           local bufnr = args.buf
           local client = vim.lsp.get_client_by_id(args.data.client_id)
-          require('lsp-inlayhints').on_attach(client, bufnr)
+          require("lsp-inlayhints").on_attach(client, bufnr)
         end,
       })
     end
@@ -288,7 +288,7 @@ return {
   {
     "folke/trouble.nvim",
 
-    event = { 'VeryLazy' },
+    event = { "VeryLazy" },
 
     dependencies = {
       { "nvim-tree/nvim-web-devicons" }

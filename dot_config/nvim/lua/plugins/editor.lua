@@ -1,11 +1,11 @@
 return {
-  { 'echasnovski/mini.ai',     version = '*', config = true },
-  { 'echasnovski/mini.align',  version = '*', config = true },
-  { 'echasnovski/mini.basics', version = '*', config = true },
-  { 'echasnovski/mini.pairs',  version = '*', config = true },
+  { "echasnovski/mini.ai",     version = "*", config = true },
+  { "echasnovski/mini.align",  version = "*", config = true },
+  { "echasnovski/mini.basics", version = "*", config = true },
+  { "echasnovski/mini.pairs",  version = "*", config = true },
   {
-    'echasnovski/mini.surround',
-    version = '*',
+    "echasnovski/mini.surround",
+    version = "*",
     opts = {
       mappings = {
         add = "gza",
@@ -20,8 +20,8 @@ return {
   },
 
   {
-    'echasnovski/mini.bracketed',
-    version = '*',
+    "echasnovski/mini.bracketed",
+    version = "*",
     opts = {
       yank = { suffix = "" },
       treesitter = { suffix = "n" },
@@ -29,28 +29,28 @@ return {
   },
 
   {
-    'numToStr/Comment.nvim',
+    "numToStr/Comment.nvim",
     opts = {
     },
     lazy = false,
   },
 
-  { 'cappyzawa/trim.nvim', config = true },
+  { "cappyzawa/trim.nvim", config = true },
   {
-    'RRethy/vim-illuminate',
+    "RRethy/vim-illuminate",
 
-    event = { 'VeryLazy' },
+    event = { "VeryLazy" },
 
     opts = {
       filetypes_denylist = {
-        'neo-tree',
-        'fugitive',
-        'mason',
-        'Trouble',
-        'notify',
-        'help',
-        'Outline',
-        'TelescopePrompt',
+        "neo-tree",
+        "fugitive",
+        "mason",
+        "Trouble",
+        "notify",
+        "help",
+        "Outline",
+        "TelescopePrompt",
       },
       under_cursor = false,
 
@@ -58,21 +58,21 @@ return {
     },
 
     config = function(_, opts)
-      require('illuminate').configure(opts)
+      require("illuminate").configure(opts)
     end,
   },
 
-  { 'vim-utils/vim-line', },
+  { "vim-utils/vim-line", },
   {
-    'kana/vim-textobj-entire',
+    "kana/vim-textobj-entire",
     dependencies = {
-      { 'kana/vim-textobj-user', },
+      { "kana/vim-textobj-user", },
     },
   },
 
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { 'VeryLazy' },
+    event = { "VeryLazy" },
     main = "ibl",
     opts = {}
   },
@@ -125,15 +125,15 @@ return {
 
     keys = {
       {
-        '<leader>m',
+        "<leader>m",
         function()
-          require('treesj').toggle()
+          require("treesj").toggle()
         end,
       },
       {
-        '<leader>M',
+        "<leader>M",
         function()
-          require('treesj').toggle({
+          require("treesj").toggle({
             split = {
               recursive = true,
             },
@@ -141,20 +141,20 @@ return {
         end,
       },
       {
-        '<leader>tj',
+        "<leader>tj",
         function()
-          require('treesj').join()
+          require("treesj").join()
         end
       },
       {
-        '<leader>ts',
+        "<leader>ts",
         function()
-          require('treesj').split()
+          require("treesj").split()
         end
       },
     },
 
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
 
     config = true,
   },
@@ -190,7 +190,7 @@ return {
     config = function()
       local actions = require("diffview.actions")
 
-      require('diffview').setup {
+      require("diffview").setup {
         view = {
           merge_tool = {
             layout = "diff3_mixed",
@@ -209,7 +209,7 @@ return {
   },
 
   {
-    'mhartington/formatter.nvim',
+    "mhartington/formatter.nvim",
 
     keys = {
       { "<space>f", vim.cmd.Format, desc = "Format" }
@@ -220,7 +220,7 @@ return {
         yaml = {
           function()
             return {
-              exe = vim.fn.stdpath('data') .. '/mason/packages/yamlfmt/yamlfmt',
+              exe = vim.fn.stdpath("data") .. "/mason/packages/yamlfmt/yamlfmt",
               args = { "-in" },
               stdin = true,
             }
@@ -250,9 +250,9 @@ return {
           "--column",
         },
         -- regex that will be used to match keywords.
-        -- don't replace the (KEYWORDS) placeholder
+        -- don"t replace the (KEYWORDS) placeholder
         pattern = [[\b(KEYWORDS)(\([^)]*\))?:]], -- ripgrep regex
-        -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You'll likely get false positives
+        -- pattern = [[\b(KEYWORDS)\b]], -- match without the extra colon. You"ll likely get false positives
       },
     },
     -- stylua: ignore
@@ -300,7 +300,7 @@ return {
     end,
     opts = {
       plugins = {
-        marks = true,       -- shows a list of your marks on ' and `
+        marks = true,       -- shows a list of your marks on " and `
         registers = true,   -- shows your registers on " in NORMAL or <C-r> in INSERT mode
         spelling = {
           enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
@@ -321,7 +321,7 @@ return {
       -- add operators that will trigger motion and text object completion
       -- to enable all native operators, set the preset / operators plugin above
       operators = { gc = "Comments" },
-      ignore_missing = false,                                                       -- enable this to hide mappings for which you didn't specify a label
+      ignore_missing = false,                                                       -- enable this to hide mappings for which you didn"t specify a label
       hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
       show_help = true,                                                             -- show help message on the command line when the popup is visible
       triggers = "auto",                                                            -- automatically setup triggers
@@ -343,45 +343,45 @@ return {
   },
 
   {
-    'mbbill/undotree',
+    "mbbill/undotree",
     keys = {
       { "<leader>tu", vim.cmd.UndotreeToggle, desc = "Toggle UndoTree" },
     },
   },
 
   {
-    'stevearc/dressing.nvim',
+    "stevearc/dressing.nvim",
     opts = {},
   },
 
   {
-    'gbprod/yanky.nvim',
+    "gbprod/yanky.nvim",
     opts = {
       ring = { history_length = 20 },
       highlight = { timer = 250 },
     },
     keys = {
-      { 'p',  '<Plug>(YankyPutAfter)',          mode = { 'n', 'x' },                         desc = 'Put yanked text after cursor' },
-      { 'P',  '<Plug>(YankyPutBefore)',         mode = { 'n', 'x' },                         desc = 'Put yanked text before cursor' },
-      { '=p', '<Plug>(YankyPutAfterLinewise)',  desc = 'Put yanked text in line below' },
-      { '=P', '<Plug>(YankyPutBeforeLinewise)', desc = 'Put yanked text in line above' },
-      { '[y', '<Plug>(YankyCycleForward)',      desc = 'Cycle forward through yank history' },
-      { ']y', '<Plug>(YankyCycleBackward)',     desc = 'Cycle backward through yank history' },
+      { "p",  "<Plug>(YankyPutAfter)",          mode = { "n", "x" },                         desc = "Put yanked text after cursor" },
+      { "P",  "<Plug>(YankyPutBefore)",         mode = { "n", "x" },                         desc = "Put yanked text before cursor" },
+      { "=p", "<Plug>(YankyPutAfterLinewise)",  desc = "Put yanked text in line below" },
+      { "=P", "<Plug>(YankyPutBeforeLinewise)", desc = "Put yanked text in line above" },
+      { "[y", "<Plug>(YankyCycleForward)",      desc = "Cycle forward through yank history" },
+      { "]y", "<Plug>(YankyCycleBackward)",     desc = "Cycle backward through yank history" },
     },
   },
 
   {
-    'lewis6991/hover.nvim',
+    "lewis6991/hover.nvim",
 
     config = function()
       require("hover").setup {
         init = function()
           require("hover.providers.lsp")
-          require('hover.providers.man')
-          require('hover.providers.dictionary')
+          require("hover.providers.man")
+          require("hover.providers.dictionary")
         end,
         preview_opts = {
-          border = 'single',
+          border = "single",
           max_width = 100,
           -- focusable = true,
           -- focus = true,
@@ -395,20 +395,20 @@ return {
     end,
 
     keys = {
-      { '<leader>lk', function() require("hover").hover() end, desc = 'Hover' },
-      -- { 'gK', function() require("hover").hover_select() end, desc = 'Hover (select)' },
+      { "<leader>lk", function() require("hover").hover() end, desc = "Hover" },
+      -- { "gK", function() require("hover").hover_select() end, desc = "Hover (select)" },
     },
 
   },
 
   {
-    'patrickpichler/hovercraft.nvim',
+    "patrickpichler/hovercraft.nvim",
 
-    event = 'VeryLazy',
+    event = "VeryLazy",
 
     keys = {
-      { 'K', function()
-        local hovercraft = require('hovercraft')
+      { "K", function()
+        local hovercraft = require("hovercraft")
 
         if hovercraft.is_visible() then
           hovercraft.enter_popup()
@@ -416,8 +416,8 @@ return {
           hovercraft.hover()
         end
       end },
-      { '<leader>ll', function()
-        local hovercraft = require('hovercraft')
+      { "<leader>ll", function()
+        local hovercraft = require("hovercraft")
 
         hovercraft.hover_select()
       end },
@@ -425,77 +425,77 @@ return {
   },
 
   {
-    'ThePrimeagen/harpoon',
+    "ThePrimeagen/harpoon",
 
-    branch = 'harpoon2',
+    branch = "harpoon2",
 
     dependencies = {
-      { 'nvim-lua/plenary.nvim' },
-      { 'nvim-telescope/telescope.nvim' },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
     },
 
     opts = {},
 
     init = function()
-      local harpoon = require('harpoon')
+      local harpoon = require("harpoon")
 
-      vim.keymap.set('n', '<leader>hw', function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
-        { desc = 'Open [h]arpoon [w]indow' })
+      vim.keymap.set("n", "<leader>hw", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+        { desc = "Open [h]arpoon [w]indow" })
 
-      vim.keymap.set('n', '<leader>ha', function() harpoon:list():append() end,
-        { desc = '[h]arpoon [a]ppend' })
-      vim.keymap.set('n', '<leader>1', function() harpoon:list():select(1) end)
-      vim.keymap.set('n', '<leader>2', function() harpoon:list():select(2) end)
-      vim.keymap.set('n', '<leader>3', function() harpoon:list():select(3) end)
-      vim.keymap.set('n', '<leader>4', function() harpoon:list():select(4) end)
+      vim.keymap.set("n", "<leader>ha", function() harpoon:list():append() end,
+        { desc = "[h]arpoon [a]ppend" })
+      vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
+      vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
+      vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
+      vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
 
-      vim.keymap.set('n', '<leader>hp', function() harpoon:list():prev() end,
-        { desc = '[h]arpoon [p]rev' })
-      vim.keymap.set('n', '<leader>hn', function() harpoon:list():next() end,
-        { desc = '[h]arpoon [n]ext' })
+      vim.keymap.set("n", "<leader>hp", function() harpoon:list():prev() end,
+        { desc = "[h]arpoon [p]rev" })
+      vim.keymap.set("n", "<leader>hn", function() harpoon:list():next() end,
+        { desc = "[h]arpoon [n]ext" })
     end,
   },
 
   {
-    'ThePrimeagen/refactoring.nvim',
+    "ThePrimeagen/refactoring.nvim",
 
     dependencies = {
-      { 'nvim-telescope/telescope.nvim' },
-      { 'nvim-lua/plenary.nvim' },
+      { "nvim-telescope/telescope.nvim" },
+      { "nvim-lua/plenary.nvim" },
     },
 
     opts = {},
 
     init = function()
-      vim.keymap.set('x', '<leader>re', function() require('refactoring').refactor('Extract Function') end,
-        { desc = '[R]efactoring [e]xtract function' })
-      vim.keymap.set('x', '<leader>rf', function() require('refactoring').refactor('Extract Function To File') end,
-        { desc = '[R]efactoring extract function to [f]ile' })
+      vim.keymap.set("x", "<leader>re", function() require("refactoring").refactor("Extract Function") end,
+        { desc = "[R]efactoring [e]xtract function" })
+      vim.keymap.set("x", "<leader>rf", function() require("refactoring").refactor("Extract Function To File") end,
+        { desc = "[R]efactoring extract function to [f]ile" })
       -- Extract function supports only visual mode
-      vim.keymap.set('x', '<leader>rv', function() require('refactoring').refactor('Extract Variable') end,
-        { desc = '[R]efactoring extract [v]ariable' })
+      vim.keymap.set("x", "<leader>rv", function() require("refactoring").refactor("Extract Variable") end,
+        { desc = "[R]efactoring extract [v]ariable" })
       -- Extract variable supports only visual mode
-      vim.keymap.set('n', '<leader>rI', function() require('refactoring').refactor('Inline Function') end,
-        { desc = '[R]efactoring [I]nline function' })
+      vim.keymap.set("n", "<leader>rI", function() require("refactoring").refactor("Inline Function") end,
+        { desc = "[R]efactoring [I]nline function" })
       -- Inline func supports only normal
-      vim.keymap.set({ 'n', 'x' }, '<leader>ri', function() require('refactoring').refactor('Inline Variable') end,
-        { desc = '[R]efactoring [i]nline variable' })
+      vim.keymap.set({ "n", "x" }, "<leader>ri", function() require("refactoring").refactor("Inline Variable") end,
+        { desc = "[R]efactoring [i]nline variable" })
       -- Inline var supports both normal and visual mode
 
-      vim.keymap.set('n', '<leader>rb', function() require('refactoring').refactor('Extract Block') end,
-        { desc = '[R]efactoring extract [b]lock' })
-      vim.keymap.set('n', '<leader>rbf', function() require('refactoring').refactor('Extract Block To File') end,
-        { desc = '[R]efactoring extract [b]lock to [f]ile' })
+      vim.keymap.set("n", "<leader>rb", function() require("refactoring").refactor("Extract Block") end,
+        { desc = "[R]efactoring extract [b]lock" })
+      vim.keymap.set("n", "<leader>rbf", function() require("refactoring").refactor("Extract Block To File") end,
+        { desc = "[R]efactoring extract [b]lock to [f]ile" })
 
       -- Extract block supports only normal mode
       -- load refactoring Telescope extension
-      require('telescope').load_extension('refactoring')
+      require("telescope").load_extension("refactoring")
 
       vim.keymap.set(
-        { 'n', 'x' },
-        '<leader>rr',
-        function() require('telescope').extensions.refactoring.refactors() end,
-        { desc = '[R]efactoring telescope' }
+        { "n", "x" },
+        "<leader>rr",
+        function() require("telescope").extensions.refactoring.refactors() end,
+        { desc = "[R]efactoring telescope" }
       )
     end,
   }

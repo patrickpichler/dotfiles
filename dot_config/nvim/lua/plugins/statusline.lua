@@ -1,22 +1,22 @@
 return {
   {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     dependencies = {
-      { 'nvim-tree/nvim-web-devicons' },
-      { 'stevearc/overseer.nvim' },
+      { "nvim-tree/nvim-web-devicons" },
+      { "stevearc/overseer.nvim" },
     },
     opts = function()
       return {
         extensions = {
-          'neo-tree',
-          'fugitive',
-          'trouble',
-          'lazy',
+          "neo-tree",
+          "fugitive",
+          "trouble",
+          "lazy",
         },
         sections = {
           lualine_c = {
-            { 'filename', file_status = true, path = 1 },
-            { 'overseer' }
+            { "filename", file_status = true, path = 1 },
+            { "overseer" }
           }
         },
       }

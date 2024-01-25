@@ -1,15 +1,15 @@
 return {
-  { 'rose-pine/neovim', name = 'rose-pine' },
+  { "rose-pine/neovim", name = "rose-pine" },
 
   {
-    'folke/tokyonight.nvim',
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     opts = {
       style = "night",
 
       on_highlights = function(hl, c, w)
-        hl.DiagnosticUnnecessary = { fg = '#707880'}
+        hl.DiagnosticUnnecessary = { fg = "#707880"}
       end
     },
     init = function()
