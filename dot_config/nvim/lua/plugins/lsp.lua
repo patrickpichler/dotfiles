@@ -14,13 +14,6 @@ local function extend_default_filetypes(lsp, ...)
   return filetypes
 end
 
-local function get_selected_range(bufnr)
-  local startPos = vim.api.nvim_buf_get_mark(bufnr, "<")
-  local endPos = vim.api.nvim_buf_get_mark(bufnr, ">")
-
-  return { start = startPos, ["end"] = endPos }
-end
-
 local function buf_set_keymaps(bufnr)
   -- Mappings.
   local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -66,14 +59,6 @@ local function buf_set_keymaps(bufnr)
   vim.keymap.set("n", "]d", vim.diagnostic.goto_next, provideOpts("Goto next diagnostic"))
   vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float, provideOpts("Open floating diagnostic message"))
   vim.keymap.set("n", "<space>dl", vim.diagnostic.setloclist, provideOpts("Open diagnostics list"))
-
-  vim.keymap.set("n", "<space>f", function()
-    vim.lsp.buf.format { async = true }
-  end, provideOpts("Format"))
-  vim.keymap.set("v", "<space>f",
-    function()
-      vim.lsp.buf.format { async = true, range = get_selected_range(bufnr) }
-    end, provideOpts("Format"))
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
