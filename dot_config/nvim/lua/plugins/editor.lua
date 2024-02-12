@@ -258,6 +258,11 @@ return {
               local ftl = string.lower(ft)
               formatters_by_ft[ftl] = formatters_by_ft[ftl] or {}
               table.insert(formatters_by_ft[ftl], pkg.spec.name)
+
+              if ftl == 'protobuf' then -- this hack is needed, as treesitter detects protobuf as proto ft
+                formatters_by_ft['proto'] = formatters_by_ft['proto'] or {}
+                table.insert(formatters_by_ft['proto'], pkg.spec.name)
+              end
             end
           end
         end
