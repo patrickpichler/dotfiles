@@ -221,9 +221,6 @@ return {
         desc = "Format",
       },
     },
-    init = function()
-      vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-    end,
     opts = function()
       local mason_reg = require "mason-registry"
 
