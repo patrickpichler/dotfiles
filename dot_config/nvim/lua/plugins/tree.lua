@@ -61,7 +61,9 @@ return {
               end
             end
           end,
-          ["/"] = "none"
+          ["/"] = "none",
+          ["<BS>"] = "none",
+          ["P"] = "navigate_up",
         },
       },
       default_component_configs = {
