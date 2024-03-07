@@ -44,13 +44,9 @@ return {
         mapping = cmp.mapping.preset.insert {
           ["<C-u>"] = cmp.mapping.scroll_docs(-4),
           ["<C-d>"] = cmp.mapping.scroll_docs(4),
-          ["<CR>"] = cmp.mapping({
-            i = function(fallback)
-              if cmp.visible() and cmp.get_selected_entry() then
-                cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
-              else
-                fallback()
-              end
+          ["<C-y>"] = cmp.mapping({
+            i = function()
+              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
             end,
             s = cmp.mapping.confirm({ select = true }),
           }),
