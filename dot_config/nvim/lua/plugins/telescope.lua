@@ -12,8 +12,9 @@ return {
       { "nvim-telescope/telescope-live-grep-args.nvim" },
     },
 
-    config = function(_, opts)
+    config = function()
       local telescope = require("telescope")
+      local actions = require("telescope.actions")
       local lga_actions = require("telescope-live-grep-args.actions")
 
       telescope.setup({
@@ -26,6 +27,14 @@ return {
           layout_config = {
             preview_cutoff = 1,
             prompt_position = "top",
+          },
+          mappings = {
+            i = {
+              ["<C-y>"] = actions.select_default,
+            },
+            n = {
+              ["<C-y>"] = actions.select_default,
+            }
           },
         },
         extensions = {
