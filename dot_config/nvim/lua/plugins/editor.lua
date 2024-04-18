@@ -414,37 +414,6 @@ return {
   },
 
   {
-    "lewis6991/hover.nvim",
-
-    config = function()
-      require("hover").setup {
-        init = function()
-          require("hover.providers.lsp")
-          require("hover.providers.man")
-          require("hover.providers.dictionary")
-        end,
-        preview_opts = {
-          border = "single",
-          max_width = 100,
-          -- focusable = true,
-          -- focus = true,
-          wrap = true,
-        },
-        -- Whether the contents of a currently open hover window should be moved
-        -- to a :h preview-window when pressing the hover keymap.
-        preview_window = false,
-        title = true,
-      }
-    end,
-
-    keys = {
-      { "<leader>lk", function() require("hover").hover() end, desc = "Hover" },
-      -- { "gK", function() require("hover").hover_select() end, desc = "Hover (select)" },
-    },
-
-  },
-
-  {
     "patrickpichler/hovercraft.nvim",
 
     event = "VeryLazy",
@@ -458,11 +427,6 @@ return {
         else
           hovercraft.hover()
         end
-      end },
-      { "<leader>ll", function()
-        local hovercraft = require("hovercraft")
-
-        hovercraft.hover_select()
       end },
     },
   },
