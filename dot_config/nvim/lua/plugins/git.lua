@@ -82,7 +82,7 @@ return {
     keys = {
       { "<leader>gb", toggleGitBlame, desc = "Toggle Git blame" },
     },
-    cmd = "Git",
+    lazy = false,
   },
 
 }
