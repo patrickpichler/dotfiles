@@ -7,9 +7,10 @@ return {
     priority = 1000,
     opts = {
       style = "night",
+      light_style = "day",
 
-      on_highlights = function(hl, c, w)
-        hl.DiagnosticUnnecessary = { fg = "#707880"}
+      on_highlights = function(hl, c)
+        -- hl.DiagnosticUnnecessary = { fg = "#707880"}
       end
     },
     init = function()
