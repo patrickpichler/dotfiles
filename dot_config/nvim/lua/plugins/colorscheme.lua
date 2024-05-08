@@ -10,7 +10,7 @@ return {
       light_style = "day",
 
       on_highlights = function(hl, c)
-        -- hl.DiagnosticUnnecessary = { fg = "#707880"}
+        hl.DiagnosticUnnecessary = { fg = "#707880"}
       end
     },
     init = function()
