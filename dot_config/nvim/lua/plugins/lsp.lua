@@ -71,6 +71,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
     end
 
+    if vim.lsp.inlay_hint then
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+    end
+
     buf_set_keymaps(bufnr)
   end,
 })
@@ -208,6 +212,8 @@ return {
 
         ["sqls"] = function()
           lspconfig.sqls.setup {
+            capabilities = default_capabilities,
+
             on_attach = function(client, bufnr)
               require("sqls").on_attach(client, bufnr)
 
@@ -247,27 +253,6 @@ return {
         blend = 0,
       },
     }
-  },
-
-  {
-    "lvimuser/lsp-inlayhints.nvim",
-
-    config = function(_, opts)
-      require("lsp-inlayhints").setup(opts)
-
-      vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("LspAttach_inlayhints", {}),
-        callback = function(args)
-          if not (args.data and args.data.client_id) then
-            return
-          end
-
-          local bufnr = args.buf
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          require("lsp-inlayhints").on_attach(client, bufnr)
-        end,
-      })
-    end
   },
 
   {
