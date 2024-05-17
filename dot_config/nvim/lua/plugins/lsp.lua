@@ -110,6 +110,7 @@ return {
       { "neovim/nvim-lspconfig" },
       { "nanotee/sqls.nvim" },
       { "ray-x/lsp_signature.nvim" }
+      { "b0o/SchemaStore.nvim" },
     },
 
     config = function()
@@ -164,7 +165,13 @@ return {
                   vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
                 end
               }
-            }
+            },
+            settings = {
+              json = {
+                schemas = require('schemastore').json.schemas(),
+                validate = { enable = true },
+              },
+            },
           }
         end,
 
@@ -239,6 +246,29 @@ return {
               vim.keymap.set({ "n" }, "<leader>qd", ":SqlsSwitchDatabase<CR>",
                 { silent = true, desc = "S[Q]L switch [D]atabase", buffer = bufnr })
             end
+          }
+        end,
+
+        ["yamlls"] = function()
+          lspconfig.yamlls.setup {
+            capabilities = default_capabilities,
+            settings = {
+              yaml = {
+                schemaStore = {
+                  -- You must disable built-in schemaStore support if you want to use
+                  -- this plugin and its advanced options like `ignore`.
+                  enable = false,
+                  -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                  url = "",
+                },
+                schemas = require('schemastore').yaml.schemas(),
+              },
+            },
+            redhat = {
+              telemetry = {
+                enabled = false,
+              },
+            },
           }
         end,
       }
