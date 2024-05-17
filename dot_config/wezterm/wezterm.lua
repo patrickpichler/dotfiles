@@ -3,7 +3,6 @@ local connection_config = require('connection')
 -- Pull in the wezterm API
 ---@type wezterm
 local wezterm = require 'wezterm'
-local act = wezterm.action
 
 wezterm.on('update-right-status', function(window)
   local name = window:active_key_table()
@@ -22,7 +21,13 @@ end
 connection_config.infuse(config)
 
 config.term = 'wezterm'
-config.color_scheme = 'tokyonight_night'
+
+local function get_appearance()
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  end
+  return 'Dark'
+end
 
 local function scheme_for_appearance(appearance)
   if appearance:find("Dark") then
@@ -31,6 +36,8 @@ local function scheme_for_appearance(appearance)
     return "tokyonight_day"
   end
 end
+
+config.color_scheme = scheme_for_appearance(get_appearance())
 
 wezterm.on("window-config-reloaded", function(window, pane)
   local overrides = window:get_config_overrides() or {}
