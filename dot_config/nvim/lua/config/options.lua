@@ -39,3 +39,5 @@ vim.opt.undofile = true
 if vim.fn.executable('par') then
   vim.opt.formatprg = 'par -re'
 end
+
+vim.opt.inccommand = "split"
