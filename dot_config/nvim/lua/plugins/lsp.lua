@@ -88,6 +88,18 @@ return {
   },
 
   {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+    opts = {
+      hint_enable = false,
+      fix_pos = true,
+      floating_window_above_cur_line = false,
+      floating_window_off_y = -2,
+    },
+    config = function(_, opts) require 'lsp_signature'.setup(opts) end
+  },
+
+  {
     "williamboman/mason-lspconfig.nvim",
 
     version = "v1.*",
@@ -97,6 +109,7 @@ return {
       { "Hoffs/omnisharp-extended-lsp.nvim" },
       { "neovim/nvim-lspconfig" },
       { "nanotee/sqls.nvim" },
+      { "ray-x/lsp_signature.nvim" }
     },
 
     config = function()

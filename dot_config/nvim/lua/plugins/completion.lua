@@ -8,7 +8,6 @@ return {
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-cmdline" },
       { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-nvim-lsp-signature-help" },
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-emoji" },
       { "ray-x/cmp-treesitter" },
@@ -28,7 +27,6 @@ return {
 
       ---@diagnostic disable-next-line: missing-fields
       cmp.setup({
-        experimental = { ghost_text = true },
 
         snippet = {
           expand = function(args)
