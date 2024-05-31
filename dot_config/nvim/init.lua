@@ -2,6 +2,7 @@ require("config.autocmds")
 require("config.commands")
 require("config.keymaps")
 require("config.options")
+require("config.autocolor")
 
 require("config.lazy") {
   dev = {
