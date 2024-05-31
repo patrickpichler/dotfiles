@@ -109,7 +109,7 @@ return {
       { "Hoffs/omnisharp-extended-lsp.nvim" },
       { "neovim/nvim-lspconfig" },
       { "nanotee/sqls.nvim" },
-      { "ray-x/lsp_signature.nvim" }
+      { "ray-x/lsp_signature.nvim" },
       { "b0o/SchemaStore.nvim" },
     },
 
