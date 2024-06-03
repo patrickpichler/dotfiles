@@ -40,7 +40,7 @@ local function buf_set_keymaps(bufnr)
   vim.keymap.set("n", "gD", referencesWrapper(vim.lsp.buf.declaration), provideOpts("Goto declaration"))
   vim.keymap.set("n", "gd", referencesWrapper(telescopeBuiltin.lsp_definitions), provideOpts("Goto definitions"))
   vim.keymap.set("n", "gi", referencesWrapper(telescopeBuiltin.lsp_implementations), provideOpts("Goto implementations"))
-  vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
+  vim.keymap.set({ "i", "n" }, "<M-p>", vim.lsp.buf.signature_help, opts)
   vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, provideOpts("Add workspace folder"))
   vim.keymap.set("n", "<space>ws", symbolsWrapper(telescopeBuiltin.lsp_dynamic_workspace_symbols),
     provideOpts("Search for workspace symbol"))
@@ -85,18 +85,6 @@ return {
     version = "v1.*",
     build = ":MasonUpdate",
     opts = true
-  },
-
-  {
-    "ray-x/lsp_signature.nvim",
-    event = "VeryLazy",
-    opts = {
-      hint_enable = false,
-      fix_pos = true,
-      floating_window_above_cur_line = false,
-      floating_window_off_y = -2,
-    },
-    config = function(_, opts) require 'lsp_signature'.setup(opts) end
   },
 
   {
