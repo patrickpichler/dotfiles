@@ -87,22 +87,22 @@ return {
             find_command = { "rg", "--files", "--hidden", "-g", "!.git" }
           })
         end,
-        desc = "[S]earch [F]iles"
+        desc = "[s]earch [f]iles"
       },
       {
-        "<leader>sg",
+        "<leader>sG",
         function() require("telescope").extensions.live_grep_args.live_grep_args() end,
-        desc = "[S]earch [G]rep",
+        desc = "[s]earch [G]rep",
       },
       {
         "<leader>sw",
         function() require("telescope.builtin").grep_string() end,
-        desc = "[S]earch [W]ord",
+        desc = "[s]earch [w]ord",
       },
       {
         "<leader>sh",
         function() require("telescope.builtin").help_tags() end,
-        desc = "[S]earch [H]elp",
+        desc = "[s]earch [h]elp",
       },
       {
         "<leader>sc",
@@ -112,12 +112,38 @@ return {
       {
         "<leader>sb",
         function() require("telescope.builtin").buffers() end,
-        desc = "[S]earch [B]uffers"
+        desc = "[s]earch [b]uffers"
       },
       {
         "<leader>sr",
         function() require("telescope.builtin").resume() end,
-        desc = "[S]earch [R]esume"
+        desc = "[s]earch [r]esume"
+      },
+
+      {
+        "<leader>sgb",
+        function() require("telescope.builtin").git_branch() end,
+        desc = "[s]earch [g]it [b]ranch",
+      },
+      {
+        "<leader>sgc",
+        function() require("telescope.builtin").git_commit() end,
+        desc = "[s]earch [g]it [c]ommit",
+      },
+      {
+        "<leader>sgs",
+        function() require("telescope.builtin").git_status() end,
+        desc = "[s]earch [g]it [s]tatus",
+      },
+      {
+        "<leader>sgS",
+        function() require("telescope.builtin").git_stash() end,
+        desc = "[s]earch [g]it [S]tash",
+      },
+      {
+        "<leader>sgf",
+        function() require("telescope.builtin").git_files() end,
+        desc = "[s]earch [g]it [f]iles",
       },
     },
 
