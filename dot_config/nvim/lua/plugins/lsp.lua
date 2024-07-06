@@ -37,19 +37,19 @@ local function buf_set_keymaps(bufnr)
   end
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set("n", "gD", referencesWrapper(vim.lsp.buf.declaration), provideOpts("Goto declaration"))
+  vim.keymap.set("n", "gD", telescopeBuiltin.lsp_type_definitions, provideOpts("Show type definitions"))
   vim.keymap.set("n", "gd", referencesWrapper(telescopeBuiltin.lsp_definitions), provideOpts("Goto definitions"))
   vim.keymap.set("n", "gi", referencesWrapper(telescopeBuiltin.lsp_implementations), provideOpts("Goto implementations"))
   vim.keymap.set({ "i", "n" }, "<M-p>", vim.lsp.buf.signature_help, opts)
   vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, provideOpts("Add workspace folder"))
   vim.keymap.set("n", "<space>ws", symbolsWrapper(telescopeBuiltin.lsp_dynamic_workspace_symbols),
     provideOpts("Search for workspace symbol"))
+  vim.keymap.set("n", "<space>d", referencesWrapper(vim.lsp.buf.declaration), provideOpts("Goto declaration"))
   vim.keymap.set("n", "<space>s", telescopeBuiltin.lsp_document_symbols, provideOpts("Search document symbols"))
   vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, provideOpts("Remove workspace folder"))
   vim.keymap.set("n", "<space>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, provideOpts("List workspace folders"))
-  vim.keymap.set("n", "<space>d", telescopeBuiltin.lsp_type_definitions, provideOpts("Show type definitions"))
   vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, provideOpts("Rename"))
   vim.keymap.set({ "n", "v" }, "<space>a", vim.lsp.buf.code_action, provideOpts("Code actions"))
   vim.keymap.set("n", "gr", referencesWrapper(telescopeBuiltin.lsp_references), provideOpts("Goto references"))
