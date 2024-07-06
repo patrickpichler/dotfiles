@@ -16,7 +16,6 @@ return {
   },
 
   { "AndrewRadev/linediff.vim", },
-  { "junegunn/vim-peekaboo", },
 
   {
     "nvim-tree/nvim-web-devicons",
