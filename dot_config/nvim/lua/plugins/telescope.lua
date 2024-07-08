@@ -90,9 +90,9 @@ return {
         desc = "[s]earch [f]iles"
       },
       {
-        "<leader>sG",
+        "<leader>ss",
         function() require("telescope").extensions.live_grep_args.live_grep_args() end,
-        desc = "[s]earch [G]rep",
+        desc = "[s]earch [s]grep",
       },
       {
         "<leader>sw",
