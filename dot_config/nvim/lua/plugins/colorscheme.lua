@@ -14,7 +14,20 @@ return {
       light_style = "day",
 
       on_highlights = function(hl, c)
-        hl.DiagnosticUnnecessary = { fg = "#707880"}
+        hl.DiagnosticUnnecessary = { fg = "#707880" }
+
+        -- Telescope
+        hl.TelescopeNormal       = { fg = c.fg, bg = c.bg }
+        hl.TelescopeBorder       = { fg = c.border_highlight, bg = c.bg }
+        hl.TelescopePromptBorder = { fg = c.orange, bg = c.bg }
+        hl.TelescopePromptTitle  = { fg = c.orange, bg = c.bg }
+
+        -- Flash
+        hl.FlashLabel            = { fg = c.orange, bg = c.bg }
+
+        -- Float
+        hl.NormalFloat           = { bg = c.bg }
+        hl.FloatBorder           = { fg = c.border_highlight, bg = c.bg }
       end
     },
     init = function()
