@@ -281,7 +281,7 @@ return {
       highlight = {
         keyword = "bg",
         after = "fg",
-        pattern = [[.*<(KEYWORDS)(\([^)]*\)|):]]
+        pattern = [[.*((KEYWORDS)(\([^)]*\)|)):]]
       },
       search = {
         command = "rg",
