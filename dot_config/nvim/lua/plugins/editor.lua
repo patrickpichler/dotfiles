@@ -505,5 +505,7 @@ return {
         { desc = "[R]efactoring telescope" }
       )
     end,
-  }
+  },
+
+  { 'towolf/vim-helm' },
 }
