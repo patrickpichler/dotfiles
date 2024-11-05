@@ -7,7 +7,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 local function extend_default_filetypes(lsp, ...)
   local filetypes = { ... }
 
-  for _, ft in ipairs(require("lspconfig.server_configurations." .. lsp).default_config.filetypes) do
+  for _, ft in ipairs(require("lspconfig.configs." .. lsp).default_config.filetypes) do
     table.insert(filetypes, ft)
   end
 
