@@ -7,7 +7,8 @@ local debouncer = require('debouncer')
 local SUPER = { 'cmd', 'ctrl' }
 
 hs.hotkey.bind(SUPER, 't', function()
-  os.execute('open -n -b com.github.wez.wezterm --args start --always-new-process')
+  -- os.execute('open -n -b com.github.wez.wezterm --args start --always-new-process')
+  os.execute('open -n -b net.kovidgoyal.kitty')
 end)
 
 local function fuzzyQuery(s, m)
