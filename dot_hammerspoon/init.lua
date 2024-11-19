@@ -3,12 +3,22 @@ hs.loadSpoon('SpoonInstall')
 spoon.SpoonInstall:andUse('EmmyLua')
 
 local debouncer = require('debouncer')
+local themeDetection = require('theme_detection')
 
 local SUPER = { 'cmd', 'ctrl' }
 
 hs.hotkey.bind(SUPER, 't', function()
-  -- os.execute('open -n -b com.github.wez.wezterm --args start --always-new-process')
   os.execute('open -n -b net.kovidgoyal.kitty')
+end)
+
+-- Kitty theme changes
+themeDetection:addHandler(function(darkTheme)
+  if darkTheme then
+    -- Sadly the PATH is messed up and I am currently not feeling to investigate.
+    os.execute('/opt/homebrew/bin/kitty +kitten themes --reload-in=all Tokyo Night Storm')
+  else
+    os.execute('/opt/homebrew/bin/kitty +kitten themes --reload-in=all Tokyo Night Day')
+  end
 end)
 
 local function fuzzyQuery(s, m)
