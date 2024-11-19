@@ -21,6 +21,12 @@ themeDetection:addHandler(function(darkTheme)
   end
 end)
 
+-- Force NVIM to update theme
+themeDetection:addHandler(function(_)
+  -- This works, as the nvim config has a special handler for SIGWINCH signals.
+  os.execute('pkill -SIGWINCH -f nvim')
+end)
+
 local function fuzzyQuery(s, m)
   local s_index = 1
   local m_index = 1
