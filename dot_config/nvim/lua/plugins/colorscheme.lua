@@ -3,7 +3,13 @@ local autocolor = require("config.plugins.autocolor")
 autocolor.set_bg()
 
 return {
-  { "rose-pine/neovim", name = "rose-pine" },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    init = function()
+      vim.cmd([[colorscheme rose-pine]])
+    end,
+  },
 
   {
     "folke/tokyonight.nvim",
@@ -30,8 +36,5 @@ return {
         hl.FloatBorder           = { fg = c.border_highlight, bg = c.bg }
       end
     },
-    init = function()
-      vim.cmd([[colorscheme tokyonight]])
-    end,
   },
 }
