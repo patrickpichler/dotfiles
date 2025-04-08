@@ -1,9 +1,3 @@
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    update_in_insert = true,
-  }
-)
-
 local function extend_default_filetypes(lsp, ...)
   local filetypes = { ... }
 
@@ -36,6 +30,12 @@ local function buf_set_keymaps(bufnr)
     end
   end
 
+  local diagnosticWrapper = function(c)
+    return function()
+      vim.diagnostic.jump(c)
+    end
+  end
+
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   vim.keymap.set("n", "gD", telescopeBuiltin.lsp_type_definitions, provideOpts("Show type definitions"))
   vim.keymap.set("n", "gd", referencesWrapper(telescopeBuiltin.lsp_definitions), provideOpts("Goto definitions"))
@@ -55,8 +55,8 @@ local function buf_set_keymaps(bufnr)
   vim.keymap.set("n", "gr", referencesWrapper(telescopeBuiltin.lsp_references), provideOpts("Goto references"))
 
   vim.keymap.set("n", "<leader>sd", telescopeBuiltin.diagnostics, provideOpts("[S]earch [D]iagnostics"))
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, provideOpts("Goto previos diagnostic"))
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, provideOpts("Goto next diagnostic"))
+  vim.keymap.set("n", "[d", diagnosticWrapper({count=-1, float=true}), provideOpts("Goto previos diagnostic"))
+  vim.keymap.set("n", "]d", diagnosticWrapper({count=1, float=true}), provideOpts("Goto next diagnostic"))
   vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float, provideOpts("Open floating diagnostic message"))
   vim.keymap.set("n", "<space>dl", vim.diagnostic.setloclist, provideOpts("Open diagnostics list"))
 end
