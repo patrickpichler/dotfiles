@@ -93,7 +93,6 @@ return {
     version = "v1.*",
 
     dependencies = {
-      { "hrsh7th/cmp-nvim-lsp" },
       { "Hoffs/omnisharp-extended-lsp.nvim" },
       { "neovim/nvim-lspconfig" },
       { "nanotee/sqls.nvim" },
@@ -105,12 +104,11 @@ return {
       local lspconfig = require("lspconfig")
       local mason_lspconfig = require("mason-lspconfig")
 
-      mason_lspconfig.setup({})
+      mason_lspconfig.setup()
 
       local default_capabilities = vim.tbl_deep_extend(
         "force",
         vim.lsp.protocol.make_client_capabilities(),
-        require("cmp_nvim_lsp").default_capabilities(),
         {
           textDocument = {
             foldingRange = {
