@@ -36,6 +36,7 @@ return {
   },
 
   { "cappyzawa/trim.nvim", config = true },
+
   {
     "RRethy/vim-illuminate",
 
@@ -43,14 +44,11 @@ return {
 
     opts = {
       filetypes_denylist = {
-        "neo-tree",
-        "fugitive",
         "mason",
         "Trouble",
         "notify",
         "help",
         "Outline",
-        "TelescopePrompt",
       },
       under_cursor = false,
 
@@ -68,14 +66,7 @@ return {
     dependencies = {
       { "kana/vim-textobj-user", },
     },
-  },
-
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    event = { "VeryLazy" },
-    main = "ibl",
-    opts = {}
-  },
+ },
 
   {
     "kevinhwang91/nvim-ufo",
@@ -126,9 +117,7 @@ return {
     keys = {
       {
         "<leader>m",
-        function()
-          require("treesj").toggle()
-        end,
+        function() require("treesj").toggle() end,
       },
       {
         "<leader>M",
@@ -160,33 +149,8 @@ return {
   },
 
   {
-    "danymat/neogen",
-    keys = {
-      {
-        "<leader>cc",
-        function()
-          require("neogen").generate({})
-        end,
-        desc = "Neogen Comment",
-      },
-    },
-    opts = { snippet_engine = "luasnip" },
-  },
-
-  {
-    "AckslD/muren.nvim",
-    opts = {
-      patterns_width = 60,
-      patterns_height = 20,
-      options_width = 40,
-      preview_height = 24,
-    },
-    cmd = "MurenToggle",
-  },
-
-  {
     "sindrets/diffview.nvim",
-    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles" },
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFileHistory" },
     config = function()
       local actions = require("diffview.actions")
 
@@ -205,7 +169,6 @@ return {
         },
       }
     end,
-    keys = { { "<leader>gd", vim.cmd.DiffviewOpen, desc = "DiffView" } },
   },
 
   {
@@ -275,7 +238,7 @@ return {
 
   {
     "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope" },
+    cmd = { "TodoTrouble" },
     event = { "BufReadPost", "BufNewFile" },
     opts = {
       highlight = {
@@ -300,12 +263,10 @@ return {
     },
     -- stylua: ignore
     keys = {
-      { "]t",         function() require("todo-comments").jump_next() end,             desc = "Next todo comment" },
-      { "[t",         function() require("todo-comments").jump_prev() end,             desc = "Previous todo comment" },
-      { "<leader>xt", vim.cmd.TodoTrouble,                                             desc = "Todo (Trouble)" },
-      { "<leader>xT", function() vim.cmd.TodoTrouble("keywords=TODO,FIX,FIXME") end,   desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", vim.cmd.TodoTelescope,                                           desc = "[S]earch [t]odo" },
-      { "<leader>sT", function() vim.cmd.TodoTelescope("keywords=TODO,FIX,FIXME") end, desc = "[S] [T]odo/Fix/Fixme" },
+      { "]t",         function() require("todo-comments").jump_next() end,                                   desc = "Next todo comment" },
+      { "[t",         function() require("todo-comments").jump_prev() end,                                   desc = "Previous todo comment" },
+      { "<leader>st", function() Snacks.picker.todo_comments() end,                                          desc = "Todo" },
+      { "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
     },
   },
 
@@ -361,12 +322,6 @@ return {
           g = true,             -- bindings for prefixed with g
         },
       },
-      -- disable the WhichKey popup for certain buf types and file types.
-      -- Disabled by deafult for Telescope
-      disable = {
-        buftypes = {},
-        filetypes = { "TelescopePrompt" },
-      },
     },
   },
 
@@ -375,11 +330,6 @@ return {
     keys = {
       { "<leader>tu", vim.cmd.UndotreeToggle, desc = "Toggle UndoTree" },
     },
-  },
-
-  {
-    "stevearc/dressing.nvim",
-    opts = {},
   },
 
   {
@@ -423,7 +373,6 @@ return {
 
     dependencies = {
       { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim" },
     },
 
     opts = {},
@@ -445,50 +394,6 @@ return {
         { desc = "[h]arpoon [p]rev" })
       vim.keymap.set("n", "<leader>hn", function() harpoon:list():next() end,
         { desc = "[h]arpoon [n]ext" })
-    end,
-  },
-
-  {
-    "ThePrimeagen/refactoring.nvim",
-
-    dependencies = {
-      { "nvim-telescope/telescope.nvim" },
-      { "nvim-lua/plenary.nvim" },
-    },
-
-    opts = {},
-
-    init = function()
-      vim.keymap.set("x", "<leader>re", function() require("refactoring").refactor("Extract Function") end,
-        { desc = "[R]efactoring [e]xtract function" })
-      vim.keymap.set("x", "<leader>rf", function() require("refactoring").refactor("Extract Function To File") end,
-        { desc = "[R]efactoring extract function to [f]ile" })
-      -- Extract function supports only visual mode
-      vim.keymap.set("x", "<leader>rv", function() require("refactoring").refactor("Extract Variable") end,
-        { desc = "[R]efactoring extract [v]ariable" })
-      -- Extract variable supports only visual mode
-      vim.keymap.set("n", "<leader>rI", function() require("refactoring").refactor("Inline Function") end,
-        { desc = "[R]efactoring [I]nline function" })
-      -- Inline func supports only normal
-      vim.keymap.set({ "n", "x" }, "<leader>ri", function() require("refactoring").refactor("Inline Variable") end,
-        { desc = "[R]efactoring [i]nline variable" })
-      -- Inline var supports both normal and visual mode
-
-      vim.keymap.set("n", "<leader>rb", function() require("refactoring").refactor("Extract Block") end,
-        { desc = "[R]efactoring extract [b]lock" })
-      vim.keymap.set("n", "<leader>rbf", function() require("refactoring").refactor("Extract Block To File") end,
-        { desc = "[R]efactoring extract [b]lock to [f]ile" })
-
-      -- Extract block supports only normal mode
-      -- load refactoring Telescope extension
-      require("telescope").load_extension("refactoring")
-
-      vim.keymap.set(
-        { "n", "x" },
-        "<leader>rr",
-        function() require("telescope").extensions.refactoring.refactors() end,
-        { desc = "[R]efactoring telescope" }
-      )
     end,
   },
 

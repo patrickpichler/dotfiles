@@ -16,20 +16,6 @@ local function buf_set_keymaps(bufnr)
     return vim.tbl_deep_extend("force", opts, { desc = description })
   end
 
-  local telescopeBuiltin = require("telescope.builtin")
-
-  local referencesWrapper = function(f)
-    return function()
-      f({ show_line = false })
-    end
-  end
-
-  local symbolsWrapper = function(f)
-    return function()
-      f({ symbol_width = 60 })
-    end
-  end
-
   local diagnosticWrapper = function(c)
     return function()
       vim.diagnostic.jump(c)
@@ -37,24 +23,14 @@ local function buf_set_keymaps(bufnr)
   end
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  vim.keymap.set("n", "gD", telescopeBuiltin.lsp_type_definitions, provideOpts("Show type definitions"))
-  vim.keymap.set("n", "gd", referencesWrapper(telescopeBuiltin.lsp_definitions), provideOpts("Goto definitions"))
-  vim.keymap.set("n", "gi", referencesWrapper(telescopeBuiltin.lsp_implementations), provideOpts("Goto implementations"))
-  vim.keymap.set({ "i", "n" }, "<M-p>", vim.lsp.buf.signature_help, opts)
   vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, provideOpts("Add workspace folder"))
-  vim.keymap.set("n", "<space>ws", symbolsWrapper(telescopeBuiltin.lsp_dynamic_workspace_symbols),
-    provideOpts("Search for workspace symbol"))
-  vim.keymap.set("n", "<space>d", referencesWrapper(vim.lsp.buf.declaration), provideOpts("Goto declaration"))
-  vim.keymap.set("n", "<space>s", telescopeBuiltin.lsp_document_symbols, provideOpts("Search document symbols"))
   vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, provideOpts("Remove workspace folder"))
   vim.keymap.set("n", "<space>wl", function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, provideOpts("List workspace folders"))
   vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, provideOpts("Rename"))
   vim.keymap.set({ "n", "v" }, "<space>a", vim.lsp.buf.code_action, provideOpts("Code actions"))
-  vim.keymap.set("n", "gr", referencesWrapper(telescopeBuiltin.lsp_references), provideOpts("Goto references"))
 
-  vim.keymap.set("n", "<leader>sd", telescopeBuiltin.diagnostics, provideOpts("[S]earch [D]iagnostics"))
   vim.keymap.set("n", "[d", diagnosticWrapper({count=-1, float=true}), provideOpts("Goto previos diagnostic"))
   vim.keymap.set("n", "]d", diagnosticWrapper({count=1, float=true}), provideOpts("Goto next diagnostic"))
   vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float, provideOpts("Open floating diagnostic message"))

@@ -49,7 +49,7 @@ return {
             set_jumps = true, -- whether to set jumps in the jumplist
             goto_next_start = {
               ["]m"] = "@function.outer",
-              ["]]"] = { query = "@class.outer", desc = "Next class start" },
+              ["]c"] = { query = "@class.outer", desc = "Next class start" },
               ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
             },
             goto_next_end = {
@@ -81,16 +81,5 @@ return {
       -- require("nvim-treesitter.install").prefer_git = true
       require("nvim-treesitter.configs").setup(opts)
     end
-  },
-
-  {
-    "mfussenegger/nvim-treehopper",
-    keys = { { "m", mode = { "o", "x" } } },
-    config = function()
-      vim.cmd([[
-        omap     <silent> m :<C-U>lua require("tsht").nodes()<CR>
-        xnoremap <silent> m :lua require("tsht").nodes()<CR>
-      ]])
-    end,
   },
 }

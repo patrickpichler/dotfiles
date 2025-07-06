@@ -1,20 +1,3 @@
-local function toggleGitBlame()
-  local lastWinNr = vim.fn.winnr("$")
-  local found = false
-  print(lastWinNr)
-
-  for winnr = 0, lastWinNr do
-    if vim.fn.getbufvar(vim.fn.winbufnr(winnr), "&filetype") == "fugitiveblame" then
-      vim.fn.execute(winnr .. "close")
-      found = true
-    end
-  end
-
-  if not found then
-    vim.cmd.Git("blame")
-  end
-end
-
 return {
   { "rhysd/committia.vim" },
 
@@ -42,15 +25,15 @@ return {
         end
 
         -- Navigation
-        map("n", "]c", function()
+        map("n", "]h", function()
           if vim.wo.diff then return "]c" end
-          vim.schedule(function() gs.next_hunk() end)
+          vim.schedule(function() gs.nav_hunk('next') end)
           return "<Ignore>"
         end, { expr = true, desc = "Next hunk" })
 
-        map("n", "[c", function()
+        map("n", "[h", function()
           if vim.wo.diff then return "[c" end
-          vim.schedule(function() gs.prev_hunk() end)
+          vim.schedule(function() gs.nav_hunk('prev') end)
           return "<Ignore>"
         end, { expr = true, desc = "Previous hunk" })
 
@@ -62,27 +45,18 @@ return {
         map("v", "<leader>hr", function() gs.reset_hunk { vim.fn.line("."), vim.fn.line("v") } end,
           { desc = "Reset hunk" })
         map("n", "<leader>hS", gs.stage_buffer, { desc = "Stage buffer" })
-        map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
         map("n", "<leader>hR", gs.reset_buffer, { desc = "Reset buffer" })
         map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
         map("n", "<leader>hb", function() gs.blame_line { full = true } end, { desc = "Toggle blame line" })
-        map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Toggle blame current line" })
+        map("n", "<leader>tgb", function() gs.toggle_current_line_blame() end, { desc = "Toggle Git blame current line" })
+        map("n", "<leader>gB", gs.blame, { desc = "Toggle Git blame" })
         map("n", "<leader>hd", gs.diffthis, { desc = "Diff this" })
         map("n", "<leader>hD", function() gs.diffthis("~") end, { desc = "Diff this head" })
-        map("n", "<leader>td", gs.toggle_deleted, { desc = "Toggle deleted" })
+        map("n", "<leader>hi", function() gs.preview_hunk_inline() end, { desc = "Toggle Git Inline preview" })
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
       end
     },
   },
-
-  {
-    "tpope/vim-fugitive",
-    keys = {
-      { "<leader>gb", toggleGitBlame, desc = "Toggle Git blame" },
-    },
-    lazy = false,
-  },
-
 }
