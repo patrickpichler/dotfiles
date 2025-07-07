@@ -54,15 +54,13 @@ return {
             },
             goto_next_end = {
               ["]M"] = "@function.outer",
-              ["]["] = "@class.outer",
             },
             goto_previous_start = {
               ["[m"] = "@function.outer",
-              ["[["] = "@class.outer",
+              ["[c"] = "@class.outer",
             },
             goto_previous_end = {
               ["[M"] = "@function.outer",
-              ["[]"] = "@class.outer",
             },
           },
         },
@@ -78,7 +76,6 @@ return {
       }
     end,
     config = function(_, opts)
-      -- require("nvim-treesitter.install").prefer_git = true
       require("nvim-treesitter.configs").setup(opts)
     end
   },
