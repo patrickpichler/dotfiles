@@ -6,6 +6,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "nvim-neotest/neotest-go",
+      "nvim-neotest/neotest-python",
     },
 
     opts = {},
@@ -32,6 +33,9 @@ return {
             experimental = {
               test_table = true,
             },
+          }),
+          require("neotest-python")({
+            pytest_discover_instances = true,
           }),
         },
       })
