@@ -35,10 +35,22 @@ return {
     { "<leader>/",       function() Snacks.picker.grep({ hidden = true }) end, desc = "Grep" },
     { "<leader>:",       function() Snacks.picker.command_history() end,       desc = "Command History" },
     { "<leader>n",       function() Snacks.picker.notifications() end,         desc = "Notification History" },
-    { "<leader>e",       function() Snacks.explorer() end,                     desc = "File Explorer" },
-    { "<leader>E",       function() Snacks.explorer.reveal() end,              desc = "File Explorer (Current)" },
+    { "<leader>E",       function() Snacks.explorer() end,                     desc = "File Explorer" },
+    {
+      "<leader>e",
+      function()
+        if Snacks.picker.get({ source = "explorer" })[1] == nil then
+          Snacks.picker.explorer()
+        elseif Snacks.picker.get({ source = "explorer" })[1]:is_focused() == true then
+          Snacks.picker.explorer()
+        elseif Snacks.picker.get({ source = "explorer" })[1]:is_focused() == false then
+          Snacks.picker.get({ source = "explorer" })[1]:focus()
+        end
+      end,
+      desc = "File Explorer (Current)",
+    },
     -- find
-    { "<leader>fb",      function() Snacks.picker.buffers() end,               desc = "Buffers" },
+    { "<leader>fb", function() Snacks.picker.buffers() end,                                     desc = "Buffers" },
     {
       "<leader>fc",
       function()
