@@ -56,11 +56,9 @@ local function fuzzyQuery(s, m)
   end
 end
 
-local GOPASS_DEBOUNCER_KEY = 'gopass'
-
-local function _fuzzy_filter(initial_choices, chooser)
+local function _fuzzy_filter(debounce_key, initial_choices, chooser, timeout)
   return function(query)
-    debouncer:debounce(GOPASS_DEBOUNCER_KEY, 0.5, function()
+    debouncer:debounce(debounce_key, timeout, function()
       if query:len() == 0 then
         chooser:choices(initial_choices)
         return
@@ -81,21 +79,7 @@ local function _fuzzy_filter(initial_choices, chooser)
   end
 end
 
-local GOPASS_CHOOSER = hs.chooser.new(function(result)
-  if result == nil then
-    return
-  end
-
-  local target = result["text"]
-
-  local _, status = hs.execute("gopass show --clip " .. target, true)
-
-  if not status then
-    hs.alert.show("error while copying password for `" .. target .. "`")
-  end
-end)
-
-local function get_choices()
+local function get_password_choices()
   local output, status = hs.execute("gopass list -f", true)
 
   if not status or output == nil then
@@ -113,17 +97,104 @@ local function get_choices()
   return result
 end
 
+local GOPASS_CHOOSER = hs.chooser.new(function(result)
+  if result == nil then
+    return
+  end
+
+  local target = result["text"]
+
+  local _, status = hs.execute("gopass show --clip " .. target, true)
+
+  if not status then
+    hs.alert.show("error while copying password for `" .. target .. "`")
+  end
+end)
+
 hs.hotkey.bind(SUPER, 'p', function()
   if GOPASS_CHOOSER:isVisible() then
     return
   end
 
-  local choices = get_choices()
+  local choices = get_password_choices()
 
   GOPASS_CHOOSER:refreshChoicesCallback(true)
 
-  GOPASS_CHOOSER:queryChangedCallback(_fuzzy_filter(choices, GOPASS_CHOOSER))
+  GOPASS_CHOOSER:queryChangedCallback(_fuzzy_filter('gopass', choices, GOPASS_CHOOSER, 0.5))
 
   GOPASS_CHOOSER:choices(choices)
   GOPASS_CHOOSER:show()
+end)
+
+local GOPASS_OTP_CHOOSER = hs.chooser.new(function(result)
+  if result == nil then
+    return
+  end
+
+  local target = result["text"]
+
+  local _, status = hs.execute("gopass otp --clip " .. target, true)
+
+  if not status then
+    hs.alert.show("error while copying OTP token for `" .. target .. "`")
+  end
+end)
+
+hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'p', function()
+  if GOPASS_OTP_CHOOSER:isVisible() then
+    return
+  end
+
+  local choices = get_password_choices()
+
+  GOPASS_OTP_CHOOSER:refreshChoicesCallback(true)
+
+  GOPASS_OTP_CHOOSER:queryChangedCallback(_fuzzy_filter('gopass', choices, GOPASS_OTP_CHOOSER, 0.5))
+
+  GOPASS_OTP_CHOOSER:choices(choices)
+  GOPASS_OTP_CHOOSER:show()
+end)
+
+local WINDOW_CHOOSER = hs.chooser.new(function(result)
+  if result == nil then
+    return
+  end
+
+  local target = result["id"]
+  local win = hs.window.find(target)
+  if win == nil then
+    return
+  end
+
+  win:focus()
+end)
+
+local function get_windows()
+  local windows = hs.window.allWindows()
+
+  local result = {}
+
+  for _, w in ipairs(windows) do
+    table.insert(result, {
+      ["text"] = w:application():title() .. " " .. w:title(),
+      ["id"] = w:id(),
+    })
+  end
+
+  return result
+end
+
+hs.hotkey.bind(SUPER, 'e', function()
+  if WINDOW_CHOOSER:isVisible() then
+    return
+  end
+
+  local choices = get_windows()
+
+  WINDOW_CHOOSER:refreshChoicesCallback(true)
+
+  WINDOW_CHOOSER:queryChangedCallback(_fuzzy_filter('windows', choices, WINDOW_CHOOSER, 0.15))
+
+  WINDOW_CHOOSER:choices(choices)
+  WINDOW_CHOOSER:show()
 end)
