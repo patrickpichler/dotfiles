@@ -160,8 +160,7 @@ local WINDOW_CHOOSER = hs.chooser.new(function(result)
     return
   end
 
-  local target = result["id"]
-  local win = hs.window.find(target)
+  local win = result["window"]
   if win == nil then
     return
   end
@@ -178,6 +177,7 @@ local function get_windows()
     table.insert(result, {
       ["text"] = w:application():title() .. " " .. w:title(),
       ["id"] = w:id(),
+      ["window"] = w,
     })
   end
 
