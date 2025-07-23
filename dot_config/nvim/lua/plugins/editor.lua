@@ -215,6 +215,12 @@ return {
 
             -- finally add the formatter to it's compatible filetype(s)
             for _, ft in pairs(pkg.spec.languages) do
+              -- Ignore certain packages, as they cause conflicts
+              if vim.tbl_contains({"ruff"}, pkg.spec.name) then
+                goto continue
+              end
+
+
               local ftl = string.lower(ft)
               formatters_by_ft[ftl] = formatters_by_ft[ftl] or {}
               table.insert(formatters_by_ft[ftl], pkg.spec.name)
@@ -223,6 +229,7 @@ return {
                 formatters_by_ft['proto'] = formatters_by_ft['proto'] or {}
                 table.insert(formatters_by_ft['proto'], pkg.spec.name)
               end
+                ::continue::
             end
           end
         end
@@ -231,7 +238,7 @@ return {
       return {
         lsp_fallback = true,
         formatters = formatters,
-        formatters_by_ft = formatters_by_ft
+        formatters_by_ft = formatters_by_ft,
       }
     end,
   },
