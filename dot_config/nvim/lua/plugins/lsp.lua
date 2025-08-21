@@ -31,10 +31,31 @@ local function buf_set_keymaps(bufnr)
   vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, provideOpts("Rename"))
   vim.keymap.set({ "n", "v" }, "<space>a", vim.lsp.buf.code_action, provideOpts("Code actions"))
 
-  vim.keymap.set("n", "[d", diagnosticWrapper({count=-1, float=true}), provideOpts("Goto previos diagnostic"))
-  vim.keymap.set("n", "]d", diagnosticWrapper({count=1, float=true}), provideOpts("Goto next diagnostic"))
+  vim.keymap.set("n", "[d", diagnosticWrapper({ count = -1, float = true }), provideOpts("Goto previos diagnostic"))
+  vim.keymap.set("n", "]d", diagnosticWrapper({ count = 1, float = true }), provideOpts("Goto next diagnostic"))
   vim.keymap.set("n", "<leader>do", vim.diagnostic.open_float, provideOpts("Open floating diagnostic message"))
   vim.keymap.set("n", "<space>dl", vim.diagnostic.setloclist, provideOpts("Open diagnostics list"))
+end
+
+if vim.fn.executable("sqls") == 1 then
+  vim.lsp.config("sqls", {
+    on_attach = function(client, bufnr)
+      require("sqls").on_attach(client, bufnr)
+
+      vim.keymap.set({ "n", "v" }, "<C-CR>", ":SqlsExecuteQuery<CR>",
+        { silent = true, desc = "Execute query", buffer = bufnr })
+
+      vim.keymap.set({ "n", "v" }, "<M-CR>", ":SqlsExecuteQueryVertical<CR>",
+        { silent = true, desc = "Execute query", buffer = bufnr })
+
+      vim.keymap.set("n", "<leader>qc", ":SqlsSwitchConnection<CR>",
+        { silent = true, desc = "S[Q]L switch [C]onnection", buffer = bufnr })
+
+      vim.keymap.set({ "n" }, "<leader>qd", ":SqlsSwitchDatabase<CR>",
+        { silent = true, desc = "S[Q]L switch [D]atabase", buffer = bufnr })
+    end
+  })
+  vim.lsp.enable("sqls")
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -200,6 +221,9 @@ return {
               require("sqls").on_attach(client, bufnr)
 
               vim.keymap.set({ "n", "v" }, "<C-CR>", ":SqlsExecuteQuery<CR>",
+                { silent = true, desc = "Execute query", buffer = bufnr })
+
+              vim.keymap.set({ "n", "v" }, "<M-CR>", ":SqlsExecuteQueryVertical<CR>",
                 { silent = true, desc = "Execute query", buffer = bufnr })
 
               vim.keymap.set("n", "<leader>qc", ":SqlsSwitchConnection<CR>",
