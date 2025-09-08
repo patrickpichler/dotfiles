@@ -16,7 +16,45 @@ return {
       enabled = true,
       timeout = 3000,
     },
-    picker = { enabled = true },
+    picker = {
+      sources = {
+        lsp_definitions = {
+          jump = {
+            reuse_win = false,
+          },
+        },
+        lsp_declarations = {
+          jump = {
+            reuse_win = false,
+          },
+        },
+        lsp_references = {
+          jump = {
+            reuse_win = false,
+          },
+        },
+        lsp_implementations = {
+          jump = {
+            reuse_win = false,
+          },
+        },
+        lsp_type_definitions = {
+          jump = {
+            reuse_win = false,
+          },
+        },
+        lsp_symbols = {
+          jump = {
+            reuse_win = false,
+          },
+        },
+        lsp_workspace_symbols = {
+          jump = {
+            reuse_win = false,
+          },
+        },
+      },
+    },
     quickfile = { enabled = true },
     scope = { enabled = true },
     -- scroll = { enabled = true },
