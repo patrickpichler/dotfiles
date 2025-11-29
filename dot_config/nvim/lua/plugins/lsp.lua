@@ -1,7 +1,7 @@
 local function extend_default_filetypes(lsp, ...)
   local filetypes = { ... }
 
-  for _, ft in ipairs(require("lspconfig.configs." .. lsp).default_config.filetypes) do
+  for _, ft in ipairs(vim.lsp.config[lsp].filetypes) do
     table.insert(filetypes, ft)
   end
 
@@ -64,6 +64,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local bufnr = args.buf
     local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+    if client == nil then
+      dd("got nil client")
+      bt()
+      return
+    end
+
     if client.server_capabilities.definitionProvider then
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
     end
@@ -78,213 +84,132 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 return {
   {
-    "williamboman/mason.nvim",
-    version = "v1.*",
-    build = ":MasonUpdate",
-    opts = true
-  },
-
-  {
     "williamboman/mason-lspconfig.nvim",
 
-    version = "v1.*",
-
     dependencies = {
+      { "mason-org/mason.nvim",             opts = {} },
       { "Hoffs/omnisharp-extended-lsp.nvim" },
       { "neovim/nvim-lspconfig" },
       { "nanotee/sqls.nvim" },
       { "ray-x/lsp_signature.nvim" },
       { "b0o/SchemaStore.nvim" },
+      { "mrjones2014/codesettings.nvim" }
     },
 
     config = function()
-      local lspconfig = require("lspconfig")
       local mason_lspconfig = require("mason-lspconfig")
 
-      mason_lspconfig.setup()
-
-      local default_capabilities = vim.tbl_deep_extend(
-        "force",
-        vim.lsp.protocol.make_client_capabilities(),
-        {
-          textDocument = {
-            foldingRange = {
-              dynamicRegistration = false,
-              lineFoldingOnly = true,
-            },
-          },
-        }
-      )
-
-      mason_lspconfig.setup_handlers {
-        function(server_name)
-          lspconfig[server_name].setup {
-            capabilities = default_capabilities,
-          }
+      vim.lsp.config('*', {
+        before_init = function(_, config)
+          local codesettings = require('codesettings')
+          config = codesettings.with_local_settings(config.name, config)
         end,
+      })
 
-        ["efm"] = function()
-          lspconfig.efm.setup {
-            capabilities = default_capabilities,
-            filetypes = { "python" },
-          }
-        end,
-
-        ["omnisharp"] = function()
-          lspconfig.omnisharp.setup {
-            capabilities = default_capabilities,
-            handlers = {
-              ["textDocument/definition"] = require("omnisharp_extended").handler
-            },
-          }
-        end,
-
-        ["jsonls"] = function()
-          lspconfig.jsonls.setup {
-            capabilities = default_capabilities,
-            commands = {
-              Format = {
-                function()
-                  vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
-                end
-              }
-            },
-            settings = {
-              json = {
-                schemas = require('schemastore').json.schemas(),
-                validate = { enable = true },
-              },
-            },
-          }
-        end,
-
-        ["gopls"] = function()
-          lspconfig.gopls.setup {
-            capabilities = default_capabilities,
-            init_options = {
-              env = { GOFLAGS = "-tags=unit" },
-              hints = {
-                assignVariableTypes = true,
-                compositeLiteralFields = true,
-                constantValues = true,
-                functionTypeParameters = true,
-                parameterNames = true,
-                rangeVariableTypes = true
-              },
-              usePlaceholders = true,
-            }
-          }
-        end,
-
-        ["html"] = function()
-          local filetypes = extend_default_filetypes("html", "templ")
-
-          lspconfig.html.setup {
-            capabilities = default_capabilities,
-            filetypes = filetypes,
-          }
-        end,
-
-        ["htmx"] = function()
-          local filetypes = extend_default_filetypes("htmx", "templ")
-
-          lspconfig.htmx.setup {
-            capabilities = default_capabilities,
-            filetypes = filetypes,
-          }
-        end,
-
-        ["tailwindcss"] = function()
-          local filetypes = extend_default_filetypes("tailwindcss", "templ")
-
-          lspconfig.tailwindcss.setup {
-            capabilities = default_capabilities,
-            filetypes = filetypes,
-            init_options = { userLanguages = { templ = "html" } },
-          }
-        end,
-
-        ["emmet_language_server"] = function()
-          local filetypes = extend_default_filetypes("emmet_language_server", "templ")
-
-          lspconfig.emmet_language_server.setup {
-            capabilities = default_capabilities,
-            filetypes = filetypes,
-          }
-        end,
-
-        ["sqls"] = function()
-          lspconfig.sqls.setup {
-            capabilities = default_capabilities,
-
-            on_attach = function(client, bufnr)
-              require("sqls").on_attach(client, bufnr)
-
-              vim.keymap.set({ "n", "v" }, "<C-CR>", ":SqlsExecuteQuery<CR>",
-                { silent = true, desc = "Execute query", buffer = bufnr })
-
-              vim.keymap.set({ "n", "v" }, "<M-CR>", ":SqlsExecuteQueryVertical<CR>",
-                { silent = true, desc = "Execute query", buffer = bufnr })
-
-              vim.keymap.set("n", "<leader>qc", ":SqlsSwitchConnection<CR>",
-                { silent = true, desc = "S[Q]L switch [C]onnection", buffer = bufnr })
-
-              vim.keymap.set({ "n" }, "<leader>qd", ":SqlsSwitchDatabase<CR>",
-                { silent = true, desc = "S[Q]L switch [D]atabase", buffer = bufnr })
+      vim.lsp.config("jsonls", {
+        commands = {
+          Format = {
+            function()
+              vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
             end
           }
-        end,
+        },
+        settings = {
+          json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+          },
+        },
+      })
 
-        ["yamlls"] = function()
-          lspconfig.yamlls.setup {
-            capabilities = default_capabilities,
-            settings = {
-              yaml = {
-                schemaStore = {
-                  -- You must disable built-in schemaStore support if you want to use
-                  -- this plugin and its advanced options like `ignore`.
-                  enable = false,
-                  -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-                  url = "",
-                },
-                schemas = require('schemastore').yaml.schemas(),
-              },
-            },
-            redhat = {
-              telemetry = {
-                enabled = false,
-              },
-            },
-          }
-        end,
+      vim.lsp.config('gopls', {
+        init_options = {
+          -- env = { GOFLAGS = "-tags=unit" },
+          hints = {
+            assignVariableTypes = true,
+            compositeLiteralFields = true,
+            constantValues = true,
+            functionTypeParameters = true,
+            parameterNames = false,
+            rangeVariableTypes = true
+          },
+          usePlaceholders = true,
+          -- buildFlags = { "-tags unit" }
+        }
+      })
 
-        ['helm_ls'] = function()
-          lspconfig.helm_ls.setup {
-            settings = {
-              logLevel = "info",
-              valuesFiles = {
-                mainValuesFile = "values.yaml",
-                lintOverlayValuesFile = "values.lint.yaml",
-                additionalValuesFilesGlobPattern = "values*.yaml"
+      vim.lsp.config("html", {
+        filetypes = extend_default_filetypes("html", "templ"),
+      })
+
+      vim.lsp.config("htmx", {
+        filetypes = extend_default_filetypes("htmx", "templ"),
+      })
+
+      vim.lsp.config("sqls", {
+        on_attach = function(client, bufnr)
+          require("sqls").on_attach(client, bufnr)
+
+          vim.keymap.set({ "n", "v" }, "<C-CR>", ":SqlsExecuteQuery<CR>",
+            { silent = true, desc = "Execute query", buffer = bufnr })
+
+          vim.keymap.set({ "n", "v" }, "<M-CR>", ":SqlsExecuteQueryVertical<CR>",
+            { silent = true, desc = "Execute query", buffer = bufnr })
+
+          vim.keymap.set("n", "<leader>qc", ":SqlsSwitchConnection<CR>",
+            { silent = true, desc = "S[Q]L switch [C]onnection", buffer = bufnr })
+
+          vim.keymap.set({ "n" }, "<leader>qd", ":SqlsSwitchDatabase<CR>",
+            { silent = true, desc = "S[Q]L switch [D]atabase", buffer = bufnr })
+        end
+      })
+
+      vim.lsp.config("yamlls", {
+        settings = {
+          yaml = {
+            schemaStore = {
+              -- You must disable built-in schemaStore support if you want to use
+              -- this plugin and its advanced options like `ignore`.
+              enable = false,
+              -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+              url = "",
+            },
+            schemas = require('schemastore').yaml.schemas(),
+          },
+        },
+        redhat = {
+          telemetry = {
+            enabled = false,
+          },
+        },
+      })
+
+      vim.lsp.config("helm_ls", {
+        settings = {
+          logLevel = "info",
+          valuesFiles = {
+            mainValuesFile = "values.yaml",
+            lintOverlayValuesFile = "values.lint.yaml",
+            additionalValuesFilesGlobPattern = "values*.yaml"
+          },
+          yamlls = {
+            enabled = true,
+            diagnosticsLimit = 50,
+            showDiagnosticsDirectly = false,
+            path = "yaml-language-server",
+            config = {
+              schemas = {
+                kubernetes = "templates/**",
               },
-              yamlls = {
-                enabled = true,
-                diagnosticsLimit = 50,
-                showDiagnosticsDirectly = false,
-                path = "yaml-language-server",
-                config = {
-                  schemas = {
-                    kubernetes = "templates/**",
-                  },
-                  completion = true,
-                  hover = true,
-                  -- any other config from https://github.com/redhat-developer/yaml-language-server#language-server-settings
-                }
-              }
+              completion = true,
+              hover = true,
+              -- any other config from https://github.com/redhat-developer/yaml-language-server#language-server-settings
             }
           }
-        end
-      }
+        }
+      })
+
+      mason_lspconfig.setup()
     end,
   },
 
@@ -292,8 +217,8 @@ return {
     "neovim/nvim-lspconfig",
 
     dependencies = {
-      { "folke/neodev.nvim" },
-      { "folke/neoconf.nvim", opts = true, },
+      -- { "folke/neoconf.nvim", opts = true, },
+      { "mrjones2014/codesettings.nvim", opts = {} }
     },
   },
 
