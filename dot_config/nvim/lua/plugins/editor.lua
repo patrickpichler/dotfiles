@@ -66,7 +66,7 @@ return {
     dependencies = {
       { "kana/vim-textobj-user", },
     },
- },
+  },
 
   {
     "kevinhwang91/nvim-ufo",
@@ -216,7 +216,7 @@ return {
             -- finally add the formatter to it's compatible filetype(s)
             for _, ft in pairs(pkg.spec.languages) do
               -- Ignore certain packages, as they cause conflicts
-              if vim.tbl_contains({"ruff"}, pkg.spec.name) then
+              if vim.tbl_contains({ "ruff" }, pkg.spec.name) then
                 goto continue
               end
 
@@ -229,7 +229,7 @@ return {
                 formatters_by_ft['proto'] = formatters_by_ft['proto'] or {}
                 table.insert(formatters_by_ft['proto'], pkg.spec.name)
               end
-                ::continue::
+              ::continue::
             end
           end
         end
