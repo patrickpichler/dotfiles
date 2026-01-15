@@ -155,6 +155,11 @@ return {
         vim.lsp.enable("sqls")
       end
 
+      if vim.fn.executable("rust-analyzer") == 1 then
+        vim.lsp.config("rust_analyzer", {})
+        vim.lsp.enable("rust_analyzer")
+      end
+
 
       vim.lsp.config("yamlls", {
         settings = {
