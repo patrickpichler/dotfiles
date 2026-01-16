@@ -156,7 +156,19 @@ return {
       end
 
       if vim.fn.executable("rust-analyzer") == 1 then
-        vim.lsp.config("rust_analyzer", {})
+        -- lspconfig overrides the before_init for rust-analyzer, hence we need to manually
+        -- call it to get everything working.
+        local rust_analyzer_before_init = vim.lsp.config.rust_analyzer.before_init
+
+        vim.lsp.config("rust_analyzer", {
+          before_init = function(init_params, config)
+            local codesettings = require('codesettings')
+            config = codesettings.with_local_settings(config.name, config)
+
+            ---@diagnostic disable-next-line: need-check-nil
+            rust_analyzer_before_init(init_params, config)
+          end,
+        })
         vim.lsp.enable("rust_analyzer")
       end
 
