@@ -8,7 +8,7 @@ local themeDetection = require('theme_detection')
 local SUPER = { 'cmd', 'ctrl' }
 
 hs.hotkey.bind(SUPER, 't', function()
-  os.execute('open -n -b net.kovidgoyal.kitty')
+  os.execute('open -n -b com.mitchellh.ghostty')
 end)
 
 -- Kitty theme changes
