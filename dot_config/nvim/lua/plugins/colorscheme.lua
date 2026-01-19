@@ -9,6 +9,12 @@ return {
     init = function()
       vim.cmd([[colorscheme rose-pine]])
     end,
+
+    config = {
+      styles = {
+        italic = false,
+      }
+    },
   },
 
   {
