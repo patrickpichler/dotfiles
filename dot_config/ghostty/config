@@ -59,6 +59,8 @@ theme = dark: Rose Pine, light: Rose Pine Dawn
 macos-option-as-alt = true
 macos-titlebar-style = tabs
 
+quit-after-last-window-closed = true
+
 keybind = super+j=goto_split:down
 keybind = super+l=goto_split:left
 keybind = super+h=goto_split:right
