@@ -66,3 +66,6 @@ keybind = super+h=goto_split:left
 keybind = super+l=goto_split:right
 keybind = super+k=goto_split:up
 keybind = global:cmd+backquote=toggle_quick_terminal
+
+# Always open ghostty with CWD set to home
+working-directory = home
