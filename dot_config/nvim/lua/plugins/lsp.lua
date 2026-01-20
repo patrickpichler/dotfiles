@@ -113,6 +113,7 @@ return {
             rangeVariableTypes = true
           },
           usePlaceholders = true,
+          semanticTokens = true,
         },
       })
 
