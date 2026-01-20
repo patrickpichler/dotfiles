@@ -172,6 +172,11 @@ return {
         vim.lsp.enable("rust_analyzer")
       end
 
+      if vim.fn.executable("clangd") == 1 then
+        vim.lsp.config("clangd", {})
+        vim.lsp.enable("clangd")
+      end
+
 
       vim.lsp.config("yamlls", {
         settings = {
