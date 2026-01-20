@@ -1,3 +1,25 @@
+local function textobject_move(fun, query_strings, query_group)
+  return function()
+    require("nvim-treesitter-textobjects.move")[fun](query_strings, query_group or "textobjects")
+  end
+end
+
+local function goto_next_start(query_strings, query_group)
+  return textobject_move("goto_next_start", query_strings, query_group)
+end
+
+local function goto_next_end(query_strings, query_group)
+  return textobject_move("goto_next_end", query_strings, query_group)
+end
+
+local function goto_previous_start(query_strings, query_group)
+  return textobject_move("goto_previous_start", query_strings, query_group)
+end
+
+local function goto_previous_end(query_strings, query_group)
+  return textobject_move("goto_previous_end", query_strings, query_group)
+end
+
 return {
   {
     "nvim-treesitter/nvim-treesitter-context",
@@ -23,22 +45,16 @@ return {
       move = {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
-        goto_next_start = {
-          ["]m"] = "@function.outer",
-          ["]c"] = { query = "@class.outer", desc = "Next class start" },
-          ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-        },
-        goto_next_end = {
-          ["]M"] = "@function.outer",
-        },
-        goto_previous_start = {
-          ["[m"] = "@function.outer",
-          ["[c"] = "@class.outer",
-        },
-        goto_previous_end = {
-          ["[M"] = "@function.outer",
-        },
       },
+    },
+    keys = {
+      { "[m", goto_previous_start("@function.outer") },
+      { "[M", goto_previous_end("@function.outer") },
+      { "]m", goto_next_start("@function.outer") },
+      { "]M", goto_next_end("@function.outer") },
+      { "[c", goto_previous_start("@class.outer") },
+      { "]c", goto_next_start("@class.outer") },
+      { "]z", goto_next_start("@fold", "folds") },
     }
   },
   {
