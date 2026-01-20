@@ -41,6 +41,30 @@ return {
       },
     }
   },
+  {
+    'MeanderingProgrammer/treesitter-modules.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    opts = {
+      ensure_installed = {
+        "c", "lua", "vim", "vimdoc", "elixir", "javascript", "html", "zig", "go", "templ", "css", "nix",
+        "xml", "bash", "diff", "http", "java", "make", "rust", "toml", "yaml", "gomod", "json5", "proto", "templ",
+        "kotlin", "python", "svelte", "vimdoc", "comment", "clojure", "markdown", "starlark",
+        "yaml", "helm"
+      },
+      fold = { enable = true },
+      highlight = { enable = true },
+      indent = { enable = true },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "<cr>",
+          node_incremental = "<cr>",
+          scope_incremental = false,
+          node_decremental = "<bs>",
+        },
+      },
+    },
+  },
 
   {
     "nvim-treesitter/nvim-treesitter",
@@ -57,32 +81,6 @@ return {
 
     config = function(_, opts)
       require("nvim-treesitter.config").setup(opts)
-
-      -- Install wanted and wait for three minutes
-      require('nvim-treesitter').install(
-        { "c", "lua", "vim", "vimdoc", "elixir", "javascript", "html", "zig", "go", "templ", "css", "nix",
-          "xml", "bash", "diff", "http", "java", "make", "rust", "toml", "yaml", "gomod", "json5", "proto", "templ",
-          "kotlin", "python", "svelte", "vimdoc", "comment", "clojure", "markdown", "starlark",
-          "yaml", "helm" }
-      ):wait(300)
-
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = '*',
-        callback = function()
-          local installed = require('nvim-treesitter').get_available()
-
-          if not vim.tbl_contains(installed, vim.bo.filetype) then
-            return
-          end
-
-          vim.treesitter.start()
-
-          vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-          vim.wo[0][0].foldmethod = 'expr'
-
-          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end
-      })
     end
   },
 }
