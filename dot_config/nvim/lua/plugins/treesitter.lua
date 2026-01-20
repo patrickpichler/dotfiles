@@ -16,6 +16,31 @@ return {
       zindex = 20, -- The Z-index of the context window
     },
   },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    opts = {
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          ["]m"] = "@function.outer",
+          ["]c"] = { query = "@class.outer", desc = "Next class start" },
+          ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+        },
+        goto_next_end = {
+          ["]M"] = "@function.outer",
+        },
+        goto_previous_start = {
+          ["[m"] = "@function.outer",
+          ["[c"] = "@class.outer",
+        },
+        goto_previous_end = {
+          ["[M"] = "@function.outer",
+        },
+      },
+    }
+  },
 
   {
     "nvim-treesitter/nvim-treesitter",
@@ -25,59 +50,39 @@ return {
     dependencies = {
       {
         "nvim-treesitter/nvim-treesitter-textobjects",
-        branch = "main",
       }
     },
     build = ":TSUpdate",
-    opts = function()
-      return {
-        ensure_installed = {
-          "c", "lua", "vim", "vimdoc", "elixir", "javascript", "html", "zig", "go", "templ", "css", "nix",
-          "xml", "bash", "diff", "http", "java", "make", "rust", "toml", "yaml", "gomod", "json5", "proto", "templ",
-          "kotlin", "python", "svelte", "vimdoc", "comment", "clojure", "markdown", "starlark",
-        },
-        sync_install = true,
-        ignore_install = { "phpdoc" },
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
-        indent = { enable = true },
-        autotag = { enable = true },
-        textobjects = {
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              ["]m"] = "@function.outer",
-              ["]c"] = { query = "@class.outer", desc = "Next class start" },
-              ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
-            },
-            goto_next_end = {
-              ["]M"] = "@function.outer",
-            },
-            goto_previous_start = {
-              ["[m"] = "@function.outer",
-              ["[c"] = "@class.outer",
-            },
-            goto_previous_end = {
-              ["[M"] = "@function.outer",
-            },
-          },
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<cr>",
-            node_incremental = "<cr>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-          },
-        },
-      }
-    end,
+    opts = {},
+
     config = function(_, opts)
       require("nvim-treesitter.config").setup(opts)
+
+      -- Install wanted and wait for three minutes
+      require('nvim-treesitter').install(
+        { "c", "lua", "vim", "vimdoc", "elixir", "javascript", "html", "zig", "go", "templ", "css", "nix",
+          "xml", "bash", "diff", "http", "java", "make", "rust", "toml", "yaml", "gomod", "json5", "proto", "templ",
+          "kotlin", "python", "svelte", "vimdoc", "comment", "clojure", "markdown", "starlark",
+          "yaml", "helm" }
+      ):wait(300)
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = '*',
+        callback = function()
+          local installed = require('nvim-treesitter').get_available()
+
+          if not vim.tbl_contains(installed, vim.bo.filetype) then
+            return
+          end
+
+          vim.treesitter.start()
+
+          vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+          vim.wo[0][0].foldmethod = 'expr'
+
+          vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+      })
     end
   },
 }
