@@ -81,7 +81,7 @@ return {
       vim.lsp.config('*', {
         before_init = function(_, config)
           local codesettings = require('codesettings')
-          config = codesettings.with_local_settings(config.name, config)
+          codesettings.with_local_settings(config.name, config)
         end,
       })
 
@@ -115,6 +115,7 @@ return {
           usePlaceholders = true,
           semanticTokens = true,
         },
+        settings = {},
       })
 
       vim.lsp.config("html", {
