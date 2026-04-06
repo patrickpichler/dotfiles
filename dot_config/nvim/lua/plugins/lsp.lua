@@ -179,6 +179,10 @@ return {
         vim.lsp.enable("clangd")
       end
 
+      if vim.fn.executable("zls") == 1 then
+        vim.lsp.enable("zls")
+      end
+
 
       vim.lsp.config("yamlls", {
         settings = {
