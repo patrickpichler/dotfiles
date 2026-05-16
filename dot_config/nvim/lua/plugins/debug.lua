@@ -21,7 +21,7 @@ return {
       dm.plugins.osv_integration.enabled = true -- needed if you want to debug neovim lua code
       local dap = require("dap")
       -- Configure your debug adapters here
-      -- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
+      -- https://codeberg.org/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
 
       dap.adapters.delve = function(callback, config)
         if config.mode == 'remote' and config.request == 'attach' then
