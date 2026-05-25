@@ -5,6 +5,8 @@ spoon.SpoonInstall:andUse('EmmyLua')
 local debouncer = require('debouncer')
 local themeDetection = require('theme_detection')
 
+require('cmd_h_handling')
+
 local SUPER = { 'cmd', 'ctrl' }
 
 hs.hotkey.bind(SUPER, 't', function()
@@ -140,7 +142,7 @@ local GOPASS_OTP_CHOOSER = hs.chooser.new(function(result)
   end
 end)
 
-hs.hotkey.bind({'cmd', 'ctrl', 'shift'}, 'p', function()
+hs.hotkey.bind({ 'cmd', 'ctrl', 'shift' }, 'p', function()
   if GOPASS_OTP_CHOOSER:isVisible() then
     return
   end
