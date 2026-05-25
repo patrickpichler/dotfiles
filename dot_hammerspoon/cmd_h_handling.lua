@@ -2,8 +2,6 @@ local whitelist = {
   ["Finder"] = true,
   -- TODO(patrick.pichler): figure out why ghostty remap is not working in ghostty conf.
   -- ["Ghostty"] = true,
-
-  ["AltTab"] = true,
 }
 
 function isAltTabSwitcherVisibleAX()
