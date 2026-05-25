@@ -61,10 +61,10 @@ macos-titlebar-style = tabs
 
 quit-after-last-window-closed = true
 
-keybind = super+j=goto_split:down
-keybind = super+h=goto_split:left
-keybind = super+l=goto_split:right
-keybind = super+k=goto_split:up
+keybind = super+shift+j=goto_split:down
+keybind = super+shift+h=goto_split:left
+keybind = super+shift+l=goto_split:right
+keybind = super+shift+k=goto_split:up
 keybind = global:cmd+backquote=toggle_quick_terminal
 
 # Always open ghostty with CWD set to home
