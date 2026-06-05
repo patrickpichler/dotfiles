@@ -42,3 +42,7 @@ if vim.fn.executable('par') then
 end
 
 vim.opt.inccommand = "split"
+
+-- HACK(patrick.pichler): this should fix issues with the statuscolumn.
+-- See https://github.com/folke/snacks.nvim/issues/150
+vim.o.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
